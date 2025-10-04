@@ -1,0 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+:root {
+  /* Nền chính (trắng) */
+  --bg-color-one: #ffffff;
+
+  /* Nền phụ (xám nhạt cho header, footer, card) */
+  --bg-color-two: #f5f5f5;
+
+  /* Màu chữ chính (đen) */
+  --text-color-one: #000000;
+
+  /* Màu chữ phụ (xám trung tính) */
+  --text-color-two: #555555;
+
+  /* Màu nhấn (nút/link đen nổi bật) */
+  --accent-color: #111111;
+
+  /* Hover (xám đậm hơn chút) */
+  --secondary-color: #333333;
+
+  /* Màu cảnh báo/lỗi (đỏ tươi để giữ rõ ràng) */
+  --danger-color: #e63946;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color-one);
+  color: var(--text-color-one);
+}
+
+body {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
