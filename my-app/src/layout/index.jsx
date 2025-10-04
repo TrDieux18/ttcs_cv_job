@@ -139,8 +139,6 @@ const LayoutDefault = () => {
       <main className="layout-main">
         <Outlet />
       </main>
-
-      <footer className="layout-footer">Copyright @2025 by Jobs</footer>
     </div>
   );
 };

@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { login } from "../../services/userService";
+import { login } from "@services/userService";
 import { useDispatch } from "react-redux";
 import "./Login.scss";
-import { setCookie } from "../../components/helpers/cookie";
-import { checkLogin } from "../../actions/login";
+// import { setCookie } from "../../components/helpers/cookie";
+import { checkLogin } from "@actions/login";
+import { setCookie } from "@helpers/cookie";
 
 const Login = () => {
   const navigate = useNavigate();
