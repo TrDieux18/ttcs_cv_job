@@ -1,9 +1,8 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useDispatch } from "react-redux";
-import { checkLogin } from "../../actions/login.js";
 import { deleteAllCookies } from "../../helpers/cookie.js";
+import { useDispatch } from "react-redux";
 
 const Logout = () => {
   const navigate = useNavigate();
@@ -11,7 +10,7 @@ const Logout = () => {
 
   useEffect(() => {
     deleteAllCookies();
-    dispatch(checkLogin(false, null));
+
     setTimeout(() => navigate("/login"), 0);
   }, [dispatch, navigate]);
 

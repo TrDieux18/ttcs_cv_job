@@ -5,7 +5,7 @@ import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space } from "antd";
 
 const LayoutDefault = () => {
-  const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
+  const user = useSelector((state) => state.user.user);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -119,7 +119,7 @@ const LayoutDefault = () => {
           </ul>
         </div>
         <div className="layout-header__account">
-          {isLoggedIn ? (
+          {user ? (
             <button onClick={handleLogout} className="btn">
               Logout
             </button>

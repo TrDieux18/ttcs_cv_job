@@ -2,9 +2,9 @@ import { useNavigate } from "react-router-dom";
 import { login } from "@services/userService";
 import { useDispatch } from "react-redux";
 import "./Login.scss";
-// import { setCookie } from "../../components/helpers/cookie";
-import { checkLogin } from "@actions/login";
+
 import { setCookie } from "@helpers/cookie";
+import { setError, setUser } from "../../store/UserReducer";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -24,12 +24,13 @@ const Login = () => {
     const response = await login(user);
 
     if (response.length > 0) {
+      console.log(response[0]);
       setCookie("token", response[0].token);
-      dispatch(checkLogin(true, response[0]));
+      dispatch(setUser(response[0]));
       navigate("/");
     } else {
       alert("Sai tài khoản hoặc mật khẩu");
-      dispatch(checkLogin(false, null));
+      dispatch(setError(true));
     }
   };
   return (
