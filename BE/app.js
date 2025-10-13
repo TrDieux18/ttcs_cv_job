@@ -3,11 +3,11 @@ import cors from "cors";
 import clientRoute from "./routes/client/index.route.js";
 import adminRoute from "./routes/admin/index.route.js";
 import dotenv from "dotenv";
-import connectDB from "./config/database.js";
+import connectDB from "./configs/database.js";
 import path from "path";
 import cookieParser from "cookie-parser";
 import { fileURLToPath } from "url";
-import { SYSTEM } from "./config/system.js";
+import { SYSTEM } from "./configs/system.js";
 
 dotenv.config();
 connectDB();
@@ -43,8 +43,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use(SYSTEM.PATH_ADMIN, adminRoute);
 app.use(SYSTEM.PATH_CLIENT, clientRoute);
-//Kết nối FE
-app.use(cors({ origin: process.env.ORIGIN_URL }));
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
