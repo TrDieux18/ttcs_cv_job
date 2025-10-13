@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { login } from "@services/userService";
+import { login } from "@services/client/UserService";
 import { useDispatch } from "react-redux";
 import "./Login.scss";
 
