@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import "./Login.scss";
 
 import { setCookie } from "@helpers/cookie";
-import { setError, setUser } from "../../store/UserReducer";
+import { setError, setUser } from "@store/UserReducer";
 
 const Login = () => {
   const navigate = useNavigate();

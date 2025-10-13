@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { deleteAllCookies } from "../../helpers/cookie.js";
+import { deleteAllCookies } from "@helpers/cookie.js";
 import { useDispatch } from "react-redux";
 
 const Logout = () => {
