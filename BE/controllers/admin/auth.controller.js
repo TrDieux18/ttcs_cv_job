@@ -2,7 +2,7 @@ import User from "../../models/user.model.js";
 import UserDTO from "../../dtos/user.dto.js";
 import { JWT_SECRET, JWT_EXPIRES_IN } from "../../configs/system.js";
 import jwt from "jsonwebtoken";
-import Role from "../../models/role.model.js";
+
 export const loginAdmin = async (req, res) => {
   try {
     const { username, password } = req.body;
