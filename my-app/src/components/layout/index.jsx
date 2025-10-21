@@ -1,15 +1,25 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import "./LayoutDefault.scss";
-import { useSelector } from "react-redux";
+
 import { DownOutlined } from "@ant-design/icons";
-import { Dropdown, Space } from "antd";
+import { Dropdown, message, Space } from "antd";
+import { logout } from "@services/common/AuthService";
 
 const LayoutDefault = () => {
-  const user = useSelector((state) => state.user.user);
+  const user = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user"))
+    : null;
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    navigate("/logout");
+  const handleLogout = async () => {
+    const response = await logout();
+    if (response.success) {
+      localStorage.removeItem("user");
+      message.success("Đăng xuất thành công");
+      setTimeout(() => navigate("/login"), 800);
+    } else {
+      message.error("Đăng xuất thất bại");
+    }
   };
 
   // Menu items cho Jobs
