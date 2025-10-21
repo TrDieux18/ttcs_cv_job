@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import clientRoute from "./routes/client/index.route.js";
 import adminRoute from "./routes/admin/index.route.js";
+import authRoute from "./routes/common/index.route.js";
 import dotenv from "dotenv";
 import connectDB from "./configs/database.js";
 import path from "path";
@@ -41,9 +42,9 @@ app.use((req, res, next) => {
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
+app.use(SYSTEM.PATH_AUTH, authRoute);
 app.use(SYSTEM.PATH_ADMIN, adminRoute);
 app.use(SYSTEM.PATH_CLIENT, clientRoute);
-
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

@@ -1,9 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { login } from "@services/client/UserService";
+import { login } from "@services/common/AuthService";
 import { useDispatch } from "react-redux";
 import "./Login.scss";
 
-import { setCookie } from "@helpers/cookie";
 import { setError, setUser } from "@store/UserReducer";
 
 const Login = () => {
@@ -13,23 +12,23 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const email = formData.get("email");
+    const username = formData.get("username");
 
     const password = formData.get("password");
     const user = {
-      email: email,
+      username: username,
       password: password,
     };
+    console.log("user", user);
 
     const response = await login(user);
 
-    if (response.length > 0) {
-      console.log(response[0]);
-      setCookie("token", response[0].token);
-      dispatch(setUser(response[0]));
+    if (response.success && response.data) {
+      console.log(response);
+      dispatch(setUser(response.data));
+      localStorage.setItem("user", JSON.stringify(response.data));
       navigate("/");
     } else {
-      alert("Sai tài khoản hoặc mật khẩu");
       dispatch(setError(true));
     }
   };
@@ -38,7 +37,7 @@ const Login = () => {
       <form onSubmit={handleSubmit}>
         <h2 className="in-regis__title">Login</h2>
         <div className="in-regis__email">
-          <input type="email" placeholder="Email" name="email" />
+          <input type="text" placeholder="Tên tài khoản" name="username" />
         </div>
         <div className="in-regis__password">
           <input type="password" placeholder="Password" name="password" />

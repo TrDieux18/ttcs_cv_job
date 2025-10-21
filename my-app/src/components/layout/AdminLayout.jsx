@@ -2,7 +2,7 @@ import { Menu } from "lucide-react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { Dropdown, message } from "antd";
 import { DownOutlined, UserOutlined, LogoutOutlined } from "@ant-design/icons";
-import { logoutAdmin } from "@services/admin/AuthService";
+import { logout } from "@services/common/AuthService";
 
 const AdminLayout = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -25,7 +25,7 @@ const AdminLayout = () => {
 
   const handleMenuClick = async ({ key }) => {
     if (key === "logout") {
-      const response = await logoutAdmin();
+      const response = await logout();
       if (response.success) {
         localStorage.removeItem("user");
         messageApi.success("Đăng xuất thành công");
@@ -38,11 +38,10 @@ const AdminLayout = () => {
     }
   };
 
-  // 🧭 Hiện tất cả menu (bỏ qua permission)
   const sidebarItems = [
     { label: "Tổng quan", path: "/admin/dashboard" },
-    { label: "Tài khoản", path: "/admin/accounts" },
-    { label: "Sản phẩm", path: "/admin/products" },
+    { label: "Người dùng", path: "/admin/users" },
+
     { label: "Vai trò", path: "/admin/roles" },
     { label: "Phân quyền", path: "/admin/roles/permission" },
   ];
@@ -97,7 +96,7 @@ const AdminLayout = () => {
             </Dropdown>
           </header>
 
-          <main className="p-6 flex-1 overflow-y-auto">
+          <main className="p-4 flex-1 overflow-y-auto">
             <Outlet />
           </main>
         </div>

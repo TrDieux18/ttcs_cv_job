@@ -23,8 +23,4 @@ export class User {
     this.updatedAt = updatedAt ? new Date(updatedAt) : null;
   }
 
-  // 🧠 Ví dụ: kiểm tra quyền
-  hasPermission(permission) {
-    return this.role?.permissions?.includes(permission) || false;
-  }
 }

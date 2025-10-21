@@ -4,6 +4,7 @@ dotenv.config();
 export const SYSTEM = {
   PATH_ADMIN: "/admin",
   PATH_CLIENT: "/",
+  PATH_AUTH: "/auth",
 };
 
 export const JWT_SECRET = process.env.JWT_SECRET;
