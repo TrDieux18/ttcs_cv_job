@@ -1,10 +1,10 @@
 import { ApiResponse } from "@types/response/ApiResponse";
-import { ADMIN_API } from "@types/api";
+import { AUTH_API } from "@types/api";
 
-export const loginAdmin = async (value = { username: "", password: "" }) => {
+export const login = async (value = { username: "", password: "" }) => {
   console.log("value", value);
   try {
-    const response = await fetch(`${ADMIN_API}/auth/login`, {
+    const response = await fetch(`${AUTH_API}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -27,7 +27,7 @@ export const loginAdmin = async (value = { username: "", password: "" }) => {
 
 export const verifyToken = async () => {
   try {
-    const response = await fetch(`${ADMIN_API}/auth/check`, {
+    const response = await fetch(`${AUTH_API}/check`, {
       method: "GET",
       credentials: "include",
     });
@@ -43,9 +43,9 @@ export const verifyToken = async () => {
   }
 };
 
-export const logoutAdmin = async () => {
+export const logout = async () => {
   try {
-    const response = await fetch(`${ADMIN_API}/auth/logout`, {
+    const response = await fetch(`${AUTH_API}/logout`, {
       method: "POST",
       credentials: "include",
     });

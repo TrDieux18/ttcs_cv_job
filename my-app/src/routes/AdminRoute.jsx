@@ -1,8 +1,11 @@
 import LoginAdmin from "@pages/admin/Login";
 import AdminLayout from "@components/layout/AdminLayout";
-import Dashboard from "../pages/admin/Dashboard";
-import PublicRoute from "../components/guard/PublicRoute";
-import ProtectedRoute from "../components/guard/ProtectedRoute";
+import Dashboard from "@pages/admin/Dashboard";
+import PublicRoute from "@components/guard/PublicRoute";
+import ProtectedRoute from "@components/guard/ProtectedRoute";
+import User from "@pages/admin/User";
+import Role from "@pages/admin/Role";
+import UserForm from "@pages/admin/User/components/UserForm";
 
 const adminRoutes = [
   {
@@ -15,7 +18,19 @@ const adminRoutes = [
     children: [
       {
         element: <AdminLayout />,
-        children: [{ path: "dashboard", element: <Dashboard /> }],
+        children: [
+          { path: "dashboard", element: <Dashboard /> },
+          {
+            path: "users",
+            element: <User />,
+          },
+          { path: "users/create", element: <UserForm mode="create" /> },
+          { path: "users/update/:id", element: <UserForm mode="update" /> },
+          {
+            path: "roles",
+            element: <Role />,
+          },
+        ],
       },
     ],
   },

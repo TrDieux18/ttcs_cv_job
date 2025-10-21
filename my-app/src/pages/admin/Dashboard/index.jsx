@@ -1,8 +1,11 @@
 import StatsCard from "./components/StatsCard";
 import SalesChart from "./components/SalesChart";
 import RecentOrders from "./components/RecentOrders";
+import { useSelector } from "react-redux";
 
 const Dashboard = () => {
+  const user = useSelector((state) => state.user.user);
+  console.log("Logged in user:", user);
   return (
     <>
       <div className="space-y-6">

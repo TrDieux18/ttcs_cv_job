@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { verifyToken } from "@services/admin/AuthService";
+import { verifyToken } from "@services/common/AuthService";
 import { Navigate, Outlet } from "react-router-dom";
 
 const ProtectedRoute = () => {

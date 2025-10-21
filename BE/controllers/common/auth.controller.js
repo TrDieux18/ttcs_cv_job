@@ -3,10 +3,14 @@ import UserDTO from "../../dtos/user.dto.js";
 import { JWT_SECRET, JWT_EXPIRES_IN } from "../../configs/system.js";
 import jwt from "jsonwebtoken";
 
-export const loginAdmin = async (req, res) => {
+
+
+
+export const login = async (req, res) => {
+
   try {
     const { username, password } = req.body;
-    console.log(username, password);
+    // console.log(username, password);
 
     const user = await User.findOne({
       username,
@@ -29,6 +33,9 @@ export const loginAdmin = async (req, res) => {
       });
     }
 
+    user.timeLogin = new Date();
+    await user.save();
+
     Object.keys(req.cookies).forEach((name) => {
       res.clearCookie(name, {
         path: "/",
@@ -36,7 +43,6 @@ export const loginAdmin = async (req, res) => {
         sameSite: "lax",
       });
     });
-    console.log(user);
 
     const payload = {
       id: user._id,
@@ -80,7 +86,7 @@ export const verifyToken = async (req, res) => {
     }
 
     const decoded = jwt.verify(tokenOnServer, JWT_SECRET);
-    console.log("decoded", decoded);
+    // console.log("decoded", decoded);
 
     if (!decoded || !decoded.id) {
       return res.status(401).json({ success: false });
@@ -105,7 +111,7 @@ export const verifyToken = async (req, res) => {
   }
 };
 
-export const logoutAdmin = async (req, res) => {
+export const logout = async (req, res) => {
   try {
     res.clearCookie("token", {
       path: "/",

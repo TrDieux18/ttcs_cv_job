@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { verifyToken } from "@services/admin/AuthService";
+import { verifyToken } from "@services/common/AuthService";
 
 const PublicRoute = () => {
   const location = useLocation();

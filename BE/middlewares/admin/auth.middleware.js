@@ -1,6 +1,6 @@
-import { JWT_SECRET } from "../../config/system.js";
+import { JWT_SECRET } from "../../configs/system.js";
 import jwt from "jsonwebtoken";
-import User from "../../models/User.model.js";
+import User from "../../models/user.model.js";
 
 export const authMiddleware = async (req, res, next) => {
   const token = req.cookies.token || req.headers.authorization?.split(" ")[1];

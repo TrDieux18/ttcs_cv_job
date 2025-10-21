@@ -4,7 +4,7 @@ import { Button, Checkbox, Form, Input, message } from "antd";
 
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { loginAdmin } from "@services/admin/AuthService";
+import { login } from "@services/common/AuthService";
 import { setUser } from "@store/UserReducer";
 
 const LoginAdmin = () => {
@@ -12,9 +12,9 @@ const LoginAdmin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const login = async (values) => {
+  const loginAuth = async (values) => {
     try {
-      const response = await loginAdmin(values);
+      const response = await login(values);
       if (response.success && response.data) {
         dispatch(setUser(response.data));
         localStorage.setItem("user", JSON.stringify(response.data));
@@ -54,7 +54,7 @@ const LoginAdmin = () => {
               layout="vertical"
               style={{ width: 400 }}
               initialValues={{ remember: true }}
-              onFinish={login}
+              onFinish={loginAuth}
               autoComplete="true"
             >
               <Form.Item
@@ -102,10 +102,6 @@ const LoginAdmin = () => {
                 </Button>
               </Form.Item>
             </Form>
-
-            <p className="text-[var(--color-text-two)] font-bold text-xl">
-              Forgot Password?
-            </p>
           </div>
         </div>
       </AuthLayout>
