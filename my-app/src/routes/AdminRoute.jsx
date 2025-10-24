@@ -6,6 +6,8 @@ import ProtectedRoute from "@components/guard/ProtectedRoute";
 import User from "@pages/admin/User";
 import Role from "@pages/admin/Role";
 import UserForm from "@pages/admin/User/components/UserForm";
+import DetailUser from "@pages/admin/User/components/DetailUser";
+import RolePermission from "@pages/admin/Role/components/RolePermission";
 
 const adminRoutes = [
   {
@@ -26,9 +28,14 @@ const adminRoutes = [
           },
           { path: "users/create", element: <UserForm mode="create" /> },
           { path: "users/update/:id", element: <UserForm mode="update" /> },
+          { path: "users/detail/:id", element: <DetailUser /> },
           {
             path: "roles",
             element: <Role />,
+          },
+          {
+            path: "roles-permission",
+            element: <RolePermission />,
           },
         ],
       },

@@ -37,3 +37,55 @@ export const PERMISSIONS = Object.freeze({
   USER_CREATE: "user:create",
   USER_DELETE: "user:delete",
 });
+
+export const permissionGroup = [
+  {
+    title: "Người dùng",
+    permissions: [
+      { label: "Xem", name: PERMISSIONS.USER_VIEW },
+      { label: "Tạo mới", name: PERMISSIONS.USER_CREATE },
+      { label: "Chỉnh sửa", name: PERMISSIONS.USER_UPDATE },
+      { label: "Xoá", name: PERMISSIONS.USER_DELETE },
+    ],
+  },
+  {
+    title: "Công ty",
+    permissions: [
+      { label: "Xem", name: PERMISSIONS.COMPANY_VIEW },
+      { label: "Tạo mới", name: PERMISSIONS.COMPANY_CREATE },
+      { label: "Chỉnh sửa", name: PERMISSIONS.COMPANY_UPDATE },
+      { label: "Xoá", name: PERMISSIONS.COMPANY_DELETE },
+    ],
+  },
+  {
+    title: "Việc làm",
+    permissions: [
+      { label: "Xem", name: PERMISSIONS.JOB_VIEW },
+      { label: "Tạo mới", name: PERMISSIONS.JOB_CREATE },
+      { label: "Chỉnh sửa", name: PERMISSIONS.JOB_UPDATE },
+      { label: "Xoá", name: PERMISSIONS.JOB_DELETE },
+    ],
+  },
+  {
+    title: "Vai trò",
+    permissions: [
+      { label: "Xem", name: PERMISSIONS.ROLE_VIEW },
+      { label: "Tạo mới", name: PERMISSIONS.ROLE_CREATE },
+      { label: "Chỉnh sửa", name: PERMISSIONS.ROLE_UPDATE },
+      { label: "Xoá", name: PERMISSIONS.ROLE_DELETE },
+      {
+        label: "Phân quyền",
+        name: PERMISSIONS.ROLE_PERMISSION_VIEW,
+      },
+    ],
+  },
+  {
+    title: "Bài viết",
+    permissions: [
+      { label: "Xem", name: PERMISSIONS.BLOG_VIEW },
+      { label: "Tạo mới", name: PERMISSIONS.BLOG_CREATE },
+      { label: "Chỉnh sửa", name: PERMISSIONS.BLOG_UPDATE },
+      { label: "Xoá", name: PERMISSIONS.BLOG_DELETE },
+    ],
+  },
+];

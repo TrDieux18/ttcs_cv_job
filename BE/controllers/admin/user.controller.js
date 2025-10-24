@@ -67,6 +67,35 @@ export const createUser = async (req, res) => {
   }
 };
 
+export const updateUser = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const { fullName, username, email, isActive, role_id, password } = req.body;
+    const updateData = {
+      fullName,
+      username,
+      email,
+      isActive,
+      role_id,
+      password,
+    };
+    if (req.file) {
+      updateData.avatar = `/uploads/${req.file.filename}`;
+    }
+    const updatedUser = await User.findByIdAndUpdate(
+      { _id: userId },
+      updateData,
+      { new: true }
+    );
+    if (!updatedUser) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    res.json({ success: true, data: updatedUser });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 export const changeUserStatus = async (req, res) => {
   try {
     const userId = req.params.id;
@@ -77,6 +106,23 @@ export const changeUserStatus = async (req, res) => {
       { new: true }
     );
     if (!updatedUser) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    res.json({ success: true });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export const deleteUser = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const deletedUser = await User.findByIdAndUpdate(
+      { _id: userId },
+      { deleted: true },
+      { new: true }
+    );
+    if (!deletedUser) {
       return res.status(404).json({ error: "User not found" });
     }
     res.json({ success: true });

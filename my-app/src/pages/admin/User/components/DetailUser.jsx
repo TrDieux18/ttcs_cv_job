@@ -11,22 +11,11 @@ import {
 } from "antd";
 import { useEffect, useState } from "react";
 import { getAllRoles } from "@services/admin/RoleService";
-import { createUser } from "@services/admin/UserService";
-import { message } from "antd";
-import { useNavigate, useParams } from "react-router-dom";
-import { getUserById, updateUser } from "@services/admin/UserService";
+import { BASE_API } from "@types/api";
+import { useParams } from "react-router-dom";
+import { getUserById } from "@services/admin/UserService";
 import { formatDateTime } from "@helpers/formatDate";
 import { DeleteOutlined, UserOutlined } from "@ant-design/icons";
-import { BASE_API } from "@types/api";
-
-const styleButton = {
-  border: "none",
-  padding: "8px 10px",
-  backgroundColor: "#3875F6",
-  color: "#fff",
-  fontSize: "15px",
-  fontWeight: "600",
-};
 
 const styleInput = {
   border: "none",
@@ -49,7 +38,7 @@ const styleLabelSpan = {
   fontSize: "14px",
 };
 
-const UserForm = ({ mode }) => {
+const DetailUser = () => {
   const [form] = Form.useForm();
 
   const [preview, setPreview] = useState("");
@@ -60,9 +49,6 @@ const UserForm = ({ mode }) => {
   const [initialAvatar, setInitialAvatar] = useState("");
   const [signInTime, setSignInTime] = useState("");
   const { id } = useParams();
-  const navigate = useNavigate();
-
-  const isEdit = mode === "update";
 
   useEffect(() => {
     const fetchRoles = async () => {
@@ -80,7 +66,7 @@ const UserForm = ({ mode }) => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      if (isEdit && id) {
+      if (id) {
         try {
           const response = await getUserById(id);
           if (response) {
@@ -107,54 +93,12 @@ const UserForm = ({ mode }) => {
       }
     };
     fetchUser();
-  }, [id, isEdit]);
+  }, [id]);
   console.log(preview);
 
-  const handleSubmit = async (values) => {
-    const formData = new FormData();
-    Object.keys(values).forEach((key) => {
-      formData.append(key, values[key]);
-    });
-
-    const fileInput = document.getElementById("avatarInput");
-    if (fileInput?.files?.[0]) {
-      formData.append("avatar", fileInput.files[0]);
-    } else if (values.avatar && typeof values.avatar === "string") {
-      formData.append("avatar", values.avatar);
-    } else {
-      formData.append("avatar", initialAvatar);
-    }
-
-    for (const pair of formData.entries()) {
-      console.log(`${pair[0]}: ${pair[1]}`);
-    }
-
-    try {
-      if (isEdit) {
-        const response = await updateUser(id, formData);
-        if (response.success) {
-          message.success("Cập nhật người dùng thành công!");
-          navigate(-1);
-        } else {
-          message.error(response.errors?.[0] || "Đã xảy ra lỗi!");
-        }
-      } else {
-        const response = await createUser(formData);
-        if (response.success) {
-          message.success("Tạo người dùng thành công!");
-          navigate(-1);
-        } else {
-          message.error(response.errors?.[0] || "Đã xảy ra lỗi!");
-        }
-      }
-    } catch (error) {
-      message.error("Đã xảy ra lỗi!");
-    }
-  };
-
   return (
-    <div className="overflow-x-auto space-y-4 ">
-      <Form layout="vertical" form={form} onFinish={handleSubmit}>
+    <div className="overflow-x-auto space-y-4 p-2">
+      <Form layout="vertical" form={form}>
         <Row
           style={{
             display: "flex",
@@ -162,14 +106,7 @@ const UserForm = ({ mode }) => {
           }}
         >
           <Col span={10}>
-            <Card
-              style={styleOutermostCard}
-              styles={{
-                body: {
-                  padding: 0,
-                },
-              }}
-            >
+            <Card style={styleOutermostCard}>
               <div
                 style={{
                   display: "flex",
@@ -218,99 +155,80 @@ const UserForm = ({ mode }) => {
                     }
                   }}
                 />
+
+                <div className="mt-4">
+                  <h2 className="text-xl font-semibold">{email}</h2>
+                  <span className="font-semibold text-[#d0d0d0]">
+                    Đăng nhập gần nhất: {signInTime}
+                  </span>
+                </div>
+              </div>
+
+              <div className="mt-4 flex items-center gap-2">
+                <h2 className="bg-[#f9f9f9] px-1.5 py-1 rounded-xl border-2 border-[#eee] w-fit">
+                  <span className="text-[#000] text-4 font-medium">
+                    User ID:
+                  </span>
+                  <span className="text-[10px] font-medium text-[#888]">
+                    {userData?._id}
+                  </span>
+                </h2>
                 <Button
-                  type="primary"
                   style={{
-                    ...styleButton,
-                    width: "15%",
-                    margin: "10px 0 0 5px",
+                    backgroundColor: "#f9f9f9",
+                    padding: "6px 8px",
+                    border: "2px solid #eee",
+                    borderRadius: "16px",
+                    color: " #000",
+                    fontWeight: 600,
+                    fontSize: "12px",
                   }}
-                  onClick={() =>
-                    document.getElementById("avatarInput")?.click()
-                  }
                 >
-                  Đổi
+                  Copy
+                </Button>
+              </div>
+              <div className="mt-7 flex flex-col  items-start">
+                <Button
+                  style={{
+                    padding: 0,
+                    fontWeight: 500,
+                  }}
+                  onMouseEnter={(e) =>
+                    (e.target.style.backgroundColor = "#ffffff")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.target.style.backgroundColor = "#ffffff")
+                  }
+                  type="text"
+                  icon={<UserOutlined />}
+                >
+                  Hồ sơ cá nhân
                 </Button>
 
-                {isEdit && (
-                  <div className="mt-4">
-                    <h2 className="text-xl font-semibold">{email}</h2>
-                    <span className="font-semibold text-[#d0d0d0]">
-                      Đăng nhập gần nhất: {signInTime}
-                    </span>
-                  </div>
-                )}
+                <Popconfirm
+                  cancelText="Hủy"
+                  okText="Xóa"
+                  title="Bạn có chắc chắn xóa người dùng này?"
+                >
+                  <Button
+                    style={{
+                      padding: 0,
+                      fontWeight: 500,
+                    }}
+                    onMouseEnter={(e) =>
+                      (e.target.style.backgroundColor = "#ffffff")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.target.style.backgroundColor = "#ffffff")
+                    }
+                    danger
+                    type="text"
+                    icon={<DeleteOutlined />}
+                  >
+                    Xóa người dùng
+                  </Button>
+                </Popconfirm>
               </div>
-              {isEdit && (
-                <>
-                  {" "}
-                  <div className="mt-4 flex items-center gap-2">
-                    <h2 className="bg-[#f9f9f9] px-1.5 py-1 rounded-xl border-2 border-[#eee] w-fit">
-                      <span className="text-[#000] text-4 font-medium">
-                        User ID:
-                      </span>
-                      <span className="text-[10px] font-medium text-[#888]">
-                        {userData?._id}
-                      </span>
-                    </h2>
-                    <Button
-                      style={{
-                        backgroundColor: "#f9f9f9",
-                        padding: "6px 8px",
-                        border: "2px solid #eee",
-                        borderRadius: "16px",
-                        color: " #000",
-                        fontWeight: 600,
-                        fontSize: "12px",
-                      }}
-                    >
-                      Copy
-                    </Button>
-                  </div>
-                  <div className="mt-7 flex flex-col  items-start">
-                    <Button
-                      style={{
-                        padding: 0,
-                        fontWeight: 500,
-                      }}
-                      onMouseEnter={(e) =>
-                        (e.target.style.backgroundColor = "#ffffff")
-                      }
-                      onMouseLeave={(e) =>
-                        (e.target.style.backgroundColor = "#ffffff")
-                      }
-                      type="text"
-                      icon={<UserOutlined />}
-                    >
-                      Hồ sơ cá nhân
-                    </Button>
-
-                    <Popconfirm
-                      cancelText="Hủy"
-                      okText="Xóa"
-                      title="Bạn có chắc chắn xóa người dùng này?"
-                    >
-                      <Button
-                        style={{
-                          padding: 0,
-                          fontWeight: 500,
-                        }}
-                        onMouseEnter={(e) =>
-                          (e.target.style.backgroundColor = "#ffffff")
-                        }
-                        onMouseLeave={(e) =>
-                          (e.target.style.backgroundColor = "#ffffff")
-                        }
-                        danger
-                        type="text"
-                        icon={<DeleteOutlined />}
-                      >
-                        Xóa người dùng
-                      </Button>
-                    </Popconfirm>
-                  </div>
-                </>
-              )}
             </Card>
           </Col>
 
@@ -321,7 +239,6 @@ const UserForm = ({ mode }) => {
                 body: {
                   display: "flex",
                   flexDirection: "column",
-                  padding: 0,
                 },
               }}
             >
@@ -366,6 +283,7 @@ const UserForm = ({ mode }) => {
                             words[words.length - 1][0].toUpperCase();
                           setInitialAvatar(intials);
                         }}
+                        disabled
                       />
                     </Form.Item>
                   </Col>
@@ -381,6 +299,7 @@ const UserForm = ({ mode }) => {
                           message: "Vui lòng nhập tên tài khoản.",
                         },
                       ]}
+                      disabled
                     >
                       <Input
                         placeholder="Nhập tên tài khoản"
@@ -407,6 +326,7 @@ const UserForm = ({ mode }) => {
                         onChange={(e) => {
                           setEmail(e.target.value);
                         }}
+                        disabled
                       />
                     </Form.Item>
                   </Col>
@@ -418,6 +338,7 @@ const UserForm = ({ mode }) => {
                       rules={[
                         { required: true, message: "Vui lòng nhập mật khẩu." },
                       ]}
+                      disabled
                     >
                       <Input.Password
                         placeholder="Nhập mật khẩu"
@@ -435,6 +356,7 @@ const UserForm = ({ mode }) => {
                     >
                       <Select
                         style={{ height: 39.56, backgroundColor: "#f9f9f9" }}
+                        disabled
                       >
                         <Select.Option value={true}>
                           <span
@@ -469,6 +391,7 @@ const UserForm = ({ mode }) => {
                         placeholder="Chọn vai trò"
                         optionLabelProp="label"
                         style={{ height: 39.56, backgroundColor: "#f9f9f9" }}
+                        disabled
                       >
                         {roles.map((role) => {
                           return (
@@ -524,9 +447,7 @@ const UserForm = ({ mode }) => {
 
                   <Col span={24}>
                     <Form.Item
-                      label={
-                        <span style={styleLabelSpan}>Cập nhật gần nhất</span>
-                      }
+                      label={<span style={styleLabelSpan}>Ngày sửa</span>}
                       style={{ margin: 0 }}
                       name="updatedAt"
                     >
@@ -535,17 +456,6 @@ const UserForm = ({ mode }) => {
                   </Col>
                 </Row>
               </Card>
-              <div className="flex  justify-end">
-                <Button
-                  style={{
-                    ...styleButton,
-                    width: "15%",
-                  }}
-                  htmlType="submit"
-                >
-                  {isEdit ? "Cập nhật" : "Tạo mới"}
-                </Button>
-              </div>
             </Card>
           </Col>
         </Row>
@@ -554,4 +464,4 @@ const UserForm = ({ mode }) => {
   );
 };
 
-export default UserForm;
+export default DetailUser;

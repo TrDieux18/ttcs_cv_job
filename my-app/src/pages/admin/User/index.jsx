@@ -1,8 +1,16 @@
 import { useEffect, useState } from "react";
 import { getAllUsers } from "@services/admin/UserService";
-import { Button, message, Popconfirm, Table } from "antd";
+import { Button, Dropdown, message, Popconfirm, Table } from "antd";
 import { NavLink, useNavigate } from "react-router-dom";
 import { changeUserStatus } from "@services/admin/UserService";
+import {
+  DeleteOutlined,
+  EditOutlined,
+  EyeOutlined,
+  MoreOutlined,
+} from "@ant-design/icons";
+import { deleteUser } from "@services/admin/UserService";
+
 const User = () => {
   const [users, setUsers] = useState([]);
   const [messageApi, contextHolder] = message.useMessage();
@@ -13,7 +21,7 @@ const User = () => {
     const fetchUsers = async () => {
       try {
         const response = await getAllUsers();
-        console.log("Fetched users:", response);
+
         setUsers(response);
       } catch (error) {
         console.error("Error fetching users:", error);
@@ -40,6 +48,57 @@ const User = () => {
     } catch (error) {
       console.error("Error changing user status:", error);
       messageApi.error("Cập nhật trạng thái người dùng thất bại");
+    }
+  };
+
+  const actionUserDropdown = (record) => ({
+    items: [
+      {
+        key: "detail",
+        label: "Xem chi tiết",
+        icon: <EyeOutlined style={{ fontSize: 15 }} />,
+        onClick: () => navigate(`/admin/users/detail/${record._id}`),
+      },
+      { type: "divider" },
+      {
+        key: "edit",
+        label: <span className="text-sky-400">Chỉnh sửa</span>, // xanh nhạt da trời
+        icon: (
+          <EditOutlined
+            style={{
+              color: "#00BCFF",
+              fontSize: 15,
+            }}
+          />
+        ),
+        onClick: () => navigate(`/admin/users/update/${record._id}`),
+      },
+      { type: "divider" },
+      {
+        key: "delete",
+        label: "Xóa",
+        icon: <DeleteOutlined style={{ fontSize: 15 }} />,
+        danger: true,
+        onClick: () => handleDeleteUser(record._id),
+      },
+    ],
+  });
+
+  const handleDeleteUser = async (userId) => {
+    console.log("Delete user with ID:", userId);
+    try {
+      const response = await deleteUser(userId);
+      if (response.success) {
+        setUsers((prevUsers) =>
+          prevUsers.filter((user) => user._id !== userId)
+        );
+        messageApi.success("Xóa người dùng thành công");
+      } else {
+        messageApi.error("Xóa người dùng thất bại");
+      }
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      messageApi.error("Xóa người dùng thất bại");
     }
   };
 
@@ -106,24 +165,14 @@ const User = () => {
       key: "action",
       align: "center",
       render: (_, record) => (
-        <div className="space-x-2">
-          <Button color="gold">Chi tiết</Button>
-
-          <Button
-            type="primary"
-            onClick={() => navigate(`/admin/users/update/${record._id}`)}
-          >
-            Sửa
-          </Button>
-
-          <Popconfirm
-            title="Bạn có chắc muốn xóa sản phẩm này?"
-            okText="Xóa"
-            cancelText="Hủy"
-          >
-            <Button danger>Xóa</Button>
-          </Popconfirm>
-        </div>
+        <Dropdown
+          menu={actionUserDropdown(record)}
+          trigger={["click"]}
+          placement="bottom"
+          arrow
+        >
+          <Button icon={<MoreOutlined />} />
+        </Dropdown>
       ),
     },
   ];
@@ -134,7 +183,7 @@ const User = () => {
       <div className="overflow-x-auto space-y-4 p-2">
         <div className="flex justify-between">
           <h1 className="text-xl font-semibold">Danh sách tài khoản</h1>
-          <Button type="primary">
+          <Button type="primary" style={{ background: "#3875F6" }}>
             <NavLink to="/admin/users/create">Tạo mới</NavLink>
           </Button>
         </div>

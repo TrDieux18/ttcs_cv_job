@@ -8,6 +8,7 @@ export const getAllUsers = async () => {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
     });
 
     if (!response.ok) {
@@ -29,6 +30,7 @@ export const getUserById = async (userId) => {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
     });
 
     if (!response.ok) {
@@ -52,6 +54,7 @@ export const createUser = async (userData) => {
     const response = await fetch(`${ADMIN_API}/users/create`, {
       method: "POST",
       body: userData,
+      credentials: "include",
     });
 
     const data = await response.json();
@@ -75,6 +78,7 @@ export const changeUserStatus = async (userId, status) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ isActive: newStatus }),
+      credentials: "include",
     });
     if (!response.ok) {
       throw new Error("Failed to change user status");
@@ -83,6 +87,45 @@ export const changeUserStatus = async (userId, status) => {
     return new ApiResponse(data.success);
   } catch (error) {
     console.error("Error changing user status:", error);
+    return new ApiResponse(false, null, [error.message]);
+  }
+};
+
+export const updateUser = async (userId, userData) => {
+  try {
+    const response = await fetch(`${ADMIN_API}/users/update/${userId}`, {
+      method: "PATCH",
+      body: userData,
+      credentials: "include",
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.message || "Cập nhật người dùng thất bại!");
+    }
+    return new ApiResponse(data.success, data.data);
+  } catch (error) {
+    console.error("Error updating user:", error);
+    return new ApiResponse(false, null, [error.message]);
+  }
+};
+
+export const deleteUser = async (userId) => {
+  try {
+    const response = await fetch(`${ADMIN_API}/users/delete/${userId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to delete user");
+    }
+    const data = await response.json();
+    return new ApiResponse(data.success);
+  } catch (error) {
+    console.error("Error deleting user:", error);
     return new ApiResponse(false, null, [error.message]);
   }
 };
