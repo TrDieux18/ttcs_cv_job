@@ -1,16 +1,15 @@
 import multer from "multer";
-import path from "path";
 
-const storage = multer.diskStorage({
-  destination: "uploads/", // thư mục lưu file
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname));
-  },
-});
+// lưu file trong RAM
+export const upload = multer({ storage: multer.memoryStorage() });
 
-export const upload = multer({ storage });
+// import path from "path";
 
-// import multer from "multer";
+// const storage = multer.diskStorage({
+//   destination: "uploads/", // thư mục lưu file
+//   filename: (req, file, cb) => {
+//     cb(null, Date.now() + path.extname(file.originalname));
+//   },
+// });
 
-// // lưu file trong RAM
-// export const upload = multer({ storage: multer.memoryStorage() });
+// export const upload = multer({ storage });

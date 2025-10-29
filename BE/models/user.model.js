@@ -15,6 +15,8 @@ const userSchema = new mongoose.Schema(
       ref: "Role",
       required: false,
     },
+    
+
     timeLogin: { type: Date, default: null },
 
     isActive: { type: Boolean, default: true },

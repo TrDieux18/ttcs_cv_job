@@ -8,6 +8,10 @@ import Role from "@pages/admin/Role";
 import UserForm from "@pages/admin/User/components/UserForm";
 import DetailUser from "@pages/admin/User/components/DetailUser";
 import RolePermission from "@pages/admin/Role/components/RolePermission";
+import CV from "@pages/admin/CV";
+
+import CreateCV from "@pages/admin/CV/CreateCV";
+import DetailCV from "@pages/admin/CV/components/DetailCV";
 
 const adminRoutes = [
   {
@@ -36,6 +40,19 @@ const adminRoutes = [
           {
             path: "roles-permission",
             element: <RolePermission />,
+          },
+
+          {
+            path: "cvs",
+            element: <CV />,
+          },
+          {
+            path: "cvs/create",
+            element: <CreateCV />,
+          },
+          {
+            path: "cvs/detail/:_id",
+            element: <DetailCV />,
           },
         ],
       },

@@ -1,11 +1,13 @@
 import { AuthLayout } from "@components/layout/AuthAdminLayout";
 
-import { Button, Checkbox, Form, Input, message } from "antd";
+import { Button, Form, Input, message } from "antd";
 
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "@services/common/AuthService";
 import { setUser } from "@store/UserReducer";
+import { LuLock, LuLogIn, LuUser } from "react-icons/lu";
+import { IoLockOpenOutline } from "react-icons/io5";
 
 const LoginAdmin = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -23,6 +25,8 @@ const LoginAdmin = () => {
         setTimeout(() => {
           navigate("/admin/dashboard");
         }, 1500);
+      } else {
+        messageApi.error(response.message || "Đăng nhập thất bại");
       }
     } catch (error) {
       console.error("Login failed:", error);
@@ -30,23 +34,26 @@ const LoginAdmin = () => {
   };
 
   return (
-    <div>
+    <div
+      className="min-h-screen "
+      style={{
+        background:
+          "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)",
+      }}
+    >
       {contextHolder}
       <AuthLayout>
         <div className="p-4">
-          <div className="name flex gap-2 items-center">
-            <div className="text-[#c41212] bg-[#3929cc] flex items-center justify-center h-7 w-7 rounded-full">
-              <img src="@assets/image/image.png" alt="anh" />
+          <div className="name flex gap-2 items-center text-amber-50">
+            <div className=" text-2xl font-semibold flex items-center justify-center h-7 w-7 rounded-full">
+              <LuLogIn />
             </div>
-            <p className="text-2xl font-bold text-[var(--color-text-two)]">
-              Cyberverdict
-            </p>
+            <p className="text-2xl font-semibold">Trang quản trị</p>
           </div>
 
           <div className="flex flex-col justify-center items-center mt-20">
-            <div className="mb-6 text-[var(--color-text-two)] text-center">
-              <h1 className="text-3xl font-bold">Login to your Account</h1>
-              <p>with your enroll Email Address</p>
+            <div className="mb-6text-center">
+              <h1 className="text-3xl font-bold text-amber-50">Đăng nhập</h1>
             </div>
 
             <Form
@@ -58,7 +65,12 @@ const LoginAdmin = () => {
               autoComplete="true"
             >
               <Form.Item
-                label={<span>Tên đăng nhập</span>}
+                label={
+                  <div className="flex items-center gap-1 text-amber-50">
+                    <LuUser size={16} />
+                    <span className=" text-[16px]">Tên đăng nhập</span>
+                  </div>
+                }
                 name="username"
                 rules={[{ required: true, message: "Nhập tên đăng nhập" }]}
               >
@@ -70,9 +82,10 @@ const LoginAdmin = () => {
 
               <Form.Item
                 label={
-                  <span className="text-[var(--color-text-one)] text-[16px]">
-                    Password
-                  </span>
+                  <div className="flex items-center gap-1 text-amber-50">
+                    <LuLock size={16} />
+                    <span className="text-[16px] ">Mật khẩu</span>
+                  </div>
                 }
                 name="password"
                 rules={[{ required: true, message: "Nhập mật khẩu!" }]}
@@ -83,14 +96,6 @@ const LoginAdmin = () => {
                 />
               </Form.Item>
 
-              <Form.Item name="remember" valuePropName="checked">
-                <Checkbox>
-                  <span className="text-[var(--color-text-one)] text-[16px]">
-                    Remember my password
-                  </span>
-                </Checkbox>
-              </Form.Item>
-
               <Form.Item>
                 <Button
                   type="primary"
@@ -98,7 +103,7 @@ const LoginAdmin = () => {
                   className="w-full !h-12 !shadow-lg !text-lg mt-3"
                   size="large"
                 >
-                  Login
+                  Đăng nhập
                 </Button>
               </Form.Item>
             </Form>

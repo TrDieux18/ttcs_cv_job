@@ -1,14 +1,16 @@
 .layout {
-  min-height: 100vh; // đảm bảo chiếm đủ chiều cao màn hình
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 
   &-header {
-    padding: 0px 80px;
+    padding: 0px 50px;
+    height: 64px;
     display: flex;
+
     align-items: center;
     flex-wrap: wrap;
-    background-color: var(--bg-color-two);
+    background: linear-gradient(269.85deg, #54151c 0%, #121212 54.89%);
 
     &__logo {
       font-size: 40px;
@@ -27,6 +29,7 @@
         display: flex;
         justify-content: space-evenly;
         width: auto;
+        color: #a6a6a6;
 
         li {
           list-style: none;
@@ -34,9 +37,7 @@
           transition: ease-in-out 0.3s all;
 
           &:hover {
-            background-color: #f6e0a7;
-
-            border-radius: 5px;
+            color: #ffffff;
           }
 
           a {
@@ -146,5 +147,64 @@
 
   &:hover {
     filter: drop-shadow(2px 8px 5px rgba(11, 151, 232, 0.2));
+  }
+}
+
+.ant-dropdown {
+  .ant-dropdown-menu {
+    background: #121212;
+    padding: 0 !important;
+    overflow: hidden;
+    border-radius: 0;
+    box-shadow: none;
+
+    .ant-dropdown-menu-item {
+      color: #a6a6a6;
+      padding: 8px 15px;
+      font-size: 15px;
+      border-radius: 0;
+    }
+
+    .ant-dropdown-menu-item:not(:last-child) {
+      border-bottom: 1px solid #2c2c2e;
+    }
+
+    .ant-dropdown-menu-item:hover {
+      background: #414042;
+      color: #ffffff;
+    }
+  }
+}
+.custom-dropdown {
+  .ant-dropdown-menu {
+    padding: 0 !important;
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+
+    .ant-dropdown-menu-item {
+      border-radius: 0;
+    }
+    .ant-dropdown-menu-item:not(:last-child) {
+      border-bottom: none;
+    }
+
+    .ant-dropdown-menu-item:first-child {
+      background: #f7f7f7;
+    }
+    .ant-dropdown-menu-item:not(:first-child) {
+      font-size: 15px;
+      padding: 8px 12px;
+      color: #121212;
+    }
+
+    .ant-dropdown-menu-item:not(:first-child):hover {
+      background-color: #fdf5f5;
+      color: #da3738;
+    }
+
+    .ant-dropdown-menu-item-divider {
+      margin: 0 !important;
+    }
   }
 }

@@ -1,17 +1,49 @@
 import UserDTO from "../../dtos/user.dto.js";
+import { formatName } from "../../helpers/formatName.js";
 import User from "../../models/user.model.js";
+import { uploadToCloudinary } from "../../middlewares/admin/uploadCloudinary.middleware.js";
+
 
 export const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find({ deleted: false }).populate(
-      "role_id",
-      "title"
-    );
-    // console.log(users);
+    const { page = 1, limit = 5, keyword = "", isActive = "all" } = req.query;
+
+    const filter = { deleted: false };
+
+    if (keyword.trim()) {
+      const regex = new RegExp(keyword.trim(), "i");
+      filter.$or = [{ fullName: regex }, { username: regex }, { email: regex }];
+    }
+
+    if (isActive !== "all") {
+      filter.isActive = isActive === "true";
+    }
+
+    const skip = (Number(page) - 1) * Number(limit);
+
+    const [users, total] = await Promise.all([
+      User.find(filter)
+        .populate("role_id", "title")
+        .skip(skip)
+        .limit(Number(limit))
+        .sort({ createdAt: -1 }),
+      User.countDocuments(filter),
+    ]);
+
     const results = users.map((user) => new UserDTO(user));
-    res.json(results);
+
+    return res.json({
+      success: true,
+      data: results,
+      total,
+    });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error("Error fetching users:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Lỗi khi lấy danh sách người dùng",
+      error: error.message,
+    });
   }
 };
 
@@ -48,18 +80,22 @@ export const createUser = async (req, res) => {
       });
     }
 
+    const formattedName = formatName(fullName);
+
     const newUser = new User({
-      fullName,
+      fullName: formattedName,
       username,
       email,
       isActive,
       role_id,
       password,
-      avatar: req.file ? `/uploads/${req.file.filename}` : req.body.avatar,
+      avatar: req.file
+        ? (await uploadToCloudinary(req.file.buffer, "users")).secure_url
+        : req.body.avatar,
     });
 
     const userSave = await newUser.save();
-    // console.log(userSave);
+
     res.status(201).json({ success: true, data: userSave });
   } catch (error) {
     console.error(error);
@@ -71,31 +107,46 @@ export const updateUser = async (req, res) => {
   try {
     const userId = req.params.id;
     const { fullName, username, email, isActive, role_id, password } = req.body;
-    const updateData = {
-      fullName,
-      username,
-      email,
-      isActive,
-      role_id,
-      password,
-    };
+
+ 
+    const user = await User.findById(userId);
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
+
+  
+    if (fullName) user.fullName = formatName(fullName);
+    if (username) user.username = username;
+    if (email) user.email = email;
+    if (typeof isActive !== "undefined") user.isActive = isActive;
+    if (role_id) user.role_id = role_id;
+
+
+    if (password) {
+      user.password = password;
+    }
+
+    
     if (req.file) {
-      updateData.avatar = `/uploads/${req.file.filename}`;
+      const result = await uploadToCloudinary(req.file.buffer, "users");
+      user.avatar = result.secure_url;
     }
-    const updatedUser = await User.findByIdAndUpdate(
-      { _id: userId },
-      updateData,
-      { new: true }
-    );
-    if (!updatedUser) {
-      return res.status(404).json({ error: "User not found" });
-    }
-    res.json({ success: true, data: updatedUser });
+
+
+    const updatedUser = await user.save();
+
+    return res.json({
+      success: true,
+      message: "Cập nhật người dùng thành công",
+      data: updatedUser,
+    });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error("Update user error:", error);
+    return res.status(500).json({ success: false, message: error.message });
   }
 };
-
 export const changeUserStatus = async (req, res) => {
   try {
     const userId = req.params.id;

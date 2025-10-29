@@ -22,25 +22,25 @@ const __dirname = path.dirname(__filename);
 app.use(
   cors({
     origin: process.env.ORIGIN_URL || "http://localhost:5173",
-    credentials: true, // ✅ Cho phép cookie cross-origin
+    credentials: true,
   })
 );
 
 app.use(cookieParser());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.originalUrl}`, {
     query: req.query,
     body: req.body,
     params: req.params,
-    cookies: req.cookies, // ✅ Xem cookie luôn ở đây
+    // cookies: req.cookies, // ✅ Xem cookie luôn ở đây
   });
   next();
 });
 
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+// app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use(SYSTEM.PATH_AUTH, authRoute);
 app.use(SYSTEM.PATH_ADMIN, adminRoute);

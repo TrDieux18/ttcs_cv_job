@@ -1,9 +1,10 @@
 import { ApiResponse } from "@types/response/ApiResponse";
 import { ADMIN_API } from "@types/api";
 
-export const getAllUsers = async () => {
+export const getAllUsers = async (query = {}) => {
   try {
-    const response = await fetch(`${ADMIN_API}/users `, {
+    const params = new URLSearchParams(query).toString();
+    const response = await fetch(`${ADMIN_API}/users?${params}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

@@ -1,7 +1,9 @@
+import { BASE_API } from "@types/api";
+
 export const login = async (user) => {
   try {
     const res = await fetch(
-      `http://localhost:3001/users?email=${encodeURIComponent(
+      `${BASE_API}/users?email=${encodeURIComponent(
         user.email
       )}&password=${encodeURIComponent(user.password)}`,
       {

@@ -80,6 +80,7 @@ const clientRoutes = [
         path: "login",
         element: <Login />,
       },
+
       {
         element: <PrivateRoute />,
         children: [

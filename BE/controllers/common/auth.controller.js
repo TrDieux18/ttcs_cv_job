@@ -2,15 +2,12 @@ import User from "../../models/user.model.js";
 import UserDTO from "../../dtos/user.dto.js";
 import { JWT_SECRET, JWT_EXPIRES_IN } from "../../configs/system.js";
 import jwt from "jsonwebtoken";
-
-
-
+import Role from "../../models/role.model.js";
 
 export const login = async (req, res) => {
-
   try {
     const { username, password } = req.body;
-    // console.log(username, password);
+    console.log(username, password);
 
     const user = await User.findOne({
       username,
@@ -123,5 +120,49 @@ export const logout = async (req, res) => {
     res.status(200).json({ success: true, message: "Đăng xuất thành công" });
   } catch (err) {
     res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
+export const register = async (req, res) => {
+  try {
+    const { username, password, fullName, email, role } = req.body;
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Tên đăng nhập đã tồn tại" });
+    }
+
+    const existingEmail = await User.findOne({ email });
+    if (existingEmail) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Email đã được sử dụng" });
+    }
+
+    const roleId = await Role.findOne({
+      title: { $regex: new RegExp(`^${role}$`, "i") },
+    });
+    if (!roleId) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Vai trò không hợp lệ" });
+    }
+    const newUser = new User({
+      username,
+      password,
+      fullName,
+      email,
+      role_id: roleId,
+    });
+    const savedUser = await newUser.save();
+
+    res.status(201).json({
+      success: true,
+      data: savedUser,
+    });
+  } catch (err) {
+    console.error("❌ Lỗi khi đăng ký:", err);
+    res.status(500).json({ success: false, message: "Lỗi server" });
   }
 };

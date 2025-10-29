@@ -80,7 +80,7 @@ const DetailUser = () => {
             setSignInTime(formatDateTime(response.timeLogin));
             setEmail(response.email);
             if (response.avatar && response.avatar.length > 1) {
-              setPreview(`${BASE_API}${response.avatar}`);
+              setPreview(`${response.avatar}`);
             } else {
               const words = response.fullName.trim().split(" ");
               const initials = words[words.length - 1][0].toUpperCase();
@@ -97,7 +97,7 @@ const DetailUser = () => {
   console.log(preview);
 
   return (
-    <div className="overflow-x-auto space-y-4 p-2">
+    <div className="overflow-x-auto space-y-4">
       <Form layout="vertical" form={form}>
         <Row
           style={{
@@ -106,7 +106,14 @@ const DetailUser = () => {
           }}
         >
           <Col span={10}>
-            <Card style={styleOutermostCard}>
+            <Card
+              style={styleOutermostCard}
+              styles={{
+                body: {
+                  padding: 0,
+                },
+              }}
+            >
               <div
                 style={{
                   display: "flex",
@@ -158,13 +165,13 @@ const DetailUser = () => {
 
                 <div className="mt-4">
                   <h2 className="text-xl font-semibold">{email}</h2>
-                  <span className="font-semibold text-[#d0d0d0]">
+                  <span className="font-medium text-gray-300">
                     Đăng nhập gần nhất: {signInTime}
                   </span>
                 </div>
               </div>
 
-              <div className="mt-4 flex items-center gap-2">
+              <div className="mt-3 flex items-center gap-2">
                 <h2 className="bg-[#f9f9f9] px-1.5 py-1 rounded-xl border-2 border-[#eee] w-fit">
                   <span className="text-[#000] text-4 font-medium">
                     User ID:
@@ -187,7 +194,7 @@ const DetailUser = () => {
                   Copy
                 </Button>
               </div>
-              <div className="mt-7 flex flex-col  items-start">
+              <div className="mt-4 flex flex-col  items-start">
                 <Button
                   style={{
                     padding: 0,
@@ -239,6 +246,7 @@ const DetailUser = () => {
                 body: {
                   display: "flex",
                   flexDirection: "column",
+                  padding: 0,
                 },
               }}
             >

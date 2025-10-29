@@ -14,12 +14,12 @@ import { Layout, Menu, Dropdown, Button, message, theme } from "antd";
 import { Outlet, useNavigate } from "react-router-dom";
 import { logout } from "@services/common/AuthService";
 import { useSelector } from "react-redux";
+import { LuFileUser } from "react-icons/lu";
 
 const { Header, Sider, Content } = Layout;
 
 const AdminLayout = () => {
   const user = useSelector((state) => state.user.user);
-  // console.log("user in layout:", user);
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
@@ -28,7 +28,6 @@ const AdminLayout = () => {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
-  // 👉 Menu bên trái
   const sidebarItems = [
     {
       key: "/admin/dashboard",
@@ -49,6 +48,11 @@ const AdminLayout = () => {
       key: "/admin/roles-permission",
       icon: <PartitionOutlined />,
       label: "Phân quyền",
+    },
+    {
+      key: "/admin/cvs",
+      icon: <LuFileUser />,
+      label: "Hồ sơ ứng viên",
     },
   ];
 
@@ -91,26 +95,74 @@ const AdminLayout = () => {
     <Layout style={{ minHeight: "100vh" }}>
       {contextHolder}
 
-      <Sider trigger={null} collapsible collapsed={collapsed}>
+      <Sider
+        trigger={null}
+        collapsible
+        collapsed={collapsed}
+        width={220}
+        collapsedWidth={80}
+        style={{
+          backgroundColor: "#F5F7F9",
+          borderRight: "2px solid #eee",
+        }}
+      >
         <div
-          className="demo-logo-vertical text-white text-center py-4 text-lg font-bold"
+          className="demo-logo-vertical text-center py-2 text-lg font-bold flex items-center justify-center"
           style={{ cursor: "pointer" }}
           onClick={() => navigate("/admin/dashboard")}
         >
-          {collapsed ? "A" : "Admin Panel"}
+          {collapsed ? (
+            <img
+              src={user.avatar}
+              alt="avatar"
+              className="w-8 h-8 rounded-full border object-cover"
+            />
+          ) : (
+            <div className="w-[90%] px-2 py-1  rounded-lg bg-[#fff] border-[#eee] border-[2px]">
+              <Dropdown
+                menu={profileMenu}
+                trigger={["click"]}
+                placement="bottom"
+                arrow
+              >
+                <div className="flex justify-between items-center gap-2 cursor-pointer select-none  ">
+                  <div className="flex items-center gap-1">
+                    <img
+                      src={user.avatar}
+                      alt="avatar"
+                      className="w-8 h-8 rounded-full border object-cover"
+                    />
+                    <span className="text-gray-700 font-medium">
+                      {user.fullName}
+                    </span>
+                  </div>
+                  <DownOutlined
+                    style={{
+                      fontSize: 14,
+                      fontWeight: 600,
+                    }}
+                  />
+                </div>
+              </Dropdown>
+            </div>
+          )}
         </div>
+
         <Menu
-          theme="dark"
+          theme="light"
           mode="inline"
           defaultSelectedKeys={["/admin/dashboard"]}
           items={sidebarItems}
           onClick={handleMenuClick}
+          style={{
+            fontSize: 15,
+            backgroundColor: "#F5F7F9",
+            borderRight: "none",
+          }}
         />
       </Sider>
 
-      {/* Main Layout */}
       <Layout>
-        {/* Header */}
         <Header
           style={{
             padding: "0 16px",
@@ -130,31 +182,13 @@ const AdminLayout = () => {
               height: 48,
             }}
           />
-          <Dropdown
-            menu={profileMenu}
-            trigger={["click"]}
-            placement="bottomRight"
-            arrow
-          >
-            <div className="flex items-center gap-2 cursor-pointer select-none">
-              <span className="text-gray-700 font-medium">Admin</span>
-              <img
-                src="https://i.pravatar.cc/40"
-                alt="avatar"
-                className="w-8 h-8 rounded-full border"
-              />
-              <DownOutlined className="text-gray-500 text-xs" />
-            </div>
-          </Dropdown>
         </Header>
 
-        {/* Nội dung */}
         <Content
           style={{
-            margin: "16px",
-            padding: 24,
+            padding: "24px",
             background: colorBgContainer,
-            borderRadius: borderRadiusLG,
+
             minHeight: 280,
           }}
         >

@@ -59,3 +59,23 @@ export const logout = async () => {
     return new ApiResponse(false, null, [error.message]);
   }
 };
+
+export const register = async (value) => {
+  try {
+    const response = await fetch(`${AUTH_API}/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(value),
+    });
+
+    const data = await response.json();
+    return new ApiResponse(
+      data.success || false,
+      data.data || null,
+      data.message ? [data.message] : []
+    );
+  } catch (error) {
+    console.error("Error registering user:", error);
+    return new ApiResponse(false, null, [error.message]);
+  }
+};

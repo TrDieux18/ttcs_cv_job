@@ -8,6 +8,7 @@ import {
   Popconfirm,
   Row,
   Select,
+  Space,
 } from "antd";
 import { useEffect, useState } from "react";
 import { getAllRoles } from "@services/admin/RoleService";
@@ -17,7 +18,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getUserById, updateUser } from "@services/admin/UserService";
 import { formatDateTime } from "@helpers/formatDate";
 import { DeleteOutlined, UserOutlined } from "@ant-design/icons";
-import { BASE_API } from "@types/api";
 
 const styleButton = {
   border: "none",
@@ -94,7 +94,7 @@ const UserForm = ({ mode }) => {
             setSignInTime(formatDateTime(response.timeLogin));
             setEmail(response.email);
             if (response.avatar && response.avatar.length > 1) {
-              setPreview(`${BASE_API}${response.avatar}`);
+              setPreview(`${response.avatar}`);
             } else {
               const words = response.fullName.trim().split(" ");
               const initials = words[words.length - 1][0].toUpperCase();
@@ -178,10 +178,10 @@ const UserForm = ({ mode }) => {
               >
                 {preview ? (
                   <Image
+                    height={80}
+                    width={80}
                     src={preview}
                     style={{
-                      width: 80,
-                      height: 80,
                       borderRadius: "50%",
                       objectFit: "cover",
                     }}
@@ -193,7 +193,7 @@ const UserForm = ({ mode }) => {
                       width: 80,
                       height: 80,
                       borderRadius: "50%",
-                      backgroundColor: "#041527",
+                      backgroundColor: "#3875F6",
                       color: "#fff",
                       display: "flex",
                       alignItems: "center",
@@ -235,7 +235,7 @@ const UserForm = ({ mode }) => {
                 {isEdit && (
                   <div className="mt-4">
                     <h2 className="text-xl font-semibold">{email}</h2>
-                    <span className="font-semibold text-[#d0d0d0]">
+                    <span className="font-medium text-gray-300">
                       Đăng nhập gần nhất: {signInTime}
                     </span>
                   </div>
@@ -243,8 +243,7 @@ const UserForm = ({ mode }) => {
               </div>
               {isEdit && (
                 <>
-                  {" "}
-                  <div className="mt-4 flex items-center gap-2">
+                  <div className="mt-3 flex items-center gap-2">
                     <h2 className="bg-[#f9f9f9] px-1.5 py-1 rounded-xl border-2 border-[#eee] w-fit">
                       <span className="text-[#000] text-4 font-medium">
                         User ID:
@@ -267,7 +266,7 @@ const UserForm = ({ mode }) => {
                       Copy
                     </Button>
                   </div>
-                  <div className="mt-7 flex flex-col  items-start">
+                  <div className="mt-4 flex flex-col  items-start">
                     <Button
                       style={{
                         padding: 0,
