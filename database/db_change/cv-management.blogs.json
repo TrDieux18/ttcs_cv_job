@@ -1,0 +1,525 @@
+[{
+  "_id": {
+    "$oid": "68fa5a21a35664100403b621"
+  },
+  "title": "Khởi đầu sự nghiệp: Làm sao chọn ngành phù hợp?",
+  "content": "Hướng dẫn cách xác định ngành nghề phù hợp thông qua sở thích, kỹ năng và xu hướng thị trường.",
+  "description": "Khám phá cách lựa chọn ngành nghề phù hợp với bản thân.\nPhân tích sở thích, kỹ năng và giá trị cá nhân để định hướng đúng.\nCung cấp các công cụ giúp đánh giá năng lực nghề nghiệp.\nGiúp bạn tự tin bắt đầu hành trình sự nghiệp đúng hướng.",
+  "author": {
+    "$oid": "6718b8b3f0c1df2345a6a222"
+  },
+  "category": "Hướng nghiệp",
+  "tags": [
+    "hướng nghiệp",
+    "nghề nghiệp"
+  ],
+  "image": {
+    "url": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80",
+    "public_id": null
+  },
+  "createdAt": {
+    "$date": "2025-10-22T08:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-26T14:55:47.111Z"
+  },
+  "__v": 5,
+  "comments": [],
+  "likes": [
+    {
+      "$oid": "68e3f1a504997d6d93f9cfb0"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68fa5a21a35664100403b622"
+  },
+  "title": "Làm sao để phỏng vấn thành công?",
+  "content": "Chia sẻ các mẹo giúp bạn tự tin khi phỏng vấn, từ chuẩn bị đến trả lời câu hỏi.",
+  "description": "Bí quyết chinh phục nhà tuyển dụng qua buổi phỏng vấn.\nHướng dẫn chuẩn bị tâm lý, trang phục và nội dung trả lời.\nCung cấp các ví dụ câu hỏi và cách ứng biến thông minh.\nGiúp bạn ghi điểm và tạo ấn tượng chuyên nghiệp.",
+  "author": {
+    "$oid": "6718b8b3f0c1df2345a6a222"
+  },
+  "category": "Kỹ năng phỏng vấn",
+  "tags": [
+    "phỏng vấn",
+    "nghề nghiệp"
+  ],
+  "image": {
+    "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjJkz7tU4miKZENupJRKW5KACSlldADhOK0A&s",
+    "public_id": null
+  },
+  "createdAt": {
+    "$date": "2025-10-22T09:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-25T15:48:44.735Z"
+  },
+  "__v": 1,
+  "comments": [],
+  "likes": []
+},
+{
+  "_id": {
+    "$oid": "68fa5a21a35664100403b623"
+  },
+  "title": "Cách tối ưu CV để gây ấn tượng với nhà tuyển dụng",
+  "content": "Học cách trình bày CV khoa học, tối ưu từ khóa và làm nổi bật kỹ năng để vượt qua hệ thống ATS.",
+  "description": "Hướng dẫn cách trình bày CV chuyên nghiệp và thu hút.\nTối ưu từ khóa để vượt qua hệ thống lọc hồ sơ ATS.\nGiúp làm nổi bật kỹ năng và thành tựu cá nhân.\nTăng cơ hội lọt vào vòng phỏng vấn mong muốn.",
+  "author": {
+    "$oid": "6718b8b3f0c1df2345a6a222"
+  },
+  "category": "Tối ưu CV",
+  "tags": [
+    "CV",
+    "ứng tuyển",
+    "ATS"
+  ],
+  "image": {
+    "url": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxISEhISEhIWFhUVFRUSFxcVFRUVFxUVFRUWFxUVFRUYHSggGBolGxUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGhAQGy8lHx8tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0rLS0tLS0tLS0tLSstKy0tLS0tLf/AABEIAKgBLAMBIgACEQEDEQH/xAAcAAABBQEBAQAAAAAAAAAAAAAFAQIDBAYABwj/xABCEAACAQIEAggDBAgFAwUAAAABAhEAAwQFEiExQQYTIlFhcYGRBzKhQrHB0RQjM1JigpKiU3LC8PEkQ4MVFmPh4v/EABsBAAMBAQEBAQAAAAAAAAAAAAABAgMEBQYH/8QAJhEAAgICAgICAgIDAAAAAAAAAAECEQMhEjEEQRNRImEF4SNxgf/aAAwDAQACEQMRAD8A8/vKLqTzFZ7EcwaMYa9obwqDO8J9teBqiAJVmw9VqsYC+LdxWIkChbYpWlaLsEcQR5gipNNS5pmqXAAknxIiKqWL+4mnNKLpbIxSlKNyVP6DCWRonVvVz9IK2/nYeu1DuuQrBO1S5Jctm+nWt2BPzHszympnPirRviwrLNRbSt9v0UHvSeNEMtuathWq6U4PD3LS6CpZZaViIA4EisrhE0bjjU4cnNW1Rfl4Fhm4Rlf7NDg7TJJ2INDcfje2ZAFTLi7hH2fY/nQ/EYZmaTXVOS40ebDHLm5Pse2KFXsFibekzEzzjhQLFWmB2FMRH7qyVXZGeMmqDDYlQTHCmNigaohG7q4o3dVWef8AAkXlsMxBA2NbDLMMqID4UDwCEINQir+ExM7VcGejj8aMakXznYEg7egqjg7xe8COA3qljrO80SyZVRZ58apbN3oJ59jgtrx4eteeY1uNHc2xetz3DYVncY07VMnYRBFxjPGotR76nv2iKrmsZG8RxunvNWsqs6mmqcUZy39WsmiO2OT0GkQCABV4WRHCg2Fx4J3ozaubVqYMpXhE0JuvvRTGHjQZjvQCLOFY6q1OGdEtyRJrKWtqt3MX2YpoZo8Cou9puHdU1y6A0J60HwN4lYB86L4Z1QVVENjVsSZNXrlsQIpmGbWeFEMNgWbgNudTNas38dty4r2Z7ObfYms2Fr0XNMm7B3rFXsucEiJrjyNWe5i8PMo3xMy61ZwlwMCjelQkVGZBkVseGDMwwptuRy5VWitResLfQSYI5xP0oe2Sj/GHqjD7pqaY3KuwNS6zRNslblctnzLj/TV3K+jDXJLMkD91xv71UYSk6RE8kIq2wItyn4a9Borm3Rm7bgoNQP8AEhI+tDxlV/8Awn9BP3USg4umVDIpxtBFcc7DSCSO4Uz9NjjRno/htAOtGU95Uj8KLZV0QTH3XZrhtovZ7IEs2xnfluK58r+J3Lr7PRh4ePJ4yyxmuV7j+jLLmZHOtl8OcHbx2LS05hQrXDHEhY2HqRVbph8P7eEsm7avM+kiQ4XcMY2juJrL5RiruHuLdtOUdTIZeI5eo8DRjyRyxuLORxlikn/1HtHxB6IYe1YW7aGkhwhBMyCDwnntXneIwqoOVErvSPE4tV6+6XI3AAVQD36VAE+NA8ZiCxIbaOVXGNdEZpyyO57Y+06UcybK7d17YJjU6r6FgKx1x4Oxo9kDOYAbjv5eNWotmXxpOz2HpN0Vw4wt0oNLW0LgzM6RMH2rynDqA1aDPukGJNrqXvEpEHhLAcmMSayZvxVQVdG2WcsjubsuYxgarpeIETUqjUJNU7yxWyfs5pIivbmonwygyee/vTwtdibRKSPsmPQ7j6g+9MQLx9oEbUEZd6OaDwNVLuDMzWclZrF0R4HCyZNWr7chSKYEUgWhKgbsiiiOCxpGxqnFNpktBHF3pFUFrtU0jGgRLqpxNRClDUwDGUvO1aSxh5oR0YwWrtVsLWFYcq1j0ZsgyzBHUPGtebYVQAKCZRb/AFm9GcVcK1jkez3P4vCuPP22CMzckUAImjmMeaEMlc0j63xdRo8ximsKfSEVqfnw3DXtDeFF+rVt4oO61by3EfZPpR1sTVllsMv+zUli6bIMCRzE/Wi2U4grqVQuth2GZQTMbqCeEj/e9WMxyo9WlzQoLqXRkkB9P7S2yyQrrxgdxrSMmnaMZ41JUzL47Hm5G0AcuNQW6sWLnVXN/lO3pR5LKHkD6CtNy2ZKsektA3BYp14Mfc0dy/PLludLkT3mR9als5RabhHsPzFWLPRlXOzCJAO5BAJiYJ3qZQbVPocc0U9dkOMzu5dEXGDDuIUg+lDriLP7O2f/ABpuO/YVNj8kVD8x33EEHbx/5pbWS3Gt61DkLtOkkEEwNx3Nt60o41H0VLK5e2Lhbttf+2vpI+41WzQ2m7XVeGzMPxNS2spvPPV6mjjCsY84nuNU7+CucDBjx/Orq9UKOSt2UVsWSf2bDycfilHstW2oBUMPUH8qE2MFcn5fqKO2sKVXgfahQK+Zv2R4gW3O7N/T/wDuq9zBWT9s/Uf6TTrinupCtLgg+Vk1nDJH7T6n8bYqK/lqnhd+lv8AG4KfhUmZpt63Bo4oXyNiYTJpMC5Pon+lzWyynoNqQtcYBWETDcdiOI7wKx2EfSwrYYTpA2gW5hT2fKdp9OPpRxfoiUm2ZHNMnVHKh0MHvj7xVO5gez9n+pfzq/mjk3CT9rteRJIYejBh6UNxbQtJm0brYHv2CDw9iD9xqE2z3H2NNuNJNNFQWrFYHupIqULG9Qs9MZxpFFN1U+aAOY0iUxjUtgSQO+gR6H0QtgWwa0zKWG1Zno5YIQMxhQKI3s7cfs7RIHOtboyC+DK2mBJ96u5lfkSOFZM9I0PZvWys99E8uzBIgOGTkOY8Kzmr6PV/jfKjilxn0JdkjahryDRAZlaEnUNuIoBmHSOzrMcK5ZH1+PyMce2q+7RgopKfTa2PgxpqJhG4qamMKQBXA4jWvjRnBZmFdHuqzMh1Aq0ajEDWDsfPj51kMPd0NPKjJBYalamvomS9kV+1qHjUeGxrrAB2HIgGpSHHcarXVMyRFXZlJWaDA50yblR3TBNde6RPqDAaSOa9k+u3hQvB3zUmM7Szp3HcOVVbM+Eb6CTdIBcUK+qRG/HYTtHrx8PWtPg88JwttrLkGwdNxQN9J1QwBJJ2gEgCNIrzYoRxBq/lj3UfVZco0ESCAYOxG/Ee9QnJv+i3GMUeiYTGpftXxqCOoS4zp2QwGt1uEDdmOo+m/LcbmwUpbY3Ee5urFDqlRGhmPfy9BVROkb6LoWzZS4QUZk1L2HKgQCSNpZZ4xcEEbznHJESg+v3g1rG0+jKVNVZo8JZ51dduVA8JcYCQSPCSa4Yx/wB77q05mfxsNW0LEACSTAFG1yRFE3XAJ5AD8eNB+ieJLYhQ0cGjzj/mtRkttbhv37wkW3ZAOI7Ph7VnKexxgBrmVWZ7Dg+Yj8qqY7KYB28iOFbK4vWJqGGAXjPZmKqthRHZ/pb8KFIHFro84a3Bq3a4UYzLKZD3LY2X5hzX07qE2V5UJlJkGYCYbyb+rst/es/+ShWbNC0adJBHcf7XgE+jC2aA5xwqWdEXYBmpbI5mogaR7tQjUffuzVctSFq4CgBy0pNJTWNACg0TyXAG7cHJQdz+FDLSyfPatbgLWlQi+tNfYnvSNUc0tW1CIuqKfh+kXI2hHgRVXL8tESwqnm+XJxRip8DQ8o1hYZxq4fEDcQayGPwjWHm22w8aH3M3v2Whu0ORq0MZ1w1D1o5JkuLWmdiSLiM3B438azRejWIv91DcThzq896hlIbSGnRTGoGJTTSzSUgGOtWssxUHSfSq5qJhzoA3eR2rTA6lDPusOAVAaNDCIaZkceY79qePythrItE2xvI1dnjsTPKDv4Tzobk+ZON0bS0aeAMjug8th7Uds51iCrO1hXQEan6tlAIjiyQAYA9KpENIzKsqnfUI7iD9NqIrpIEP/Up/0k1SzEBiXVdIn5ZmB3TQ/VVoycQ9iMI53R08RqC/Roq3h8Pctal6ksP3lXXG23y1m7eLcfaP3/fWysuMRbZrVoT1SMWD9rrLQXWjqx2LEEqVgHUoiTs6RlO2qIstvs1wBknV2WDKslYj7UcvqK0VzowwC60XYyCAwBA7tzyoF0ZzllvBX1gzpILHYzzU/dXql7M1u2AVgncBezqIEAwPMjbjvVcpJGfxxv8A0ecYjBBZER48qoWLKy0iT+FanFXrR3YBSNiCzDyHa24cqBYu3ZksjOCOXZYekAbVUraLi1FULhE6t1uJsVIMcj3j1FbXK3XU4B/V4kalP7t0cVPcT+FYezjLfAsQfFY+4mi2S5jpLKxVrbGSuqCD+8sxvWPY5NRZuzhmdEB2KDSw8uDe1P8A0Ix9xp+X35CknUOTruY7nFG7Sgjl6VndG0IKWzG4uybbC6B/C4/eH50DzbKtJcW7UyOtVwT2V21KV5j863+a2B1bLzas1nVsItnUWEdltBhtJWGj6bVSZnOPFmFKiYPBgUP8wifTj6VnM2kzPHn5jZvqDWpxtsS2n5ZME7EjkSOVZ/pEm8/vAP6nst9RPrVyHjZlHNQsamu1HpqDoQgFOArq4mgoRjUZpWNTYLBvdYKgmiwJ8qslriwOFehZRl/Nqr5BkHVgE8eJrQXHVFrNys2jGiHG4gIsCsjmmNJnerub5iDMGstjMXNZN2aJUQ429qEGqmX442208jUV+7VRzuD41cNGU9mjXczT7m9RWW7I8qhfEgHc1qYIjprVBgsSLig8+B86nNAyOumuNNoAU000tIaAG2bhRprbZC4uKmrVpViw0voMsACJgxMLvHLuNYd6IZHmTWm0zsaXQ+zZ5z0bc/rbVtlViQVOknYA6xp20mTuNpHjWfxXRq6oLR41qMH0k0lTwI5ii2a51auW9gAxG8cCfLlVKQnBM8lcEGDVjBXBqE9878Par+Pw4diRtRTIsJaLyLLzEcrg/wA2281rCmznyRlFUthbK7KsQbiKwIK2XYv2WEGGZHDFIkCSQNo4EHWtcWzbtrpBUjUVZw7Ek7jUDIAgaQscuJqjluD0qqrcMA7A8gDIHa7htP5mnY3LmCmLcndhttueG3LkBHOt+Kfs5OUov8o1++yli8B1jXmLrbZWkgi4qHWxhkK8jtx4bbmdq9rBnDF3uXlQva0p1ZW9ch2R1ccFVZWCSZIYgDcGo8Vj7lsSwhkAB0gMDbYwJ1DcTKnj9mguZ5uL7KXXSEUIoWAAASdxzMk1nJaLhPey5m9lWFq5bZWZ9Qfq1dUDCNJhlEMZbsgfZB51Vwl+DTcrguoBYgOjEDY7NvHETHhXoiZJaW4b4AKX1dApW31YYgEHcGJ5nsweGxion+KRUf8AI2k+in0ezNlIUTuQBHeTAEc62+EzCB2h6g7e42rznNMsfCXmUayiwweOAJ21FdgZ+8Voctx5022QhXuklzx0KG0kqscJBJ5jblWTRcOUHRq7+MXjE1lM9vazvyGw7qJNiGYupYNpRmJUlgYWVZDy3gR41mMXip50RQs02wdcUFoP+4oR0ms6rWr9xv7X2P1C+9XMXdgz3GadfQXAVPB1K/1DY+hg+lbVaaM4ummec3VqIipsUpBIPESD5gwaqk1gd6FJppNcoJMCSTyG5rW9Heh1y5Fy+pVOIU8W8xyFDdFpNgfI8huYgzwTm3f5V6LlWT27KgKBtzqa3htEKE7I2HKKpYnOdEgLIHHvrCU7OiGOi9jMaEECsxmmZkzvSY3NUYauFZbHY/UTFZ22aUkOxmMnnQu7drrj1Xdq0SMpSEdqha5uBXO1JZtSZq4oybDbYjTbHlQW5fJM1LjL07d1UjVtkxR2CxJttPLga0IeQCOBrM9Se6iWVXyOw3DlSQ2EjTaeaYaogQ02aUmozQApNMYc6dNIaQw3lWL1iDxFaYYcXLUqdwNx4gCfLc7V5/ZulGDCtVg8wUKLkSNiw748RwpoCuFAI7q0uV4mxagkgGsu9xXZivAkkCeAJ2qlcDgwatWuiHxaqR7Zl2Y27igxqUeo+vnVXOMMXXXYuFInaY/+h6V59kObvaEK5Bo0OlT8DBPCeB9xTUthKCcdIm/9Xu7pcUOPkcMBJUiDB4Exwplyzh9MNhiBJIZJ3g76SeIiBxjfnRyxZsX7aMLfzLbBM3Dca6xYXBq16UVSAPkadabHUJZ0nxAt4SzZSyLhSUa7cYjq3ckkIBE/Kyhj+4RvBi/k30czwUtMC2cPhjcVy+iRCypCmOBkcNjp37p41pcJim5G3dAjSIUqDbB0NAI2G7bzso5mvO+1Hbt+ZHP/AH51Nh7APyuyeEn/AI+tU52qIj46T5Ls3eJxjRoYGGhTI0s4mChnYzqUf57k/YFC3xPU3BpCtbPbUQQAxA1FChlQYDDeIK1nLt7FWx2bpYb+PJgdtwPnf1M8amsZhfurBs6obVIRpEzIBXlEDl8q91Q3Gh8J33ZsrebdYIC6ROqbPGRzcEySPMUJzvEDrCVBAaDBGneBqMcpMmPGr+EydCANDyyqdWsiWZZCoCDABKgzv8xGwp+A6PBh1t66Oqj5dXa8ngkADYbEcOVZ2kaPG5aMliL01cy6zcdYCMYMTBjw34UYxeY27B/UKAPAJv5kbn1pMvx97EMYPZ4FiYAPKBzojk2N+P8Aj2ZvM+iam/qu4hLa3CGKqC7yYDxy+afejD9BMCsMRdMx2S8T5wBRq+MLYHWuouXE3DNBKSQJUcAJjegn/qwxN2BcKqsEmeA4++1Y5JOMqO7BBShYWwmWYfDDVZwwEcWALN/dvUb58pbSA892nQPcis30gxWjtWrzmNpJoThOkzLGpiSOdYykzojBG4x+PaAqqQTxJjh4UGxlgcTtQ/EdJVZUZ2kloUDlyloH0rRdILwfDWWPZbQO6Dt3DhU9ldHnOdADg3Gg7CrvSK6FYQdiJoML88K0itGM3snc1Wc91WLeHZuOwq5h8OFrRRMXIGpZ76XhRW7bBHChd5YNaGfZVu1BVhxUGmpZaCfViuFmrq4cU/8ARxWlGdjLZkeNNNWkwncarYm2VMGk0OyFqaTXTSEVIzgaWkFLQAhFW8rxehtJ4GqtNYUAaFcnx7N+qw/WIdw2w28waLYToXjrkarRQ+LBh78ad0N6Z37KG0ukkcNW/p5UZb4hY4FgUt93A7TwPGqTIcR+X9AcSvzaPafwmr//ALAc8W89vzrOr0txx0zf577AfSio6e4rq2DMsTpDBQW8wJrTkZONdGhyfo09gmLhZTxXZlPKY4g/7MijGIyvDsjWrgnWhTTso7VwXSxI4tqEgwOJ76w2TZ5h1DG9dxAuDfsEwe7snhU2G6buphjqWeFxYIHiwkeu1Gn6JtpUaW30Qw6fIGEciZFEFyVCN0U8tlAP0oVg+mtkjt22A23SHWDw3FG8FnGGugaLqz3E6T7Gpdlx4lVsoRd+rjzA/KrFrDKu66VjyFFVcxsZoR0my5sRYuW1ADEAgjmQZjYjjUNujRJNnXszVIXSLhJiEIMbEy3GF8aD47MjcY3Htsqpae4VLcSNatbZgpWGbSIkbXAR4YFnu4UG22u0xckzIlYEDeJiD7ionxNxyQoF1m5KNTbcyBwiov7NqS6JNAYwXCnxmST4CtVhMSmFsrb+ZyJMHv34VlMHlpRhcxEWwJYKW1MSP4QZHrT8bfRmL22MHkZO/qab0JbL2Lxa3Q9udJcFD/NwbxgwfSstlmHjDt1l0WndzxO/Z7OmOPGd6ix19iwCneeXfU+e5Yo/WlzrZQ+mBpHJvUsGP81Tl6TZeDTaRQxF4qpDGY+vdQt8Rq5VDnuJMqk8BJ9eH0oYmJYc/es4x9msp7oLYRj1i+Bn23/CiFjH3mklmg7CTt5AUDw2YQdx4SPHajL4hOrAVgzcgOU7T7UNApKiFrgcktvyFPQKO6ql6xcUS1t1HeysB7kRUCv41slSMG7DKx30+KEI5pzXTTIYTND8WlQ9Y3fSHUeJoAiYVGUqx1VL1VAy2rnvrusihj4yOFQtjHNVyRPFhhsUBuT9ahuY9WGwJ8aEqCx33ogluBS5D4kaYwc9qs27oNVLtmag6srwNIYVmlBoamLI+YVatYgHgaAosV1IGpaBHWrhRgw5VrcN1eITVIViADuQoI4EqONZGruS5gbLxPZbskHhB7xQM0V/LH7IVleRvMJB3BgEyducjyqrcsQDqBWWiSpC6tiQNW0xNaodGrj27d23aY295bDvqOk7w1kr5/KCfpQs4Egugh9BnQymy+mOBt3Np4bbTVpP0KSVArqipOk6ttJJG2/GIHluDUY2CkFkk7mCCQTI3Y7mAYiOFEcRbt6pcFNawASEWdO2wOgxt2RHKaiuIUUbqxB+XSF2jY6ixDHwj1qjm4bILRMuVgxwMvqInltE8zvG3GpDiSCNW2odnrNpI2JkQY9TSiyqsA6lWIGyNKmQCBKkrMbH86ktYJygKEPBmNEA+ZBIPtTE4k+Bzq8gBt3bqbx2WJHgYaBB9eFaPB9NcUoKu6PAHzLobfhvtv6GstewR1M922UJDdoliAx4v2DHOYMDzqGziFUQt3UVPZGiBG8ktyPDlSBRNk+bYS/C4t8WN5gvqQeOyg/SiOWZPk90gW7ssfsm6ysfDSSJrzq0XJCqp7UAKkPJ/hUSfSKuYfLL7EAYW4eMnqrg39Fge1FIr8gln9rDJfu20tjTOkbnYLxaZ4kzv3RQrL0UNLRpXtQx2Pcpo7hehGIuSxtXhEcdKTI5BjO3DlRPB9BLqmWsAjuu3BH9s1HHfZvy10YPGzceVVOMgW0gfdVvE4HEPZJ6p2ZW1RtuGgHfwIX3New4Ho/YVBNlUbmEMj0YgfdTG6K2GJm5eggggXSBB7oolFNbFCTi9HzpiMlvM51W21sZ+UijeW/DnEXhOpV8wTXvGG6IYVOCsf8AMxb76vJgLNvuHmRWejWzwk/CjFLvqtt6sPwq50f6O/o13/qLasQdocGPSvaLuY4ZPmvIPNhQ7EdKcAvG4h8ln8KaoTs7LWtsoGnaOBpmO6I4C/vcwlok8wgVv6lg1SvdO8GvyqzeSgffVK98RE+xhz/MwFW5ojiQY34TYBv2Zu2j/C+sezgn60Cx3whuD9jiUbwuIVPupP3UTxHxGu8rdpfMz+NCcV8Rr3+PbXwVQT+NLmh0Z7H/AA5zG3wsC4P/AI3VvoYP0rK4nDvbdkdSrKYZWBBB7jW2xfTLEXAYv3j5AqPfashe1sSWlmO5JO58yad36EVQTSzU62yOVdoNFDszdPRTSCp7dQUS2Eqxp8abbWnxTENK0w26kiuoArtZqBrHdV00wigCqt5l8as28YDx2pClRPZFAF9XBpWFDQrDgalTEkcaAo9M+G/Tc4U9VcBZTwAO/pXs36Ph8bbDXbAII26xBInuPEelfK1jEQQyncb16bkXxauWbapct64gTMGmgPQsf0GXT/0997ZBkBv1iD37Q96Dp8NCTLOiTpB6sPwB3IUnTJ7yDVJvi+vKwfcVVxnxbufYtL5lqrmyeCNPhPh8lsgi+wIOxVFVh671Zwvw9waaiesJPPXojeZ7EfWvOMZ8VcWeDW18gTQnNviJi3AFvEEHnAFLmx8Ue12+imCX/tz367jt7y1SrluASB1WHGnh2U2nc14AvS/ENbKveuMxETqj7qo4DFX1YtJaf33JpW2OkfRV7pBgLGxvWkjkNI+6q6dOMC0lL2v/ACia+csZh7txyxVJP8Ronk+XX9Olb9u3J4Aj7zU0M9st/EXCPPVh2g6TtG4qC/0/A+W0P5mryq10ZvjV1mIA219m4oBUkiQZ33G8d4ql+hYfctddo8SaTQHpeM+Ir8uqXzM/jQrEfEj96+F/yQfYH86xOnBjkT6Uh/RjsE/to2hcb9B7NPiEGYkYm4RA4SN4E7ec0CxHTVTzuN5saGYn9Hkg2TPhAqhdsWT8ttx/NRRQTu9L+637mqlzpTePAKPShrYUeI896mXLBzY+1HEB1zP8Qftx5VWfMbrcbje9XkytOZNW7eWWhynzNUok8kAhiDzJqexi3X5Z9K0KYG2OFsVZtW1H2AKfEXP9AOzmV790n0Iq9ax7ncgiiGwnb2qt1onZfpVInv0IcbtuopExYH2BTtuYpoC91MDKoKtWlrq6szRlkV1dXUCENdXV1ACGm11dQB00kV1dQAhWmtbFdXUANSysiWiuxSbkA7d9dXUAOwyGdyaMW8AhEz9a6up3QiJ8IopyWB3UldVAKqCatEwK6uoQE2Ay84ibaEdZMgEhdY5gE7T4c5qtcsNauMn2kO4BB8wYrq6ofZrHov5VmSa9N5AbbjSwPIH7S9xFWs7wNm02i1r0xMsDvPCD3RSV1Kx0ZzEAqaOXcTYayHllusCCunskz2XVp28R3ikrqBdAnGAmGjePpUSUtdRYUdbtywBETU6lYB2O+4/MV1dQC0T5rhxsy7AgRQxg3I11dQgYgv3Bzp65hcFdXUxUPGannXLmdLXUyXFFpcUWFSIxjh9K6uqkTR//2Q==",
+    "public_id": null
+  },
+  "createdAt": {
+    "$date": "2025-10-22T10:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-25T15:46:23.734Z"
+  },
+  "__v": 1,
+  "comments": [],
+  "likes": []
+},
+{
+  "_id": {
+    "$oid": "68fa5a21a35664100403b624"
+  },
+  "title": "Top 5 công ty đang tuyển dụng IT hot nhất 2025",
+  "content": "Danh sách các công ty đang tuyển lập trình viên tài năng trong năm 2025.",
+  "description": "Danh sách những doanh nghiệp IT hấp dẫn nhất năm 2025.\nPhân tích xu hướng tuyển dụng và mức lương cạnh tranh.\nCung cấp thông tin chi tiết về yêu cầu vị trí và cơ hội nghề nghiệp.\nGiúp bạn định hướng ứng tuyển đúng nơi phù hợp.",
+  "author": {
+    "$oid": "6718b8b3f0c1df2345a6a222"
+  },
+  "category": "Tin tuyển dụng",
+  "tags": [
+    "tuyển dụng",
+    "IT"
+  ],
+  "image": {
+    "url": "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=800&q=80",
+    "public_id": null
+  },
+  "createdAt": {
+    "$date": "2025-10-22T11:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-26T14:21:35.498Z"
+  },
+  "__v": 4,
+  "comments": [],
+  "likes": []
+},
+{
+  "_id": {
+    "$oid": "68fa5a21a35664100403b625"
+  },
+  "title": "Công nghệ AI đang thay đổi cách tuyển dụng thế nào?",
+  "content": "AI giúp nhà tuyển dụng sàng lọc hồ sơ hiệu quả và dự đoán ứng viên phù hợp.",
+  "description": "Khám phá vai trò của trí tuệ nhân tạo trong tuyển dụng hiện đại.\nAI hỗ trợ sàng lọc hồ sơ, dự đoán ứng viên tiềm năng.\nGiới thiệu các nền tảng AI nổi bật trong HR Tech.\nCùng nhìn lại lợi ích và thách thức khi AI bước vào nhân sự.",
+  "author": {
+    "$oid": "6718b8b3f0c1df2345a6a222"
+  },
+  "category": "Công nghệ & AI",
+  "tags": [
+    "AI",
+    "công nghệ",
+    "nhân sự"
+  ],
+  "image": {
+    "url": "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80",
+    "public_id": null
+  },
+  "createdAt": {
+    "$date": "2025-10-22T12:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-22T12:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fa5a21a35664100403b626"
+  },
+  "title": "Chia sẻ trải nghiệm: Hành trình tìm việc sau khi tốt nghiệp",
+  "content": "Câu chuyện thật từ sinh viên mới ra trường về những bài học khi đi xin việc đầu tiên.",
+  "description": "Câu chuyện thật từ sinh viên mới ra trường.\nChia sẻ hành trình vượt qua khó khăn khi tìm việc đầu tiên.\nNhững bài học quý giá về kiên trì và chuẩn bị kỹ năng.\nNguồn cảm hứng cho những ai đang bắt đầu sự nghiệp.",
+  "author": {
+    "$oid": "6718b8b3f0c1df2345a6a222"
+  },
+  "category": "Chia sẻ trải nghiệm",
+  "tags": [
+    "trải nghiệm",
+    "tìm việc",
+    "sinh viên"
+  ],
+  "image": {
+    "url": "https://res.cloudinary.com/dfreegzd9/image/upload/v1761237465/blogs/mgws3tjfglaosh0almiq.png",
+    "public_id": "blogs/mgws3tjfglaosh0almiq"
+  },
+  "createdAt": {
+    "$date": "2025-10-22T13:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-26T10:43:23.194Z"
+  },
+  "__v": 6,
+  "comments": [
+    {
+      "user": {
+        "$oid": "68e3f1a504997d6d93f9cfb0"
+      },
+      "content": "ok",
+      "_id": {
+        "$oid": "68fdfb4b90a9bd26a1d04545"
+      },
+      "createdAt": {
+        "$date": "2025-10-26T10:43:23.192Z"
+      }
+    }
+  ],
+  "likes": []
+},
+{
+  "_id": {
+    "$oid": "68fa5a21a35664100403b627"
+  },
+  "title": "Tổng hợp tất cả chủ đề blog nghề nghiệp",
+  "content": "Tổng hợp các bài viết về hướng nghiệp, kỹ năng, công nghệ và tuyển dụng.",
+  "description": "Bộ sưu tập các bài viết về hướng nghiệp và phát triển bản thân.\nTừ kỹ năng phỏng vấn đến xu hướng công nghệ mới.\nTổng hợp nguồn kiến thức hữu ích cho người đi làm và sinh viên.\nĐiểm khởi đầu hoàn hảo để khám phá thế giới nghề nghiệp.",
+  "author": {
+    "$oid": "6718b8b3f0c1df2345a6a222"
+  },
+  "category": "Tất cả",
+  "tags": [
+    "hướng nghiệp",
+    "phỏng vấn",
+    "công nghệ"
+  ],
+  "image": {
+    "url": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80",
+    "public_id": null
+  },
+  "createdAt": {
+    "$date": "2025-10-22T14:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-26T15:02:31.697Z"
+  },
+  "__v": 4,
+  "comments": [],
+  "likes": []
+},
+{
+  "_id": {
+    "$oid": "68fa5a21a35664100403b628"
+  },
+  "title": "5 bước lập kế hoạch nghề nghiệp cá nhân hiệu quả",
+  "content": "Học cách xác định mục tiêu, kỹ năng cần phát triển và định hướng tương lai.",
+  "description": "Hướng dẫn chi tiết 5 bước để lập kế hoạch nghề nghiệp rõ ràng.\nGiúp bạn xác định mục tiêu và kỹ năng cần phát triển.\nCung cấp công cụ theo dõi tiến độ và điều chỉnh mục tiêu.\nThích hợp cho sinh viên và người đang muốn chuyển hướng nghề.",
+  "author": {
+    "$oid": "6718b8b3f0c1df2345a6a222"
+  },
+  "category": "Hướng nghiệp",
+  "tags": [
+    "kế hoạch",
+    "hướng nghiệp",
+    "mục tiêu"
+  ],
+  "image": {
+    "url": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80",
+    "public_id": null
+  },
+  "createdAt": {
+    "$date": "2025-10-23T08:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-30T14:57:29.832Z"
+  },
+  "__v": 11,
+  "comments": [
+    {
+      "user": {
+        "$oid": "68e3f03604997d6d93f9cfab"
+      },
+      "content": "ok",
+      "_id": {
+        "$oid": "68fe3ef256d38d39fb65030e"
+      },
+      "createdAt": {
+        "$date": "2025-10-26T15:32:02.683Z"
+      }
+    }
+  ],
+  "likes": [
+    {
+      "$oid": "68e3f03604997d6d93f9cfab"
+    },
+    {
+      "$oid": "69032f694d196be2dca91feb"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68fa5a21a35664100403b629"
+  },
+  "title": "10 câu hỏi phỏng vấn thường gặp và cách trả lời thông minh",
+  "content": "Chuẩn bị cho phỏng vấn bằng cách luyện tập các câu hỏi phổ biến với cách trả lời ấn tượng\r\n",
+  "description": "Tổng hợp những câu hỏi phổ biến trong buổi phỏng vấn.\nGợi ý cách trả lời giúp thể hiện tư duy và sự chuyên nghiệp.\nGiúp bạn chuẩn bị tự tin hơn khi đối mặt nhà tuyển dụng.\nCông cụ hữu ích cho cả sinh viên và người đi làm.",
+  "author": {
+    "$oid": "6718b8b3f0c1df2345a6a222"
+  },
+  "category": "Kỹ năng phỏng vấn",
+  "tags": [
+    "phỏng vấn",
+    "kỹ năng mềm"
+  ],
+  "image": {
+    "url": "https://res.cloudinary.com/dfreegzd9/image/upload/v1761237377/blogs/fjbtwotmgipsvhx2grfj.png",
+    "public_id": null
+  },
+  "createdAt": {
+    "$date": "2025-10-23T09:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-31T08:08:50.455Z"
+  },
+  "__v": 86,
+  "comments": [
+    {
+      "user": {
+        "$oid": "68e3f1a504997d6d93f9cfb0"
+      },
+      "content": "ok",
+      "_id": {
+        "$oid": "68fda959e2ca11648af5eb4a"
+      },
+      "createdAt": {
+        "$date": "2025-10-26T04:53:45.229Z"
+      }
+    },
+    {
+      "user": {
+        "$oid": "68e3f1a504997d6d93f9cfb0"
+      },
+      "content": "ok",
+      "_id": {
+        "$oid": "68fdab03e2ca11648af5eb98"
+      },
+      "createdAt": {
+        "$date": "2025-10-26T05:00:51.984Z"
+      }
+    },
+    {
+      "user": {
+        "$oid": "68e3f1a504997d6d93f9cfb0"
+      },
+      "content": "haha",
+      "_id": {
+        "$oid": "68fdab83e2ca11648af5ebb4"
+      },
+      "createdAt": {
+        "$date": "2025-10-26T05:02:59.873Z"
+      }
+    },
+    {
+      "user": {
+        "$oid": "68e4e3c729cf7f7cbb661cb6"
+      },
+      "content": "hay",
+      "_id": {
+        "$oid": "68fe464456d38d39fb6503a8"
+      },
+      "createdAt": {
+        "$date": "2025-10-26T16:03:16.005Z"
+      }
+    }
+  ],
+  "likes": [
+    {
+      "$oid": "68e3f1a504997d6d93f9cfb0"
+    },
+    {
+      "$oid": "68e4e3c729cf7f7cbb661cb6"
+    },
+    {
+      "$oid": "69032f694d196be2dca91feb"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68fcebdb22092c9fd389fca6"
+  },
+  "title": "Làm sao để phỏng vấn thành công?",
+  "content": "Bài viết chia sẻ các mẹo giúp bạn tự tin khi phỏng vấn.",
+  "description": "Bí quyết chinh phục nhà tuyển dụng qua buổi phỏng vấn. Hướng dẫn chuẩn bị tâm lý, trang phục và nội dung trả lời. Cung cấp các ví dụ câu hỏi và cách ứng biến thông minh. Giúp bạn ghi điểm và tạo ấn tượng chuyên nghiệp.",
+  "author": {
+    "$oid": "6718b8b3f0c1df2345a6a222"
+  },
+  "category": "Kỹ năng phỏng vấn",
+  "tags": [
+    "phỏng vấn",
+    "nghề nghiệp"
+  ],
+  "image": {
+    "url": "https://res.cloudinary.com/dfreegzd9/image/upload/v1761407172/blogs/bd6fwpel0k3yvuqbxc3s.png",
+    "public_id": "blogs/bd6fwpel0k3yvuqbxc3s"
+  },
+  "__v": 8,
+  "comments": [],
+  "likes": [],
+  "updatedAt": {
+    "$date": "2025-10-25T15:50:10.608Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fcebdb22092c9fd389fca7"
+  },
+  "title": "Cách tối ưu CV để gây ấn tượng với nhà tuyển dụng",
+  "content": "Hướng dẫn cách viết CV chuyên nghiệp và nổi bật.",
+  "description": "Hướng dẫn cách trình bày CV chuyên nghiệp và thu hút. Tối ưu từ khóa để vượt qua hệ thống lọc hồ sơ ATS. Giúp làm nổi bật kỹ năng và thành tựu cá nhân. Tăng cơ hội lọt vào vòng phỏng vấn mong muốn.",
+  "author": {
+    "$oid": "6718b8b3f0c1df2345a6a222"
+  },
+  "category": "Hồ sơ xin việc",
+  "tags": [
+    "CV",
+    "tuyển dụng",
+    "ứng viên"
+  ],
+  "image": {
+    "url": "https://res.cloudinary.com/demo/image/upload/v1729850200/cv-tips.jpg"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fcebdb22092c9fd389fca8"
+  },
+  "title": "Top 5 công ty đang tuyển dụng IT hot nhất 2025",
+  "content": "Danh sách những doanh nghiệp IT hấp dẫn nhất năm 2025.",
+  "description": "Danh sách những doanh nghiệp IT hấp dẫn nhất năm 2025. Phân tích xu hướng tuyển dụng và mức lương cạnh tranh. Cung cấp thông tin chi tiết về yêu cầu vị trí và cơ hội nghề nghiệp. Giúp bạn định hướng ứng tuyển đúng nơi phù hợp.",
+  "author": {
+    "$oid": "6718b8b3f0c1df2345a6a222"
+  },
+  "category": "Cơ hội việc làm",
+  "tags": [
+    "IT",
+    "tuyển dụng",
+    "công nghệ"
+  ],
+  "image": {
+    "url": "https://res.cloudinary.com/demo/image/upload/v1729850300/top-it-companies.jpg"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fcebdb22092c9fd389fca9"
+  },
+  "title": "Công nghệ AI đang thay đổi cách tuyển dụng thế nào?",
+  "content": "Phân tích vai trò của trí tuệ nhân tạo trong lĩnh vực tuyển dụng hiện đại.",
+  "description": "Khám phá vai trò của trí tuệ nhân tạo trong tuyển dụng hiện đại. AI hỗ trợ sàng lọc hồ sơ, dự đoán ứng viên tiềm năng. Giới thiệu các nền tảng AI nổi bật trong HR Tech. Cùng nhìn lại lợi ích và thách thức khi AI bước vào nhân sự.",
+  "author": {
+    "$oid": "6718b8b3f0c1df2345a6a222"
+  },
+  "category": "Công nghệ nhân sự",
+  "tags": [
+    "AI",
+    "tuyển dụng",
+    "HR Tech"
+  ],
+  "image": {
+    "url": "https://res.cloudinary.com/demo/image/upload/v1729850400/ai-recruitment.jpg"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fcebdb22092c9fd389fcaa"
+  },
+  "title": "Chia sẻ trải nghiệm: Hành trình tìm việc sau khi tốt nghiệp",
+  "content": "Câu chuyện thực tế về quá trình tìm việc đầu tiên của một sinh viên mới ra trường.",
+  "description": "Câu chuyện thật từ sinh viên mới ra trường. Chia sẻ hành trình vượt qua khó khăn khi tìm việc đầu tiên. Những bài học quý giá về kiên trì và chuẩn bị kỹ năng. Nguồn cảm hứng cho những ai đang bắt đầu sự nghiệp.",
+  "author": {
+    "$oid": "6718b8b3f0c1df2345a6a222"
+  },
+  "category": "Câu chuyện nghề nghiệp",
+  "tags": [
+    "sinh viên",
+    "kinh nghiệm",
+    "hành trình nghề nghiệp"
+  ],
+  "image": {
+    "url": "https://res.cloudinary.com/demo/image/upload/v1729850500/graduate-job-story.jpg"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fcebdb22092c9fd389fcab"
+  },
+  "title": "Tổng hợp tất cả chủ đề blog nghề nghiệp",
+  "content": "Danh mục các bài viết hữu ích về hướng nghiệp, kỹ năng, và xu hướng tuyển dụng.",
+  "description": "Bộ sưu tập các bài viết về hướng nghiệp và phát triển bản thân. Từ kỹ năng phỏng vấn đến xu hướng công nghệ mới. Tổng hợp nguồn kiến thức hữu ích cho người đi làm và sinh viên. Điểm khởi đầu hoàn hảo để khám phá thế giới nghề nghiệp.",
+  "author": {
+    "$oid": "6718b8b3f0c1df2345a6a222"
+  },
+  "category": "Tổng hợp",
+  "tags": [
+    "nghề nghiệp",
+    "blog",
+    "tổng hợp"
+  ],
+  "image": {
+    "url": "https://res.cloudinary.com/demo/image/upload/v1729850600/all-career-topics.jpg"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fcebdb22092c9fd389fcac"
+  },
+  "title": "5 bước lập kế hoạch nghề nghiệp cá nhân hiệu quả",
+  "content": "Hướng dẫn chi tiết cách đặt mục tiêu và xây dựng lộ trình phát triển nghề nghiệp.",
+  "description": "Hướng dẫn chi tiết 5 bước để lập kế hoạch nghề nghiệp rõ ràng. Giúp bạn xác định mục tiêu và kỹ năng cần phát triển. Cung cấp công cụ theo dõi tiến độ và điều chỉnh mục tiêu. Thích hợp cho sinh viên và người đang muốn chuyển hướng nghề.",
+  "author": {
+    "$oid": "6718b8b3f0c1df2345a6a222"
+  },
+  "category": "Phát triển bản thân",
+  "tags": [
+    "lập kế hoạch",
+    "nghề nghiệp",
+    "mục tiêu"
+  ],
+  "image": {
+    "url": "https://res.cloudinary.com/demo/image/upload/v1729850700/career-plan-steps.jpg"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fcebdb22092c9fd389fcad"
+  },
+  "title": "10 câu hỏi phỏng vấn thường gặp và cách trả lời thông minh",
+  "content": "Tổng hợp những câu hỏi phổ biến trong buổi phỏng vấn và cách ứng biến phù hợp.",
+  "description": "Tổng hợp những câu hỏi phổ biến trong buổi phỏng vấn. Gợi ý cách trả lời giúp thể hiện tư duy và sự chuyên nghiệp. Giúp bạn chuẩn bị tự tin hơn khi đối mặt nhà tuyển dụng. Công cụ hữu ích cho cả sinh viên và người đi làm.",
+  "author": {
+    "$oid": "6718b8b3f0c1df2345a6a222"
+  },
+  "category": "Kỹ năng phỏng vấn",
+  "tags": [
+    "phỏng vấn",
+    "ứng viên",
+    "mẹo nghề nghiệp"
+  ],
+  "image": {
+    "url": "https://res.cloudinary.com/demo/image/upload/v1729850800/interview-questions.jpg"
+  }
+}]

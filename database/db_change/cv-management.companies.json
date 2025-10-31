@@ -1,0 +1,115 @@
+[{
+  "_id": {
+    "$oid": "6901a3c1e2f3a4b5c6d7e801"
+  },
+  "user": {
+    "$oid": "69010689895dd630532a2ff7"
+  },
+  "headline": "Global IT Services & Solutions Provider",
+  "description": "FPT Software là công ty thành viên thuộc Tập đoàn FPT. Chúng tôi cung cấp các dịch vụ và giải pháp chuyển đổi số toàn diện cho khách hàng trên toàn thế giới.",
+  "location": "Hanoi, Da Nang, Ho Chi Minh City",
+  "size": "10,000+",
+  "website": "https://fpt-software.com",
+  "logo": {
+    "url": "https://placehold.co/200x200/F97316/FFFFFF?text=FPT",
+    "public_id": null
+  },
+  "createdAt": {
+    "$date": "2025-10-28T12:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-28T12:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6901a3c1e2f3a4b5c6d7e802"
+  },
+  "user": {
+    "$oid": "6901069c895dd630532a2ffa"
+  },
+  "headline": "Leading Internet Ecosystem in Vietnam",
+  "description": "VNG là kỳ lân công nghệ của Việt Nam với các sản phẩm đa dạng: Zalo, ZaloPay, VNG Games. Chúng tôi kiến tạo công nghệ và phát triển con người.",
+  "location": "Ho Chi Minh City",
+  "size": "5,000-10,000",
+  "website": "https://vng.com.vn",
+  "logo": {
+    "url": "https://placehold.co/200x200/2563EB/FFFFFF?text=VNG",
+    "public_id": null
+  },
+  "createdAt": {
+    "$date": "2025-10-28T12:01:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-28T12:01:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6901a3c1e2f3a4b5c6d7e803"
+  },
+  "user": {
+    "$oid": "690106ba895dd630532a2ffd"
+  },
+  "headline": "Digital Transformation & ICT Solutions",
+  "description": "Tổng Công ty Giải pháp Doanh nghiệp Viettel (Viettel Solutions) đồng hành cùng Chính phủ, Doanh nghiệp và Người dân kiến tạo xã hội số.",
+  "location": "Hanoi",
+  "size": "10,000+",
+  "website": "https://solutions.viettel.vn",
+  "logo": {
+    "url": "https://placehold.co/200x200/E11D48/FFFFFF?text=VT",
+    "public_id": null
+  },
+  "createdAt": {
+    "$date": "2025-10-28T12:02:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-28T12:02:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6901a3c1e2f3a4b5c6d7e804"
+  },
+  "user": {
+    "$oid": "690106da895dd630532a3000"
+  },
+  "headline": "Technology Solutions & BPO Services",
+  "description": "NashTech Vietnam là công ty hàng đầu về giải pháp công nghệ và BPO. Chúng tôi là một phần của tập đoàn Harvey Nash Group, UK.",
+  "location": "Ho Chi Minh City, Hanoi",
+  "size": "1,000-2,000",
+  "website": "https://nashtechglobal.com/vn",
+  "logo": {
+    "url": "https://placehold.co/200x200/0891B2/FFFFFF?text=NT",
+    "public_id": null
+  },
+  "createdAt": {
+    "$date": "2025-10-28T12:03:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-28T12:03:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6901a3c1e2f3a4b5c6d7e805"
+  },
+  "user": {
+    "$oid": "690106f1895dd630532a3003"
+  },
+  "headline": "Vietnam's Leading E-Wallet",
+  "description": "Momo là Siêu ứng dụng Ví điện tử hàng đầu Việt Nam, cung cấp các giải pháp thanh toán, tài chính và giải trí cho hàng chục triệu người dùng.",
+  "location": "Ho Chi Minh City, Hanoi",
+  "size": "1,000-2,000",
+  "website": "https://momo.vn",
+  "logo": {
+    "url": "https://placehold.co/200x200/DB2777/FFFFFF?text=Momo",
+    "public_id": null
+  },
+  "createdAt": {
+    "$date": "2025-10-28T12:04:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-28T12:04:00.000Z"
+  }
+}]
