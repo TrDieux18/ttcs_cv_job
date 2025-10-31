@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { login } from "@services/common/AuthService";
 import { setUser } from "@store/UserReducer";
 import { LuLock, LuLogIn, LuUser } from "react-icons/lu";
-import { IoLockOpenOutline } from "react-icons/io5";
 
 const LoginAdmin = () => {
   const [messageApi, contextHolder] = message.useMessage();

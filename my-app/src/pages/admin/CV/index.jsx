@@ -63,6 +63,7 @@ const CV = () => {
                       background: "#3875F6",
                       objectFit: "cover",
                     }}
+                    preview={false}
                   />
                   <span className="text-xl font-semibold">
                     {formatName(cv.userId.fullName)}

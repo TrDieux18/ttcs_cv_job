@@ -1,17 +1,20 @@
 import axios from "axios";
+import { BASE_API } from "@types/api";
 import { ApiResponse } from "@types/response/ApiResponse";
-import { ADMIN_API } from "@types/api";
 
-export const getAllCvs = async () => {
+const axiosClient = axios.create({
+  baseURL: BASE_API,
+  withCredentials: true,
+});
+
+export const getAllJobs = async () => {
   try {
-    const response = await axios.get(`${ADMIN_API}/cvs`, {
-      withCredentials: true,
-    });
+    const response = await axiosClient.get("/jobs");
 
     const data = response.data;
     return new ApiResponse(data.success, data.data);
   } catch (error) {
-    console.error("Error fetching cvs:", error);
+    console.error("Error fetching jobs:", error);
 
     const message =
       error.response?.data?.message || error.message || "Unknown error";
@@ -19,3 +22,5 @@ export const getAllCvs = async () => {
     return new ApiResponse(false, null, [message]);
   }
 };
+
+export const getJobFilters = () => API.get("/job/filters");

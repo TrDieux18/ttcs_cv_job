@@ -3,7 +3,6 @@ import { formatName } from "../../helpers/formatName.js";
 import User from "../../models/user.model.js";
 import { uploadToCloudinary } from "../../middlewares/admin/uploadCloudinary.middleware.js";
 
-
 export const getAllUsers = async (req, res) => {
   try {
     const { page = 1, limit = 5, keyword = "", isActive = "all" } = req.query;
@@ -26,7 +25,7 @@ export const getAllUsers = async (req, res) => {
         .populate("role_id", "title")
         .skip(skip)
         .limit(Number(limit))
-        .sort({ createdAt: -1 }),
+        .sort({ username: 1 }),
       User.countDocuments(filter),
     ]);
 
@@ -108,7 +107,6 @@ export const updateUser = async (req, res) => {
     const userId = req.params.id;
     const { fullName, username, email, isActive, role_id, password } = req.body;
 
- 
     const user = await User.findById(userId);
     if (!user) {
       return res
@@ -116,24 +114,20 @@ export const updateUser = async (req, res) => {
         .json({ success: false, message: "User not found" });
     }
 
-  
     if (fullName) user.fullName = formatName(fullName);
     if (username) user.username = username;
     if (email) user.email = email;
     if (typeof isActive !== "undefined") user.isActive = isActive;
     if (role_id) user.role_id = role_id;
 
-
     if (password) {
       user.password = password;
     }
 
-    
     if (req.file) {
       const result = await uploadToCloudinary(req.file.buffer, "users");
       user.avatar = result.secure_url;
     }
-
 
     const updatedUser = await user.save();
 

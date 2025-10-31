@@ -15,81 +15,26 @@ import {
   LuSettings,
   LuUser,
 } from "react-icons/lu";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "@store/UserReducer";
 
 const LayoutDefault = () => {
   const user = useSelector((state) => state.user.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleLogout = async () => {
     const response = await logout();
     if (response.success) {
       localStorage.removeItem("user");
+      dispatch(setUser(null));
       message.success("Đăng xuất thành công");
+
       setTimeout(() => navigate("/login"), 800);
     } else {
       message.error("Đăng xuất thất bại");
     }
   };
-
-  // Menu items cho Jobs
-  const jobItems = [
-    {
-      key: "1",
-      label: <NavLink to="/jobs/skill">Jobs by Skill</NavLink>,
-    },
-    {
-      key: "2",
-      label: <NavLink to="/jobs/expertise">Jobs by Expertise</NavLink>,
-    },
-    {
-      key: "3",
-      label: <NavLink to="/jobs/title">Jobs by Title</NavLink>,
-    },
-    {
-      key: "4",
-      label: <NavLink to="/jobs/company">Jobs by Company</NavLink>,
-    },
-    {
-      key: "5",
-      label: <NavLink to="/jobs/city">Jobs by City</NavLink>,
-    },
-  ];
-
-  // Menu items cho IT Companies
-  const companyItems = [
-    {
-      key: "1",
-      label: (
-        <NavLink to="/companies/vietnam-best-it-companies">
-          Vietnam Best IT Conpanies
-        </NavLink>
-      ),
-    },
-    {
-      key: "2",
-      label: <NavLink to="/companies/review">Company Reviews</NavLink>,
-    },
-  ];
-
-  const blogItems = [
-    {
-      key: "1",
-      label: <NavLink to="/blogs/salary-report">IT Salary Report</NavLink>,
-    },
-    {
-      key: "2",
-      label: <NavLink to="/blogs/career">IT Career</NavLink>,
-    },
-    {
-      key: "3",
-      label: <NavLink to="/blogs/apply">Applying & Career Up</NavLink>,
-    },
-    {
-      key: "4",
-      label: <NavLink to="/blogs/expertise">IT Expertise</NavLink>,
-    },
-  ];
 
   const profieMenuItems = [
     {
@@ -171,47 +116,26 @@ const LayoutDefault = () => {
 
   return (
     <div className="layout-default">
-      <header className="layout-header">
+      <header className="layout-header bg-gradient-to-r from-green-700 to-teal-500 fixed top-0 left-0 right-0 z-50 shadow-md">
         <div className="layout-header__logo">
           <NavLink to={"/"}>Home</NavLink>
         </div>
         <div className="layout-header__menu">
           <ul>
             <li>
-              <Dropdown menu={{ items: jobItems }}>
-                <span className="dropdown-link">
-                  <Space>
-                    Jobs
-                    <DownOutlined />
-                  </Space>
-                </span>
-              </Dropdown>
+              <NavLink to={"/jobs"}>Việc làm</NavLink>
             </li>
             <li>
-              <Dropdown menu={{ items: companyItems }}>
-                <span className="dropdown-link">
-                  <Space>
-                    IT Companies
-                    <DownOutlined />
-                  </Space>
-                </span>
-              </Dropdown>
+              <NavLink to={"/companies"}>Công ty</NavLink>
             </li>
             <li>
-              <Dropdown menu={{ items: blogItems }}>
-                <span className="dropdown-link">
-                  <Space>
-                    Blog
-                    <DownOutlined />
-                  </Space>
-                </span>
-              </Dropdown>
+              <NavLink to={"/blogs"}>Bài viết</NavLink>
             </li>
             <li>
-              <NavLink to={"/templates"}>CV IT Templates</NavLink>
+              <NavLink to={"/templates"}>Hồ sơ cá nhân</NavLink>
             </li>
             <li>
-              <NavLink to={"/about"}>About</NavLink>
+              <NavLink to={"/about"}>Giới thiệu</NavLink>
             </li>
           </ul>
         </div>
@@ -241,18 +165,24 @@ const LayoutDefault = () => {
             </div>
           ) : (
             <>
-              <NavLink to={"/login"}>
-                <button className="btn">Đăng nhập</button>
+              <NavLink
+                to={"/login"}
+                className="px-4 py-1.5 rounded-full bg-amber-50 hover:bg-white/20 hover:text-amber-50 transition-colors"
+              >
+                <button>Đăng nhập</button>
               </NavLink>
-              <NavLink to={"/register"}>
-                <button className="btn">Đăng kí</button>
+              <NavLink
+                to={"/register"}
+                className="bg-white text-green-700 px-4 py-1.5 rounded-full shadow-sm hover:bg-blue-100 transition-colors"
+              >
+                <button>Đăng kí</button>
               </NavLink>
             </>
           )}
         </div>
       </header>
 
-      <main className="layout-main">
+      <main className="layout-main pt-16">
         <Outlet />
       </main>
     </div>

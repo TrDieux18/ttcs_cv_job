@@ -124,6 +124,7 @@ const AdminLayout = () => {
                 trigger={["click"]}
                 placement="bottom"
                 arrow
+                overlayClassName="custom-dropdown-two"
               >
                 <div className="flex justify-between items-center gap-2 cursor-pointer select-none  ">
                   <div className="flex items-center gap-1">

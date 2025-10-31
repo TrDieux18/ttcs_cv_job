@@ -1,50 +1,37 @@
+import axios from "axios";
 import { ApiResponse } from "@types/response/ApiResponse";
 import { ADMIN_API } from "@types/api";
 
+// ✅ axiosClient dùng chung
+const axiosClient = axios.create({
+  baseURL: ADMIN_API,
+  withCredentials: true,
+  headers: { "Content-Type": "application/json" },
+});
+
+// ✅ GET ALL USERS (có query params)
 export const getAllUsers = async (query = {}) => {
   try {
-    const params = new URLSearchParams(query).toString();
-    const response = await fetch(`${ADMIN_API}/users?${params}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch users");
-    }
-
-    const data = await response.json();
-    return data;
+    const response = await axiosClient.get("/users", { params: query });
+    return response.data;
   } catch (error) {
     console.error("Error fetching users:", error);
     throw error;
   }
 };
 
+// ✅ GET USER BY ID
 export const getUserById = async (userId) => {
   try {
-    const response = await fetch(`${ADMIN_API}/users/detail/${userId}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch user by ID");
-    }
-    const data = await response.json();
-    return data;
+    const response = await axiosClient.get(`/users/detail/${userId}`);
+    return response.data;
   } catch (error) {
     console.error("Error fetching user by ID:", error);
     throw error;
   }
 };
 
+// ✅ CREATE USER (FormData)
 export const createUser = async (userData) => {
   console.log("User Data Service");
   for (const pair of userData.entries()) {
@@ -52,81 +39,75 @@ export const createUser = async (userData) => {
   }
 
   try {
-    const response = await fetch(`${ADMIN_API}/users/create`, {
-      method: "POST",
-      body: userData,
-      credentials: "include",
+    const response = await axios.post(`${ADMIN_API}/users/create`, userData, {
+      withCredentials: true,
+      headers: { "Content-Type": "multipart/form-data" },
     });
 
-    const data = await response.json();
-    if (!response.ok) {
+    const data = response.data;
+    if (!data.success) {
       throw new Error(data.message || "Tạo người dùng thất bại!");
     }
 
     return new ApiResponse(data.success, data.data);
   } catch (error) {
     console.error("Error creating user:", error);
-    return new ApiResponse(false, null, [error.message]);
+    const message = error.response?.data?.message || error.message;
+    return new ApiResponse(false, null, [message]);
   }
 };
 
+// ✅ CHANGE USER STATUS
 export const changeUserStatus = async (userId, status) => {
   const newStatus = !status;
   try {
-    const response = await fetch(`${ADMIN_API}/users/change-status/${userId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ isActive: newStatus }),
-      credentials: "include",
+    const response = await axiosClient.patch(`/users/change-status/${userId}`, {
+      isActive: newStatus,
     });
-    if (!response.ok) {
-      throw new Error("Failed to change user status");
-    }
-    const data = await response.json();
+
+    const data = response.data;
     return new ApiResponse(data.success);
   } catch (error) {
     console.error("Error changing user status:", error);
-    return new ApiResponse(false, null, [error.message]);
+    const message = error.response?.data?.message || error.message;
+    return new ApiResponse(false, null, [message]);
   }
 };
 
+// ✅ UPDATE USER (FormData)
 export const updateUser = async (userId, userData) => {
   try {
-    const response = await fetch(`${ADMIN_API}/users/update/${userId}`, {
-      method: "PATCH",
-      body: userData,
-      credentials: "include",
-    });
-    const data = await response.json();
-    if (!response.ok) {
+    const response = await axios.patch(
+      `${ADMIN_API}/users/update/${userId}`,
+      userData,
+      {
+        withCredentials: true,
+        headers: { "Content-Type": "multipart/form-data" },
+      }
+    );
+
+    const data = response.data;
+    if (!data.success) {
       throw new Error(data.message || "Cập nhật người dùng thất bại!");
     }
+
     return new ApiResponse(data.success, data.data);
   } catch (error) {
     console.error("Error updating user:", error);
-    return new ApiResponse(false, null, [error.message]);
+    const message = error.response?.data?.message || error.message;
+    return new ApiResponse(false, null, [message]);
   }
 };
 
+// ✅ DELETE USER
 export const deleteUser = async (userId) => {
   try {
-    const response = await fetch(`${ADMIN_API}/users/delete/${userId}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to delete user");
-    }
-    const data = await response.json();
+    const response = await axiosClient.delete(`/users/delete/${userId}`);
+    const data = response.data;
     return new ApiResponse(data.success);
   } catch (error) {
     console.error("Error deleting user:", error);
-    return new ApiResponse(false, null, [error.message]);
+    const message = error.response?.data?.message || error.message;
+    return new ApiResponse(false, null, [message]);
   }
 };

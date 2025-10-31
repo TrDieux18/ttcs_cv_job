@@ -58,8 +58,8 @@ const Role = () => {
       { type: "divider" },
       {
         key: "edit",
-        label: <span className="text-sky-400">Chỉnh sửa</span>,
-        icon: <EditOutlined style={{ color: "#00BCFF", fontSize: 15 }} />,
+        label: <span>Chỉnh sửa</span>,
+        icon: <EditOutlined style={{ fontSize: 15 }} />,
         onClick: () =>
           setOpenModal({ visible: true, type: "edit", record: record }),
       },
@@ -100,9 +100,10 @@ const Role = () => {
       render: (_, record) => (
         <Dropdown
           menu={actionRoleDropdown(record)}
-          trigger={["click"]}
+          trigger={["hover"]}
           arrow
           placement="bottom"
+          overlayClassName="custom-dropdown-two"
         >
           <Button icon={<MoreOutlined />} />
         </Dropdown>

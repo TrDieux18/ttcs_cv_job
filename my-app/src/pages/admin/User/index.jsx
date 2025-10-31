@@ -71,28 +71,27 @@ const User = () => {
     }
   };
 
-  // ✅ Gọi 1 lần khi mount
+ 
   useEffect(() => {
     fetchUsers(pagination.current, pagination.pageSize, keyword, status);
   }, []);
 
-  // ✅ Xử lý khi đổi trạng thái lọc
   const handleStatusChange = (value) => {
     setStatus(value);
     fetchUsers(1, pagination.pageSize, keyword, value);
   };
 
-  // ✅ Khi đổi trang
+
   const handleTableChange = (newPagination) => {
     fetchUsers(newPagination.current, newPagination.pageSize, keyword, status);
   };
 
-  // ✅ Khi bấm tìm kiếm
+
   const handleSearch = () => {
     fetchUsers(1, pagination.pageSize, keyword, status);
   };
 
-  // ✅ Cập nhật trạng thái user
+
   const handleChangeUserStatus = async (userId, isActive) => {
     try {
       const response = await changeUserStatus(userId, isActive);
@@ -111,7 +110,6 @@ const User = () => {
     }
   };
 
-  // ✅ Xóa user
   const handleDeleteUser = async (userId) => {
     try {
       const response = await deleteUser(userId);
@@ -137,8 +135,8 @@ const User = () => {
       { type: "divider" },
       {
         key: "edit",
-        label: <span className="text-sky-400">Chỉnh sửa</span>,
-        icon: <EditOutlined style={{ color: "#00BCFF", fontSize: 15 }} />,
+        label: <span>Chỉnh sửa</span>,
+        icon: <EditOutlined style={{ fontSize: 15 }} />,
         onClick: () => navigate(`/admin/users/update/${record._id}`),
       },
       { type: "divider" },
@@ -202,9 +200,10 @@ const User = () => {
       render: (_, record) => (
         <Dropdown
           menu={actionUserDropdown(record)}
-          trigger={["click"]}
+          trigger={["hover"]}
           placement="bottom"
           arrow
+          overlayClassName="custom-dropdown-two"
         >
           <Button icon={<MoreOutlined />} />
         </Dropdown>

@@ -126,6 +126,8 @@ export const logout = async (req, res) => {
 export const register = async (req, res) => {
   try {
     const { username, password, fullName, email, role } = req.body;
+
+    console.log(username, password, fullName, email, role);
     const existingUser = await User.findOne({ username });
     if (existingUser) {
       return res
