@@ -11,7 +11,7 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("candidate"); // ✅ đổi mặc định từ "user" → "candidate"
+  const [role, setRole] = useState("candidate");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -25,7 +25,7 @@ const Register = () => {
       username,
       email,
       password,
-      role, // ✅ gửi candidate hoặc company
+      role,
     };
 
     console.log("Registration payload:", payload);
@@ -48,7 +48,7 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-teal-50 via-white to-green-50 py-5 px-4">
+    <div className="min-h-screen flex items-center justify-center py-5 px-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

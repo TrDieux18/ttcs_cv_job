@@ -9,7 +9,6 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },

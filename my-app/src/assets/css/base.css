@@ -1,4 +1,3 @@
-
 :root {
   /* Nền chính (trắng) */
   --bg-color-one: #ffffff;
@@ -29,8 +28,4 @@ body {
   background-color: var(--bg-color-one);
   color: var(--text-color-one);
   box-sizing: border-box;
-}
-
-a {
-  text-decoration: none;
 }

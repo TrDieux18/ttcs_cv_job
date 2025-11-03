@@ -13,6 +13,8 @@ import Logout from "@pages/common/Logout";
 import Register from "@pages/client/Register";
 import BlogDetail from "@pages/client/Blogs/BlogDetail";
 import JobList from "@pages/client/Jobs";
+import DetailCompany from "@pages/client/Companies/components/DetailCompany";
+import DetailJob from "@pages/client/Jobs/components/DetailJob";
 
 const clientRoutes = [
   {
@@ -28,8 +30,16 @@ const clientRoutes = [
         element: <JobList />,
       },
       {
+        path: "jobs/:id",
+        element: <DetailJob />,
+      },
+      {
         path: "companies",
         element: <Companies />,
+      },
+      {
+        path: "companies/:slug",
+        element: <DetailCompany />,
       },
       {
         path: "blogs",

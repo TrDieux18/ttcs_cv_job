@@ -38,7 +38,6 @@ const User = () => {
 
   const navigate = useNavigate();
 
-  // ✅ Fetch danh sách user
   const fetchUsers = async (
     page = 1,
     limit = 5,

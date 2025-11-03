@@ -11,33 +11,9 @@ import {
   LuHeart,
   LuExternalLink,
   LuClock,
- 
 } from "react-icons/lu";
-
-
-const parseHTMLList = (html) => {
-  if (!html) return [];
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(html, "text/html");
-  const items = doc.querySelectorAll("li");
-  return Array.from(items).map((item) => item.textContent);
-};
-
-
-const getRelativeTime = (dateString) => {
-  const date = new Date(dateString);
-  const now = new Date();
-  const diffMs = now - date;
-  const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-
-  if (diffHours < 24) return `Đăng ${diffHours} giờ trước`;
-  if (diffDays < 7) return `Đăng ${diffDays} ngày trước`;
-  return `Đăng ${Math.floor(diffDays / 7)} tuần trước`;
-};
-
-
-
+import { parseHTMLList } from "@helpers/parseHTMLList";
+import { getRelativeTime } from "@helpers/getRelavtiveTime";
 
 const optionCity = [
   {
@@ -59,16 +35,18 @@ export default function JobList() {
   const [jobs, setJobs] = useState([]);
   const [selectedJob, setSelectedJob] = useState(null);
   const [loading, setLoading] = useState(true);
+ 
 
   useEffect(() => {
     const fetchJobs = async () => {
       try {
         const response = await getAllJobs();
-        console.log("Jobs fetched:", response);
+
         const jobsData = response.data || [];
         setJobs(jobsData);
         if (jobsData.length > 0) {
           setSelectedJob(jobsData[0]);
+         
         }
       } catch (error) {
         console.error("Error loading jobs:", error);
@@ -80,7 +58,7 @@ export default function JobList() {
   }, []);
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-teal-100 via-white to-teal-50">
+    <div className="min-h-screen w-full ">
       <div className="w-full bg-gradient-to-r from-green-600 to-teal-500 shadow-lg py-8 mb-6">
         <div className="max-w-7xl mx-auto px-4">
           <div className="bg-white rounded-xl shadow-xl p-6 flex gap-4 items-center">
@@ -136,23 +114,19 @@ export default function JobList() {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div
-              className="lg:col-span-1 space-y-4 h-[calc(100vh-120px)] overflow-y-auto pr-2 scrollbar-hide"
-              style={{
-                scrollbarWidth: "none",
-                msOverflowStyle: "none",
-              }}
-            >
+          <div className="grid grid-cols-1 lg:grid-cols-[40%_60%] gap-6">
+            {/* Left: Job List - Can scroll freely */}
+            <div className="space-y-4 overflow-y-auto pr-2 scrollbar-hide">
               {jobs.map((job) => (
                 <motion.div
                   key={job._id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
                   onClick={() => setSelectedJob(job)}
                   className={`bg-white rounded-lg p-4 shadow-md cursor-pointer transition-all border-2 hover:shadow-lg ${
                     selectedJob?._id === job._id
-                      ? "border-red-400"
+                      ? "border-red-400 border-l-5"
                       : "border-transparent hover:border-gray-200"
                   }`}
                 >
@@ -171,7 +145,6 @@ export default function JobList() {
                     {job.title}
                   </h3>
 
-                  {/* Company Info */}
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-12 h-12 rounded flex items-center justify-center text-white font-bold text-xl">
                       <img
@@ -183,31 +156,32 @@ export default function JobList() {
                         }}
                       />
                     </div>
-                    <span className="text-gray-700 font-medium">
-                      {job.company?.fullName || "Company"}
-                    </span>
+                    <a
+                      className="text-gray-700 font-medium hover:underline underline-offset-2"
+                      href={`/companies/${job.company?.slug}`}
+                    >
+                      {job.company?.user.fullName || "Company"}
+                    </a>
                   </div>
 
-                  {/* Salary */}
-                  <div className="flex items-center gap-2 text-green-600 font-semibold mb-3">
+                  <div className="flex items-center gap-2 text-green-600 font-semibold ">
                     <LuDollarSign size={18} />
                     <span>{job.salary}</span>
                   </div>
 
-                  {/* Experience & Degree */}
+                  <hr className="border-b border-dashed border-[#dedede] my-3" />
+
                   {job.experienceRequirement && (
                     <div className="flex items-center gap-2 text-gray-500 text-sm mb-2">
                       <span>✓ {job.experienceRequirement}</span>
                     </div>
                   )}
 
-                  {/* Category */}
                   <div className="flex items-center gap-2 text-gray-600 text-sm mb-2">
                     <LuBriefcase size={16} />
                     <span>{job.category}</span>
                   </div>
 
-                  {/* Location */}
                   <div className="flex items-center gap-2 text-gray-600 text-sm mb-3">
                     <LuMapPin size={16} />
                     <span>
@@ -215,13 +189,12 @@ export default function JobList() {
                     </span>
                   </div>
 
-                  {/* Keywords/Skills */}
                   {job.keywords && job.keywords.length > 0 && (
                     <div className="flex flex-wrap gap-2">
                       {job.keywords.slice(0, 4).map((keyword, idx) => (
                         <span
                           key={idx}
-                          className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
+                          className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:outline outline-gray-700 cursor-pointer"
                         >
                           {keyword}
                         </span>
@@ -232,20 +205,20 @@ export default function JobList() {
               ))}
             </div>
 
-            {/* Right: Job Detail */}
+            {/* Right: Job Detail*/}
             {selectedJob && (
               <motion.div
                 key={selectedJob._id}
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="lg:col-span-2 bg-white rounded-lg shadow-lg sticky top-4 h-[calc(100vh-120px)] flex flex-col"
+                duration={{ duration: 0.6 }}
+                className="bg-white rounded-lg shadow-lg sticky top-20 h-[calc(100vh-90px)] flex flex-col"
               >
-                {/* Fixed Header Section */}
-                <div className="p-6 pb-0 border-b border-gray-200 bg-white rounded-t-lg flex-shrink-0">
+                <div className="p-6 pb-2 bg-white rounded-t-lg flex-shrink-0">
                   {/* Header */}
-                  <div className="flex items-start justify-between mb-6">
+                  <div className="flex items-start justify-between">
                     <div className="flex items-start gap-4">
-                      <div className="w-24 h-24 rounded bg-white border-2 border-gray-200 flex items-center justify-center flex-shrink-0 p-2">
+                      <div className="w-24 h-24 rounded bg-white border-2 border-gray-200 flex items-center justify-center flex-shrink-0 overflow-hidden">
                         <img
                           src={selectedJob.company?.logo.url}
                           alt={selectedJob.company?.fullName}
@@ -257,16 +230,23 @@ export default function JobList() {
                         />
                       </div>
                       <div>
-                        <h2 className="text-2xl font-bold text-gray-800 mb-2 flex items-center gap-2">
+                        <a
+                          href={`/jobs/${selectedJob._id}`}
+                          className="text-2xl font-bold text-gray-800 mb-2 flex items-center gap-2 hover:text-red-400 transition"
+                        >
                           {selectedJob.title}
                           <LuExternalLink
                             size={20}
                             className="text-gray-400 cursor-pointer hover:text-gray-600"
                           />
-                        </h2>
-                        <p className="text-gray-700 font-medium mb-2">
-                          {selectedJob.company?.fullName}
-                        </p>
+                        </a>
+                        <a
+                          href={`/companies/${selectedJob.company?.slug}`}
+                          className="text-gray-700 font-medium mb-2 hover:underline underline-offset-2"
+                        >
+                          {selectedJob.company?.user.fullName}
+                        </a>
+
                         <div className="flex items-center gap-2 text-green-600 font-bold text-lg">
                           <LuDollarSign size={20} />
                           <span>{selectedJob.salary}</span>
@@ -281,14 +261,12 @@ export default function JobList() {
                     </button>
                   </div>
 
-                  {/* Apply Button */}
                   <Button
                     type="primary"
                     size="large"
-                    className="w-full mb-4"
+                    className="w-full my-4"
                     style={{
                       background: "#d43f3f",
-                      borderColor: "#d43f3f",
                       height: 48,
                     }}
                   >
@@ -296,49 +274,46 @@ export default function JobList() {
                   </Button>
                 </div>
 
-                {/* Scrollable Content */}
-                <div className="flex-1 overflow-y-auto p-6 pt-4">
-                  {/* Job Type and Time Info */}
-                  <div className="flex items-center gap-2 text-gray-600 mb-2">
-                    <LuBriefcase size={18} />
-                    <span>{selectedJob.jobType || "Full-time"}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-gray-600 mb-6">
-                    <LuClock size={18} />
-                    <span>{getRelativeTime(selectedJob.createdAt)}</span>
+                <hr className="border-b border-[#dedede] mx-6" />
+
+                <div className="flex-1 overflow-y-auto p-6">
+                  <div className="flex flex-col gap-2">
+                    <div className="flex items-center gap-2 text-gray-600">
+                      <LuBriefcase size={18} />
+                      <span>{selectedJob.jobType || "Full-time"}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-gray-600">
+                      <LuClock size={18} />
+                      <span>{getRelativeTime(selectedJob.createdAt)}</span>
+                    </div>
                   </div>
 
-                  {/* Keywords */}
+                  <hr className="border-b border-dashed border-[#dedede] my-4" />
+
                   {selectedJob.keywords && selectedJob.keywords.length > 0 && (
-                    <div className="mb-6">
-                      <h3 className="font-semibold text-gray-700 mb-2">
-                        Kỹ năng:
-                      </h3>
-                      <div className="flex flex-wrap gap-2">
-                        {selectedJob.keywords.map((keyword, idx) => (
-                          <span
-                            key={idx}
-                            className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 text-sm inline-block"
-                          >
-                            {keyword}
-                          </span>
-                        ))}
-                      </div>
+                    <div className="mb-4 flex flex-wrap items-center gap-2">
+                      <h3 className="font-semibold text-gray-700">Kỹ năng:</h3>
+                      {selectedJob.keywords.map((keyword, idx) => (
+                        <span
+                          key={idx}
+                          className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm border border-transparent hover:border-gray-700 cursor-pointer transition-colors"
+                        >
+                          {keyword}
+                        </span>
+                      ))}
                     </div>
                   )}
 
-                  {/* Category */}
-                  <div className="mb-6">
-                    <h3 className="font-semibold text-gray-700 mb-2">
-                      Chuyên môn:
-                    </h3>
-                    <span className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 text-sm inline-block">
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-semibold text-gray-700">Chuyên môn:</h3>
+                    <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm border border-transparent hover:border-gray-700 cursor-pointer transition-colors">
                       {selectedJob.category}
                     </span>
                   </div>
 
-                  {/* Location */}
-                  <div className="mb-6">
+                  <hr className="border-b border-dashed border-[#dedede] my-4" />
+
+                  <div>
                     <h3 className="font-semibold text-gray-700 mb-2">
                       Địa điểm:
                     </h3>
@@ -354,10 +329,10 @@ export default function JobList() {
                       </div>
                     </div>
                   </div>
+                  <hr className="border-b border-dashed border-[#dedede] my-4" />
 
-                  {/* Benefits */}
                   {selectedJob.benefits && (
-                    <div className="mb-6">
+                    <div>
                       <h3 className="text-xl font-bold text-gray-800 mb-4">
                         Phúc lợi
                       </h3>
@@ -366,7 +341,7 @@ export default function JobList() {
                           (benefit, idx) => (
                             <li
                               key={idx}
-                              className="flex items-start gap-2 text-gray-700"
+                              className="flex items-center gap-2 text-gray-700"
                             >
                               <span className="text-red-500 mt-1">•</span>
                               <span>{benefit}</span>
@@ -377,8 +352,9 @@ export default function JobList() {
                     </div>
                   )}
 
-                  {/* Job Description */}
-                  <div className="mb-6">
+                  <hr className="border-b border-dashed border-[#dedede] my-4" />
+
+                  <div>
                     <h3 className="text-xl font-bold text-gray-800 mb-4">
                       Mô tả công việc
                     </h3>
@@ -387,18 +363,23 @@ export default function JobList() {
                     </p>
                   </div>
 
-                  {/* Requirements */}
+                  <hr className="border-b border-dashed border-[#dedede] my-4" />
+
                   {selectedJob.requirements && (
-                    <div className="mb-6">
+                    <div className="mb-4">
                       <h3 className="text-xl font-bold text-gray-800 mb-4">
                         Yêu cầu công việc
                       </h3>
+                      <li className="flex items-center gap-2 mb-1 text-gray-700">
+                        <span className="text-green-500 mt-1">✓</span>
+                        <span>{selectedJob.level}</span>
+                      </li>
                       <ul className="space-y-2">
                         {parseHTMLList(selectedJob.requirements).map(
                           (req, idx) => (
                             <li
                               key={idx}
-                              className="flex items-start gap-2 text-gray-700"
+                              className="flex items-center gap-2 text-gray-700"
                             >
                               <span className="text-green-500 mt-1">✓</span>
                               <span>{req}</span>

@@ -50,12 +50,12 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-teal-50 via-white to-green-50 py-5 px-4">
+    <div className="min-h-screen flex items-center justify-center py-5 px-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="max-w-md w-full bg-white p-8 md:p-6 rounded-xl shadow-xl border border-gray-200" // Tăng shadow, border
+        className="max-w-md w-full bg-white p-8 md:p-6 rounded-xl shadow-xl border border-gray-200"
       >
         <h2 className="text-3xl font-bold text-center text-green-700 mb-8">
           🔐 Đăng nhập
