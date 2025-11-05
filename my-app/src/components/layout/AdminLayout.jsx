@@ -9,6 +9,8 @@ import {
   SettingOutlined,
   PartitionOutlined,
   DownOutlined,
+  BankOutlined,
+  CarryOutOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, Dropdown, Button, message, theme } from "antd";
 import { Outlet, useNavigate } from "react-router-dom";
@@ -48,6 +50,16 @@ const AdminLayout = () => {
       key: "/admin/roles-permission",
       icon: <PartitionOutlined />,
       label: "Phân quyền",
+    },
+    {
+      key: "/admin/companies",
+      icon: <BankOutlined />,
+      label: "Công ty",
+    },
+    {
+      key: "/admin/jobs",
+      icon: <CarryOutOutlined />,
+      label: "Việc làm",
     },
     {
       key: "/admin/cvs",

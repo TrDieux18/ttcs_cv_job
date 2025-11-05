@@ -255,7 +255,7 @@
   "fullName": "Đặng Tùng",
   "username": "dangtung",
   "email": "dangtung@gmail.com",
-  "password": "$2b$10$1yELcYHIQGV9NqanRnpJ5uD1cLcz.thzPI4w4pc4zgANdZf6AIn8u",
+  "password": "123456",
   "avatar": null,
   "role_id": {
     "$oid": "68ea93aa8d7e018eae6b4e4c"

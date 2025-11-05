@@ -12,6 +12,10 @@ import CV from "@pages/admin/CV";
 
 import CreateCV from "@pages/admin/CV/CreateCV";
 import DetailCV from "@pages/admin/CV/components/DetailCV";
+import Company from "@pages/admin/Company";
+import CompanyForm from "@pages/admin/Company/components/CompanyForm";
+import Job from "@pages/admin/Job";
+import JobForm from "@pages/admin/Job/components/JobForm";
 
 const adminRoutes = [
   {
@@ -53,6 +57,30 @@ const adminRoutes = [
           {
             path: "cvs/detail/:_id",
             element: <DetailCV />,
+          },
+          {
+            path: "companies",
+            element: <Company />,
+          },
+          {
+            path: "companies/create",
+            element: <CompanyForm mode="create" />,
+          },
+          {
+            path: "companies/update/:id",
+            element: <CompanyForm mode="update" />,
+          },
+          {
+            path: "jobs",
+            element: <Job />,
+          },
+          {
+            path: "jobs/create",
+            element: <JobForm mode="create" />,
+          },
+          {
+            path: "jobs/update/:id",
+            element: <JobForm mode="update" />,
           },
         ],
       },

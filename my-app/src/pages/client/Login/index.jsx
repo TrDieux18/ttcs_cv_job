@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "@store/UserReducer";
 import { LuLock, LuUser } from "react-icons/lu";
 import { message } from "antd";
+import { getRedirectPath } from "@helpers/roleHelper";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -28,16 +29,12 @@ export default function Login() {
       dispatch(setUser(response.data));
       localStorage.setItem("user", JSON.stringify(response.data));
       message.success("🎉 Đăng nhập thành công!");
-      const userRole = response.data.role.title;
-      if (userRole === "Candidate") {
-        setTimeout(() => {
-          navigate("/");
-        }, 1000);
-      } else if (userRole === "Company") {
-        setTimeout(() => {
-          navigate("/company/jobs");
-        }, 1000);
-      }
+      
+      // Auto redirect dựa trên role
+      const redirectPath = getRedirectPath(response.data.role);
+      setTimeout(() => {
+        navigate(redirectPath);
+      }, 1000);
     } catch (err) {
       console.error("Login error:", err.response || err);
       setError(
