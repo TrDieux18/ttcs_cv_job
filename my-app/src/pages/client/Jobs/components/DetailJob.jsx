@@ -249,9 +249,7 @@ const DetailJob = () => {
                     </a>
                   </div>
                 </div>
-                {job.headline && (
-                  <div className="mt-5 text-gray-500">{job.headline}</div>
-                )}
+
                 <div className="mt-4">
                   <div className="grid grid-rows-[auto] gap-2">
                     <div className="flex justify-between border-b border-dashed border-gray-300 py-2">
