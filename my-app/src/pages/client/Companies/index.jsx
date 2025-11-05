@@ -2,22 +2,28 @@ import { getAllCompanies } from "@services/client/CompanyService";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { HiLocationMarker, HiUserGroup } from "react-icons/hi";
+import { useNavigate } from "react-router-dom";
 
 const Companies = () => {
+  const navigate = useNavigate();
   const [companies, setCompanies] = useState([]);
   useEffect(() => {
     const fetchCompanies = async () => {
-      const response = await getAllCompanies();
-      setCompanies(response.data || []);
+      try {
+        const response = await getAllCompanies();
+        setCompanies(response.data);
+      } catch (error) {
+        console.error("Error fetching companies:", error);
+      }
     };
     fetchCompanies();
   }, []);
-  console.log(companies);
+
   return (
     <>
-      <div className="min-h-screen w-full bg-gray-50">
+      <div className="min-h-screen w-full bg-gray-50 bg-gradient-to-br from-teal-90 to-teal-50 ">
         <motion.section
-          className="bg-gradient-to-r from-green-700 to-teal-500 text-white py-20"
+          className="bg-gradient-to-r from-green-700 to-teal-500 text-white py-10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
@@ -52,7 +58,7 @@ const Companies = () => {
               >
                 <div className="relative h-32 bg-gradient-to-r from-green-600 to-teal-500">
                   <div className="absolute -bottom-10 left-6">
-                    <div className="w-15 h-15 bg-white rounded-lg shadow-lg p-2 flex items-center justify-center ">
+                    <div className="w-15 h-15 bg-white rounded-md overflow-hidden shadow-lg  flex items-center justify-center ">
                       <img
                         src={com.logo?.url || "https://via.placeholder.com/80"}
                         alt={com.user?.fullName}
@@ -89,7 +95,10 @@ const Companies = () => {
                   </div>
 
                   {/* Action Button */}
-                  <button className="w-full py-2.5 bg-gradient-to-r from-green-600 to-teal-500 text-white rounded-lg font-semibold hover:from-green-700 hover:to-teal-600 transition-all duration-300">
+                  <button
+                    onClick={() => navigate(`/companies/${com.slug}`)}
+                    className="w-full py-2.5 bg-gradient-to-r from-green-600 to-teal-500 text-white rounded-lg font-semibold hover:from-green-700 hover:to-teal-600 transition-all duration-300"
+                  >
                     Xem chi tiết
                   </button>
                 </div>

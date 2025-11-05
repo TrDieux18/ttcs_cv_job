@@ -23,4 +23,5 @@ export const getAllJobs = async () => {
   }
 };
 
-export const getJobFilters = () => API.get("/job/filters");
+export const getJobFilters = () => axiosClient.get("/job/filters");
+export const getJobById = (id) => axiosClient.get(`/jobs/${id}`);
