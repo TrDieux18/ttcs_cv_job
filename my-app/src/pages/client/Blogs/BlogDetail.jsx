@@ -16,19 +16,8 @@ import {
   LuTrash,
   LuUser,
 } from "react-icons/lu";
-
-const createMarkup = (htmlString) => {
-  const allowedTags =
-    /<b>|<i>|<u>|<ul>|<ol>|<li>|<p>|<br>|<div>|<strong>|<em>/gi;
-  const sanitized = htmlString
-    ?.replace(/<script.*?>.*?<\/script>/gi, "")
-    .replace(/onerror|onload|onclick|onmouseover|onfocus|onblur/gi, "")
-    .replace(/<style.*?>.*?<\/style>/gi, "")
-    .replace(/<link.*?>/gi, "")
-    .replace(/<.*?>/g, (tag) => (allowedTags.test(tag) ? tag : ""));
-  return { __html: sanitized || "" };
-};
-// ---
+import { createMarkup } from "@helpers/createMarkup";
+import { formatDate, formatDateTime } from "@helpers/formatDate";
 
 const BlogDetail = () => {
   const { id } = useParams();
@@ -40,7 +29,7 @@ const BlogDetail = () => {
   const [liked, setLiked] = useState(false);
   const [loadingComment, setLoadingComment] = useState(false);
   const [loadingSimilar, setLoadingSimilar] = useState(false);
-  const user = JSON.parse(localStorage.getItem("user") || "null"); // Handle null localStorage
+  const user = JSON.parse(localStorage.getItem("user") || "null");
   const token = localStorage.getItem("user");
   const commentEndRef = useRef(null);
 
@@ -214,24 +203,6 @@ const BlogDetail = () => {
       alert("Có lỗi xảy ra, không thể thay đổi trạng thái thích.");
     }
   };
-  const formatDate = (dateStr) =>
-    dateStr
-      ? new Date(dateStr).toLocaleDateString("vi-VN", {
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric",
-        })
-      : "N/A";
-  const formatDateTime = (dateStr) =>
-    dateStr
-      ? new Date(dateStr).toLocaleString("vi-VN", {
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-        })
-      : "N/A";
 
   // --- Loading và Error UI ---
   if (loading && !blog) {
@@ -258,7 +229,7 @@ const BlogDetail = () => {
   if (!blog) return null;
 
   return (
-    <div className="bg-gradient-to-br from-teal-50 via-white to-green-50 py-10 px-4">
+    <div className="bg-gradient-to-br from-teal-50 via-white to-green-50 py-10 px-4 ">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -282,8 +253,8 @@ const BlogDetail = () => {
 
           {blog.image?.url && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="mb-8 rounded-lg overflow-hidden aspect-video shadow-md"
             >

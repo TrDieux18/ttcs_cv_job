@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { login } from "@services/common/AuthService";
 import { setUser } from "@store/UserReducer";
 import { LuLock, LuLogIn, LuUser } from "react-icons/lu";
+import { getRedirectPath } from "@helpers/roleHelper";
 
 const LoginAdmin = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -20,9 +21,9 @@ const LoginAdmin = () => {
         dispatch(setUser(response.data));
         localStorage.setItem("user", JSON.stringify(response.data));
         messageApi.success("Đăng nhập thành công");
-
+        const redirectPath = getRedirectPath(response.data.role);
         setTimeout(() => {
-          navigate("/admin/dashboard");
+          navigate(redirectPath);
         }, 1500);
       } else {
         messageApi.error(response.message || "Đăng nhập thất bại");

@@ -11,3 +11,12 @@ export const formatDateTime = (dateString) => {
 
   return `${day}/${month}/${year}, ${hours}:${minutes}:${seconds}`;
 };
+
+export const formatDate = (dateStr) =>
+  dateStr
+    ? new Date(dateStr).toLocaleDateString("vi-VN", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      })
+    : "Chưa có ngày";

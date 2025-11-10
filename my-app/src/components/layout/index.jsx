@@ -1,6 +1,6 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import { DownOutlined } from "@ant-design/icons";
-import { Dropdown, message, Space } from "antd";
+
+import { Dropdown, message } from "antd";
 import { logout } from "@services/common/AuthService";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import "./LayoutDefault.scss";
@@ -75,6 +75,7 @@ const LayoutDefault = () => {
     {
       key: "logout",
       label: "Đăng xuất",
+
       icon: <LuLogOut size={16} />,
     },
   ];
@@ -182,7 +183,7 @@ const LayoutDefault = () => {
         </div>
       </header>
 
-      <main className="layout-main pt-16">
+      <main className="layout-main pt-16  bg-gray-50 bg-gradient-to-br from-teal-90 to-teal-50">
         <Outlet />
       </main>
     </div>

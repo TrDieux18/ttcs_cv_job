@@ -7,6 +7,9 @@ import { useDispatch } from "react-redux";
 import { setUser } from "@store/UserReducer";
 import { LuLock, LuUser } from "react-icons/lu";
 import { message } from "antd";
+import { getRedirectPath } from "@helpers/roleHelper";
+import { logout } from "@services/common/AuthService";
+import { isAdminRole } from "@helpers/roleHelper";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -25,19 +28,21 @@ export default function Login() {
 
     try {
       const response = await login({ username, password });
+      const role = response.data.role?.title;
+      if (isAdminRole(role)) {
+        await logout();
+        navigate("/admin/auth/login");
+        message.warning("Vui lòng đăng nhập qua trang quản trị!");
+        return;
+      }
       dispatch(setUser(response.data));
       localStorage.setItem("user", JSON.stringify(response.data));
       message.success("🎉 Đăng nhập thành công!");
-      const userRole = response.data.role.title;
-      if (userRole === "Candidate") {
-        setTimeout(() => {
-          navigate("/");
-        }, 1000);
-      } else if (userRole === "Company") {
-        setTimeout(() => {
-          navigate("/company/jobs");
-        }, 1000);
-      }
+
+      const redirectPath = getRedirectPath(response.data.role);
+      setTimeout(() => {
+        navigate(redirectPath);
+      }, 1000);
     } catch (err) {
       console.error("Login error:", err.response || err);
       setError(
@@ -50,12 +55,12 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-teal-50 via-white to-green-50 py-5 px-4">
+    <div className="min-h-screen flex items-center justify-center py-5 px-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="max-w-md w-full bg-white p-8 md:p-6 rounded-xl shadow-xl border border-gray-200" // Tăng shadow, border
+        className="max-w-md w-full bg-white p-8 md:p-6 rounded-xl shadow-xl border border-gray-200"
       >
         <h2 className="text-3xl font-bold text-center text-green-700 mb-8">
           🔐 Đăng nhập

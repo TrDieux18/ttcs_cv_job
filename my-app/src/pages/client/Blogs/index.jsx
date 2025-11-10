@@ -4,6 +4,23 @@ import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { LuClock, LuHeart, LuMessageSquareText } from "react-icons/lu";
 
+import { formatDate } from "@helpers/formatDate";
+
+const categories = [
+  "Tất cả",
+  "Hướng nghiệp",
+  "Kỹ năng phỏng vấn",
+  "Tối ưu CV",
+  "Tin tuyển dụng",
+  "Công nghệ & AI",
+  "Chia sẻ trải nghiệm",
+];
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -20 },
+};
 const BlogPage = () => {
   const navigate = useNavigate();
   const [blogs, setBlogs] = useState([]);
@@ -11,16 +28,6 @@ const BlogPage = () => {
   const [activeCategory, setActiveCategory] = useState("Tất cả");
   const [currentPage, setCurrentPage] = useState(1);
   const blogsPerPage = 7;
-
-  const categories = [
-    "Tất cả",
-    "Hướng nghiệp",
-    "Kỹ năng phỏng vấn",
-    "Tối ưu CV",
-    "Tin tuyển dụng",
-    "Công nghệ & AI",
-    "Chia sẻ trải nghiệm",
-  ];
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -42,16 +49,16 @@ const BlogPage = () => {
     return blogs.filter((b) => b.category === activeCategory);
   }, [blogs, activeCategory]);
 
-  // Tính pagination dựa trên tất cả filteredBlogs
   const totalPages = Math.ceil(filteredBlogs.length / blogsPerPage);
+
   const currentBlogs = useMemo(() => {
     const start = (currentPage - 1) * blogsPerPage;
     return filteredBlogs.slice(start, start + blogsPerPage);
   }, [currentPage, filteredBlogs]);
 
-
   const featured = currentBlogs[0] || null;
   const otherBlogs = currentBlogs.slice(1);
+  const handleBlogClick = (id) => id && navigate(`/blog/${id}`);
 
   if (loading) {
     return (
@@ -61,25 +68,8 @@ const BlogPage = () => {
     );
   }
 
-  const formatDate = (dateStr) =>
-    dateStr
-      ? new Date(dateStr).toLocaleDateString("vi-VN", {
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric",
-        })
-      : "Chưa có ngày";
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -20 },
-  };
-
-  const handleBlogClick = (id) => id && navigate(`/blog/${id}`);
-
   return (
-    <div className="min-h-screen w-full bg-white relative">
+    <div className="min-h-screen w-full bg-white relative ">
       <div
         className="absolute inset-0 z-0"
         style={{
@@ -90,7 +80,6 @@ const BlogPage = () => {
       <div className="absolute inset-0 z-0 bg-gradient-to-br from-teal-50 via-white to-teal-100 opacity-80" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 md:px-6 py-12 md:py-16">
-     
         <div className="text-center mb-12">
           <h1 className="text-2xl md:text-3xl font-extrabold text-green-900 mb-3 tracking-tight">
             Bài viết
@@ -255,7 +244,7 @@ const BlogPage = () => {
                         </span>
                       </div>
                       <div className="flex items-center gap-1">
-                       <LuMessageSquareText />
+                        <LuMessageSquareText />
                         <span>
                           {blog.commentsCount || blog.comments?.length || 0}
                         </span>
