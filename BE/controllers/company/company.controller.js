@@ -4,7 +4,9 @@ import { uploadToCloudinary } from "../../middlewares/admin/uploadCloudinary.mid
 // ✅ Lấy thông tin công ty của user hiện tại
 export const getMyCompany = async (req, res) => {
   try {
-    const userId = req.user._id; // từ auth middleware
+    console.log("res.locals:", res.locals.user);
+    const userId = res.locals.user.id; // từ auth middleware
+    console.log("User ID:", userId);
 
     const company = await Company.findOne({ user: userId }).populate(
       "user",
@@ -69,7 +71,13 @@ export const updateMyCompany = async (req, res) => {
 export const createMyCompany = async (req, res) => {
   try {
     const userId = req.user._id;
-    const { headline = "", description = "", website = "", location = "", size = "" } = req.body;
+    const {
+      headline = "",
+      description = "",
+      website = "",
+      location = "",
+      size = "",
+    } = req.body;
 
     // Kiểm tra user đã có company chưa
     const existing = await Company.findOne({ user: userId });

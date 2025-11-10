@@ -1,14 +1,14 @@
 import Job from "../../models/job.model.js";
 import Company from "../../models/company.model.js";
 
-// ✅ GET ALL JOBS (Admin - quản lý tất cả jobs)
+
 export const getAllJobsAdmin = async (req, res) => {
   try {
     const { page = 1, limit = 10, keyword = "", status = "all" } = req.query;
 
     const filter = {};
 
-    // Search keyword
+   
     if (keyword && keyword.trim()) {
       const regex = new RegExp(keyword.trim(), "i");
       filter.$or = [
@@ -64,7 +64,7 @@ export const getJobByIdAdmin = async (req, res) => {
   }
 };
 
-// ✅ CREATE JOB (Admin)
+
 export const createJobAdmin = async (req, res) => {
   try {
     const {
@@ -136,7 +136,7 @@ export const createJobAdmin = async (req, res) => {
   }
 };
 
-// ✅ UPDATE JOB (Admin)
+
 export const updateJobAdmin = async (req, res) => {
   try {
     const id = req.params.id;

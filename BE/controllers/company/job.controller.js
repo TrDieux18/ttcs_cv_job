@@ -4,7 +4,7 @@ import Company from "../../models/company.model.js";
 // ✅ GET MY JOBS (Company user - jobs của công ty mình)
 export const getMyJobs = async (req, res) => {
   try {
-    const userId = req.user._id;
+    const userId = res.locals.user.id;
     const { page = 1, limit = 10, keyword = "" } = req.query;
 
     // Tìm company của user
