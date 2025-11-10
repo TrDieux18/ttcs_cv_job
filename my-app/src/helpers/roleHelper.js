@@ -1,41 +1,39 @@
-// Helper để xác định route redirect dựa trên role của user
 export const getRedirectPath = (userRole) => {
   const roleTitle = userRole?.title?.toLowerCase();
-  
+
   switch (roleTitle) {
     case "administrator":
     case "admin":
-      return "/admin/dashboard";
-    
+      return "/admin/auth/login";
+
     case "content manager":
     case "content-manager":
-      return "/admin/dashboard"; // Content Manager cũng vào admin
-    
+      return "/admin/auth/login";
+
     case "company":
-      return "/company/my-jobs"; // Company user vào quản lý jobs
-    
+      return "/company/my-jobs";
+
     case "candidate":
     default:
-      return "/"; // Candidate về trang chủ client
+      return "/";
   }
 };
 
-// Helper kiểm tra user có phải admin không (bao gồm administrator và content manager)
 export const isAdminRole = (userRole) => {
   const roleTitle = userRole?.title?.toLowerCase();
-  return roleTitle === "administrator" || 
-         roleTitle === "admin" || 
-         roleTitle === "content manager" ||
-         roleTitle === "content-manager";
+  return [
+    "administrator",
+    "admin",
+    "content manager",
+    "content-manager",
+  ].includes(roleTitle);
 };
 
-// Helper kiểm tra user có phải company không
 export const isCompanyRole = (userRole) => {
   const roleTitle = userRole?.title?.toLowerCase();
   return roleTitle === "company";
 };
 
-// Helper kiểm tra user có phải candidate không
 export const isCandidateRole = (userRole) => {
   const roleTitle = userRole?.title?.toLowerCase();
   return roleTitle === "candidate";

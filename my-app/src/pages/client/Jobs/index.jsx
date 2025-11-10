@@ -35,7 +35,6 @@ export default function JobList() {
   const [jobs, setJobs] = useState([]);
   const [selectedJob, setSelectedJob] = useState(null);
   const [loading, setLoading] = useState(true);
- 
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -46,7 +45,6 @@ export default function JobList() {
         setJobs(jobsData);
         if (jobsData.length > 0) {
           setSelectedJob(jobsData[0]);
-         
         }
       } catch (error) {
         console.error("Error loading jobs:", error);
@@ -141,9 +139,12 @@ export default function JobList() {
                     )}
                   </div>
 
-                  <h3 className="text-lg font-bold text-gray-800 mb-3">
+                  <a
+                    href={`/jobs/${job._id}`}
+                    className="text-lg font-bold text-gray-800 mb-3 block hover:text-red-400 transition"
+                  >
                     {job.title}
-                  </h3>
+                  </a>
 
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-12 h-12 rounded flex items-center justify-center text-white font-bold text-xl">

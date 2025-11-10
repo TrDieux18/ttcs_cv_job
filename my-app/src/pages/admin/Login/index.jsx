@@ -21,8 +21,6 @@ const LoginAdmin = () => {
         dispatch(setUser(response.data));
         localStorage.setItem("user", JSON.stringify(response.data));
         messageApi.success("Đăng nhập thành công");
-
-        // Auto redirect dựa trên role
         const redirectPath = getRedirectPath(response.data.role);
         setTimeout(() => {
           navigate(redirectPath);

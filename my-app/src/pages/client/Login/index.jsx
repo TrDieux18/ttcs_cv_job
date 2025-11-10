@@ -8,6 +8,8 @@ import { setUser } from "@store/UserReducer";
 import { LuLock, LuUser } from "react-icons/lu";
 import { message } from "antd";
 import { getRedirectPath } from "@helpers/roleHelper";
+import { logout } from "@services/common/AuthService";
+import { isAdminRole } from "@helpers/roleHelper";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -26,11 +28,17 @@ export default function Login() {
 
     try {
       const response = await login({ username, password });
+      const role = response.data.role?.title;
+      if (isAdminRole(role)) {
+        await logout();
+        navigate("/admin/auth/login");
+        message.warning("Vui lòng đăng nhập qua trang quản trị!");
+        return;
+      }
       dispatch(setUser(response.data));
       localStorage.setItem("user", JSON.stringify(response.data));
       message.success("🎉 Đăng nhập thành công!");
-      
-      // Auto redirect dựa trên role
+
       const redirectPath = getRedirectPath(response.data.role);
       setTimeout(() => {
         navigate(redirectPath);
