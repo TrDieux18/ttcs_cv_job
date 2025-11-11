@@ -1,0 +1,85 @@
+[{
+  "_id": {
+    "$oid": "68fc9731cc03ce10539ce4b3"
+  },
+  "userId": "68fb9ee2f08201429f9d6a69",
+  "title": "Frontend Developer",
+  "fileUrl": "/uploads/cv-frontend.pdf",
+  "skills": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "React"
+  ],
+  "experience": [
+    {
+      "company": "ABC Corp",
+      "position": "Frontend Dev",
+      "from": "2023-01",
+      "to": "2024-12"
+    }
+  ],
+  "education": [
+    {
+      "school": "ĐH Bách Khoa Hà Nội",
+      "degree": "Cử nhân CNTT",
+      "from": "2019",
+      "to": "2023"
+    }
+  ],
+  "createdAt": "2025-08-19T08:00:00Z"
+},
+{
+  "_id": {
+    "$oid": "68fc9731cc03ce10539ce4b4"
+  },
+  "userId": "68fa4a2d1f2acfe0e9735956",
+  "title": "Backend Developer",
+  "fileUrl": "/uploads/cv-backend.pdf",
+  "skills": [
+    "Java",
+    "Spring Boot",
+    "MySQL"
+  ],
+  "experience": [
+    {
+      "company": "XYZ Tech",
+      "position": "Backend Dev",
+      "from": "2022-01",
+      "to": "2024-06"
+    }
+  ],
+  "education": [
+    {
+      "school": "ĐH Công Nghệ",
+      "degree": "Kỹ sư phần mềm",
+      "from": "2018",
+      "to": "2022"
+    }
+  ],
+  "createdAt": "2025-08-22T08:30:00Z"
+},
+{
+  "_id": {
+    "$oid": "690103d28c3e49a31ddb4966"
+  },
+  "userId": {
+    "$oid": "68e4da29222ffcbf35b08990"
+  },
+  "title": "FE",
+  "fileUrl": "https://res.cloudinary.com/dfreegzd9/raw/upload/v1761674193/cvs/nneosychnuurkgfpuwpw",
+  "skills": [
+    "undefined"
+  ],
+  "experience": [],
+  "education": [],
+  "projects": [],
+  "githubLink": null,
+  "createdAt": {
+    "$date": "2025-10-28T17:56:34.013Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-28T17:56:34.013Z"
+  },
+  "__v": 0
+}]

@@ -1,0 +1,401 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Nguyễn Văn A",
+      "email": "vana@example.com",
+      "password": "123456789A",
+      "phone": "0123456789",
+      "role": "candidate",
+      "companyId": null,
+      "token": "jwt.candidate.1.signature",
+      "createdAt": "2025-08-20T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "name": "Trần Thị B",
+      "email": "btran@example.com",
+      "password": "123456789A",
+      "phone": "0987654321",
+      "role": "recruiter",
+      "companyId": 1,
+      "token": "jwt.recruiter.2.signature",
+      "createdAt": "2025-08-21T11:00:00Z"
+    },
+    {
+      "id": 3,
+      "name": "Lê Văn C",
+      "email": "c.le@example.com",
+      "password": "hashed_password_3",
+      "phone": "0901234567",
+      "role": "candidate",
+      "companyId": null,
+      "token": "jwt.candidate.3.signature",
+      "createdAt": "2025-08-22T08:00:00Z"
+    },
+    {
+      "id": 4,
+      "name": "Phạm Thị D",
+      "email": "pham.d@example.com",
+      "password": "hashed_password_4",
+      "phone": "0911122233",
+      "role": "candidate",
+      "companyId": null,
+      "token": "jwt.candidate.4.signature",
+      "createdAt": "2025-08-23T09:00:00Z"
+    },
+    {
+      "id": 5,
+      "name": "Hoàng Văn E",
+      "email": "hoange@example.com",
+      "password": "hashed_password_5",
+      "phone": "0922233344",
+      "role": "recruiter",
+      "companyId": 2,
+      "token": "jwt.recruiter.5.signature",
+      "createdAt": "2025-08-24T10:00:00Z"
+    },
+    {
+      "id": 6,
+      "name": "Đỗ Thị F",
+      "email": "dotf@example.com",
+      "password": "hashed_password_6",
+      "phone": "0933344455",
+      "role": "candidate",
+      "companyId": null,
+      "token": "jwt.candidate.6.signature",
+      "createdAt": "2025-08-25T10:00:00Z"
+    },
+    {
+      "id": 7,
+      "name": "Ngô Văn G",
+      "email": "ngovang@example.com",
+      "password": "hashed_password_7",
+      "phone": "0944455566",
+      "role": "candidate",
+      "companyId": null,
+      "token": "jwt.candidate.7.signature",
+      "createdAt": "2025-08-25T11:00:00Z"
+    },
+    {
+      "id": 8,
+      "name": "Trịnh Thị H",
+      "email": "trinht@example.com",
+      "password": "hashed_password_8",
+      "phone": "0955566677",
+      "role": "recruiter",
+      "companyId": 3,
+      "token": "jwt.recruiter.8.signature",
+      "createdAt": "2025-08-26T12:00:00Z"
+    }
+  ],
+
+  "companies": [
+    {
+      "id": 1,
+      "name": "FPT Software",
+      "logo": "/uploads/fpt.png",
+      "industry": "Information Technology",
+      "address": "Hà Nội, Việt Nam",
+      "website": "https://fptsoftware.com",
+      "description": "Leading IT outsourcing company in Vietnam",
+      "createdAt": "2025-08-20T12:00:00Z"
+    },
+    {
+      "id": 2,
+      "name": "VinGroup",
+      "logo": "/uploads/vingroup.png",
+      "industry": "Conglomerate",
+      "address": "Hà Nội, Việt Nam",
+      "website": "https://vingroup.net",
+      "description": "Tập đoàn kinh tế tư nhân lớn nhất Việt Nam",
+      "createdAt": "2025-08-24T10:00:00Z"
+    },
+    {
+      "id": 3,
+      "name": "Shopee Vietnam",
+      "logo": "/uploads/shopee.png",
+      "industry": "E-commerce",
+      "address": "TP.HCM, Việt Nam",
+      "website": "https://shopee.vn",
+      "description": "Công ty thương mại điện tử hàng đầu Đông Nam Á",
+      "createdAt": "2025-08-26T12:00:00Z"
+    }
+  ],
+
+  "jobs": [
+    {
+      "id": 101,
+      "title": "Frontend Developer",
+      "description": "Phát triển giao diện web với ReactJS...",
+      "requirements": ["2+ năm kinh nghiệm", "Thành thạo ReactJS, Redux"],
+      "salaryRange": { "min": 15000000, "max": 25000000, "currency": "VND" },
+      "location": "Hà Nội",
+      "type": "Full-time",
+      "companyId": 1,
+      "createdAt": "2025-08-20T14:00:00Z",
+      "deadline": "2025-09-15T23:59:59Z"
+    },
+    {
+      "id": 102,
+      "title": "Backend Developer",
+      "description": "Phát triển API với Java Spring Boot...",
+      "requirements": ["3+ năm kinh nghiệm", "Thành thạo Java, SQL, REST API"],
+      "salaryRange": { "min": 18000000, "max": 28000000, "currency": "VND" },
+      "location": "Hồ Chí Minh",
+      "type": "Full-time",
+      "companyId": 1,
+      "createdAt": "2025-08-21T09:00:00Z",
+      "deadline": "2025-09-20T23:59:59Z"
+    },
+    {
+      "id": 103,
+      "title": "Data Analyst",
+      "description": "Phân tích dữ liệu, hỗ trợ ra quyết định kinh doanh...",
+      "requirements": ["2+ năm kinh nghiệm", "Thành thạo SQL, Excel, PowerBI"],
+      "salaryRange": { "min": 12000000, "max": 20000000, "currency": "VND" },
+      "location": "Hà Nội",
+      "type": "Full-time",
+      "companyId": 2,
+      "createdAt": "2025-08-25T08:00:00Z",
+      "deadline": "2025-09-18T23:59:59Z"
+    },
+    {
+      "id": 104,
+      "title": "Product Manager",
+      "description": "Quản lý sản phẩm, định hướng chiến lược phát triển...",
+      "requirements": ["Kinh nghiệm PM 3 năm+", "Kỹ năng giao tiếp tốt"],
+      "salaryRange": { "min": 30000000, "max": 50000000, "currency": "VND" },
+      "location": "Hà Nội",
+      "type": "Full-time",
+      "companyId": 2,
+      "createdAt": "2025-08-24T09:00:00Z",
+      "deadline": "2025-09-30T23:59:59Z"
+    },
+    {
+      "id": 105,
+      "title": "Marketing Executive",
+      "description": "Triển khai các chiến dịch marketing online...",
+      "requirements": ["1-2 năm kinh nghiệm", "Hiểu biết SEO/Ads"],
+      "salaryRange": { "min": 10000000, "max": 15000000, "currency": "VND" },
+      "location": "TP.HCM",
+      "type": "Full-time",
+      "companyId": 3,
+      "createdAt": "2025-08-26T13:00:00Z",
+      "deadline": "2025-09-25T23:59:59Z"
+    },
+    {
+      "id": 106,
+      "title": "UI/UX Designer",
+      "description": "Thiết kế giao diện và trải nghiệm người dùng...",
+      "requirements": ["Sử dụng Figma/Adobe XD", "Có portfolio đẹp"],
+      "salaryRange": { "min": 15000000, "max": 22000000, "currency": "VND" },
+      "location": "TP.HCM",
+      "type": "Full-time",
+      "companyId": 3,
+      "createdAt": "2025-08-26T14:00:00Z",
+      "deadline": "2025-09-22T23:59:59Z"
+    }
+  ],
+
+  "cvs": [
+    {
+      
+      "userId": "68fb9ee2f08201429f9d6a69",
+      "title": "CV Frontend Developer",
+      "fileUrl": "/uploads/cv-frontend.pdf",
+      "skills": ["HTML", "CSS", "JavaScript", "React"],
+      "experience": [
+        {
+          "company": "ABC Corp",
+          "position": "Frontend Dev",
+          "from": "2023-01",
+          "to": "2024-12"
+        }
+      ],
+      "education": [
+        {
+          "school": "ĐH Bách Khoa Hà Nội",
+          "degree": "Cử nhân CNTT",
+          "from": "2019",
+          "to": "2023"
+        }
+      ],
+      "createdAt": "2025-08-19T08:00:00Z"
+    },
+    {
+     
+      "userId": "68fba0dff08201429f9d6a74",
+      "title": "CV Backend Developer",
+      "fileUrl": "/uploads/cv-backend.pdf",
+      "skills": ["Java", "Spring Boot", "MySQL"],
+      "experience": [
+        {
+          "company": "XYZ Tech",
+          "position": "Backend Dev",
+          "from": "2022-01",
+          "to": "2024-06"
+        }
+      ],
+      "education": [
+        {
+          "school": "ĐH Công Nghệ",
+          "degree": "Kỹ sư phần mềm",
+          "from": "2018",
+          "to": "2022"
+        }
+      ],
+      "createdAt": "2025-08-22T08:30:00Z"
+    },
+    {
+      "id": 302,
+      "userId": 4,
+      "title": "CV Data Analyst",
+      "fileUrl": "/uploads/cv-data.pdf",
+      "skills": ["SQL", "Excel", "PowerBI"],
+      "experience": [
+        {
+          "company": "Analytics Co",
+          "position": "Data Analyst",
+          "from": "2022-05",
+          "to": "2024-05"
+        }
+      ],
+      "education": [
+        {
+          "school": "ĐH Kinh Tế Quốc Dân",
+          "degree": "Thống kê",
+          "from": "2017",
+          "to": "2021"
+        }
+      ],
+      "createdAt": "2025-08-23T09:00:00Z"
+    },
+    {
+      "id": 303,
+      "userId": 6,
+      "title": "CV Marketing Executive",
+      "fileUrl": "/uploads/cv-marketing.pdf",
+      "skills": ["SEO", "Google Ads", "Content"],
+      "experience": [
+        {
+          "company": "Media House",
+          "position": "Marketing",
+          "from": "2023-01",
+          "to": "2025-05"
+        }
+      ],
+      "education": [
+        {
+          "school": "ĐH Thương Mại",
+          "degree": "Marketing",
+          "from": "2019",
+          "to": "2023"
+        }
+      ],
+      "createdAt": "2025-08-25T10:00:00Z"
+    },
+    {
+      "id": 304,
+      "userId": 7,
+      "title": "CV UI/UX Designer",
+      "fileUrl": "/uploads/cv-uiux.pdf",
+      "skills": ["Figma", "Adobe XD", "Photoshop"],
+      "experience": [
+        {
+          "company": "Creative Studio",
+          "position": "UI/UX Designer",
+          "from": "2021-01",
+          "to": "2024-12"
+        }
+      ],
+      "education": [
+        {
+          "school": "Arena Multimedia",
+          "degree": "Thiết kế đồ họa",
+          "from": "2018",
+          "to": "2021"
+        }
+      ],
+      "createdAt": "2025-08-25T11:00:00Z"
+    }
+  ],
+
+  "applications": [
+    {
+      "id": 5001,
+      "userId": 1,
+      "jobId": 101,
+      "cvId": 300,
+      "status": "pending",
+      "createdAt": "2025-08-22T09:30:00Z"
+    },
+    {
+      "id": 5002,
+      "userId": 3,
+      "jobId": 102,
+      "cvId": 301,
+      "status": "reviewed",
+      "createdAt": "2025-08-23T11:00:00Z"
+    },
+    {
+      "id": 5003,
+      "userId": 4,
+      "jobId": 103,
+      "cvId": 302,
+      "status": "pending",
+      "createdAt": "2025-08-25T09:00:00Z"
+    },
+    {
+      "id": 5004,
+      "userId": 6,
+      "jobId": 105,
+      "cvId": 303,
+      "status": "accepted",
+      "createdAt": "2025-08-26T10:00:00Z"
+    },
+    {
+      "id": 5005,
+      "userId": 7,
+      "jobId": 106,
+      "cvId": 304,
+      "status": "rejected",
+      "createdAt": "2025-08-26T11:30:00Z"
+    }
+  ],
+
+  "blogs": [
+    {
+      "id": 700,
+      "title": "Kinh nghiệm phỏng vấn Frontend",
+      "content": "Chia sẻ một số tips phỏng vấn vị trí Frontend...",
+      "authorId": 1,
+      "tags": ["career", "frontend", "interview"],
+      "createdAt": "2025-08-18T10:00:00Z"
+    },
+    {
+      "id": 701,
+      "title": "Học Spring Boot cho người mới",
+      "content": "Bài viết chia sẻ cách học Spring Boot hiệu quả...",
+      "authorId": 3,
+      "tags": ["backend", "spring", "java"],
+      "createdAt": "2025-08-19T09:00:00Z"
+    },
+    {
+      "id": 702,
+      "title": "Làm CV như thế nào cho ấn tượng?",
+      "content": "Một CV hay cần súc tích, rõ ràng, có số liệu...",
+      "authorId": 6,
+      "tags": ["cv", "career"],
+      "createdAt": "2025-08-25T09:30:00Z"
+    },
+    {
+      "id": 703,
+      "title": "Xu hướng UI/UX 2025",
+      "content": "Dark mode, neumorphism và AI-driven design sẽ bùng nổ...",
+      "authorId": 7,
+      "tags": ["design", "uiux", "trend"],
+      "createdAt": "2025-08-26T11:00:00Z"
+    }
+  ]
+}
