@@ -6,7 +6,7 @@ import authRoute from "./routes/common/index.route.js";
 import companyRoute from "./routes/company/index.route.js";
 import dotenv from "dotenv";
 import connectDB from "./configs/database.js";
-import path from "path";
+
 import cookieParser from "cookie-parser";
 import { fileURLToPath } from "url";
 import { SYSTEM } from "./configs/system.js";
@@ -44,7 +44,7 @@ app.use((req, res, next) => {
 
 app.use(SYSTEM.PATH_AUTH, authRoute);
 app.use(SYSTEM.PATH_ADMIN, adminRoute);
-app.use("/company", companyRoute);
+app.use(SYSTEM.PATH_COMPANY, companyRoute);
 app.use(SYSTEM.PATH_CLIENT, clientRoute);
 
 app.listen(port, () => {

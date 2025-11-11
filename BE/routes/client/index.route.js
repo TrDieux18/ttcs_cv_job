@@ -4,6 +4,7 @@ import userRoute from "./user.route.js";
 import jobRoute from "./job.route.js";
 import blogRoute from "./blog.route.js";
 import companyRoute from "./company.route.js";
+import applicationRoute from "./application.route.js";
 
 const router = express.Router();
 
@@ -12,4 +13,5 @@ router.use("/user", userRoute);
 router.use("/jobs", jobRoute);
 router.use("/blogs", blogRoute);
 router.use("/companies", companyRoute);
+router.use("/application", applicationRoute);
 export default router;

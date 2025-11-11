@@ -1,5 +1,6 @@
 import Company from "../../models/company.model.js";
 import Job from "../../models/job.model.js";
+import { buildCompanyFilter } from "../../helpers/queryFilter.js";
 
 export const getAllCompanies = async (req, res) => {
   try {

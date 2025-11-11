@@ -7,12 +7,12 @@ const axiosClient = axios.create({
   withCredentials: true,
 });
 
-export const getAllJobs = async () => {
+export const getAllJobs = async (params = {}) => {
   try {
-    const response = await axiosClient.get("/jobs");
+    const response = await axiosClient.get("/jobs", { params });
 
     const data = response.data;
-    return new ApiResponse(data.success, data.data);
+    return new ApiResponse(data.success, data.data, null, data.pagination);
   } catch (error) {
     console.error("Error fetching jobs:", error);
 

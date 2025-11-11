@@ -4,12 +4,11 @@ export const getRedirectPath = (userRole) => {
   switch (roleTitle) {
     case "administrator":
     case "admin":
-      return "/admin/auth/login";
+      return "/admin/dashboard";
 
     case "content manager":
     case "content-manager":
-      return "/admin/auth/login";
-
+      return "/admin/dashboard";
     case "company":
       return "/company/my-jobs";
 
@@ -19,8 +18,11 @@ export const getRedirectPath = (userRole) => {
   }
 };
 
-export const isAdminRole = (userRole) => {
-  const roleTitle = userRole?.title?.toLowerCase();
+export const isAdminRole = (roleObj) => {
+  if (!roleObj) return false;
+  const roleTitle = (
+    typeof roleObj === "string" ? roleObj : roleObj.title
+  )?.toLowerCase();
   return [
     "administrator",
     "admin",
@@ -29,12 +31,18 @@ export const isAdminRole = (userRole) => {
   ].includes(roleTitle);
 };
 
-export const isCompanyRole = (userRole) => {
-  const roleTitle = userRole?.title?.toLowerCase();
+export const isCompanyRole = (roleObj) => {
+  if (!roleObj) return false;
+  const roleTitle = (
+    typeof roleObj === "string" ? roleObj : roleObj.title
+  )?.toLowerCase();
   return roleTitle === "company";
 };
 
-export const isCandidateRole = (userRole) => {
-  const roleTitle = userRole?.title?.toLowerCase();
+export const isCandidateRole = (roleObj) => {
+  if (!roleObj) return false;
+  const roleTitle = (
+    typeof roleObj === "string" ? roleObj : roleObj.title
+  )?.toLowerCase();
   return roleTitle === "candidate";
 };

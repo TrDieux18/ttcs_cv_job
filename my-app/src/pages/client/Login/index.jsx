@@ -25,16 +25,28 @@ export default function Login() {
     if (isSubmitting) return;
 
     setIsSubmitting(true);
+    setError(""); // Clear previous errors
 
     try {
       const response = await login({ username, password });
-      const role = response.data.role?.title;
-      if (isAdminRole(role)) {
-        await logout();
-        navigate("/admin/auth/login");
-        message.warning("Vui lòng đăng nhập qua trang quản trị!");
+      
+      if (!response.success) {
+        setError(
+          response.errors?.[0] || "Tài khoản hoặc mật khẩu không chính xác."
+        );
         return;
       }
+
+      if (isAdminRole(response.data.role)) {
+        await logout();
+        message.warning("Vui lòng đăng nhập qua trang quản trị!");
+        setTimeout(() => {
+          navigate("/admin/auth/login");
+        }, 1000);
+        return;
+      }
+
+      
       dispatch(setUser(response.data));
       localStorage.setItem("user", JSON.stringify(response.data));
       message.success("🎉 Đăng nhập thành công!");
@@ -44,10 +56,11 @@ export default function Login() {
         navigate(redirectPath);
       }, 1000);
     } catch (err) {
-      console.error("Login error:", err.response || err);
+      console.error("Login error:", err);
       setError(
         err.response?.data?.message ||
-          "Tài khoản hoặc mật khẩu không chính xác."
+          err.message ||
+          "Đã xảy ra lỗi. Vui lòng thử lại."
       );
     } finally {
       setIsSubmitting(false);

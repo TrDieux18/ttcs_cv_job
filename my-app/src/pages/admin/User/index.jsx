@@ -70,7 +70,6 @@ const User = () => {
     }
   };
 
- 
   useEffect(() => {
     fetchUsers(pagination.current, pagination.pageSize, keyword, status);
   }, []);
@@ -80,16 +79,13 @@ const User = () => {
     fetchUsers(1, pagination.pageSize, keyword, value);
   };
 
-
   const handleTableChange = (newPagination) => {
     fetchUsers(newPagination.current, newPagination.pageSize, keyword, status);
   };
 
-
   const handleSearch = () => {
     fetchUsers(1, pagination.pageSize, keyword, status);
   };
-
 
   const handleChangeUserStatus = async (userId, isActive) => {
     try {
@@ -228,7 +224,7 @@ const User = () => {
 
             <Select
               value={status}
-              style={{ width: 150 }}
+              style={{ width: 160 }}
               onChange={handleStatusChange}
             >
               <Option value="all">Tất cả</Option>

@@ -1,5 +1,6 @@
 import { uploadToCloudinary } from "../../middlewares/admin/uploadCloudinary.middleware.js";
 import CV from "../../models/cv.model.js";
+import { buildCVFilter } from "../../helpers/queryFilter.js";
 
 export const getCvById = async (req, res) => {
   try {
@@ -23,13 +24,24 @@ export const getCvById = async (req, res) => {
 export const getCvByUserId = async (req, res) => {
   try {
     const { userId } = req.params;
-    const cvs = await CV.find({ userId })
+    
+
+    const filter = buildCVFilter(req.query);
+    filter.userId = userId;
+
+    const cvs = await CV.find(filter)
       .populate("userId", "fullName email avatar")
       .lean();
+    
     if (!cvs || cvs.length === 0) {
       return res.status(404).json({ success: false, message: "CV not found" });
     }
-    res.status(200).json({ success: true, data: cvs });
+    
+    res.status(200).json({ 
+      success: true, 
+      data: cvs,
+      total: cvs.length 
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, message: "Server Error" });

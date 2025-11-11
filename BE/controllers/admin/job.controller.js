@@ -1,16 +1,16 @@
 import Job from "../../models/job.model.js";
 import Company from "../../models/company.model.js";
+import { buildJobFilter } from "../../helpers/queryFilter.js";
 
 
 export const getAllJobsAdmin = async (req, res) => {
   try {
-    const { page = 1, limit = 10, keyword = "", status = "all" } = req.query;
+    const { page = 1, limit = 10, search = "", status = "all" } = req.query;
 
-    const filter = {};
+    const filter = buildJobFilter(req.query);
 
-   
-    if (keyword && keyword.trim()) {
-      const regex = new RegExp(keyword.trim(), "i");
+    if (search && search.trim()) {
+      const regex = new RegExp(search.trim(), "i");
       filter.$or = [
         { title: regex },
         { description: regex },

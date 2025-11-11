@@ -1,13 +1,13 @@
 import Job from "../../models/job.model.js";
 import Company from "../../models/company.model.js";
+import { buildJobFilter } from "../../helpers/queryFilter.js";
 
 // ✅ GET MY JOBS (Company user - jobs của công ty mình)
 export const getMyJobs = async (req, res) => {
   try {
     const userId = res.locals.user.id;
-    const { page = 1, limit = 10, keyword = "" } = req.query;
+    const { page = 1, limit = 10, search = "" } = req.query;
 
-    // Tìm company của user
     const company = await Company.findOne({ user: userId });
     if (!company) {
       return res.status(404).json({
@@ -16,11 +16,11 @@ export const getMyJobs = async (req, res) => {
       });
     }
 
-    const filter = { company: company._id };
+    const filter = buildJobFilter(req.query);
+    filter.company = company._id;
 
-    // Search keyword
-    if (keyword && keyword.trim()) {
-      const regex = new RegExp(keyword.trim(), "i");
+    if (search && search.trim()) {
+      const regex = new RegExp(search.trim(), "i");
       filter.$or = [
         { title: regex },
         { description: regex },

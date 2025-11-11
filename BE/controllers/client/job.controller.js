@@ -1,10 +1,14 @@
 import Job from "../../models/job.model.js";
 import Company from "../../models/company.model.js";
 import User from "../../models/user.model.js";
+import { buildJobFilter } from "../../helpers/queryFilter.js";
 
 export const getAllJobs = async (req, res) => {
   try {
-    const jobs = await Job.find()
+   
+    const filter = buildJobFilter(req.query);
+
+    const jobs = await Job.find(filter)
       .populate({
         path: "company",
         select: "logo user slug",
@@ -19,6 +23,7 @@ export const getAllJobs = async (req, res) => {
     res.json({
       success: true,
       data: jobs,
+      total: jobs.length,
     });
   } catch (error) {
     console.error("Error fetching jobs:", error);

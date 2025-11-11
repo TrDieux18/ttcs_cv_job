@@ -7,7 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { login } from "@services/common/AuthService";
 import { setUser } from "@store/UserReducer";
 import { LuLock, LuLogIn, LuUser } from "react-icons/lu";
-import { getRedirectPath } from "@helpers/roleHelper";
+import { getRedirectPath, isAdminRole } from "@helpers/roleHelper";
+import { logout } from "@services/common/AuthService";
 
 const LoginAdmin = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -17,19 +18,40 @@ const LoginAdmin = () => {
   const loginAuth = async (values) => {
     try {
       const response = await login(values);
-      if (response.success && response.data) {
-        dispatch(setUser(response.data));
-        localStorage.setItem("user", JSON.stringify(response.data));
-        messageApi.success("Đăng nhập thành công");
-        const redirectPath = getRedirectPath(response.data.role);
-        setTimeout(() => {
-          navigate(redirectPath);
-        }, 1500);
-      } else {
-        messageApi.error(response.message || "Đăng nhập thất bại");
+
+      if (!response.success) {
+        messageApi.error(
+          response.errors?.[0] ||
+            response.message ||
+            "Tài khoản hoặc mật khẩu không chính xác"
+        );
+        return;
       }
+
+      if (!isAdminRole(response.data.role)) {
+        await logout();
+        messageApi.warning("Bạn không có quyền truy cập trang quản trị!");
+        setTimeout(() => {
+          navigate("/login");
+        }, 800);
+        return;
+      }
+
+      dispatch(setUser(response.data));
+      localStorage.setItem("user", JSON.stringify(response.data));
+      messageApi.success("Đăng nhập thành công");
+
+      const redirectPath = getRedirectPath(response.data.role);
+      setTimeout(() => {
+        navigate(redirectPath);
+      }, 1500);
     } catch (error) {
       console.error("Login failed:", error);
+      messageApi.error(
+        error.response?.data?.message ||
+          error.message ||
+          "Đã xảy ra lỗi. Vui lòng thử lại."
+      );
     }
   };
 

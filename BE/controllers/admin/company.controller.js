@@ -1,14 +1,16 @@
 import Company from "../../models/company.model.js";
 import User from "../../models/user.model.js";
 import { uploadToCloudinary } from "../../middlewares/admin/uploadCloudinary.middleware.js";
+import { buildCompanyFilter } from "../../helpers/queryFilter.js";
 
 export const getAllCompaniesAdmin = async (req, res) => {
   try {
-    const { page = 1, limit = 10, keyword = "" } = req.query;
+    const { page = 1, limit = 10, search = "" } = req.query;
 
-    const filter = {};
-    if (keyword && keyword.trim()) {
-      const regex = new RegExp(keyword.trim(), "i");
+    const filter = buildCompanyFilter(req.query);
+
+    if (search && search.trim()) {
+      const regex = new RegExp(search.trim(), "i");
       filter.$or = [{ headline: regex }, { description: regex }];
     }
 

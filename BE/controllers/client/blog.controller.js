@@ -1,12 +1,16 @@
 import Blog from "../../models/blog.model.js";
 import mongoose from "mongoose";
+import { buildBlogFilter } from "../../helpers/queryFilter.js";
 
 export const getBlogs = async (req, res) => {
   let { page = 1, limit = 10, search = "", tag } = req.query;
   page = Math.max(1, parseInt(page));
   limit = Math.min(50, parseInt(limit));
 
-  const query = {};
+  // Sử dụng helper để build filter cơ bản
+  const query = buildBlogFilter(req.query);
+
+  // Thêm logic search riêng cho blog (search nhiều field)
   if (search) {
     query.$or = [
       { title: { $regex: search, $options: "i" } },
@@ -14,6 +18,7 @@ export const getBlogs = async (req, res) => {
     ];
   }
 
+  // Lọc theo tag
   if (tag) query.tags = tag;
 
   const total = await Blog.countDocuments(query);

@@ -2,15 +2,18 @@ import UserDTO from "../../dtos/user.dto.js";
 import { formatName } from "../../helpers/formatName.js";
 import User from "../../models/user.model.js";
 import { uploadToCloudinary } from "../../middlewares/admin/uploadCloudinary.middleware.js";
+import { buildUserFilter } from "../../helpers/queryFilter.js";
 
 export const getAllUsers = async (req, res) => {
   try {
-    const { page = 1, limit = 5, keyword = "", isActive = "all" } = req.query;
+    const { page = 1, limit = 5, search = "", isActive = "all" } = req.query;
 
-    const filter = { deleted: false };
+    const filter = buildUserFilter(req.query);
+    console.log("Initial filter:", filter);
+    filter.deleted = false;
 
-    if (keyword.trim()) {
-      const regex = new RegExp(keyword.trim(), "i");
+    if (search.trim()) {
+      const regex = new RegExp(search.trim(), "i");
       filter.$or = [{ fullName: regex }, { username: regex }, { email: regex }];
     }
 

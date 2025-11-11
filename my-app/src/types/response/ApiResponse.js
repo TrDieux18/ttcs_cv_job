@@ -1,10 +1,11 @@
 
 export class ApiResponse {
-  constructor(success, data = null, errors = [], message = "") {
+  constructor(success, data = null, errors = [], message = "", pagination = null) {
     this.success = success;
     this.data = data;
     this.errors = errors;
     this.message = message;
+    this.pagination = pagination;
   }
 }
 
