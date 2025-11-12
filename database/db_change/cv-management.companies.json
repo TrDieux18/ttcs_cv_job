@@ -1,212 +1,240 @@
-[
-  {
-    "_id": { "$oid": "6901a3c1e2f3a4b5c6d7e801" },
-    "user": { "$oid": "69010689895dd630532a2ff7" },
-    "headline": "Global IT Services & Solutions Provider",
-    "description": "FPT Software là công ty thành viên thuộc Tập đoàn FPT, cung cấp các dịch vụ và giải pháp chuyển đổi số toàn diện cho khách hàng trên toàn thế giới.",
-    "location": "Hanoi, Da Nang, Ho Chi Minh City",
-    "size": "10,000+",
-    "website": "https://fpt-software.com",
-    "companyModel": "Công ty Cổ phần",
-    "industry": "Công nghệ thông tin, Gia công phần mềm, Chuyển đổi số",
-    "country": "Việt Nam",
-    "foundedYear": 1999,
-    "workTime": "Thứ 2 – Thứ 6, 08:00 – 17:30",
-    "about": "FPT Software là một trong những doanh nghiệp công nghệ hàng đầu Việt Nam và khu vực châu Á. Với hơn 30,000 nhân viên trên toàn cầu, FPT Software cung cấp các dịch vụ như Cloud, AI, Big Data, IoT, RPA, và nhiều giải pháp chuyển đổi số cho các tập đoàn Fortune 500. Công ty có hơn 60 văn phòng tại 30 quốc gia, phục vụ hàng trăm khách hàng quốc tế với phương châm 'Digital Transformation Partner'.",
-    "logo": {
-      "url": "https://placehold.co/200x200/F97316/FFFFFF?text=FPT",
-      "public_id": null
-    },
-    "createdAt": { "$date": "2025-10-28T12:00:00.000Z" },
-    "updatedAt": { "$date": "2025-10-28T12:00:00.000Z" }
+[{
+  "_id": {
+    "$oid": "6901a3c1e2f3a4b5c6d7e801"
   },
-  {
-    "_id": { "$oid": "6901a3c1e2f3a4b5c6d7e802" },
-    "user": { "$oid": "6901069c895dd630532a2ffa" },
-    "headline": "Leading Internet Ecosystem in Vietnam",
-    "description": "VNG là kỳ lân công nghệ của Việt Nam với các sản phẩm đa dạng: Zalo, ZaloPay, VNG Games. Chúng tôi kiến tạo công nghệ và phát triển con người.",
-    "location": "Ho Chi Minh City",
-    "size": "5,000-10,000",
-    "website": "https://vng.com.vn",
-    "companyModel": "Công ty Cổ phần",
-    "industry": "Công nghệ Internet, Thanh toán điện tử, Trò chơi trực tuyến",
-    "country": "Việt Nam",
-    "foundedYear": 2004,
-    "workTime": "Thứ 2 – Thứ 6, 09:00 – 18:00",
-    "about": "VNG Corporation là doanh nghiệp công nghệ hàng đầu tại Việt Nam, được xem là kỳ lân đầu tiên của quốc gia. VNG phát triển hệ sinh thái số đa dạng với các sản phẩm nổi bật như Zalo (nền tảng nhắn tin và mạng xã hội), ZaloPay (ví điện tử), và VNGGames (phát hành game quốc tế). VNG cam kết xây dựng môi trường sáng tạo, trẻ trung, và hướng đến việc đưa công nghệ Việt vươn tầm thế giới.",
-    "logo": {
-      "url": "https://placehold.co/200x200/2563EB/FFFFFF?text=VNG",
-      "public_id": null
-    },
-    "createdAt": { "$date": "2025-10-28T12:01:00.000Z" },
-    "updatedAt": { "$date": "2025-10-28T12:01:00.000Z" }
+  "user": {
+    "$oid": "69010689895dd630532a2ff7"
   },
-  {
-    "_id": { "$oid": "6901a3c1e2f3a4b5c6d7e803" },
-    "user": { "$oid": "690106ba895dd630532a2ffd" },
-    "headline": "Digital Transformation & ICT Solutions",
-    "description": "Tổng Công ty Giải pháp Doanh nghiệp Viettel (Viettel Solutions) đồng hành cùng Chính phủ, Doanh nghiệp và Người dân kiến tạo xã hội số.",
-    "location": "Hanoi",
-    "size": "10,000+",
-    "website": "https://solutions.viettel.vn",
-    "companyModel": "Doanh nghiệp Nhà nước",
-    "industry": "Viễn thông, Công nghệ thông tin, Chuyển đổi số",
-    "country": "Việt Nam",
-    "foundedYear": 2010,
-    "workTime": "Thứ 2 – Thứ 6, 08:00 – 17:30",
-    "about": "Viettel Solutions là đơn vị thành viên của Tập đoàn Công nghiệp - Viễn thông Quân đội (Viettel), đóng vai trò dẫn dắt chuyển đổi số trong Chính phủ và doanh nghiệp. Với kinh nghiệm triển khai hàng nghìn dự án lớn trong nước và quốc tế, Viettel Solutions cung cấp giải pháp ICT toàn diện: Smart City, E-Government, Cloud, IoT, Cyber Security, giúp nâng cao hiệu quả quản lý và phát triển xã hội số bền vững.",
-    "logo": {
-      "url": "https://placehold.co/200x200/E11D48/FFFFFF?text=VT",
-      "public_id": null
-    },
-    "createdAt": { "$date": "2025-10-28T12:02:00.000Z" },
-    "updatedAt": { "$date": "2025-10-28T12:02:00.000Z" }
+  "slug": "fpt-software",
+  "headline": "Global IT Services & Solutions Provider",
+  "description": "FPT Software là công ty thành viên thuộc Tập đoàn FPT, cung cấp các dịch vụ và giải pháp chuyển đổi số toàn diện cho khách hàng trên toàn thế giới.",
+  "location": "Hanoi, Da Nang, Ho Chi Minh City",
+  "size": "10,000+",
+  "website": "https://fpt-software.com",
+  "companyModel": "Công ty Cổ phần",
+  "industry": "Công nghệ thông tin",
+  "country": "Việt Nam",
+  "foundedYear": 1999,
+  "workTime": "Thứ 2 – Thứ 6",
+  "about": "FPT Software là một trong những doanh nghiệp công nghệ hàng đầu Việt Nam và khu vực châu Á...",
+  "logo": {
+    "url": "https://placehold.co/200x200/F97316/FFFFFF?text=FPT",
+    "public_id": null
   },
-  {
-    "_id": { "$oid": "6901a3c1e2f3a4b5c6d7e804" },
-    "user": { "$oid": "690106da895dd630532a3000" },
-    "headline": "Technology Solutions & BPO Services",
-    "description": "NashTech Vietnam là công ty hàng đầu về giải pháp công nghệ và BPO. Chúng tôi là một phần của tập đoàn Harvey Nash Group, UK.",
-    "location": "Ho Chi Minh City, Hanoi",
-    "size": "1,000-2,000",
-    "website": "https://nashtechglobal.com/vn",
-    "companyModel": "Công ty TNHH",
-    "industry": "Công nghệ phần mềm, BPO, Tư vấn CNTT",
-    "country": "Việt Nam, Vương quốc Anh",
-    "foundedYear": 2000,
-    "workTime": "Thứ 2 – Thứ 6, 08:30 – 17:30",
-    "about": "NashTech là công ty công nghệ toàn cầu có trụ sở chính tại Vương quốc Anh, với đội ngũ kỹ sư giàu kinh nghiệm tại Việt Nam. NashTech chuyên cung cấp dịch vụ phần mềm, kiểm thử, tự động hóa quy trình và BPO cho khách hàng tại hơn 20 quốc gia. Văn hóa công ty chú trọng vào phát triển con người, hợp tác toàn cầu, và tạo ra giá trị bền vững thông qua công nghệ tiên tiến.",
-    "logo": {
-      "url": "https://placehold.co/200x200/0891B2/FFFFFF?text=NT",
-      "public_id": null
-    },
-    "createdAt": { "$date": "2025-10-28T12:03:00.000Z" },
-    "updatedAt": { "$date": "2025-10-28T12:03:00.000Z" }
+  "createdAt": {
+    "$date": "2025-10-28T12:00:00.000Z"
   },
-  {
-    "_id": { "$oid": "6901a3c1e2f3a4b5c6d7e805" },
-    "user": { "$oid": "690106f1895dd630532a3003" },
-    "headline": "Vietnam's Leading E-Wallet",
-    "description": "Momo là Siêu ứng dụng Ví điện tử hàng đầu Việt Nam, cung cấp các giải pháp thanh toán, tài chính và giải trí cho hàng chục triệu người dùng.",
-    "location": "Ho Chi Minh City, Hanoi",
-    "size": "1,000-2,000",
-    "website": "https://momo.vn",
-    "companyModel": "Công ty Cổ phần",
-    "industry": "Fintech, Thanh toán điện tử, Dịch vụ tài chính",
-    "country": "Việt Nam",
-    "foundedYear": 2010,
-    "workTime": "Thứ 2 – Thứ 6, 09:00 – 18:00",
-    "about": "MoMo là ví điện tử hàng đầu Việt Nam, được hơn 30 triệu người dùng tin cậy. Với hệ sinh thái thanh toán phong phú, MoMo không chỉ giúp người dùng thanh toán hóa đơn, mua sắm, chuyển tiền mà còn kết nối với các dịch vụ tài chính, bảo hiểm và đầu tư. Công ty hướng đến mục tiêu phổ cập tài chính số, đóng góp vào sự phát triển của nền kinh tế không tiền mặt tại Việt Nam.",
-    "logo": {
-      "url": "https://placehold.co/200x200/DB2777/FFFFFF?text=Momo",
-      "public_id": null
-    },
-    "createdAt": { "$date": "2025-10-28T12:04:00.000Z" },
-    "updatedAt": { "$date": "2025-10-28T12:04:00.000Z" }
-  },
-  {
-    "_id": { "$oid": "6901a3c1e2f3a4b5c6d7e806" },
-    "user": { "$oid": "69010701895dd630532a3006" },
-    "headline": "Organize the World’s Information",
-    "description": "Google là công ty công nghệ hàng đầu thế giới, cung cấp các sản phẩm và dịch vụ Internet như Tìm kiếm, YouTube, Gmail, Android và Cloud.",
-    "location": "Mountain View, California, USA",
-    "size": "100,000+",
-    "website": "https://about.google",
-    "companyModel": "Tập đoàn Cổ phần",
-    "industry": "Công nghệ Internet, Quảng cáo số, Điện toán đám mây",
-    "country": "Hoa Kỳ",
-    "foundedYear": 1998,
-    "workTime": "Thứ 2 – Thứ 6, 09:00 – 18:00",
-    "about": "Google LLC là một trong những tập đoàn công nghệ lớn nhất thế giới, thuộc sở hữu của Alphabet Inc. Sứ mệnh của Google là 'Tổ chức thông tin của thế giới và làm cho chúng trở nên hữu ích và dễ tiếp cận'. Các sản phẩm nổi bật gồm Google Search, YouTube, Gmail, Google Maps, Chrome, Android, và Google Cloud Platform. Với hơn 70 văn phòng tại 50 quốc gia, Google dẫn đầu trong lĩnh vực trí tuệ nhân tạo, học máy và dữ liệu lớn.",
-    "logo": {
-      "url": "https://placehold.co/200x200/4285F4/FFFFFF?text=Google",
-      "public_id": null
-    },
-    "createdAt": { "$date": "2025-10-28T12:05:00.000Z" },
-    "updatedAt": { "$date": "2025-10-28T12:05:00.000Z" }
-  },
-  {
-    "_id": { "$oid": "6901a3c1e2f3a4b5c6d7e807" },
-    "user": { "$oid": "6901071a895dd630532a3009" },
-    "headline": "Work Hard. Have Fun. Make History.",
-    "description": "Amazon là công ty thương mại điện tử và công nghệ toàn cầu, tiên phong trong lĩnh vực điện toán đám mây, bán lẻ trực tuyến và AI.",
-    "location": "Seattle, Washington, USA",
-    "size": "1,500,000+",
-    "website": "https://www.amazon.com",
-    "companyModel": "Tập đoàn Cổ phần",
-    "industry": "Thương mại điện tử, Cloud, Trí tuệ nhân tạo, Logistics",
-    "country": "Hoa Kỳ",
-    "foundedYear": 1994,
-    "workTime": "Thứ 2 – Thứ 6, 08:00 – 17:30",
-    "about": "Amazon.com, Inc. được thành lập bởi Jeff Bezos và là một trong những công ty công nghệ có giá trị nhất thế giới. Từ cửa hàng sách trực tuyến, Amazon đã phát triển thành nền tảng thương mại điện tử toàn cầu, đồng thời tiên phong trong điện toán đám mây với Amazon Web Services (AWS). Amazon cũng hoạt động trong các lĩnh vực AI, logistics, streaming (Prime Video) và thiết bị thông minh (Echo, Alexa).",
-    "logo": {
-      "url": "https://placehold.co/200x200/FF9900/FFFFFF?text=Amazon",
-      "public_id": null
-    },
-    "createdAt": { "$date": "2025-10-28T12:06:00.000Z" },
-    "updatedAt": { "$date": "2025-10-28T12:06:00.000Z" }
-  },
-  {
-    "_id": { "$oid": "6901a3c1e2f3a4b5c6d7e808" },
-    "user": { "$oid": "69010730895dd630532a300c" },
-    "headline": "Empowering Every Person and Organization on the Planet",
-    "description": "Microsoft là tập đoàn công nghệ đa quốc gia, nổi tiếng với Windows, Office, Azure và các giải pháp doanh nghiệp.",
-    "location": "Redmond, Washington, USA",
-    "size": "220,000+",
-    "website": "https://www.microsoft.com",
-    "companyModel": "Tập đoàn Cổ phần",
-    "industry": "Phần mềm, Cloud, AI, Thiết bị điện tử",
-    "country": "Hoa Kỳ",
-    "foundedYear": 1975,
-    "workTime": "Thứ 2 – Thứ 6, 09:00 – 18:00",
-    "about": "Microsoft Corporation được thành lập bởi Bill Gates và Paul Allen, là công ty phần mềm lớn nhất thế giới. Các sản phẩm tiêu biểu gồm hệ điều hành Windows, bộ công cụ Office, dịch vụ đám mây Azure và nền tảng phát triển .NET. Microsoft định hướng phát triển bền vững với trọng tâm vào AI, bảo mật và hỗ trợ doanh nghiệp chuyển đổi số. Công ty hiện hoạt động tại hơn 190 quốc gia.",
-    "logo": {
-      "url": "https://placehold.co/200x200/107C10/FFFFFF?text=MSFT",
-      "public_id": null
-    },
-    "createdAt": { "$date": "2025-10-28T12:07:00.000Z" },
-    "updatedAt": { "$date": "2025-10-28T12:07:00.000Z" }
-  },
-  {
-    "_id": { "$oid": "6901a3c1e2f3a4b5c6d7e809" },
-    "user": { "$oid": "6901074e895dd630532a300f" },
-    "headline": "Building a Smarter Planet",
-    "description": "IBM là tập đoàn công nghệ toàn cầu với lịch sử hơn 100 năm, chuyên cung cấp giải pháp AI, Cloud, và phần cứng doanh nghiệp.",
-    "location": "Armonk, New York, USA",
-    "size": "300,000+",
-    "website": "https://www.ibm.com",
-    "companyModel": "Tập đoàn Cổ phần",
-    "industry": "Công nghệ thông tin, AI, Cloud, Phần cứng",
-    "country": "Hoa Kỳ",
-    "foundedYear": 1911,
-    "workTime": "Thứ 2 – Thứ 6, 08:00 – 17:30",
-    "about": "IBM (International Business Machines Corporation) là một trong những công ty công nghệ lâu đời và sáng tạo nhất thế giới. IBM nổi tiếng với các sản phẩm như Watson (AI), IBM Cloud, và máy chủ doanh nghiệp. Với hơn một thế kỷ kinh nghiệm, IBM đóng vai trò tiên phong trong nghiên cứu công nghệ lượng tử, an ninh mạng và dữ liệu doanh nghiệp.",
-    "logo": {
-      "url": "https://placehold.co/200x200/1E3A8A/FFFFFF?text=IBM",
-      "public_id": null
-    },
-    "createdAt": { "$date": "2025-10-28T12:08:00.000Z" },
-    "updatedAt": { "$date": "2025-10-28T12:08:00.000Z" }
-  },
-  {
-    "_id": { "$oid": "6901a3c1e2f3a4b5c6d7e80a" },
-    "user": { "$oid": "69010767895dd630532a3012" },
-    "headline": "Making an Impact that Matters",
-    "description": "Deloitte là công ty tư vấn và kiểm toán hàng đầu thế giới, cung cấp dịch vụ cho các tổ chức trong hơn 150 quốc gia.",
-    "location": "London, United Kingdom",
-    "size": "450,000+",
-    "website": "https://www.deloitte.com",
-    "companyModel": "Tập đoàn Đa quốc gia",
-    "industry": "Tư vấn, Kiểm toán, Pháp lý, Chuyển đổi số",
-    "country": "Vương quốc Anh",
-    "foundedYear": 1845,
-    "workTime": "Thứ 2 – Thứ 6, 08:30 – 17:30",
-    "about": "Deloitte Touche Tohmatsu Limited (Deloitte) là một trong bốn hãng kiểm toán lớn nhất thế giới (Big Four). Công ty cung cấp dịch vụ kiểm toán, tư vấn quản lý, tư vấn tài chính và pháp lý cho doanh nghiệp toàn cầu. Deloitte chú trọng vào chuyển đổi số, ESG, và đổi mới mô hình kinh doanh, giúp các tổ chức thích nghi với thời đại công nghệ và phát triển bền vững.",
-    "logo": {
-      "url": "https://placehold.co/200x200/16A34A/FFFFFF?text=Deloitte",
-      "public_id": null
-    },
-    "createdAt": { "$date": "2025-10-28T12:09:00.000Z" },
-    "updatedAt": { "$date": "2025-10-28T12:09:00.000Z" }
+  "updatedAt": {
+    "$date": "2025-10-28T12:00:00.000Z"
   }
-]
+},
+{
+  "_id": {
+    "$oid": "6901a3c1e2f3a4b5c6d7e802"
+  },
+  "user": {
+    "$oid": "6901069c895dd630532a2ffa"
+  },
+  "slug": "vng-corporation",
+  "headline": "Leading Internet Ecosystem in Vietnam",
+  "description": "VNG là kỳ lân công nghệ của Việt Nam với các sản phẩm đa dạng: Zalo, ZaloPay, VNG Games...",
+  "location": "Ho Chi Minh City",
+  "size": "5,000-10,000",
+  "website": "https://vng.com.vn",
+  "companyModel": "Công ty Cổ phần",
+  "industry": "Công nghệ Internet",
+  "country": "Việt Nam",
+  "foundedYear": 2004,
+  "workTime": "Thứ 2 – Thứ 6",
+  "about": "VNG Corporation là doanh nghiệp công nghệ hàng đầu tại Việt Nam...",
+  "logo": {
+    "url": "https://placehold.co/200x200/2563EB/FFFFFF?text=VNG",
+    "public_id": null
+  },
+  "createdAt": {
+    "$date": "2025-10-28T12:01:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-28T12:01:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6901a3c1e2f3a4b5c6d7e803"
+  },
+  "user": {
+    "$oid": "690106ba895dd630532a2ffd"
+  },
+  "slug": "viettel-solutions",
+  "headline": "Digital Transformation & ICT Solutions",
+  "description": "Tổng Công ty Giải pháp Doanh nghiệp Viettel (Viettel Solutions)...",
+  "location": "Hanoi",
+  "size": "10,000+",
+  "website": "https://solutions.viettel.vn",
+  "companyModel": "Doanh nghiệp Nhà nước",
+  "industry": "Viễn thông",
+  "country": "Việt Nam",
+  "foundedYear": 2010,
+  "workTime": "Thứ 2 – Thứ 6",
+  "about": "Viettel Solutions là đơn vị thành viên của Tập đoàn Viettel...",
+  "logo": {
+    "url": "https://placehold.co/200x200/E11D48/FFFFFF?text=VT",
+    "public_id": null
+  },
+  "createdAt": {
+    "$date": "2025-10-28T12:02:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-28T12:02:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6901a3c1e2f3a4b5c6d7e804"
+  },
+  "user": {
+    "$oid": "690106da895dd630532a3000"
+  },
+  "slug": "nashtech-vietnam",
+  "headline": "Technology Solutions & BPO Services",
+  "description": "NashTech Vietnam là công ty hàng đầu về giải pháp công nghệ và BPO...",
+  "location": "Ho Chi Minh City, Hanoi",
+  "size": "1,000-2,000",
+  "website": "https://nashtechglobal.com/vn",
+  "companyModel": "Công ty TNHH",
+  "industry": "Công nghệ phần mềm",
+  "country": "Việt Nam, Vương quốc Anh",
+  "foundedYear": 2000,
+  "workTime": "Thứ 2 – Thứ 6",
+  "about": "NashTech là công ty công nghệ toàn cầu có trụ sở chính tại Vương quốc Anh...",
+  "logo": {
+    "url": "https://placehold.co/200x200/0891B2/FFFFFF?text=NT",
+    "public_id": null
+  },
+  "createdAt": {
+    "$date": "2025-10-28T12:03:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-28T12:03:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6901a3c1e2f3a4b5c6d7e805"
+  },
+  "user": {
+    "$oid": "690106f1895dd630532a3003"
+  },
+  "slug": "momo",
+  "headline": "Vietnam's Leading E-Wallet",
+  "description": "Momo là Siêu ứng dụng Ví điện tử hàng đầu Việt Nam...",
+  "location": "Ho Chi Minh City, Hanoi",
+  "size": "1,000-2,000",
+  "website": "https://momo.vn",
+  "companyModel": "Công ty Cổ phần",
+  "industry": "Thanh toán điện tử",
+  "country": "Việt Nam",
+  "foundedYear": 2010,
+  "workTime": "Thứ 2 – Thứ 6",
+  "about": "MoMo là ví điện tử hàng đầu Việt Nam...",
+  "logo": {
+    "url": "https://placehold.co/200x200/DB2777/FFFFFF?text=Momo",
+    "public_id": null
+  },
+  "createdAt": {
+    "$date": "2025-10-28T12:04:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-28T12:04:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6901a3c1e2f3a4b5c6d7e806"
+  },
+  "user": {
+    "$oid": "69010701895dd630532a3006"
+  },
+  "slug": "google",
+  "headline": "Organize the World’s Information",
+  "description": "Google là công ty công nghệ hàng đầu thế giới...",
+  "location": "Mountain View, California, USA",
+  "size": "100,000+",
+  "website": "https://about.google",
+  "companyModel": "Tập đoàn Cổ phần",
+  "industry": "Điện toán đám mây",
+  "country": "Hoa Kỳ",
+  "foundedYear": 1998,
+  "workTime": "Thứ 2 – Thứ 6",
+  "about": "Google LLC là một trong những tập đoàn công nghệ lớn nhất thế giới...",
+  "logo": {
+    "url": "https://placehold.co/200x200/4285F4/FFFFFF?text=Google",
+    "public_id": null
+  },
+  "createdAt": {
+    "$date": "2025-10-28T12:05:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-28T12:05:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6901a3c1e2f3a4b5c6d7e807"
+  },
+  "user": {
+    "$oid": "6901071a895dd630532a3009"
+  },
+  "slug": "amazon",
+  "headline": "Work Hard. Have Fun. Make History.",
+  "description": "Amazon là công ty thương mại điện tử và công nghệ toàn cầu...",
+  "location": "Seattle, Washington, USA",
+  "size": "1,500,000+",
+  "website": "https://www.amazon.com",
+  "companyModel": "Tập đoàn Cổ phần",
+  "industry": "Thương mại điện tử",
+  "country": "Hoa Kỳ",
+  "foundedYear": 1994,
+  "workTime": "Thứ 2 – Thứ 6",
+  "about": "Amazon.com, Inc. được thành lập bởi Jeff Bezos...",
+  "logo": {
+    "url": "https://placehold.co/200x200/FF9900/FFFFFF?text=Amazon",
+    "public_id": null
+  },
+  "createdAt": {
+    "$date": "2025-10-28T12:06:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-28T12:06:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6901a3c1e2f3a4b5c6d7e808"
+  },
+  "user": {
+    "$oid": "69010730895dd630532a300c"
+  },
+  "slug": "microsoft",
+  "headline": "Empowering Every Person and Organization on the Planet",
+  "description": "Microsoft là tập đoàn công nghệ đa quốc gia...",
+  "location": "Redmond, Washington, USA",
+  "size": "220,000+",
+  "website": "https://www.microsoft.com",
+  "companyModel": "Tập đoàn Cổ phần",
+  "industry": "Phần mềm, Cloud, AI",
+  "country": "Hoa Kỳ",
+  "foundedYear": 1975,
+  "workTime": "Thứ 2 – Thứ 6",
+  "about": "Microsoft Corporation được thành lập bởi Bill Gates và Paul Allen...",
+  "logo": {
+    "url": "https://placehold.co/200x200/107C10/FFFFFF?text=MSFT",
+    "public_id": null
+  },
+  "createdAt": {
+    "$date": "2025-10-28T12:07:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-28T12:07:00.000Z"
+  }
+}]

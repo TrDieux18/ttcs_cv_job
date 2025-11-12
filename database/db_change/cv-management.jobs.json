@@ -9,7 +9,7 @@
   },
   "location": "Hanoi",
   "salary": "10 - 20 triệu",
-  "jobType": "Full-time",
+  "jobType": "Part-time",
   "category": "Backend Development",
   "isFeatured": true,
   "requirements": "<ul><li>Tốt nghiệp ĐH chuyên ngành CNTT hoặc tương đương.</li><li>Nắm vững Java Core, OOP.</li><li>Có kiến thức về Spring Boot, REST API là lợi thế.</li><li>Tiếng Anh đọc hiểu tài liệu.</li></ul>",
