@@ -2,14 +2,14 @@ import axios from "axios";
 import { ApiResponse } from "@types/response/ApiResponse";
 import { ADMIN_API } from "@types/api";
 
-// ✅ axiosClient dùng chung
+
 const axiosClient = axios.create({
   baseURL: ADMIN_API,
   withCredentials: true,
   headers: { "Content-Type": "application/json" },
 });
 
-// ✅ GET ALL USERS (có query params)
+
 export const getAllUsers = async (query = {}) => {
   try {
     const response = await axiosClient.get("/users", { params: query });
@@ -20,7 +20,7 @@ export const getAllUsers = async (query = {}) => {
   }
 };
 
-// ✅ GET USER BY ID
+
 export const getUserById = async (userId) => {
   try {
     const response = await axiosClient.get(`/users/detail/${userId}`);
@@ -31,7 +31,7 @@ export const getUserById = async (userId) => {
   }
 };
 
-// ✅ CREATE USER (FormData)
+
 export const createUser = async (userData) => {
   console.log("User Data Service");
   for (const pair of userData.entries()) {
@@ -57,7 +57,7 @@ export const createUser = async (userData) => {
   }
 };
 
-// ✅ CHANGE USER STATUS
+
 export const changeUserStatus = async (userId, status) => {
   const newStatus = !status;
   try {
@@ -74,7 +74,7 @@ export const changeUserStatus = async (userId, status) => {
   }
 };
 
-// ✅ UPDATE USER (FormData)
+
 export const updateUser = async (userId, userData) => {
   try {
     const response = await axios.patch(
@@ -99,7 +99,7 @@ export const updateUser = async (userId, userData) => {
   }
 };
 
-// ✅ DELETE USER
+
 export const deleteUser = async (userId) => {
   try {
     const response = await axiosClient.delete(`/users/delete/${userId}`);
