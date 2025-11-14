@@ -1,0 +1,198 @@
+[{
+  "_id": {
+    "$oid": "6901a4e5d6e7f8a9b0c1d201"
+  },
+  "title": "Java Developer (Fresher/Junior)",
+  "description": "Tham gia các dự án phần mềm lớn cho thị trường Nhật Bản, Mỹ và Châu Âu. Được đào tạo chuyên sâu về Java Spring, Microservices.",
+  "company": {
+    "$oid": "6901a3c1e2f3a4b5c6d7e801"
+  },
+  "location": "Hanoi",
+  "salary": "10 - 20 triệu",
+  "jobType": "Full-time",
+  "category": "Backend Development",
+  "isFeatured": true,
+  "requirements": "<ul><li>Tốt nghiệp ĐH chuyên ngành CNTT hoặc tương đương.</li><li>Nắm vững Java Core, OOP.</li><li>Có kiến thức về Spring Boot, REST API là lợi thế.</li><li>Tiếng Anh đọc hiểu tài liệu.</li></ul>",
+  "benefits": "<ul><li>Lương tháng 13, thưởng hiệu suất.</li><li>Bảo hiểm FPT Care cho nhân viên và gia đình.</li><li>Cơ hội onsite tại nước ngoài.</li></ul>",
+  "level": "Fresher / Junior",
+  "genderRequirement": "Không yêu cầu",
+  "hiringQuantity": 20,
+  "degreeRequirement": "Đại học",
+  "experienceRequirement": "Không yêu cầu kinh nghiệm",
+  "applicationDeadline": {
+    "$date": "2025-11-30T17:00:00.000Z"
+  },
+  "specificAddress": "Tòa nhà FPT, 17 Duy Tân, Cầu Giấy, Hà Nội",
+  "keywords": [
+    "Java",
+    "Spring Boot",
+    "Fresher",
+    "Hanoi",
+    "Backend"
+  ],
+  "createdAt": {
+    "$date": "2025-10-28T13:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-28T13:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6901a4e5d6e7f8a9b0c1d202"
+  },
+  "title": "Game Designer (Zalo Games)",
+  "description": "Lên ý tưởng, thiết kế kịch bản, level và các tính năng cho các dự án game mobile mới của VNG. Cân bằng game economy.",
+  "company": {
+    "$oid": "6901a3c1e2f3a4b5c6d7e802"
+  },
+  "location": "Ho Chi Minh City",
+  "salary": "Thỏa thuận",
+  "jobType": "Full-time",
+  "category": "Game Development",
+  "isFeatured": true,
+  "requirements": "<ul><li>Đam mê chơi game và hiểu biết sâu rộng về thị trường game mobile.</li><li>Có kinh nghiệm thiết kế game (ít nhất 1 năm).</li><li>Khả năng tư duy logic, sáng tạo và phân tích.</li><li>Sử dụng thành thạo các công cụ thiết kế, wireframing.</li></ul>",
+  "benefits": "<ul><li>Môi trường làm việc 'Start-up' trong một tập đoàn lớn.</li><li>Ăn trưa miễn phí, phòng gym, khu giải trí.</li><li>Cổ phiếu ưu đãi (ESOP).</li></ul>",
+  "level": "Middle",
+  "genderRequirement": "Không yêu cầu",
+  "hiringQuantity": 3,
+  "degreeRequirement": "Không yêu cầu",
+  "experienceRequirement": "1+ năm kinh nghiệm",
+  "applicationDeadline": {
+    "$date": "2025-11-25T17:00:00.000Z"
+  },
+  "specificAddress": "Khu chế xuất Tân Thuận, Quận 7, TP. Hồ Chí Minh",
+  "keywords": [
+    "Game Design",
+    "Mobile Games",
+    "Zalo",
+    "VNG",
+    "HCM"
+  ],
+  "createdAt": {
+    "$date": "2025-10-27T10:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-27T10:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6901a4e5d6e7f8a9b0c1d203"
+  },
+  "title": "AI Engineer (NLP & Computer Vision)",
+  "description": "Nghiên cứu và phát triển các mô hình AI/ML cho các bài toán xử lý ngôn ngữ tự nhiên (NLP) và thị giác máy tính (CV) ứng dụng trong các sản phẩm của Viettel.",
+  "company": {
+    "$oid": "6901a3c1e2f3a4b5c6d7e803"
+  },
+  "location": "Hanoi",
+  "salary": "2000 - 3500 USD",
+  "jobType": "Full-time",
+  "category": "Artificial Intelligence",
+  "isFeatured": false,
+  "requirements": "<ul><li>Thạc sĩ hoặc Cử nhân CNTT, Toán-Tin, Khoa học dữ liệu.</li><li>Kinh nghiệm làm việc với TensorFlow hoặc PyTorch.</li><li>Có kiến thức nền tảng vững chắc về Machine Learning, Deep Learning.</li><li>Kinh nghiệm với NLP hoặc Computer Vision là bắt buộc.</li></ul>",
+  "benefits": "<ul><li>Làm việc tại Trung tâm Không gian mạng Viettel.</li><li>Cơ hội tham gia các dự án tầm cỡ quốc gia.</li><li>Phúc lợi, phụ cấp theo chế độ tập đoàn.</li></ul>",
+  "level": "Middle / Senior",
+  "genderRequirement": "Không yêu cầu",
+  "hiringQuantity": 5,
+  "degreeRequirement": "Đại học trở lên",
+  "experienceRequirement": "2+ năm kinh nghiệm",
+  "applicationDeadline": {
+    "$date": "2025-12-01T17:00:00.000Z"
+  },
+  "specificAddress": "Tòa nhà Viettel, Lô D26, KĐT mới Cầu Giấy, Hà Nội",
+  "keywords": [
+    "AI",
+    "NLP",
+    "Computer Vision",
+    "ML",
+    "Python",
+    "Viettel",
+    "Hanoi"
+  ],
+  "createdAt": {
+    "$date": "2025-10-26T14:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-26T14:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6901a4e5d6e7f8a9b0c1d204"
+  },
+  "title": "Senior QA Automation Engineer",
+  "description": "Thiết kế, phát triển và duy trì test framework (Selenium, Cypress) cho các dự án web. Thực hiện CI/CD và đảm bảo chất lượng sản phẩm.",
+  "company": {
+    "$oid": "6901a3c1e2f3a4b5c6d7e804"
+  },
+  "location": "Ho Chi Minh City",
+  "salary": "1800 - 2500 USD",
+  "jobType": "Full-time",
+  "category": "Quality Assurance",
+  "isFeatured": false,
+  "requirements": "<ul><li>3+ năm kinh nghiệm test tự động.</li><li>Thành thạo Java/JavaScript và Selenium/Cypress.</li><li>Kinh nghiệm về API testing (Postman, RestAssured).</li><li>Có chứng chỉ ISTQB là lợi thế.</li></ul>",
+  "benefits": "<ul><li>Gói thu nhập 14-15 tháng lương.</li><li>Bảo hiểm sức khỏe cá nhân và gia đình.</li><li>Môi trường làm việc chuẩn quốc tế.</li><li>Đào tạo chuyên môn và kỹ năng mềm.</li></ul>",
+  "level": "Senior",
+  "genderRequirement": "Không yêu cầu",
+  "hiringQuantity": 3,
+  "degreeRequirement": "Đại học",
+  "experienceRequirement": "3+ năm kinh nghiệm",
+  "applicationDeadline": {
+    "$date": "2025-11-20T17:00:00.000Z"
+  },
+  "specificAddress": "Tòa nhà Etown 3, 364 Cộng Hòa, Tân Bình, TP. Hồ Chí Minh",
+  "keywords": [
+    "QA",
+    "Automation",
+    "Selenium",
+    "Cypress",
+    "Tester",
+    "HCM"
+  ],
+  "createdAt": {
+    "$date": "2025-10-25T09:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-25T09:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6901a4e5d6e7f8a9b0c1d205"
+  },
+  "title": "Product Manager (Fintech)",
+  "description": "Chịu trách nhiệm phát triển các sản phẩm tài chính trên siêu ứng dụng Momo. Nghiên cứu thị trường, định nghĩa roadmap sản phẩm và làm việc với team Dev/Design.",
+  "company": {
+    "$oid": "6901a3c1e2f3a4b5c6d7e805"
+  },
+  "location": "Ho Chi Minh City",
+  "salary": "Thỏa thuận",
+  "jobType": "Full-time",
+  "category": "Product Management",
+  "isFeatured": true,
+  "requirements": "<ul><li>Kinh nghiệm làm Product Owner/Manager trong ngành Fintech/Banking.</li><li>Tư duy data-driven, am hiểu trải nghiệm người dùng (UX).</li><li>Kỹ năng giao tiếp và quản lý stakeholder xuất sắc.</li><li>Hiểu biết về Agile/Scrum.</li></ul>",
+  "benefits": "<ul><li>Mức lương và đãi ngộ hàng đầu thị trường.</li><li>Cổ phiếu ưu đãi (ESOP).</li><li>Môi trường làm việc trẻ, tốc độ cao.</li><li>Phát triển các sản phẩm triệu người dùng.</li></ul>",
+  "level": "Manager",
+  "genderRequirement": "Không yêu cầu",
+  "hiringQuantity": 1,
+  "degreeRequirement": "Đại học",
+  "experienceRequirement": "4+ năm kinh nghiệm",
+  "applicationDeadline": {
+    "$date": "2025-11-28T17:00:00.000Z"
+  },
+  "specificAddress": "Tòa nhà Phú Mỹ Hưng, 8 Hoàng Văn Thái, Quận 7, TP. Hồ Chí Minh",
+  "keywords": [
+    "Product Manager",
+    "Fintech",
+    "Momo",
+    "Agile",
+    "HCM"
+  ],
+  "createdAt": {
+    "$date": "2025-10-28T15:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-28T15:00:00.000Z"
+  }
+}]

@@ -1,0 +1,131 @@
+[{
+  "_id": {
+    "$oid": "68ea93aa8d7e018eae6b4e49"
+  },
+  "title": "Administrator",
+  "slug": "administrator",
+  "permissions": [
+    "application:view",
+    "application:update",
+    "application:create",
+    "application:delete",
+    "blog:view",
+    "blog:update",
+    "blog:create",
+    "blog:delete",
+    "company:view",
+    "company:update",
+    "company:create",
+    "company:delete",
+    "cv:view",
+    "cv:update",
+    "cv:create",
+    "cv:delete",
+    "job:view",
+    "job:update",
+    "job:create",
+    "job:delete",
+    "role:view",
+    "role:update",
+    "role:create",
+    "role:delete",
+    "role:permission:view",
+    "role:permission:update",
+    "user:view",
+    "user:update",
+    "user:create",
+    "user:delete"
+  ],
+  "deleted": false,
+  "createdAt": {
+    "$date": "2025-10-04T15:40:13.516Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-24T12:37:50.712Z"
+  },
+  "description": "This is the administrator permission"
+},
+{
+  "_id": {
+    "$oid": "68ea93aa8d7e018eae6b4e4a"
+  },
+  "title": "Content Manager",
+  "description": "This is the content management permission",
+  "slug": "content-manager",
+  "permissions": [
+    "blog:view",
+    "blog:update",
+    "blog:create",
+    "blog:delete",
+    "company:view",
+    "cv:view",
+    "cv:update",
+    "job:view",
+    "user:view"
+  ],
+  "deleted": false,
+  "createdAt": {
+    "$date": "2025-10-04T15:44:40.815Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-24T12:37:50.715Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68ea93aa8d7e018eae6b4e4b"
+  },
+  "title": "Company",
+  "description": "This is the company management permission",
+  "slug": "company",
+  "permissions": [
+    "application:view",
+    "application:update",
+    "application:create",
+    "application:delete",
+    "blog:view",
+    "company:view",
+    "company:update",
+    "company:create",
+    "company:delete",
+    "cv:view",
+    "job:view",
+    "job:update",
+    "job:create",
+    "job:delete"
+  ],
+  "deleted": false,
+  "createdAt": {
+    "$date": "2025-10-04T15:44:40.815Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-24T12:37:50.717Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68ea93aa8d7e018eae6b4e4c"
+  },
+  "title": "Candidate",
+  "description": "This is the candidate management permission",
+  "slug": "candidate",
+  "permissions": [
+    "application:create",
+    "application:view",
+    "application:update",
+    "blog:view",
+    "company:view",
+    "cv:view",
+    "cv:update",
+    "cv:create",
+    "cv:delete",
+    "job:view"
+  ],
+  "deleted": false,
+  "createdAt": {
+    "$date": "2025-10-04T15:44:40.815Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-24T12:37:50.719Z"
+  }
+}]
