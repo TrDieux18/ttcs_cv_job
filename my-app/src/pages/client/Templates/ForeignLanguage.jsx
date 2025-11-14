@@ -1,30 +1,46 @@
 import { useState } from "react";
 import { CiCirclePlus } from "react-icons/ci";
+
 const ForeignLanguage = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [text, setText] = useState("");
-  const [user, setUser] = useState({
-    text: "",
-  });
-  // Mở dialog
-  const handleOpenDialog = () => {
-    setText(user.text); // hiển thị nội dung cũ (nếu có)
-    setIsOpen(true);
+  const [selectedLanguage, setSelectedLanguage] = useState("");
+  const [selectedLevel, setSelectedLevel] = useState("Basic");
+  const [languages, setLanguages] = useState([]);
+  const [error, setError] = useState("");
+
+  // Thêm ngôn ngữ vào danh sách
+  const handleAdd = () => {
+    if (!selectedLanguage) {
+      setError("Vui lòng chọn ngôn ngữ!");
+      return;
+    }
+
+    // Kiểm tra trùng
+    const existed = languages.some(
+      (item) =>
+        item.language === selectedLanguage && item.level === selectedLevel
+    );
+    if (existed) {
+      alert("Ngôn ngữ này đã tồn tại trong danh sách");
+      return;
+    }
+
+    const newLang = { language: selectedLanguage, level: selectedLevel };
+    setLanguages([...languages, newLang]);
+
+    setSelectedLanguage("");
+    setSelectedLevel("Basic");
   };
-  // Cập nhật giá trị khi người dùng nhập
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setTempData((prev) => ({ ...prev, [name]: value }));
-  };
-  // Lưu giá trị mới
-  const handleSave = () => {
-    setUser({ text });
-    setIsOpen(false);
-    console.log("Dữ liệu đã lưu:", text);
+
+  // Xóa chip
+  const handleRemove = (index) => {
+    const updated = [...languages];
+    updated.splice(index, 1);
+    setLanguages(updated);
   };
 
   return (
-    <div className="w-200 h-auto bg-white rounded-lg opacity-100 shadow-lg relative m-3">
+    <div className="w-200 h-auto bg-white rounded-lg shadow-sm relative m-3">
       <div className="flex p-3">
         <h1 className="text-3xl font-bold text-center py-5">Ngoại ngữ</h1>
         <button
@@ -35,41 +51,92 @@ const ForeignLanguage = () => {
         </button>
       </div>
       <hr />
-      {/* hiển thị nội dung */}
-      <p className="text-truncated ims-2 text-rich-grey p-3">
-        <span dir="auto" className="align-middle whitespace-pre-line">
-          {user.text && user.text.trim() !== "" ? (
-            user.text
-          ) : (
-            <p className="text-gray-500 italic">
-              Liệt kê các ngôn ngữ bạn biết
-            </p>
-          )}
-        </span>
-      </p>
+
+      {/* Hiển thị danh sách ngôn ngữ */}
+      <div className="p-3 flex flex-wrap gap-3">
+        {languages.length > 0 ? (
+          languages.map((item, index) => (
+            <div
+              key={index}
+              className="flex items-center gap-1 border border-gray-300 rounded-full px-3 py-1 text-sm"
+            >
+              <span className="font-semibold">{item.language}</span>
+              <span className="text-gray-600">({item.level})</span>
+            </div>
+          ))
+        ) : (
+          <p className="text-gray-500 italic">Liệt kê các ngôn ngữ bạn biết</p>
+        )}
+      </div>
+
       {/* Dialog */}
       {isOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6  shadow-lg text-center w-250 h-auto">
+          <div className="bg-white rounded-lg p-6 shadow-lg text-center w-250">
             <h1 className="text-4xl font-semibold mb-4">Ngoại ngữ</h1>
             <hr />
-            <div className="p-6">
-              <label
-                htmlFor="Language"
-                className="block text-lg font-semibold text-gray-700 mb-2"
-              ></label>
 
-              <textarea
-                id="Language"
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                placeholder="Ví dụ: Tiếng anh (Thành thạo)"
-                rows={5}
-                className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-teal-500 focus:outline-none resize-none"
-              />
+            <div className="mt-4">
+              <p className="font-bold">Danh sách ngôn ngữ: </p>
+              <div className="flex gap-4">
+                {/* Select Language */}
+                <select
+                  value={selectedLanguage}
+                  onChange={(e) => setSelectedLanguage(e.target.value)}
+                  className="border border-gray-300 rounded-md h-13 w-110 px-2 shadow-lg"
+                >
+                  <option value="">Tìm ngôn ngữ </option>
+                  <option value="Tiếng Việt">Tiếng Việt</option>
+                  <option value="Tiếng Anh">Tiếng Anh</option>
+                  <option value="Tiếng Nhật">Tiếng Nhật</option>
+                  <option value="Tiếng Trung">Tiếng Trung</option>
+                  <option value="Tiếng Pháp">Tiếng Pháp</option>
+                  <option value="Tiếng Ý">Tiếng Ý</option>
+                </select>
 
-              <p className="mt-2 text-gray-500">Ký tự: {text.length}</p>
+                {/* Select Level */}
+                <select
+                  value={selectedLevel}
+                  onChange={(e) => setSelectedLevel(e.target.value)}
+                  className="border border-gray-300 rounded-md h-13 w-110 px-2 shadow-lg"
+                >
+                  <option value="">Chọn trình độ</option>
+                  <option value="Sơ cấp">Sơ cấp</option>
+                  <option value="Trung cấp">Trung cấp</option>
+                  <option value="Nâng cao">Nâng cao</option>
+                  <option value="Thành thạo">Thành thạo</option>
+                </select>
+
+                {/* Add button */}
+                <button
+                  onClick={handleAdd}
+                  className="border border-red-600 text-red-600 rounded-md w-13"
+                >
+                  +
+                </button>
+              </div>
+
+              {/* Chip hiển thị trong popup */}
+              <div className="flex flex-wrap gap-3 mt-4">
+                {languages.map((item, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center gap-1 border border-gray-300 rounded-full px-3 py-1 text-sm"
+                  >
+                    <span className="font-semibold">{item.language}</span>
+                    <span className="text-gray-600">({item.level})</span>
+
+                    <button
+                      onClick={() => handleRemove(index)}
+                      className="text-gray-600 hover:text-red-600"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                ))}
+              </div>
             </div>
+            {error && <p className="text-red-500 mt-2">{error}</p>}
             <div className="flex justify-center mt-4 space-x-4">
               <button
                 onClick={() => setIsOpen(false)}
@@ -78,8 +145,8 @@ const ForeignLanguage = () => {
                 Hủy bỏ
               </button>
               <button
-                onClick={handleSave}
-                className="w-25 px-4 py-2 bg-teal-500 text-white rounded-md hover:bg-teal-600 transition"
+                onClick={() => setIsOpen(false)}
+                className="px-4 py-2 bg-teal-500 text-white rounded-md hover:bg-teal-600 transition"
               >
                 Lưu
               </button>
@@ -90,4 +157,5 @@ const ForeignLanguage = () => {
     </div>
   );
 };
+
 export default ForeignLanguage;

@@ -1,29 +1,25 @@
 import { useState } from "react";
-const About = () => {
-  const [text, setText] = useState("");
-  const [user, setUser] = useState({
-    text: "ssssdadadad dkjadjalksdj dskjaldkjasld akdjalkdjasl dlakjdalsdj sdkajdlaksdj asdlkajdlasjd asdjadlkajks asdlkajdlakj dlajdlakdj dkjadlkaj asdkjasdlajs aslkdjadlkj asdladas asdaldaj asdlkajdlj aldjadlkj aldkajdl adkjadlkj asdaldj ",
-  });
+
+const About = ({ data = {} }) => {
   return (
     <div>
-      {user.text && user.text.trim() !== "" ? (
-        <div className="">
+      {data.text && data.text.trim() !== "" && (
+        <div>
           <div className="flex">
-            <div className="p-5 w-50 whitespace-nowrap font-bold">
+            <div className="flex-none p-5 w-36 whitespace-nowrap font-bold">
               Giới thiệu
             </div>
-            <p className="text-truncated ims-2 text-gray-600 text-sm p-5">
-              <span dir="auto" className=" align-middle whitespace-pre-line">
-                {user.text}
-              </span>
+            <p className="text-[#6B7280] text-sm p-5">
+              <span className="whitespace-pre-line">{data.text}</span>
             </p>
           </div>
-          <div className="pr-5 pl-5">
-            <hr />
+          <div className="px-5">
+            <hr className="border-t-2 border-[#D1D5DB]" />
           </div>
         </div>
-      ) : null}
+      )}
     </div>
   );
 };
+
 export default About;

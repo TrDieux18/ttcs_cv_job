@@ -24,7 +24,7 @@ const About = () => {
   };
 
   return (
-    <div className="w-200 h-auto bg-white rounded-lg opacity-100 shadow-lg relative m-3">
+    <div className="w-200 h-auto bg-white rounded-lg opacity-100 shadow-sm relative m-3">
       <div className="flex p-3">
         <h1 className="text-3xl font-bold text-center py-5">
           Giới thiệu bản thân
@@ -38,7 +38,7 @@ const About = () => {
       </div>
       <hr />
       {/* hiển thị nội dung */}
-      <p className="text-truncated ims-2 text-rich-grey p-3">
+      <div className="text-truncated ims-2 text-rich-grey p-3">
         <span
           dir="auto"
           className=" align-middle whitespace-pre-line"
@@ -51,7 +51,7 @@ const About = () => {
             </p>
           )}
         </span>
-      </p>
+      </div>
       {/* Dialog */}
       {isOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">

@@ -63,7 +63,7 @@ const Certificates = () => {
     !user.link;
 
   return (
-    <div className="w-200 h-auto bg-white rounded-lg shadow-lg relative m-3">
+    <div className="w-200 h-auto bg-white rounded-lg shadow-sm relative m-3">
       <div className="flex p-3">
         <h1 className="text-3xl font-bold py-5 flex-1">Chứng chỉ</h1>
         <button className="absolute right-2 top-2" onClick={handleOpenDialog}>

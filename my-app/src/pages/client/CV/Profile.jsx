@@ -1,71 +1,89 @@
 import { MdOutlineEmail } from "react-icons/md";
 import { HiOutlinePhone } from "react-icons/hi2";
-import { LiaBirthdayCakeSolid, LiaEdit } from "react-icons/lia";
-import { FiUser } from "react-icons/fi";
-import { CiLocationOn, CiCamera } from "react-icons/ci";
+import { LiaBirthdayCakeSolid } from "react-icons/lia";
+// import { FiUser } from "react-icons/fi";
+import { CiLocationOn } from "react-icons/ci";
 import { TbWorld } from "react-icons/tb";
-import { TfiTrash } from "react-icons/tfi";
+import avatar from "../../../assets/image/avatar.jpg";
+import { FiUser } from "react-icons/fi";
 
-const Profile = () =>{
-    return (
-        <div className="h-auto bg-[#383d44] flex text-white p-6 w-full">
-        <img
-          src="https://khoinguonsangtao.vn/wp-content/uploads/2022/10/hinh-anh-trai-xau-nhat.jpg"
-          alt="avatar"
-          className="w-40 h-40 p-3"
-        />
-        <div className="w-full">
-          <h1 className="text-3xl font-bold py-2">Trần Bình</h1>
-          <div className="grid grid-cols-2 gap-4 p-6 text-xs">
-            <div className="flexd flex-col">
-              <div className="flex items-center">
-                <MdOutlineEmail className="size-4" />
-                <p className="flexd flex-col align-items-center pl-1">Email</p>
-              </div>
-            </div>
-            <div className="flexd flex-col">
-              <div className="flex items-center">
-                <HiOutlinePhone className="size-4" />
-                <p className="flexd flex-col align-items-center  pl-1">
-                  Số điện thoại
-                </p>
-              </div>
-            </div>
-            <div className="flexd flex-col">
-              <div className="flex items-center">
-                <LiaBirthdayCakeSolid className="size-4" />
-                <p className="flexd flex-col align-items-center  pl-1">
-                  Ngày sinh
-                </p>
-              </div>
-            </div>
-            <div className="flexd flex-col">
-              <div className="flex items-center">
-                <FiUser className="size-4" />
-                <p className="flexd flex-col align-items-center  pl-1">
-                  Giới tính
-                </p>
-              </div>
-            </div>
-            <div className="flexd flex-col">
-              <div className="flex items-center">
-                <CiLocationOn className="size-4" />
-                <p className="flexd flex-col align-items-center  pl-1">
-                  Địa chỉ
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <div className="flex items-center">
-                <TbWorld className="size-4" />
-                <p className="flex align-items-center  pl-1">
-                  Liên kết cá nhân
-                </p>
-              </div>
-            </div>
+const Profile = ({data = {} }) => {
+  
+  return (
+    <div className="h-auto bg-[#383d44] flex text-white p-6 w-full gap-6">
+      {/* Avatar */}
+      <img src={avatar} alt="avatar" className="w-40 h-40 rounded-full object-cover" />
+
+      {/* Thông tin cá nhân */}
+      <div className="flex-1">
+        <h1 className="text-3xl font-bold py-2">{data.name}</h1>
+
+        <div className="grid grid-cols-2 gap-4 text-xs mt-4">
+          {/* Email */}
+          <div className="flex items-center gap-2">
+            <MdOutlineEmail className="w-5 h-5" />
+            {data.email && data.email.trim() !== "" ? (
+              data.email
+            ) : (
+              <p className="text-gray-500 italic">Email</p>
+            )}
+          </div>
+
+          {/* Số điện thoại */}
+          <div className="flex items-center gap-2">
+            <HiOutlinePhone className="w-5 h-5" />
+            {data.phone && data.phone.trim() !== "" ? (
+              data.phone
+            ) : (
+              <p className="text-gray-500 italic">Số điện thoại</p>
+            )}
+          </div>
+
+          {/* Ngày sinh */}
+          <div className="flex items-center gap-2">
+            <LiaBirthdayCakeSolid className="w-5 h-5" />
+            <span dir="auto" className="align-middle whitespace-pre-line pl-2">
+              {data.birthday && data.birthday.trim() !== "" ? (
+                data.birthday
+              ) : (
+                <p className="text-gray-500 italic">Ngày sinh</p>
+              )}
+            </span>
+          </div>
+
+          {/* Giới tính */}
+          <div className="flex items-center gap-2">
+            <FiUser className="w-5 h-5" />
+            {data.gender && data.gender.trim() !== "" ? (
+              data.gender
+            ) : (
+              <p className="text-gray-500 italic">Giới tính</p>
+            )}
+          </div>
+
+          {/* Địa chỉ */}
+          <div className="flex items-center gap-2">
+            <CiLocationOn className="w-5 h-5" />
+            {data.address && data.address.trim() !== "" ? (
+              data.address
+            ) : (
+              <p className="text-gray-500 italic">Địa chỉ</p>
+            )}
+          </div>
+
+          {/* Liên kết cá nhân */}
+          <div className="flex items-center gap-2">
+            <TbWorld className="w-5 h-5" />
+            {data.personalLink && data.personalLink.trim() !== "" ? (
+              data.personalLink
+            ) : (
+              <p className="text-gray-500 italic">Liên hệ cá nhân</p>
+            )}
           </div>
         </div>
       </div>
-    );
-}
+    </div>
+  );
+};
+
 export default Profile;
