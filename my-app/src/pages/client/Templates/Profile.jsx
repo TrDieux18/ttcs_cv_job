@@ -44,10 +44,10 @@ const Profile = () => {
 
   return (
     <div className="">
-      <div className="w-200 h-auto bg-white rounded-lg opacity-100 shadow-lg relative m-3">
+      <div className="w-200 h-auto bg-white rounded-lg opacity-100 shadow-sm relative m-3">
         <div className="flex">
           <img
-            src="https://khoinguonsangtao.vn/wp-content/uploads/2022/10/hinh-anh-trai-xau-nhat.jpg"
+            src="https://res.cloudinary.com/dfreegzd9/image/upload/v1761562061/users/qauy8lokwakbzpm7l74g.jpg"
             alt="avatar"
             className="w-30 h-30 p-3 rounded-full object-cover"
           />

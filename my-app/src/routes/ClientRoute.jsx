@@ -15,6 +15,7 @@ import BlogDetail from "@pages/client/Blogs/BlogDetail";
 import JobList from "@pages/client/Jobs";
 import DetailCompany from "@pages/client/Companies/components/DetailCompany";
 import DetailJob from "@pages/client/Jobs/components/DetailJob";
+import CV from "../pages/client/CV";
 
 const clientRoutes = [
   {
@@ -64,6 +65,10 @@ const clientRoutes = [
       {
         path: "register",
         element: <Register />,
+      },
+      {
+        path: "cv",
+        element: <CV/>
       },
 
       {

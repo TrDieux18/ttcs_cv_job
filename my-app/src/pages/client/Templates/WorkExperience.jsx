@@ -70,7 +70,7 @@ const WorkExperience = () => {
     !user.text_DuAn;
 
   return (
-    <div className="w-200 h-auto bg-white rounded-lg shadow-lg relative m-3">
+    <div className="w-200 h-auto bg-white rounded-lg shadow-sm relative m-3">
       <div className="flex p-3">
         <h1 className="text-3xl font-bold py-5 flex-1">Kinh nghiệm làm việc</h1>
         <button className="absolute right-2 top-2" onClick={handleOpenDialog}>
@@ -81,7 +81,7 @@ const WorkExperience = () => {
       <hr />
 
       {/* Hiển thị thông tin */}
-      <div className="p-3 text-lg">
+      <div className="p-3">
         {isEmptyData ? (
           <p className="text-gray-500 italic">
             Thể hiện những thông tin chi tiết về quá trình làm việc

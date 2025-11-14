@@ -60,7 +60,7 @@ const Education = () => {
   };
 
   return (
-    <div className="w-200 h-auto bg-white rounded-lg shadow-lg relative m-3">
+    <div className="w-200 h-auto bg-white rounded-lg shadow-sm relative m-3">
       <div className="flex p-3">
         <h1 className="text-3xl font-bold text-center py-5">Học vấn</h1>
         <button className="absolute right-2 top-2" onClick={handleOpenDialog}>
