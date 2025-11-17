@@ -7,6 +7,7 @@ import { CiLocationOn, CiCamera } from "react-icons/ci";
 import { TbWorld } from "react-icons/tb";
 import { TfiTrash } from "react-icons/tfi";
 import { useState } from "react";
+import { LuGift, LuMail, LuPencilLine, LuPhone } from "react-icons/lu";
 const Profile = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -21,7 +22,6 @@ const Profile = () => {
     personalLink: "https://facebook.com/vana",
   });
 
-  // Dữ liệu tạm khi người dùng sửa trong dialog
   const [tempData, setTempData] = useState(user);
 
   const handleOpenDialog = () => {
@@ -29,13 +29,11 @@ const Profile = () => {
     setIsOpen(true);
   };
 
-  // Cập nhật giá trị khi người dùng nhập
   const handleChange = (e) => {
     const { name, value } = e.target;
     setTempData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Lưu giá trị mới
   const handleSave = () => {
     setUser(tempData);
     setIsOpen(false);
@@ -56,12 +54,12 @@ const Profile = () => {
             className="absolute right-2 top-2"
             onClick={() => setIsOpen(true)}
           >
-            <LiaEdit className="size-10 text-red-600" />
+            <LuPencilLine className="size-10 text-red-600" />
           </button>
         </div>
         <div className="grid grid-cols-2 gap-4 p-6">
           <div className="flex">
-            <MdOutlineEmail className="size-6 text-gray-600" />
+            <LuMail className="size-6 text-gray-600" />
             <span dir="auto" className="align-middle whitespace-pre-line pl-2">
               {user.email && user.email.trim() !== "" ? (
                 user.email
@@ -72,7 +70,7 @@ const Profile = () => {
           </div>
           <div className="flex flex-col">
             <div className="flex items-center">
-              <HiOutlinePhone className="size-6 text-gray-600" />
+              <LuPhone className="size-6 text-gray-600" />
               <span
                 dir="auto"
                 className="align-middle whitespace-pre-line pl-2"
@@ -87,7 +85,7 @@ const Profile = () => {
           </div>
           <div className="flexd flex-col">
             <div className="flex items-center">
-              <LiaBirthdayCakeSolid className="size-6 text-gray-600" />
+              <LuGift className="size-6 text-gray-600" />
               <span
                 dir="auto"
                 className="align-middle whitespace-pre-line pl-2"

@@ -23,6 +23,7 @@ const userSlice = createSlice({
     logout: (state) => {
       state.user = null;
       localStorage.removeItem("user");
+      localStorage.removeItem("appliedJobs");
       state.error = null;
     },
   },

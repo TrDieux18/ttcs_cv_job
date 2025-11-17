@@ -8,9 +8,12 @@ import HighlightProject from "./HighlightProject";
 import Certificates from "./Certificates";
 import Awards from "./Awards";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 const Templates = () => {
+  const [profileData, setProfileData] = useState([]);
+  
   return (
-    <div className="min-h-screen w-full bg-gray-50 bg-gradient-to-br from-teal-90 to-teal-50 mx-auto my-10 flex flex-col items-center gap-6">
+    <div className="min-h-screen w-full bg-gray-50 bg-gradient-to-br from-teal-90 to-teal-50 mx-auto my-10 flex flex-col items-center g">
       <Profile />
       <About />
       <Education />
@@ -20,8 +23,6 @@ const Templates = () => {
       <HighlightProject />
       <Certificates />
       <Awards />
-
-      {/* Nút Link căn giữa, chiều rộng bằng các component */}
       <Link
         to={"/cv"}
         className="border rounded-lg w-[794px] h-10 bg-[rgb(237,27,47)] text-white font-bold flex items-center justify-center"

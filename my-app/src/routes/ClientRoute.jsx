@@ -68,7 +68,7 @@ const clientRoutes = [
       },
       {
         path: "cv",
-        element: <CV/>
+        element: <CV />,
       },
 
       {
