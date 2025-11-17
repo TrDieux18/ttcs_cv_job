@@ -5,7 +5,7 @@ export default class UserDTO {
     this.username = user.username;
     this.email = user.email;
     this.avatar = user.avatar;
-    this.isActive = user.isActive;
+
     this.role = user.role_id
       ? {
           _id: user.role_id._id,
@@ -24,6 +24,7 @@ export class UserDetailDTO extends UserDTO {
     this.deleted = user.deleted;
     this.token = user.token;
     this.password = user.password;
+    this.isActive = user.isActive;
   }
 }
 

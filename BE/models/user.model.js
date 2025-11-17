@@ -15,7 +15,15 @@ const userSchema = new mongoose.Schema(
       ref: "Role",
       required: false,
     },
-    
+    address: { type: String, default: null },
+    phoneNumber: { type: String, default: null },
+    gender: {
+      type: String,
+      enum: ["male", "female", "other"],
+      default: "other",
+    },
+    dateOfBirth: { type: String, default: null },
+    introduction: { type: [String], default: null },
 
     timeLogin: { type: Date, default: null },
 

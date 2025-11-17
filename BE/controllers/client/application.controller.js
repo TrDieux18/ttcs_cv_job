@@ -1,3 +1,4 @@
+import { Types } from "mongoose";
 import Application from "../../models/application.model.js";
 import CV from "../../models/cv.model.js";
 
@@ -8,7 +9,10 @@ export const applyJob = async (req, res) => {
     console.log("Job ID:", jobId);
 
     console.log("User ID:", userId);
-    const cv = await CV.findOne({ userId }).select("_id");
+    const cv = await CV.findOne({ userId: new Types.ObjectId(userId) }).select(
+      "_id"
+    );
+    console.log("Found CV:", cv);
     if (!cv) {
       return res
         .status(404)

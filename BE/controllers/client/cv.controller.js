@@ -24,7 +24,6 @@ export const getCvById = async (req, res) => {
 export const getCvByUserId = async (req, res) => {
   try {
     const { userId } = req.params;
-    
 
     const filter = buildCVFilter(req.query);
     filter.userId = userId;
@@ -32,15 +31,15 @@ export const getCvByUserId = async (req, res) => {
     const cvs = await CV.find(filter)
       .populate("userId", "fullName email avatar")
       .lean();
-    
+
     if (!cvs || cvs.length === 0) {
       return res.status(404).json({ success: false, message: "CV not found" });
     }
-    
-    res.status(200).json({ 
-      success: true, 
+
+    res.status(200).json({
+      success: true,
       data: cvs,
-      total: cvs.length 
+      total: cvs.length,
     });
   } catch (error) {
     console.error(error);
@@ -76,7 +75,7 @@ export const createCv = async (req, res) => {
 
     const newCv = await CV.create({
       title,
-      userId,
+      userId: new Types.ObjectId(userId),
       skills: parsedSkills,
       experience: parsedExperience,
       education: parsedEducation,
