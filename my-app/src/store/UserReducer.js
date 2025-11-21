@@ -14,6 +14,9 @@ const userSlice = createSlice({
       state.user = action.payload;
       localStorage.setItem("user", JSON.stringify(state.user));
     },
+    setProfile: (state, action) => {
+      s
+    },
     setLoading: (state, action) => {
       state.loading = action.payload;
     },

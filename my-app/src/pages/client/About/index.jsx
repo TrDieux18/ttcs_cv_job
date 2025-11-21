@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
 import {
-  Target,
-  Users,
-  Briefcase,
-  Award,
-  TrendingUp,
-  Heart,
-} from "lucide-react";
+  LuAward,
+  LuBriefcase,
+  LuHeart,
+  LuTarget,
+  LuTrendingUp,
+  LuUsers,
+} from "react-icons/lu";
+
 import { useNavigate } from "react-router-dom";
 
 const fadeInUp = {
@@ -17,24 +18,24 @@ const fadeInUp = {
 
 const features = [
   {
-    icon: <Briefcase className="w-12 h-12 text-teal-600" />,
+    icon: <LuBriefcase className="w-12 h-12 text-teal-600" />,
     title: "Hàng nghìn việc làm",
     description:
       "Kết nối với các công ty hàng đầu Việt Nam, cập nhật việc làm mới mỗi ngày",
   },
   {
-    icon: <Users className="w-12 h-12 text-teal-600" />,
+    icon: <LuUsers className="w-12 h-12 text-teal-600" />,
     title: "Cộng đồng lớn mạnh",
     description:
       "Hơn 100,000+ ứng viên và 5,000+ nhà tuyển dụng tin tưởng sử dụng",
   },
   {
-    icon: <Award className="w-12 h-12 text-teal-600" />,
+    icon: <LuAward className="w-12 h-12 text-teal-600" />,
     title: "CV chuyên nghiệp",
     description: "Tạo CV ấn tượng với các mẫu thiết kế hiện đại và dễ sử dụng",
   },
   {
-    icon: <TrendingUp className="w-12 h-12 text-teal-600" />,
+    icon: <LuTrendingUp className="w-12 h-12 text-teal-600" />,
     title: "Phát triển sự nghiệp",
     description:
       "Công cụ và tài nguyên giúp bạn phát triển kỹ năng và thăng tiến",
@@ -43,18 +44,18 @@ const features = [
 
 const values = [
   {
-    icon: <Heart className="w-8 h-8 text-red-500" />,
+    icon: <LuHeart className="w-8 h-8 text-red-500" />,
     title: "Tận tâm",
     description: "Đặt lợi ích của ứng viên và nhà tuyển dụng lên hàng đầu",
   },
   {
-    icon: <Target className="w-8 h-8 text-blue-500" />,
+    icon: <LuTarget className="w-8 h-8 text-blue-500" />,
     title: "Chính xác",
     description:
       "Cung cấp thông tin việc làm và ứng viên chính xác, đáng tin cậy",
   },
   {
-    icon: <Users className="w-8 h-8 text-green-500" />,
+    icon: <LuUsers className="w-8 h-8 text-green-500" />,
     title: "Kết nối",
     description: "Tạo cầu nối hiệu quả giữa ứng viên và doanh nghiệp",
   },

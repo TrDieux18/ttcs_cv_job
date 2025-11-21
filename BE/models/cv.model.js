@@ -9,7 +9,7 @@ const cvSchema = new mongoose.Schema(
     },
     title: { type: String, required: true },
     fileUrl: { type: String, default: null },
-    skills: { type: [String], default: [] },
+    skills: { type: [Object], default: [] },
     experience: { type: [Object], default: [] },
     education: { type: [Object], default: [] },
     projects: { type: [Object], default: [] },

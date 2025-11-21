@@ -2,13 +2,11 @@ import axios from "axios";
 import { ApiResponse } from "@types/response/ApiResponse";
 import { ADMIN_API } from "@types/api";
 
-
 const axiosClient = axios.create({
   baseURL: ADMIN_API,
   withCredentials: true,
   headers: { "Content-Type": "application/json" },
 });
-
 
 export const getAllUsers = async (query = {}) => {
   try {
@@ -20,7 +18,6 @@ export const getAllUsers = async (query = {}) => {
   }
 };
 
-
 export const getUserById = async (userId) => {
   try {
     const response = await axiosClient.get(`/users/detail/${userId}`);
@@ -31,13 +28,7 @@ export const getUserById = async (userId) => {
   }
 };
 
-
 export const createUser = async (userData) => {
-  console.log("User Data Service");
-  for (const pair of userData.entries()) {
-    console.log(`${pair[0]}: ${pair[1]}`);
-  }
-
   try {
     const response = await axios.post(`${ADMIN_API}/users/create`, userData, {
       withCredentials: true,
@@ -57,7 +48,6 @@ export const createUser = async (userData) => {
   }
 };
 
-
 export const changeUserStatus = async (userId, status) => {
   const newStatus = !status;
   try {
@@ -73,7 +63,6 @@ export const changeUserStatus = async (userId, status) => {
     return new ApiResponse(false, null, [message]);
   }
 };
-
 
 export const updateUser = async (userId, userData) => {
   try {
@@ -98,7 +87,6 @@ export const updateUser = async (userId, userData) => {
     return new ApiResponse(false, null, [message]);
   }
 };
-
 
 export const deleteUser = async (userId) => {
   try {

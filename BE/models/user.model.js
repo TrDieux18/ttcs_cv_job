@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     avatar: { type: String, default: null },
-
+    jobTitle: { type: String, default: "Intern" },
     role_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Role",
@@ -19,11 +19,12 @@ const userSchema = new mongoose.Schema(
     phoneNumber: { type: String, default: null },
     gender: {
       type: String,
-      enum: ["male", "female", "other"],
-      default: "other",
+      default: "male",
     },
     dateOfBirth: { type: String, default: null },
     introduction: { type: [String], default: null },
+    socialLinks: { type: String, default: null },
+    foreignLanguages: { type: [Object], default: [] },
 
     timeLogin: { type: Date, default: null },
 

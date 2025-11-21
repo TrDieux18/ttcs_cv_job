@@ -1,11 +1,16 @@
 import React from "react";
-import { Users, ShoppingCart, DollarSign, Package } from "lucide-react";
+import {
+  LuDollarSign,
+  LuPackage,
+  LuShoppingCart,
+  LuUser,
+} from "react-icons/lu";
 
 const iconMap = {
-  users: Users,
-  orders: ShoppingCart,
-  revenue: DollarSign,
-  products: Package,
+  users: LuUser,
+  orders: LuShoppingCart,
+  revenue: LuDollarSign,
+  products: LuPackage,
 };
 
 const StatsCard = ({ title, value, icon }) => {

@@ -7,12 +7,13 @@ import {
   updateCv,
 } from "../../controllers/client/cv.controller.js";
 import { upload } from "../../helpers/upload.js";
+import { authMiddleware } from "../../middlewares/admin/auth.middleware.js";
 
 const router = express.Router();
 
-router.get("/detail/:userId", getCvByUserId);
-router.get("/:cvId", getCvById);
-router.post("/create", upload.single("fileUrl"), createCv);
-router.patch("/:id", updateCv);
-router.delete("/:id", deleteCv);
+router.get("/user", authMiddleware, getCvByUserId);
+router.get("/:cvId", authMiddleware, getCvById);
+router.post("/create", authMiddleware, upload.single("fileUrl"), createCv);
+router.patch("/update", authMiddleware, upload.single("fileUrl"), updateCv);
+router.delete("/:id", authMiddleware, deleteCv);
 export default router;

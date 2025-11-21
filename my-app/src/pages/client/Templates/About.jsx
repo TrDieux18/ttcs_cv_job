@@ -1,83 +1,92 @@
-import { useState } from "react";
-import { CiCirclePlus } from "react-icons/ci";
-const About = () => {
+import { message } from "antd";
+import { useState, useEffect } from "react";
+import { LuCirclePlus } from "react-icons/lu";
+
+const About = ({ profileData, updatedProfileData }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [text, setText] = useState("");
-  const [user, setUser] = useState({
-    text: "",
-  });
-  // Mở dialog
-  const handleOpenDialog = () => {
-    setText(user.text); // hiển thị nội dung cũ (nếu có)
-    setIsOpen(true);
-  };
-  // Cập nhật giá trị khi người dùng nhập
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setTempData((prev) => ({ ...prev, [name]: value }));
-  };
-  // Lưu giá trị mới
-  const handleSave = () => {
-    setUser({ text });
-    setIsOpen(false);
-    console.log("Dữ liệu đã lưu:", text);
+
+  const [introduction, setIntroduction] = useState([]);
+
+  useEffect(() => {
+    setIntroduction(profileData?.introduction || []);
+  }, [profileData]);
+
+  const handleSave = async () => {
+    if (!introduction || introduction.length === 0) {
+      alert("Vui lòng nhập giới thiệu bản thân!");
+      return;
+    }
+
+    const formData = new FormData();
+
+    formData.append("introduction", JSON.stringify(introduction));
+
+    const updated = await updatedProfileData?.(formData);
+    if (updated) {
+      message.success("Cập nhật giới thiệu bản thân thành công!");
+      setIsOpen(false);
+    }
   };
 
   return (
-    <div className="w-200 h-auto bg-white rounded-lg opacity-100 shadow-sm relative m-3">
-      <div className="flex p-3">
-        <h1 className="text-3xl font-bold text-center py-5">
-          Giới thiệu bản thân
-        </h1>
-        <button
-          className="absolute right-2 top-2"
-          onClick={() => setIsOpen(true)}
-        >
-          <CiCirclePlus className="size-10 text-red-600" />
-        </button>
-      </div>
-      <hr />
-      {/* hiển thị nội dung */}
-      <div className="text-truncated ims-2 text-rich-grey p-3">
-        <span
-          dir="auto"
-          className=" align-middle whitespace-pre-line"
-        >
-          {user.text && user.text.trim() !== "" ? (
-            user.text
+    <div className="w-200 h-auto bg-white rounded-lg shadow-sm relative">
+      <div className="w-full h-auto p-4">
+        <div className="flex justify-between items-center">
+          <h1 className="text-[22px] font-bold">Giới thiệu bản thân</h1>
+          <button onClick={() => setIsOpen(true)}>
+            <LuCirclePlus size={16} className="text-red-600" />
+          </button>
+        </div>
+
+        {introduction.length > 0 && (
+          <hr className="mt-4 mb-3 border-gray-300" />
+        )}
+
+        <div className="align-middle mt-2 whitespace-pre-line">
+          {introduction.length > 0 ? (
+            introduction.map((line, index) => (
+              <p key={index} className={index === 0 ? "mt-0" : "mt-2"}>
+                {line}
+              </p>
+            ))
           ) : (
-            <p className="text-gray-500 italic">
+            <p className="text-gray-500">
               Thể hiện những thông tin chi tiết về quá trình làm việc
             </p>
           )}
-        </span>
+        </div>
       </div>
-      {/* Dialog */}
+
       {isOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6  shadow-lg text-center w-250 h-auto">
-            <h1 className="text-4xl font-semibold mb-4">Thông tin cá nhân</h1>
-            <hr />
-            <div className="p-6">
-              <label
-                htmlFor="about"
-                className="block text-lg font-semibold text-gray-700 mb-2"
-              >
+          <div className="bg-white rounded-lg shadow-lg w-250 h-auto text-left">
+            <h1 className="text-[22px] font-semibold px-8 py-4 border-b border-gray-300">
+              Giới thiệu bản thân
+            </h1>
+
+            <div className="px-8 py-6">
+              <label className="font-semibold mb-1 block">
                 Giới thiệu bản thân
               </label>
+              <p className="text-gray-600 text-sm mb-3">
+                <span className="font-bold text-orange-300">Tip: </span>
+                Tóm tắt kinh nghiệm chuyên môn, chú ý làm nổi bật các kỹ năng và
+                điểm mạnh.
+              </p>
 
               <textarea
-                id="about"
-                value={text}
-                onChange={(e) => setText(e.target.value)}
+                id="introduction"
+                value={introduction.join("\n")}
+                onChange={(e) => setIntroduction(e.target.value.split(/\r?\n/))}
                 placeholder="Nhập mô tả, nhấn Enter để xuống dòng..."
                 rows={5}
                 className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-teal-500 focus:outline-none resize-none"
               />
 
-              <p className="mt-2 text-gray-500">Ký tự: {text.length}</p>
+              <p className="text-gray-500 mt-2">{introduction.length} dòng</p>
             </div>
-            <div className="flex justify-center mt-4 space-x-4">
+
+            <div className="flex justify-end px-8 py-2 border-t border-gray-300 gap-4">
               <button
                 onClick={() => setIsOpen(false)}
                 className="px-4 py-2 bg-gray-400 text-white rounded-md hover:bg-gray-500 transition"
@@ -97,4 +106,5 @@ const About = () => {
     </div>
   );
 };
+
 export default About;

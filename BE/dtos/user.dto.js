@@ -6,6 +6,8 @@ export default class UserDTO {
     this.email = user.email;
     this.avatar = user.avatar;
 
+    this.isActive = user.isActive;
+
     this.role = user.role_id
       ? {
           _id: user.role_id._id,
@@ -24,16 +26,18 @@ export class UserDetailDTO extends UserDTO {
     this.deleted = user.deleted;
     this.token = user.token;
     this.password = user.password;
-    this.isActive = user.isActive;
   }
 }
 
 export class UserProfileDTO extends UserDTO {
   constructor(user) {
     super(user);
-    this.avatar = user.avatar;
     this.phoneNumber = user.phoneNumber;
     this.address = user.address;
-    this.role = user.role_id;
+    this.jobTitle = user.jobTitle;
+    this.gender = user.gender;
+    this.dateOfBirth = user.dateOfBirth;
+    this.introduction = user.introduction;
+    this.socialLinks = user.socialLinks;
   }
 }

@@ -12,7 +12,7 @@ import {
 } from "antd";
 import { useSelector } from "react-redux";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import { MdMailOutline, MdOutlineCake, MdOutlinePhone } from "react-icons/md";
 

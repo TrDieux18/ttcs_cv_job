@@ -1,29 +1,43 @@
-import { useState } from "react";
-import { CiCirclePlus } from "react-icons/ci";
-import { Input } from "antd";
-import { TbExternalLink } from "react-icons/tb";
-const HighlightProject = () => {
+import { message } from "antd";
+import { useState, useEffect } from "react";
+import { LuCirclePlus, LuExternalLink } from "react-icons/lu";
+
+const HighlightProject = ({ cvData, updatedCvData }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isStudying, setIsStudying] = useState(false);
   const [error, setError] = useState("");
 
-  // Dữ liệu người dùng hiện tại
   const [user, setUser] = useState({
-    TenDuAn: "",
-    thangnhap: "",
-    namnhap: "",
-    thangcuoi: "",
-    namcuoi: "",
-    text_MoTa: "",
+    name: "",
+    startMonth: "",
+    startYear: "",
+    endMonth: "",
+    endYear: "",
+    description: "",
     link: "",
   });
 
-  // Dữ liệu tạm khi chỉnh sửa
+  // Load project from cvData
+  useEffect(() => {
+    const firstCv = cvData?.[0];
+    const firstProject = firstCv?.projects?.[0] || {};
+
+    setUser({
+      name: firstProject.name || "",
+      startMonth: firstProject.startMonth || "",
+      startYear: firstProject.startYear || "",
+      endMonth: firstProject.endMonth || "",
+      endYear: firstProject.endYear || "",
+      description: firstProject.description || "",
+      link: firstProject.link || "",
+    });
+  }, [cvData]);
+
   const [tempData, setTempData] = useState(user);
 
   const handleOpenDialog = () => {
     setTempData(user);
-    setIsStudying(user.thangcuoi === "Hiện tại");
+    setIsStudying(user.endMonth === "Hiện tại");
     setIsOpen(true);
   };
 
@@ -36,17 +50,23 @@ const HighlightProject = () => {
     setIsStudying(e.target.checked);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const updatedData = {
       ...tempData,
-      thangcuoi: isStudying ? "Hiện tại" : tempData.thangcuoi,
-      namcuoi: isStudying ? "" : tempData.namcuoi,
+      endMonth: isStudying ? "Hiện tại" : tempData.endMonth,
+      endYear: isStudying ? "" : tempData.endYear,
     };
-    // Kiểm tra thiếu
+
+    console.log("🚀 Project tempData:", tempData);
+    console.log("🚀 Project isStudying:", isStudying);
+    console.log("🚀 Project updatedData:", updatedData);
+
     const hasEmpty = Object.entries(updatedData).some(([key, val]) => {
-      if (isStudying && (key === "thangcuoi" || key === "namcuoi"))
-        return false;
-      return val.trim() === "" && val !== "Hiện tại";
+      if (isStudying && (key === "endMonth" || key === "endYear")) return false;
+      if (typeof val === "string") {
+        return val.trim() === "" && val !== "Hiện tại";
+      }
+      return !val; 
     });
 
     if (hasEmpty) {
@@ -54,179 +74,193 @@ const HighlightProject = () => {
       return;
     }
 
-    setError("");
-    setUser(updatedData);
-    setIsOpen(false);
-    console.log("Dữ liệu đã lưu:", updatedData);
-  };
+    const formData = new FormData();
+    formData.append("projects", JSON.stringify([updatedData]));
+    console.log("📤 FormData projects string:", JSON.stringify([updatedData]));
 
-  // Kiểm tra xem dữ liệu có trống hay không
+    const success = await updatedCvData?.(formData);
+    if (success) {
+      setError("");
+      setUser(updatedData);
+      message.success("Cập nhật dự án nổi bật thành công!");
+      setIsOpen(false);
+    }
+  };
   const isEmptyData =
-    !user.TenDuAn &&
-    !user.thangnhap &&
-    !user.namnhap &&
-    !user.text_MoTa &&
+    !user.name &&
+    !user.startMonth &&
+    !user.startYear &&
+    !user.description &&
     !user.link;
 
   return (
-    <div className="w-200 h-auto bg-white rounded-lg shadow-sm relative m-3">
-      <div className="flex p-3">
-        <h1 className="text-3xl font-bold py-5 flex-1">Dự án nổi bật</h1>
-        <button className="absolute right-2 top-2" onClick={handleOpenDialog}>
-          <CiCirclePlus className="size-10 text-red-600 hover:scale-110 transition-transform" />
-        </button>
+    <div className="w-200 h-auto bg-white rounded-lg shadow-sm relative ">
+      <div className="w-full h-auto p-4">
+        <div className="flex justify-between items-center">
+          <h1 className="text-[22px] font-bold">Dự án nổi bật</h1>
+
+          <button onClick={handleOpenDialog}>
+            <LuCirclePlus className="size-4 text-red-600 hover:scale-110 transition-transform" />
+          </button>
+        </div>
+
+        {!isEmptyData && <hr className="mt-4 mb-3 border-gray-300" />}
+
+        <div className="align-middle mt-2 text-lg">
+          {isEmptyData ? (
+            <p className="text-gray-500 text-[16px]">
+              Giới thiệu dự án nổi bật của bạn
+            </p>
+          ) : (
+            <>
+              <h1 className="font-bold text-lg pb-1">{user.name}</h1>
+
+              <h1>
+                {user.startMonth}/{user.startYear} -{" "}
+                {user.endMonth === "Hiện tại"
+                  ? "Hiện tại"
+                  : `${user.endMonth}/${user.endYear}`}
+              </h1>
+
+              {user.description && (
+                <div className="mt-4">
+                  <h2 className="font-semibold text-gray-800">Mô tả:</h2>
+                  <p className="text-gray-700">{user.description}</p>
+                </div>
+              )}
+
+              {user.link && (
+                <a
+                  href={user.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 hover:underline flex items-center gap-1 mt-3"
+                >
+                  Xem dự án <LuExternalLink className="size-5" />
+                </a>
+              )}
+            </>
+          )}
+        </div>
       </div>
 
-      <hr />
-
-      {/* Hiển thị thông tin */}
-      <div className="p-3 text-lg">
-        {isEmptyData ? (
-          <p className="text-gray-500 italic">
-            Giới thiệu dự án nổi bật của bạn
-          </p>
-        ) : (
-          <>
-            <h1 className="font-bold text-xl pb-3">{user.TenDuAn}</h1>
-            <h1>
-              {user.thangnhap}/{user.namnhap} -{" "}
-              {user.thangcuoi === "Hiện tại"
-                ? "Hiện tại"
-                : `${user.thangcuoi}/${user.namcuoi}`}
-            </h1>
-
-            {user.text_MoTa && (
-              <div className="mt-4">
-                <h2 className="font-semibold text-gray-800">Mô tả:</h2>
-                <p className="text-gray-700">{user.text_MoTa}</p>
-              </div>
-            )}
-            {/* Hiển thị link */}
-            {user.link ? (
-              <a
-                href={user.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:underline flex"
-              >
-                Xem dự án <TbExternalLink className="size-6" />
-              </a>
-            ) : null}
-          </>
-        )}
-      </div>
-
-      {/* Dialog chỉnh sửa */}
       {isOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 shadow-lg w-250px max-h-[90vh] overflow-y-auto">
-            <h1 className="text-4xl font-semibold mb-4 text-center">
+          <div className="bg-white rounded-md shadow-lg w-250 max-h-[90vh] overflow-y-auto text-left">
+            <h1 className="text-[22px] font-semibold px-8 py-4 border-b border-gray-300">
               Dự án nổi bật
             </h1>
 
-            <div className="grid grid-cols-1 gap-4 mb-4">
-              {/* Chức danh */}
-              <Input
-                type="text"
-                name="TenDuAn"
-                value={tempData.TenDuAn}
-                onChange={handleChange}
-                placeholder="Tên dự án"
-                className="h-12 text-lg rounded-md border border-gray-300 px-4"
-              />
-
-              {/* Checkbox */}
-              <div className="pt-4 pb-4 flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  id="isStudying"
-                  checked={isStudying}
-                  onChange={handleCheckboxChange}
-                  className="size-4 accent-teal-500"
-                />
-                <label htmlFor="isStudying" className="text-gray-700">
-                  Tôi vẫn đang làm dự án này
-                </label>
-              </div>
-
-              {/* Thời gian */}
-              <div className="grid grid-cols-2 gap-4">
+            <div className="px-8 py-6">
+              <div className="grid grid-cols-1 gap-4">
                 <div>
-                  <h1 className="font-semibold">Ngày bắt đầu</h1>
-                  <div className="flex gap-x-4">
-                    <Input
-                      type="text"
-                      name="thangnhap"
-                      value={tempData.thangnhap}
-                      onChange={handleChange}
-                      placeholder="Tháng"
-                      className="h-12 text-lg rounded-md border border-gray-300 px-4"
-                    />
-                    <Input
-                      type="text"
-                      name="namnhap"
-                      value={tempData.namnhap}
-                      onChange={handleChange}
-                      placeholder="Năm"
-                      className="h-12 text-lg rounded-md border border-gray-300 px-4"
-                    />
+                  <label className="font-semibold mb-1 block">Tên dự án</label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={tempData.name}
+                    onChange={handleChange}
+                    placeholder="Tên dự án"
+                    className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                  />
+                </div>
+
+                <div className="pt-4 pb-4 flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    id="isStudying"
+                    checked={isStudying}
+                    onChange={handleCheckboxChange}
+                    className="size-4 accent-teal-500"
+                  />
+                  <label htmlFor="isStudying" className="text-gray-700">
+                    Tôi vẫn đang làm dự án này
+                  </label>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="font-semibold mb-1 block">
+                      Ngày bắt đầu
+                    </label>
+                    <div className="flex gap-x-4">
+                      <input
+                        type="text"
+                        name="startMonth"
+                        value={tempData.startMonth}
+                        onChange={handleChange}
+                        placeholder="Tháng"
+                        className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                      />
+                      <input
+                        type="text"
+                        name="startYear"
+                        value={tempData.startYear}
+                        onChange={handleChange}
+                        placeholder="Năm"
+                        className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="font-semibold mb-1 block">
+                      Ngày kết thúc
+                    </label>
+                    <div className="flex gap-x-4">
+                      <input
+                        type="text"
+                        name="endMonth"
+                        value={isStudying ? "Hiện tại" : tempData.endMonth}
+                        onChange={handleChange}
+                        placeholder="Tháng"
+                        disabled={isStudying}
+                        className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-teal-500 focus:outline-none disabled:bg-gray-100"
+                      />
+                      <input
+                        type="text"
+                        name="endYear"
+                        value={isStudying ? "" : tempData.endYear}
+                        onChange={handleChange}
+                        placeholder="Năm"
+                        disabled={isStudying}
+                        className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-teal-500 focus:outline-none disabled:bg-gray-100"
+                      />
+                    </div>
                   </div>
                 </div>
 
-                <div>
-                  <h1 className="font-semibold">Ngày kết thúc</h1>
-                  <div className="flex gap-x-4">
-                    <Input
-                      type="text"
-                      name="thangcuoi"
-                      value={isStudying ? "Hiện tại" : tempData.thangcuoi}
-                      onChange={handleChange}
-                      placeholder="Tháng"
-                      disabled={isStudying}
-                      className="h-12 text-lg rounded-md border border-gray-300 px-4 bg-gray-100"
-                    />
-                    <Input
-                      type="text"
-                      name="namcuoi"
-                      value={isStudying ? "" : tempData.namcuoi}
-                      onChange={handleChange}
-                      placeholder="Năm"
-                      disabled={isStudying}
-                      className="h-12 text-lg rounded-md border border-gray-300 px-4 bg-gray-100"
-                    />
-                  </div>
+                <div className="mt-6">
+                  <label className="font-semibold mb-1 block">
+                    Mô tả chi tiết
+                  </label>
+                  <textarea
+                    name="description"
+                    value={tempData.description}
+                    onChange={handleChange}
+                    placeholder="Mô tả công việc, trách nhiệm, thành tựu..."
+                    rows={5}
+                    className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-teal-500 focus:outline-none resize-none"
+                  />
+                </div>
+
+                <div className="gap-4 mb-4">
+                  <label className="font-semibold mb-1 block">Link dự án</label>
+                  <input
+                    type="text"
+                    value={tempData.link}
+                    name="link"
+                    onChange={handleChange}
+                    placeholder="Đường dẫn website"
+                    className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                  />
                 </div>
               </div>
 
-              {/* Mô tả chi tiết */}
-              <div className="mt-6">
-                <h1 className="font-bold">Mô tả chi tiết</h1>
-                <textarea
-                  name="text_MoTa"
-                  value={tempData.text_MoTa}
-                  onChange={handleChange}
-                  placeholder="Mô tả công việc, trách nhiệm, thành tựu..."
-                  rows={5}
-                  className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-teal-500 focus:outline-none resize-none"
-                />
-              </div>
-              {/* link */}
-              <div className="gap-4 mb-4">
-                <Input
-                  type="text"
-                  value={tempData.link}
-                  name="link"
-                  onChange={handleChange}
-                  placeholder="Đường dẫn website"
-                  className="h-12 text-lg rounded-md border border-gray-300 px-4"
-                />
-              </div>
+              {error && <p className="text-red-500 mt-2">{error}</p>}
             </div>
 
-            {error && <p className="text-red-500 mt-2">{error}</p>}
-
-            {/* Nút hành động */}
-            <div className="flex justify-center mt-4 space-x-4">
+            <div className="flex justify-end px-8 py-2 border-t border-gray-300 gap-4">
               <button
                 onClick={() => setIsOpen(false)}
                 className="px-4 py-2 bg-gray-400 text-white rounded-md hover:bg-gray-500 transition"
