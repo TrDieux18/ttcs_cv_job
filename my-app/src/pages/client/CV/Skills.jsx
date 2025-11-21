@@ -3,26 +3,50 @@ const Skills = ({ data = [] }) => {
 
   return (
     <div>
-      <div className="flex">
-        <div className="flex-none p-5 w-36 whitespace-nowrap font-bold">
+      <div style={{ display: "flex" }}>
+        <div
+          style={{
+            flexShrink: 0,
+            padding: "20px",
+            width: "144px",
+            whiteSpace: "nowrap",
+            fontWeight: "bold",
+          }}
+        >
           Kỹ năng
         </div>
 
-        <div className="p-3 flex flex-wrap gap-3">
+        <div
+          style={{
+            padding: "12px",
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "12px",
+          }}
+        >
           {data.map((item, index) => (
             <div
               key={index}
-              className="flex items-center gap-1 bg-[#F3F4F6] rounded-full px-3 py-1 text-xs"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "4px",
+                paddingLeft: "8px",
+                paddingRight: "8px",
+                paddingTop: "2px",
+                paddingBottom: "2px",
+                fontSize: "12px",
+              }}
             >
-              <span className="font-semibold">{item.skill}</span>
-              <span className="text-[#6B7280]">({item.level})</span>
+              <span style={{ fontWeight: 600 }}>{item.skill}</span>
+              <span style={{ color: "#6B7280" }}>({item.level})</span>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="px-5">
-        <hr className="border-t-2 border-[#D1D5DB]" />
+      <div style={{ paddingLeft: "20px", paddingRight: "20px" }}>
+        <hr style={{ borderTop: "2px solid #D1D5DB" }} />
       </div>
     </div>
   );

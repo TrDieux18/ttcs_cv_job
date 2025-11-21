@@ -13,6 +13,8 @@ const cvSchema = new mongoose.Schema(
     experience: { type: [Object], default: [] },
     education: { type: [Object], default: [] },
     projects: { type: [Object], default: [] },
+    certificates: { type: [Object], default: [] },
+    awards: { type: [Object], default: [] },
     githubLink: { type: String, default: null },
   },
   {

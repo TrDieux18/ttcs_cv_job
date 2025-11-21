@@ -29,6 +29,7 @@ export const getMyCompany = async (req, res) => {
 
 // ✅ Cập nhật thông tin công ty của user hiện tại
 export const updateMyCompany = async (req, res) => {
+  let uploadedFile = null;
   try {
     const userId = req.user._id;
     const { headline, description, website, location, size } = req.body;
@@ -51,8 +52,11 @@ export const updateMyCompany = async (req, res) => {
 
     // Upload logo mới nếu có
     if (req.file && req.file.buffer) {
-      const result = await uploadToCloudinary(req.file.buffer, "companies");
-      company.logo = { url: result.secure_url, public_id: result.public_id };
+      uploadedFile = await uploadToCloudinary(req.file.buffer, "companies");
+      company.logo = {
+        url: uploadedFile.secure_url,
+        public_id: uploadedFile.public_id,
+      };
     }
 
     const updated = await company.save();
@@ -62,6 +66,14 @@ export const updateMyCompany = async (req, res) => {
       data: updated,
     });
   } catch (error) {
+    // Rollback uploaded file on error
+    if (uploadedFile?.public_id) {
+      try {
+        const cloudinary = (await import("../../configs/cloudinary.js"))
+          .default;
+        await cloudinary.uploader.destroy(uploadedFile.public_id);
+      } catch (rollbackErr) {}
+    }
     console.error("updateMyCompany error:", error);
     return res.status(500).json({ success: false, message: error.message });
   }
@@ -69,6 +81,7 @@ export const updateMyCompany = async (req, res) => {
 
 // ✅ Tạo công ty cho user hiện tại (nếu chưa có)
 export const createMyCompany = async (req, res) => {
+  let uploadedFile = null;
   try {
     const userId = req.user._id;
     const {
@@ -99,13 +112,24 @@ export const createMyCompany = async (req, res) => {
 
     // Upload logo nếu có
     if (req.file && req.file.buffer) {
-      const result = await uploadToCloudinary(req.file.buffer, "companies");
-      company.logo = { url: result.secure_url, public_id: result.public_id };
+      uploadedFile = await uploadToCloudinary(req.file.buffer, "companies");
+      company.logo = {
+        url: uploadedFile.secure_url,
+        public_id: uploadedFile.public_id,
+      };
     }
 
     const saved = await company.save();
     return res.status(201).json({ success: true, data: saved });
   } catch (error) {
+    // Rollback uploaded file on error
+    if (uploadedFile?.public_id) {
+      try {
+        const cloudinary = (await import("../../configs/cloudinary.js"))
+          .default;
+        await cloudinary.uploader.destroy(uploadedFile.public_id);
+      } catch (rollbackErr) {}
+    }
     console.error("createMyCompany error:", error);
     return res.status(500).json({ success: false, message: error.message });
   }

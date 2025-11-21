@@ -13,7 +13,7 @@ const router = express.Router();
 
 router.get("/user", authMiddleware, getCvByUserId);
 router.get("/:cvId", authMiddleware, getCvById);
-router.post("/create", authMiddleware, upload.single("fileUrl"), createCv);
-router.patch("/update", authMiddleware, upload.single("fileUrl"), updateCv);
+router.post("/create", authMiddleware, upload.single("file"), createCv);
+router.patch("/update", authMiddleware, upload.single("file"), updateCv);
 router.delete("/:id", authMiddleware, deleteCv);
 export default router;

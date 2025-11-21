@@ -6,11 +6,22 @@ const Education = ({ data }) => {
 
   return (
     <div>
-      <div className="flex">
-        <div className="p-5 whitespace-nowrap font-bold w-38">Học vấn</div>
-        <div className="text-truncated ims-2 text-[#4B5563] text-xs p-5">
-          <h1 className="font-bold text-base">{data.Truong}</h1>
-          <h1 className="font-bold">
+      <div style={{ display: "flex" }}>
+        <div
+          style={{
+            padding: "20px",
+            whiteSpace: "nowrap",
+            fontWeight: "bold",
+            width: "152px",
+          }}
+        >
+          Học vấn
+        </div>
+        <div style={{ color: "#4B5563", fontSize: "12px", padding: "20px" }}>
+          <h1 style={{ fontWeight: "bold", fontSize: "16px" }}>
+            {data.Truong}
+          </h1>
+          <h1 style={{ fontWeight: "bold" }}>
             {data.Trinh_Do} - {data.Nganh}
           </h1>
           <h1>
@@ -19,11 +30,11 @@ const Education = ({ data }) => {
               ? "Hiện tại"
               : `${data.thangcuoi}/${data.namcuoi}`}
           </h1>
-          <h1 className="pt-2">{data.thongTinKhac}</h1>
+          <h1 style={{ paddingTop: "8px" }}>{data.thongTinKhac}</h1>
         </div>
       </div>
-      <div className="pr-5 pl-5">
-        <hr className="border-t-2 border-[#D1D5DB]" />
+      <div style={{ paddingLeft: "20px", paddingRight: "20px" }}>
+        <hr style={{ borderTop: "2px solid #D1D5DB" }} />
       </div>
     </div>
   );

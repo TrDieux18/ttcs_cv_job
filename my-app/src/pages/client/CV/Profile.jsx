@@ -1,87 +1,118 @@
-import {
-  LuMail,
-  LuPhone,
-  LuCake,
-  LuMapPin,
-  LuGlobe,
-  LuUser,
-} from "react-icons/lu";
 import avatar from "../../../assets/image/avatar.jpg";
 
 const Profile = ({ data = {} }) => {
   return (
-    <div className="h-auto bg-[#383d44] flex text-white p-6 w-full gap-6">
-    
+    <div
+      style={{
+        backgroundColor: "#383d44",
+        color: "white",
+        padding: "24px",
+        display: "flex",
+        gap: "24px",
+        width: "100%",
+      }}
+    >
       <img
         src={avatar}
         alt="avatar"
-        className="w-40 h-40 rounded-full object-cover"
+        style={{
+          width: "160px",
+          height: "160px",
+          borderRadius: "80px",
+          objectFit: "cover",
+        }}
       />
 
-      {/* Thông tin cá nhân */}
-      <div className="flex-1">
-        <h1 className="text-3xl font-bold py-2">{data.name}</h1>
+      <div style={{ flex: 1 }}>
+        <h1
+          style={{
+            fontSize: "30px",
+            fontWeight: "bold",
+            paddingTop: "8px",
+            paddingBottom: "8px",
+          }}
+        >
+          {data.name}
+        </h1>
 
-        <div className="grid grid-cols-2 gap-4 text-xs mt-4">
-          {/* Email */}
-          <div className="flex items-center gap-2">
-            <LuMail className="w-5 h-5" />
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "16px",
+            fontSize: "12px",
+            marginTop: "16px",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <span style={{ fontWeight: "bold", minWidth: "60px" }}>Email:</span>
             {data.email && data.email.trim() !== "" ? (
               data.email
             ) : (
-              <p className="text-gray-500 italic">Email</p>
+              <span style={{ color: "#9CA3AF", fontStyle: "italic" }}>
+                Email
+              </span>
             )}
           </div>
 
-          {/* Số điện thoại */}
-          <div className="flex items-center gap-2">
-            <LuPhone className="w-5 h-5" />
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <span style={{ fontWeight: "bold", minWidth: "60px" }}>Phone:</span>
             {data.phone && data.phone.trim() !== "" ? (
               data.phone
             ) : (
-              <p className="text-gray-500 italic">Số điện thoại</p>
+              <span style={{ color: "#9CA3AF", fontStyle: "italic" }}>
+                Số điện thoại
+              </span>
             )}
           </div>
 
-          {/* Ngày sinh */}
-          <div className="flex items-center gap-2">
-            <LuCake className="w-5 h-5" />
-            <span dir="auto" className="align-middle whitespace-pre-line pl-2">
-              {data.birthday && data.birthday.trim() !== "" ? (
-                data.birthday
-              ) : (
-                <p className="text-gray-500 italic">Ngày sinh</p>
-              )}
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <span style={{ fontWeight: "bold", minWidth: "60px" }}>
+              Birthday:
             </span>
+            {data.birthday && data.birthday.trim() !== "" ? (
+              data.birthday
+            ) : (
+              <span style={{ color: "#9CA3AF", fontStyle: "italic" }}>
+                Ngày sinh
+              </span>
+            )}
           </div>
 
-          {/* Giới tính */}
-          <div className="flex items-center gap-2">
-            <LuUser className="w-5 h-5" />
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <span style={{ fontWeight: "bold", minWidth: "60px" }}>
+              Gender:
+            </span>
             {data.gender && data.gender.trim() !== "" ? (
               data.gender
             ) : (
-              <p className="text-gray-500 italic">Giới tính</p>
+              <span style={{ color: "#9CA3AF", fontStyle: "italic" }}>
+                Giới tính
+              </span>
             )}
           </div>
 
-          {/* Địa chỉ */}
-          <div className="flex items-center gap-2">
-            <LuMapPin className="w-5 h-5" />
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <span style={{ fontWeight: "bold", minWidth: "60px" }}>
+              Address:
+            </span>
             {data.address && data.address.trim() !== "" ? (
               data.address
             ) : (
-              <p className="text-gray-500 italic">Địa chỉ</p>
+              <span style={{ color: "#9CA3AF", fontStyle: "italic" }}>
+                Địa chỉ
+              </span>
             )}
           </div>
 
-          {/* Liên kết cá nhân */}
-          <div className="flex items-center gap-2">
-            <LuGlobe className="w-5 h-5" />
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <span style={{ fontWeight: "bold", minWidth: "60px" }}>Link:</span>
             {data.personalLink && data.personalLink.trim() !== "" ? (
               data.personalLink
             ) : (
-              <p className="text-gray-500 italic">Liên hệ cá nhân</p>
+              <span style={{ color: "#9CA3AF", fontStyle: "italic" }}>
+                Liên hệ cá nhân
+              </span>
             )}
           </div>
         </div>

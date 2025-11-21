@@ -10,25 +10,48 @@ const Awards = ({ data = {} }) => {
     <div>
       {!hasEmptyField ? (
         <div>
-          <div className="flex">
-            <div className="p-5 whitespace-nowrap font-bold w-38 text-[#111827]">
+          <div style={{ display: "flex" }}>
+            <div
+              style={{
+                padding: "20px",
+                whiteSpace: "nowrap",
+                fontWeight: "bold",
+                width: "152px",
+                color: "#111827",
+              }}
+            >
               Giải thưởng
             </div>
 
-            <div className="text-truncated ims-2 text-[#6B7280] text-xs p-5">
-              <h1 className="font-bold text-sm text-[#111827]">
+            <div
+              style={{ color: "#6B7280", fontSize: "12px", padding: "20px" }}
+            >
+              <h1
+                style={{
+                  fontWeight: "bold",
+                  fontSize: "14px",
+                  color: "#111827",
+                }}
+              >
                 {data.TenGiaiThuong}
               </h1>
 
-              <div className="flex pt-2 pb-2 text-[#111827]">
+              <div
+                style={{
+                  display: "flex",
+                  paddingTop: "8px",
+                  paddingBottom: "8px",
+                  color: "#111827",
+                }}
+              >
                 <h1>
                   {data.thang}/{data.nam}
                 </h1>
-                <h1 className="pr-2 pl-2">|</h1>
-                <h1 className="font-bold">{data.ToChuc}</h1>
+                <h1 style={{ paddingRight: "8px", paddingLeft: "8px" }}>|</h1>
+                <h1 style={{ fontWeight: "bold" }}>{data.ToChuc}</h1>
               </div>
 
-              <h1 className="text-[#111827]">{data.text_MoTa}</h1>
+              <h1 style={{ color: "#111827" }}>{data.text_MoTa}</h1>
             </div>
           </div>
         </div>

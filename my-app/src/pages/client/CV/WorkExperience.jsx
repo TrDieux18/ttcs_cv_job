@@ -7,22 +7,43 @@ const WorkExperience = ({ data = {} }) => {
 
   return (
     <div>
-      <div className="flex">
-        <div className="pt-5 pl-5 pb-5 font-bold w-38">
+      <div style={{ display: "flex" }}>
+        <div
+          style={{
+            paddingTop: "20px",
+            paddingLeft: "20px",
+            paddingBottom: "20px",
+            fontWeight: "bold",
+            width: "152px",
+          }}
+        >
           Kinh nghiệm làm việc
         </div>
-        <div className="text-truncated ims-2 text-[#6B7280] text-xs p-5">
-          <div className="">
+        <div style={{ color: "#6B7280", fontSize: "12px", padding: "20px" }}>
+          <div>
             {isEmptyData ? (
-              <p className="text-[#6B7280] italic">
+              <p style={{ color: "#6B7280", fontStyle: "italic" }}>
                 Thể hiện những thông tin chi tiết về quá trình làm việc
               </p>
             ) : (
               <>
-                <div className="flex text-base text-black font-bold">
-                  <h1 className="font-bold uppercase">{data.ChucDanh}</h1>
-                  <h1 className="pr-3 pl-3">|</h1>
-                  <h1 className="">{data.TenCongTy}</h1>
+                <div
+                  style={{
+                    display: "flex",
+                    fontSize: "16px",
+                    color: "black",
+                    fontWeight: "bold",
+                  }}
+                >
+                  <h1
+                    style={{ fontWeight: "bold", textTransform: "uppercase" }}
+                  >
+                    {data.ChucDanh}
+                  </h1>
+                  <h1 style={{ paddingRight: "12px", paddingLeft: "12px" }}>
+                    |
+                  </h1>
+                  <h1>{data.TenCongTy}</h1>
                 </div>
                 <h1>
                   {data.thangnhap}/{data.namnhap} -{" "}
@@ -32,20 +53,32 @@ const WorkExperience = ({ data = {} }) => {
                 </h1>
 
                 {data.text_MoTa && (
-                  <div className="">
-                    <h2 className="font-semibold text-[#1F2937] uppercase">
+                  <div>
+                    <h2
+                      style={{
+                        fontWeight: 600,
+                        color: "#1F2937",
+                        textTransform: "uppercase",
+                      }}
+                    >
                       Mô tả:
                     </h2>
-                    <p className="text-[#374151">{data.text_MoTa}</p>
+                    <p style={{ color: "#374151" }}>{data.text_MoTa}</p>
                   </div>
                 )}
 
                 {data.text_DuAn && (
-                  <div className="">
-                    <h2 className="font-semibold text-[#1F2937]  uppercase">
+                  <div>
+                    <h2
+                      style={{
+                        fontWeight: 600,
+                        color: "#1F2937",
+                        textTransform: "uppercase",
+                      }}
+                    >
                       Dự án:
                     </h2>
-                    <p className="text-[#374151">{data.text_DuAn}</p>
+                    <p style={{ color: "#374151" }}>{data.text_DuAn}</p>
                   </div>
                 )}
               </>
@@ -53,8 +86,8 @@ const WorkExperience = ({ data = {} }) => {
           </div>
         </div>
       </div>
-      <div className="pr-5 pl-5">
-        <hr className="border-t-2 border-[#D1D5DB]" />
+      <div style={{ paddingLeft: "20px", paddingRight: "20px" }}>
+        <hr style={{ borderTop: "2px solid #D1D5DB" }} />
       </div>
     </div>
   );

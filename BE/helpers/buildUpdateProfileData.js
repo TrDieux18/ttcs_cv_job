@@ -29,7 +29,7 @@ export const buildUpdateData = (body, arrayFields = []) => {
     }
   });
 
-  // Handle foreignLanguages specifically
+
   if (body.foreignLanguages) {
     try {
       updateData.foreignLanguages = JSON.parse(body.foreignLanguages);

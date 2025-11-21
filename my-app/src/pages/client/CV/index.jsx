@@ -13,98 +13,112 @@ import AwardsCV from "./Awards";
 const CV = () => {
   const cvRef = useRef(); // dùng ref để lấy div của CV
   // Dữ liệu Education
-const [educationData] = useState({
-  Truong: "Đại học Bách Khoa",
-  Trinh_Do: "Cử nhân",
-  Nganh: "Công nghệ thông tin",
-  thangnhap: "09",
-  namnhap: "2018",
-  thangcuoi: "06",
-  namcuoi: "2022",
-  thongTinKhac: "Học bổng toàn phần 2 năm liền",
-});
+  const [educationData] = useState({
+    Truong: "Đại học Bách Khoa",
+    Trinh_Do: "Cử nhân",
+    Nganh: "Công nghệ thông tin",
+    thangnhap: "09",
+    namnhap: "2018",
+    thangcuoi: "06",
+    namcuoi: "2022",
+    thongTinKhac: "Học bổng toàn phần 2 năm liền",
+  });
 
-// Dữ liệu Profile
-const [ProfileData] = useState({
-  name: "Nguyễn Văn A",
-  email: "vana@example.com",
-  phone: "0123456789",
-  birthday: "01/01/1990",
-  gender: "Nam",
-  address: "123 Đường ABC, Quận 1, TP.HCM",
-  personalLink: "https://facebook.com/vana",
-});
+  // Dữ liệu Profile
+  const [ProfileData] = useState({
+    name: "Nguyễn Văn A",
+    email: "vana@example.com",
+    phone: "0123456789",
+    birthday: "01/01/1990",
+    gender: "Nam",
+    address: "123 Đường ABC, Quận 1, TP.HCM",
+    personalLink: "https://facebook.com/vana",
+  });
 
-// Dữ liệu About
-const [AboutData] = useState({
-  text: "Tôi là một lập trình viên nhiệt huyết, yêu thích công nghệ và luôn tìm cách cải thiện kỹ năng của mình. Tôi có kinh nghiệm trong phát triển web và ứng dụng di động, đồng thời đam mê học hỏi những công nghệ mới.",
-});
+  // Dữ liệu About
+  const [AboutData] = useState({
+    text: "Tôi là một lập trình viên nhiệt huyết, yêu thích công nghệ và luôn tìm cách cải thiện kỹ năng của mình. Tôi có kinh nghiệm trong phát triển web và ứng dụng di động, đồng thời đam mê học hỏi những công nghệ mới.",
+  });
 
-// Dữ liệu Skills
-const [SkillData] = useState([
-  { skill: "Tin học văn phòng", level: "Thành thạo" },
-  { skill: "Giao tiếp", level: "Khá" },
-  { skill: "Làm việc nhóm", level: "Trung bình" },
-]);
+  // Dữ liệu Skills
+  const [SkillData] = useState([
+    { skill: "Tin học văn phòng", level: "Thành thạo" },
+    { skill: "Giao tiếp", level: "Khá" },
+    { skill: "Làm việc nhóm", level: "Trung bình" },
+  ]);
 
-// Dữ liệu WorkExperience
-const [WorkExperienceData] = useState({
-  ChucDanh: "Lập trình viên",
-  TenCongTy: "Công ty ABC",
-  thangnhap: "07",
-  namnhap: "2022",
-  thangcuoi: "12",
-  namcuoi: "2024",
-  text_MoTa: "Phát triển ứng dụng web và tối ưu hệ thống backend.",
-  text_DuAn: "Dự án quản lý khách hàng, hệ thống bán hàng trực tuyến.",
-});
+  // Dữ liệu WorkExperience
+  const [WorkExperienceData] = useState({
+    ChucDanh: "Lập trình viên",
+    TenCongTy: "Công ty ABC",
+    thangnhap: "07",
+    namnhap: "2022",
+    thangcuoi: "12",
+    namcuoi: "2024",
+    text_MoTa: "Phát triển ứng dụng web và tối ưu hệ thống backend.",
+    text_DuAn: "Dự án quản lý khách hàng, hệ thống bán hàng trực tuyến.",
+  });
 
-// Dữ liệu Foreign Language
-const [LanguageData] = useState([
-  { language: "Tiếng Anh", level: "Thành thạo" },
-  { language: "Tiếng Nhật", level: "Khá" },
-  { language: "Tiếng Pháp", level: "Trung bình" },
-]);
+  // Dữ liệu Foreign Language
+  const [LanguageData] = useState([
+    { language: "Tiếng Anh", level: "Thành thạo" },
+    { language: "Tiếng Nhật", level: "Khá" },
+    { language: "Tiếng Pháp", level: "Trung bình" },
+  ]);
 
-// Dữ liệu HighlightProject
-const [HighlightProjectData] = useState({
-  TenDuAn: "Hệ thống quản lý bán hàng",
-  thangnhap: "01",
-  namnhap: "2023",
-  thangcuoi: "06",
-  namcuoi: "2023",
-  text_MoTa: "Xây dựng hệ thống quản lý bán hàng với React và Node.js.",
-  link: "http://localhost:2303/cv",
-});
+  // Dữ liệu HighlightProject
+  const [HighlightProjectData] = useState({
+    TenDuAn: "Hệ thống quản lý bán hàng",
+    thangnhap: "01",
+    namnhap: "2023",
+    thangcuoi: "06",
+    namcuoi: "2023",
+    text_MoTa: "Xây dựng hệ thống quản lý bán hàng với React và Node.js.",
+    link: "http://localhost:2303/cv",
+  });
 
-// Dữ liệu Certificates
-const [CertificatesData] = useState({
-  TenChungChi: "Chứng chỉ Lập trình Web",
-  ToChuc: "Coursera",
-  thang: "05",
-  nam: "2023",
-  link: "http://localhost:2303/cv",
-  text_MoTa: "Hoàn thành khóa học lập trình web đầy đủ từ cơ bản đến nâng cao.",
-});
+  // Dữ liệu Certificates
+  const [CertificatesData] = useState({
+    TenChungChi: "Chứng chỉ Lập trình Web",
+    ToChuc: "Coursera",
+    thang: "05",
+    nam: "2023",
+    link: "http://localhost:2303/cv",
+    text_MoTa:
+      "Hoàn thành khóa học lập trình web đầy đủ từ cơ bản đến nâng cao.",
+  });
 
-// Dữ liệu Awards
-const [AwardsData] = useState({
-  TenGiaiThuong: "Giải thưởng Nhân viên xuất sắc",
-  ToChuc: "Công ty ABC",
-  thang: "12",
-  nam: "2023",
-  text_MoTa: "Được công nhận là nhân viên xuất sắc với nhiều đóng góp cho dự án.",
-});
-
+  // Dữ liệu Awards
+  const [AwardsData] = useState({
+    TenGiaiThuong: "Giải thưởng Nhân viên xuất sắc",
+    ToChuc: "Công ty ABC",
+    thang: "12",
+    nam: "2023",
+    text_MoTa:
+      "Được công nhận là nhân viên xuất sắc với nhiều đóng góp cho dự án.",
+  });
 
   const handleDownload = () => {
     const element = cvRef.current;
     const options = {
-      margin: 0,
+      margin: [0, 0, 0, 0],
       filename: "CV.pdf",
-      image: { type: "jpeg", quality: 1 },
-      html2canvas: { scale: 2, scrollY: 0 },
-      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: {
+        scale: 3,
+        useCORS: true,
+        logging: false,
+        letterRendering: true,
+        allowTaint: false,
+        backgroundColor: "#ffffff",
+      },
+      jsPDF: {
+        unit: "mm",
+        format: "a4",
+        orientation: "portrait",
+        compress: true,
+      },
+      pagebreak: { mode: ["avoid-all"] },
     };
 
     html2pdf().set(options).from(element).save();
@@ -116,11 +130,13 @@ const [AwardsData] = useState({
         className="bg-white border shadow-lg"
         ref={cvRef}
         style={{
-          width: "210mm", // chuẩn A4
+          width: "210mm",
           height: "297mm",
           padding: "0",
           boxSizing: "border-box",
-          overflow: "hidden", // đảm bảo 1 trang
+          overflow: "hidden",
+          backgroundColor: "white",
+          fontFamily: "system-ui, -apple-system, sans-serif",
         }}
       >
         <ProfileCV data={ProfileData} />
@@ -131,7 +147,7 @@ const [AwardsData] = useState({
         <ForeignLanguageCV data={LanguageData} />
         <HighlightProjectCV data={HighlightProjectData} />
         <CertificatesCV data={CertificatesData} />
-        <AwardsCV data={AwardsData}/>
+        <AwardsCV data={AwardsData} />
       </div>
 
       {/* Nút tải PDF */}

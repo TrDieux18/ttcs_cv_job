@@ -5,16 +5,24 @@ const About = ({ data = {} }) => {
     <div>
       {data.text && data.text.trim() !== "" && (
         <div>
-          <div className="flex">
-            <div className="flex-none p-5 w-36 whitespace-nowrap font-bold">
+          <div style={{ display: "flex" }}>
+            <div
+              style={{
+                flexShrink: 0,
+                padding: "20px",
+                width: "144px",
+                whiteSpace: "nowrap",
+                fontWeight: "bold",
+              }}
+            >
               Giới thiệu
             </div>
-            <p className="text-[#6B7280] text-sm p-5">
-              <span className="whitespace-pre-line">{data.text}</span>
+            <p style={{ color: "#6B7280", fontSize: "14px", padding: "20px" }}>
+              <span style={{ whiteSpace: "pre-line" }}>{data.text}</span>
             </p>
           </div>
-          <div className="px-5">
-            <hr className="border-t-2 border-[#D1D5DB]" />
+          <div style={{ paddingLeft: "20px", paddingRight: "20px" }}>
+            <hr style={{ borderTop: "2px solid #D1D5DB" }} />
           </div>
         </div>
       )}

@@ -106,6 +106,7 @@ export const createUser = async (req, res) => {
 };
 
 export const updateUser = async (req, res) => {
+  let uploadedFile = null;
   try {
     const userId = req.params.id;
     const { fullName, username, email, isActive, role_id, password } = req.body;
@@ -128,8 +129,8 @@ export const updateUser = async (req, res) => {
     }
 
     if (req.file) {
-      const result = await uploadToCloudinary(req.file.buffer, "users");
-      user.avatar = result.secure_url;
+      uploadedFile = await uploadToCloudinary(req.file.buffer, "users");
+      user.avatar = uploadedFile.secure_url;
     }
 
     const updatedUser = await user.save();
@@ -140,6 +141,14 @@ export const updateUser = async (req, res) => {
       data: updatedUser,
     });
   } catch (error) {
+    // Rollback uploaded file on error
+    if (uploadedFile?.public_id) {
+      try {
+        const cloudinary = (await import("../../configs/cloudinary.js"))
+          .default;
+        await cloudinary.uploader.destroy(uploadedFile.public_id);
+      } catch (rollbackErr) {}
+    }
     console.error("Update user error:", error);
     return res.status(500).json({ success: false, message: error.message });
   }
