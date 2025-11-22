@@ -225,8 +225,12 @@
       padding: 8px 12px;
       color: #121212;
     }
+    .ant-dropdown-menu-item:not(:last-child):hover {
+      background-color: #f6f4f4;
+      color: #000;
+    }
 
-    .ant-dropdown-menu-item:hover {
+    .ant-dropdown-menu-item:last-child:hover {
       background-color: #fdf5f5;
       color: #da3738;
     }

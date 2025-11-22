@@ -1,6 +1,8 @@
 import Job from "../../models/job.model.js";
 import Company from "../../models/company.model.js";
 import { buildJobFilter } from "../../helpers/queryFilter.js";
+import { Types } from "mongoose";
+import Application from "../../models/application.model.js";
 
 // ✅ GET MY JOBS (Company user - jobs của công ty mình)
 export const getMyJobs = async (req, res) => {
@@ -206,8 +208,7 @@ export const updateMyJob = async (req, res) => {
       job.experienceRequirement = experienceRequirement;
     if (applicationDeadline) job.applicationDeadline = applicationDeadline;
     if (specificAddress) job.specificAddress = specificAddress;
-    if (keywords)
-      job.keywords = keywords.split(",").map((k) => k.trim());
+    if (keywords) job.keywords = keywords.split(",").map((k) => k.trim());
 
     const updated = await job.save();
     const populated = await Job.findById(updated._id).populate("company");
@@ -252,6 +253,23 @@ export const deleteMyJob = async (req, res) => {
     return res.json({ success: true, message: "Xóa job thành công" });
   } catch (error) {
     console.error("deleteMyJob error:", error);
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+export const getApplicantsForMyJob = async (req, res) => {
+  try {
+    const jobId = req.params.id;
+    console.log("Fetching applicants for job ID:", jobId);
+    const applicants = await Application.find({
+      job: new Types.ObjectId(jobId),
+    })
+      .populate("user", "fullName email")
+      .populate("cv");
+    console.log(`Found ${applicants.length} applicants for job ID:`, jobId);
+    return res.json({ success: true, data: applicants });
+  } catch (error) {
+    console.error("getApplicantsForMyJob error:", error);
     return res.status(500).json({ success: false, message: error.message });
   }
 };

@@ -5,6 +5,7 @@ import {
   createMyJob,
   updateMyJob,
   deleteMyJob,
+  getApplicantsForMyJob,
 } from "../../controllers/company/job.controller.js";
 import { authMiddleware } from "../../middlewares/admin/auth.middleware.js";
 
@@ -16,5 +17,6 @@ router.get("/:id", authMiddleware, getMyJobById);
 router.post("/", authMiddleware, createMyJob);
 router.patch("/:id", authMiddleware, updateMyJob);
 router.delete("/:id", authMiddleware, deleteMyJob);
+router.get("/:id/applicants", authMiddleware, getApplicantsForMyJob);
 
 export default router;

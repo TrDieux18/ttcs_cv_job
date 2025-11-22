@@ -9,7 +9,6 @@ const axiosClient = axios.create({
   headers: { "Content-Type": "application/json" },
 });
 
-// ✅ GET MY JOBS (Company user)
 export const getMyJobs = async (query = {}) => {
   try {
     const response = await axiosClient.get("/", { params: query });
@@ -20,7 +19,6 @@ export const getMyJobs = async (query = {}) => {
   }
 };
 
-// ✅ GET MY JOB BY ID
 export const getMyJobById = async (jobId) => {
   try {
     const response = await axiosClient.get(`/${jobId}`);
@@ -31,7 +29,6 @@ export const getMyJobById = async (jobId) => {
   }
 };
 
-// ✅ CREATE JOB
 export const createMyJob = async (jobData) => {
   try {
     const response = await axiosClient.post("/", jobData);
@@ -47,7 +44,6 @@ export const createMyJob = async (jobData) => {
   }
 };
 
-// ✅ UPDATE JOB
 export const updateMyJob = async (jobId, jobData) => {
   try {
     const response = await axiosClient.patch(`/${jobId}`, jobData);
@@ -63,7 +59,6 @@ export const updateMyJob = async (jobId, jobData) => {
   }
 };
 
-// ✅ DELETE JOB
 export const deleteMyJob = async (jobId) => {
   try {
     const response = await axiosClient.delete(`/${jobId}`);
@@ -71,6 +66,21 @@ export const deleteMyJob = async (jobId) => {
     return new ApiResponse(data.success);
   } catch (error) {
     console.error("Error deleting job:", error);
+    const message = error.response?.data?.message || error.message;
+    return new ApiResponse(false, null, [message]);
+  }
+};
+
+export const getApplicantsForMyJob = async (jobId) => {
+  try {
+    const response = await axiosClient.get(`/${jobId}/applicants`);
+    const data = response.data;
+    if (!data.success) {
+      throw new Error(data.message || "Lấy danh sách ứng viên thất bại!");
+    }
+    return new ApiResponse(data.success, data.data);
+  } catch (error) {
+    console.error("Error fetching applicants for job:", error);
     const message = error.response?.data?.message || error.message;
     return new ApiResponse(false, null, [message]);
   }
