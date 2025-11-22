@@ -26,18 +26,19 @@ const Templates = () => {
     const fetchProfileData = async () => {
       try {
         setLoading(true);
-        const response = await getUserProfile();
+        const [profileResponse, cvResponse] = await Promise.all([
+          getUserProfile(),
+          getCvByUserId(),
+        ]);
 
-        if (response.success) {
-          setProfileData(response.data);
+        if (profileResponse.success) {
+          setProfileData(profileResponse.data);
         }
-        const cvResponse = await getCvByUserId();
         if (cvResponse.success) {
           setCvData(cvResponse.data);
         }
-        return response.data;
       } catch (error) {
-        message.error("Không thể tải thông tin hồ sơ!");
+        message.error("Unable to load profile data!");
       } finally {
         setLoading(false);
       }
@@ -55,7 +56,7 @@ const Templates = () => {
         return true;
       }
     } catch (error) {
-      message.error("Cập nhật thông tin thất bại!");
+      message.error("Failed to update profile!");
     } finally {
       setLoading(false);
     }
@@ -71,7 +72,7 @@ const Templates = () => {
         return true;
       }
     } catch (error) {
-      message.error("Cập nhật thông tin thất bại!");
+      message.error("Failed to update CV!");
       return false;
     } finally {
       setLoading(false);
@@ -110,7 +111,7 @@ const Templates = () => {
         to={"/cv"}
         className="border rounded-lg w-[794px] h-10 bg-[rgb(237,27,47)] text-white font-bold flex items-center justify-center mb-10"
       >
-        Xem và tải CV
+        View and Download CV
       </Link>
     </div>
   );

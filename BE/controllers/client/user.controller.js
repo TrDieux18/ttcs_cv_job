@@ -36,20 +36,19 @@ export const updateProfileUser = async (req, res) => {
   try {
     const userId = res.locals.user.id;
 
-   
     let updateData = buildUpdateData(req.body, ["introduction"]);
 
-  
     if (req.body.introduction) {
       try {
         const lines = JSON.parse(req.body.introduction);
-        updateData.introduction = lines.map((line) =>
-          capitalizeFirstLetter(line)
-        );
+        if (Array.isArray(lines) && lines.length > 0) {
+          updateData.introduction = lines.map((line) =>
+            capitalizeFirstLetter(line)
+          );
+        }
       } catch (err) {}
     }
 
- 
     if (req.file) {
       uploadedFile = await uploadToCloudinary(req.file.buffer, "users");
       updateData.avatar = uploadedFile.secure_url;
@@ -57,7 +56,6 @@ export const updateProfileUser = async (req, res) => {
       updateData.avatar = cleanValue(req.body.avatar);
     }
 
-   
     const currentUser = await User.findById(userId);
 
     if (!currentUser) {
@@ -68,7 +66,6 @@ export const updateProfileUser = async (req, res) => {
 
     // Kiểm tra dữ liệu có thay đổi không
     const hasChange = Object.entries(updateData).some(([key, value]) => {
-    
       const oldValue = currentUser[key];
       if (Array.isArray(value) || typeof value === "object") {
         return JSON.stringify(oldValue) !== JSON.stringify(value);

@@ -132,22 +132,46 @@ export const updateCv = async (req, res) => {
     if (title) {
       updateData.title = title;
     }
-    if (skillsArr !== undefined) {
+    if (
+      skillsArr !== null &&
+      skillsArr !== undefined &&
+      Array.isArray(skillsArr)
+    ) {
       updateData.skills = skillsArr;
     }
-    if (educationArr !== undefined) {
+    if (
+      educationArr !== null &&
+      educationArr !== undefined &&
+      Array.isArray(educationArr)
+    ) {
       updateData.education = educationArr;
     }
-    if (experienceArr !== undefined) {
+    if (
+      experienceArr !== null &&
+      experienceArr !== undefined &&
+      Array.isArray(experienceArr)
+    ) {
       updateData.experience = experienceArr;
     }
-    if (projectsArr !== undefined) {
+    if (
+      projectsArr !== null &&
+      projectsArr !== undefined &&
+      Array.isArray(projectsArr)
+    ) {
       updateData.projects = projectsArr;
     }
-    if (certificatesArr !== undefined) {
+    if (
+      certificatesArr !== null &&
+      certificatesArr !== undefined &&
+      Array.isArray(certificatesArr)
+    ) {
       updateData.certificates = certificatesArr;
     }
-    if (awardsArr !== undefined) {
+    if (
+      awardsArr !== null &&
+      awardsArr !== undefined &&
+      Array.isArray(awardsArr)
+    ) {
       updateData.awards = awardsArr;
     }
     if (githubLink) {

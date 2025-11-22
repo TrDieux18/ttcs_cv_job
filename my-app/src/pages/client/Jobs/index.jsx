@@ -266,7 +266,9 @@ export default function JobList() {
             <div className="mb-4 flex justify-between items-center">
               <p className="text-gray-600">
                 Tìm thấy
-                <span className="font-semibold text-gray-800">{totalJobs}</span>{" "}
+                <span className="font-semibold text-gray-800 px-1">
+                  {totalJobs}
+                </span>
                 việc làm
               </p>
             </div>

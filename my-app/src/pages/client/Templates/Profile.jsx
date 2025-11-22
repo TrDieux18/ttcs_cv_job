@@ -352,7 +352,7 @@ const Profile = ({ profileData: user, updatedProfileData }) => {
                           setTempData((prev) => ({ ...prev, gender: value }))
                         }
                         placeholder="Giới tính"
-                        className="w-full"
+                        className=" text-left w-full"
                         size="large"
                       >
                         <Select.Option value="male">Nam</Select.Option>
