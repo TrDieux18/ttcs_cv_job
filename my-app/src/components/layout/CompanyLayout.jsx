@@ -7,10 +7,8 @@ import {
   FileTextOutlined,
   ProfileOutlined,
   BarChartOutlined,
-  HomeOutlined,
-  DownOutlined,
 } from "@ant-design/icons";
-import { Layout, Menu, Dropdown, Button, message, theme } from "antd";
+import { Layout, Menu, Button, message, theme } from "antd";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout as logoutAction } from "@store/UserReducer";
@@ -21,7 +19,7 @@ const { Header, Sider, Content } = Layout;
 
 const CompanyLayout = () => {
   const user = useSelector((state) => state.user.user);
-  console.log("🏢 CompanyLayout user:", user);
+
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -33,9 +31,9 @@ const CompanyLayout = () => {
 
   const sidebarItems = [
     {
-      key: "/",
-      icon: <HomeOutlined />,
-      label: "Trang chủ",
+      key: "/company/profile",
+      icon: <UserOutlined />,
+      label: "Hồ sơ công ty",
     },
     {
       key: "/company/my-jobs",
@@ -50,7 +48,14 @@ const CompanyLayout = () => {
     {
       key: "/company/reports",
       icon: <BarChartOutlined />,
-      label: "Báo cáo tuyển dụng",
+      label: "Báo cáo ",
+    },
+
+    {
+      key: "logout",
+      icon: <LogoutOutlined />,
+      label: "Đăng xuất",
+      danger: true,
     },
   ];
 
@@ -64,36 +69,15 @@ const CompanyLayout = () => {
         navigate("/");
       }, 500);
     } catch (error) {
-      console.error("Logout error:", error);
       messageApi.error("Đăng xuất thất bại!");
     }
   };
 
-  const profileMenu = {
-    items: [
-      {
-        key: "profile",
-        label: "Hồ sơ công ty",
-        icon: <UserOutlined />,
-      },
-      { type: "divider" },
-      {
-        key: "logout",
-        label: "Đăng xuất",
-        icon: <LogoutOutlined />,
-        danger: true,
-      },
-    ],
-    onClick: async ({ key }) => {
-      if (key === "logout") {
-        handleLogout();
-      } else if (key === "profile") {
-        navigate("/company/profile");
-      }
-    },
-  };
-
   const handleMenuClick = ({ key }) => {
+    if (key === "logout") {
+      handleLogout();
+      return;
+    }
     navigate(key);
   };
 
@@ -119,38 +103,20 @@ const CompanyLayout = () => {
         >
           {collapsed ? (
             <img
-              src={user?.avatar || "https://via.placeholder.com/40"}
+              src={user?.avatar}
               alt="avatar"
               className="w-8 h-8 rounded-full border object-cover"
             />
           ) : (
-            <div className="w-[90%] px-2 py-1 rounded-lg bg-[#fff] border-[#eee] border-[2px]">
-              <Dropdown
-                menu={profileMenu}
-                trigger={["click"]}
-                placement="bottom"
-                arrow
-                overlayClassName="custom-dropdown-two"
-              >
-                <div className="flex justify-between items-center gap-2 cursor-pointer select-none">
-                  <div className="flex items-center gap-1">
-                    <img
-                      src={user?.avatar || "https://via.placeholder.com/40"}
-                      alt="avatar"
-                      className="w-8 h-8 rounded-full border object-cover"
-                    />
-                    <span className="text-gray-700 font-medium text-sm">
-                      {user?.fullName || user?.companyName || "Công ty"}
-                    </span>
-                  </div>
-                  <DownOutlined
-                    style={{
-                      fontSize: 14,
-                      fontWeight: 600,
-                    }}
-                  />
-                </div>
-              </Dropdown>
+            <div className="flex items-center gap-2 px-3 py-1 rounded-lg w-[78%] justify-center">
+              <img
+                src={user?.avatar || "https://via.placeholder.com/40"}
+                alt="avatar"
+                className="w-8 h-8 rounded-full border object-cover"
+              />
+              <span className="text-gray-700 font-medium text-[15px]">
+                {user?.fullName || user?.companyName || "Công ty"}
+              </span>
             </div>
           )}
         </div>

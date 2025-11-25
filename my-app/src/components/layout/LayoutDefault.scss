@@ -195,9 +195,14 @@
       color: #121212;
     }
 
-    .ant-dropdown-menu-item:not(:first-child):hover {
+    .ant-dropdown-menu-item:not(:first-child):not(:last-child):hover {
       background-color: #e6f7f4;
       color: #0f766e;
+    }
+
+    .ant-dropdown-menu-item:last-child:hover {
+      background-color: #fdf5f5;
+      color: #da3738;
     }
 
     .ant-dropdown-menu-item-divider {

@@ -1,0 +1,137 @@
+[
+  {
+    "_id": {
+      "$oid": "6901b111a9c2d3e4f5a6b701"
+    },
+    "title": "Frontend Developer (ReactJS)",
+    "description": "Phát triển giao diện web sử dụng ReactJS, TailwindCSS. Tham gia tối ưu hiệu năng và UX/UI cho các sản phẩm thương mại.",
+    "company": {
+      "$oid": "6901a3c1e2f3a4b5c6d7e801"
+    },
+    "location": "Hanoi",
+    "salary": "15 - 25 triệu",
+    "jobType": "Full-time",
+    "category": "Frontend Development",
+    "isFeatured": false,
+    "requirements": "<ul><li>Kinh nghiệm với ReactJS và ES6.</li><li>Biết Redux Toolkit là lợi thế.</li><li>Nắm vững HTML5, CSS3.</li></ul>",
+    "benefits": "<ul><li>Thưởng quý và thưởng dự án.</li><li>Đóng BHXH đầy đủ.</li><li>Không OT.</li></ul>",
+    "level": "Junior",
+    "genderRequirement": "Không yêu cầu",
+    "hiringQuantity": 3,
+    "degreeRequirement": "Không yêu cầu",
+    "experienceRequirement": "Tối thiểu 6 tháng",
+    "applicationDeadline": {
+      "$date": "2025-12-15T17:00:00.000Z"
+    },
+    "specificAddress": "Tòa nhà Technosoft, Duy Tân, Cầu Giấy, Hà Nội",
+    "keywords": ["ReactJS", "Frontend", "JavaScript", "UI", "Hanoi"]
+  },
+  {
+    "_id": {
+      "$oid": "6901b112fedcc4e5a6b7c802"
+    },
+    "title": "NodeJS Backend Developer",
+    "description": "Phát triển API backend với NodeJS/Express, kết nối hệ thống microservices quy mô lớn.",
+    "company": {
+      "$oid": "6901c8a2bbf5e4d3a9c0e901"
+    },
+    "location": "Ho Chi Minh",
+    "salary": "20 - 35 triệu",
+    "jobType": "Full-time",
+    "category": "Backend Development",
+    "isFeatured": true,
+    "requirements": "<ul><li>Nắm vững NodeJS, ExpressJS.</li><li>Kinh nghiệm với MongoDB.</li><li>Biết Docker, Redis là lợi thế.</li></ul>",
+    "benefits": "<ul><li>Review lương 2 lần/năm.</li><li>Chế độ khám sức khỏe tổng quát.</li><li>Du lịch công ty hàng năm.</li></ul>",
+    "level": "Middle",
+    "genderRequirement": "Không yêu cầu",
+    "hiringQuantity": 5,
+    "degreeRequirement": "Cao đẳng trở lên",
+    "experienceRequirement": "1 - 2 năm",
+    "applicationDeadline": {
+      "$date": "2025-12-20T17:00:00.000Z"
+    },
+    "specificAddress": "Quận 1, TP. HCM",
+    "keywords": ["NodeJS", "Backend", "Express", "MongoDB", "HCM"]
+  },
+  {
+    "_id": {
+      "$oid": "6901b113cd98a7b6c7d8e903"
+    },
+    "title": "Mobile Developer (Flutter)",
+    "description": "Xây dựng ứng dụng mobile đa nền tảng Android/iOS bằng Flutter cho dự án thương mại điện tử.",
+    "company": {
+      "$oid": "6901d7a4f1b2c3d4e5f60702"
+    },
+    "location": "Da Nang",
+    "salary": "12 - 22 triệu",
+    "jobType": "Full-time",
+    "category": "Mobile Development",
+    "isFeatured": false,
+    "requirements": "<ul><li>Thành thạo Dart/Flutter.</li><li>Kinh nghiệm làm việc với REST API.</li><li>Hiểu biết Firebase là lợi thế.</li></ul>",
+    "benefits": "<ul><li>Môi trường năng động, trẻ trung.</li><li>Thưởng tháng 13.</li><li>Hỗ trợ học tập & chứng chỉ.</li></ul>",
+    "level": "Fresher / Junior",
+    "genderRequirement": "Không yêu cầu",
+    "hiringQuantity": 2,
+    "degreeRequirement": "Không yêu cầu",
+    "experienceRequirement": "Không yêu cầu kinh nghiệm",
+    "applicationDeadline": {
+      "$date": "2025-12-10T17:00:00.000Z"
+    },
+    "specificAddress": "Tòa nhà VNPT, Hải Châu, Đà Nẵng",
+    "keywords": ["Flutter", "Mobile", "Dart", "Da Nang"]
+  },
+  {
+    "_id": {
+      "$oid": "6901b114aa77bb88cc99dd04"
+    },
+    "title": "UI/UX Designer",
+    "description": "Thiết kế giao diện, prototype cho ứng dụng web/mobile. Làm việc chặt chẽ với team frontend.",
+    "company": {
+      "$oid": "6901e2f3c4d5e6a7b8c9f003"
+    },
+    "location": "Hanoi",
+    "salary": "12 - 18 triệu",
+    "jobType": "Part-time",
+    "category": "Design",
+    "isFeatured": true,
+    "requirements": "<ul><li>Biết Figma.</li><li>Tư duy thiết kế tốt.</li><li>Biết tạo prototyping.</li></ul>",
+    "benefits": "<ul><li>Được training bởi Senior Designer.</li><li>Môi trường sáng tạo.</li><li>Thời gian linh hoạt.</li></ul>",
+    "level": "Junior",
+    "genderRequirement": "Không yêu cầu",
+    "hiringQuantity": 1,
+    "degreeRequirement": "Không yêu cầu",
+    "experienceRequirement": "6 tháng trở lên",
+    "applicationDeadline": {
+      "$date": "2025-11-30T17:00:00.000Z"
+    },
+    "specificAddress": "Tòa nhà Keangnam, Nam Từ Liêm, Hà Nội",
+    "keywords": ["UIUX", "Design", "Figma", "Hanoi"]
+  },
+  {
+    "_id": {
+      "$oid": "6901b115efccddeeff001105"
+    },
+    "title": "QA/QC Tester (Manual)",
+    "description": "Kiểm thử phần mềm, viết testcase, phối hợp với team dev và BA đảm bảo chất lượng sản phẩm.",
+    "company": {
+      "$oid": "6901f0b3a5d6c7e8f9a00004"
+    },
+    "location": "Ho Chi Minh",
+    "salary": "8 - 15 triệu",
+    "jobType": "Full-time",
+    "category": "Quality Assurance",
+    "isFeatured": false,
+    "requirements": "<ul><li>Hiểu quy trình kiểm thử.</li><li>Biết viết Testcase.</li><li>Cẩn thận, tỉ mỉ.</li></ul>",
+    "benefits": "<ul><li>Thưởng theo dự án.</li><li>Teambuilding hàng quý.</li><li>Có lộ trình lên QA Lead.</li></ul>",
+    "level": "Fresher",
+    "genderRequirement": "Không yêu cầu",
+    "hiringQuantity": 4,
+    "degreeRequirement": "Cao đẳng",
+    "experienceRequirement": "Không yêu cầu kinh nghiệm",
+    "applicationDeadline": {
+      "$date": "2025-12-05T17:00:00.000Z"
+    },
+    "specificAddress": "Quận Bình Thạnh, TP. HCM",
+    "keywords": ["Tester", "QA", "Manual Test", "HCM"]
+  }
+]

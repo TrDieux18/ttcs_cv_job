@@ -47,11 +47,7 @@ const LayoutDefault = () => {
       label: "Tổng quan",
       icon: <LuLayoutDashboard size={16} />,
     },
-    {
-      key: "cv",
-      label: "Hồ sơ đính kèm",
-      icon: <LuFileText size={16} />,
-    },
+
     {
       key: "profile",
       label: "Hồ sơ cá nhân",
@@ -62,21 +58,13 @@ const LayoutDefault = () => {
       label: "Việc làm của tôi",
       icon: <LuBriefcase size={16} />,
     },
-    {
-      key: "invitation",
-      label: "Lời mời công việc",
-      icon: <LuInbox size={16} />,
-    },
+
     {
       key: "notification",
       label: "Thông báo",
       icon: <LuBell size={16} />,
     },
-    {
-      key: "setting",
-      label: "Cài đặt",
-      icon: <LuSettings size={16} />,
-    },
+
     {
       key: "logout",
       label: "Đăng xuất",
@@ -130,7 +118,9 @@ const LayoutDefault = () => {
     <div className="layout-default">
       <header className="layout-header bg-gradient-to-r from-green-700 to-teal-500 fixed top-0 left-0 right-0 z-50 shadow-md">
         <div className="layout-header__logo">
-          <NavLink to={"/"}>Home</NavLink>
+          <NavLink to={"/"}>
+            <img className="w-25" src="./logo.png" alt="Logo" />
+          </NavLink>
         </div>
         <div className="layout-header__menu">
           <ul>

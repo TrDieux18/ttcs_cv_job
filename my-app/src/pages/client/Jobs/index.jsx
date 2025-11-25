@@ -37,7 +37,7 @@ const optionCity = [
 ];
 
 export default function JobList() {
-  const navigate = useNavigate();
+
 
   const user = useSelector((state) => state.user.user);
   const appliedJobIds = useSelector((state) => state.appliedJobs.appliedJobs);

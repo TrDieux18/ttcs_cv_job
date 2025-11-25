@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ApiResponse } from "@types/response/ApiResponse";
 
-const BASE_URL = "http://localhost:3002/company/my-jobs";
+const BASE_URL = "http://localhost:3002/company/job";
 
 const axiosClient = axios.create({
   baseURL: BASE_URL,
@@ -31,7 +31,7 @@ export const getMyJobById = async (jobId) => {
 
 export const createMyJob = async (jobData) => {
   try {
-    const response = await axiosClient.post("/", jobData);
+    const response = await axiosClient.post("", jobData);
     const data = response.data;
     if (!data.success) {
       throw new Error(data.message || "Tạo job thất bại!");
@@ -60,9 +60,13 @@ export const updateMyJob = async (jobId, jobData) => {
 };
 
 export const deleteMyJob = async (jobId) => {
+  console.log("Deleting job with ID:", jobId);
   try {
     const response = await axiosClient.delete(`/${jobId}`);
     const data = response.data;
+    if (!data.success) {
+      throw new Error(data.message || "Xoá công việc thất bại!");
+    }
     return new ApiResponse(data.success);
   } catch (error) {
     console.error("Error deleting job:", error);

@@ -4,7 +4,6 @@ import { buildJobFilter } from "../../helpers/queryFilter.js";
 import { Types } from "mongoose";
 import Application from "../../models/application.model.js";
 
-// ✅ GET MY JOBS (Company user - jobs của công ty mình)
 export const getMyJobs = async (req, res) => {
   try {
     const userId = res.locals.user.id;
@@ -48,24 +47,13 @@ export const getMyJobs = async (req, res) => {
   }
 };
 
-// ✅ GET MY JOB BY ID (Company user)
 export const getMyJobById = async (req, res) => {
   try {
-    const userId = req.user._id;
     const jobId = req.params.id;
-
-    const company = await Company.findOne({ user: userId });
-    if (!company) {
-      return res.status(404).json({
-        success: false,
-        message: "Bạn chưa có công ty",
-      });
-    }
 
     const job = await Job.findOne({
       _id: jobId,
-      company: company._id,
-    }).populate("company");
+    });
 
     if (!job) {
       return res.status(404).json({
@@ -81,10 +69,10 @@ export const getMyJobById = async (req, res) => {
   }
 };
 
-// ✅ CREATE JOB (Company user)
 export const createMyJob = async (req, res) => {
   try {
-    const userId = req.user._id;
+    const userId = res.locals.user.id;
+
     const {
       title,
       description,
@@ -104,8 +92,8 @@ export const createMyJob = async (req, res) => {
       keywords,
     } = req.body;
 
-    // Tìm company của user
-    const company = await Company.findOne({ user: userId });
+    const company = await Company.findOne({ user: userId }).select("_id");
+
     if (!company) {
       return res.status(404).json({
         success: false,
@@ -113,7 +101,6 @@ export const createMyJob = async (req, res) => {
       });
     }
 
-    // Validate required
     if (!title || !description || !location) {
       return res.status(400).json({
         success: false,
@@ -124,7 +111,7 @@ export const createMyJob = async (req, res) => {
     const job = new Job({
       title,
       description,
-      company: company._id,
+      company: new Types.ObjectId(company),
       location,
       salary,
       jobType,
@@ -138,23 +125,21 @@ export const createMyJob = async (req, res) => {
       experienceRequirement,
       applicationDeadline,
       specificAddress,
-      keywords: keywords ? keywords.split(",").map((k) => k.trim()) : [],
+      keywords: keywords,
     });
+    console.log(job);
 
     const saved = await job.save();
-    const populated = await Job.findById(saved._id).populate("company");
 
-    return res.status(201).json({ success: true, data: populated });
+    return res.status(201).json({ success: true });
   } catch (error) {
     console.error("createMyJob error:", error);
     return res.status(500).json({ success: false, message: error.message });
   }
 };
 
-// ✅ UPDATE MY JOB (Company user)
 export const updateMyJob = async (req, res) => {
   try {
-    const userId = req.user._id;
     const jobId = req.params.id;
     const {
       title,
@@ -175,15 +160,7 @@ export const updateMyJob = async (req, res) => {
       keywords,
     } = req.body;
 
-    const company = await Company.findOne({ user: userId });
-    if (!company) {
-      return res.status(404).json({
-        success: false,
-        message: "Bạn chưa có công ty",
-      });
-    }
-
-    const job = await Job.findOne({ _id: jobId, company: company._id });
+    const job = await Job.findOne({ _id: new Types.ObjectId(jobId) });
     if (!job) {
       return res.status(404).json({
         success: false,
@@ -191,7 +168,6 @@ export const updateMyJob = async (req, res) => {
       });
     }
 
-    // Update fields
     if (title) job.title = title;
     if (description) job.description = description;
     if (location) job.location = location;
@@ -208,15 +184,20 @@ export const updateMyJob = async (req, res) => {
       job.experienceRequirement = experienceRequirement;
     if (applicationDeadline) job.applicationDeadline = applicationDeadline;
     if (specificAddress) job.specificAddress = specificAddress;
-    if (keywords) job.keywords = keywords.split(",").map((k) => k.trim());
+    if (keywords) job.keywords = keywords;
 
     const updated = await job.save();
-    const populated = await Job.findById(updated._id).populate("company");
+    if (!updated) {
+      return res.status(500).json({
+        success: false,
+        message: "Cập nhật công việc thất bại",
+      });
+    }
 
     return res.json({
       success: true,
       message: "Cập nhật job thành công",
-      data: populated,
+      data: updated,
     });
   } catch (error) {
     console.error("updateMyJob error:", error);
@@ -224,24 +205,11 @@ export const updateMyJob = async (req, res) => {
   }
 };
 
-// ✅ DELETE MY JOB (Company user)
 export const deleteMyJob = async (req, res) => {
   try {
-    const userId = req.user._id;
-    const jobId = req.params.id;
+    const { id } = req.params;
 
-    const company = await Company.findOne({ user: userId });
-    if (!company) {
-      return res.status(404).json({
-        success: false,
-        message: "Bạn chưa có công ty",
-      });
-    }
-
-    const deleted = await Job.findOneAndDelete({
-      _id: jobId,
-      company: company._id,
-    });
+    const deleted = await Job.findByIdAndDelete(new Types.ObjectId(id));
 
     if (!deleted) {
       return res.status(404).json({
@@ -250,7 +218,7 @@ export const deleteMyJob = async (req, res) => {
       });
     }
 
-    return res.json({ success: true, message: "Xóa job thành công" });
+    return res.json({ success: true, message: "Xóa công việc thành công" });
   } catch (error) {
     console.error("deleteMyJob error:", error);
     return res.status(500).json({ success: false, message: error.message });
@@ -260,13 +228,13 @@ export const deleteMyJob = async (req, res) => {
 export const getApplicantsForMyJob = async (req, res) => {
   try {
     const jobId = req.params.id;
-    console.log("Fetching applicants for job ID:", jobId);
+
     const applicants = await Application.find({
       job: new Types.ObjectId(jobId),
     })
       .populate("user", "fullName email")
       .populate("cv");
-    console.log(`Found ${applicants.length} applicants for job ID:`, jobId);
+
     return res.json({ success: true, data: applicants });
   } catch (error) {
     console.error("getApplicantsForMyJob error:", error);

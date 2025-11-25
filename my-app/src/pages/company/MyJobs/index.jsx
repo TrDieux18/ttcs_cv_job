@@ -15,6 +15,7 @@ import {
   Dropdown,
   Menu,
   Modal,
+  Select,
 } from "antd";
 import {
   DeleteOutlined,
@@ -24,20 +25,23 @@ import {
   EyeOutlined,
   MoreOutlined,
   UserOutlined,
-  DownloadOutlined,
 } from "@ant-design/icons";
+
+import { updateStatusApplicant } from "@services/company/ApplicantService";
+
+const { Option } = Select;
 const tagClass = (jobType) => {
   switch (jobType) {
     case "Full-time":
-      return "bg-blue-50 text-blue-800 border border-blue-200 rounded-sm px-3 py-1 font-semibold";
+      return "bg-blue-50 text-blue-800 border border-blue-200 rounded-sm px-2 py-1 font-semibold";
     case "Part-time":
-      return "bg-green-50 text-green-800 border border-green-200 rounded-sm px-3 py-1 font-semibold";
+      return "bg-green-50 text-green-800 border border-green-200 rounded-sm px-2 py-1 font-semibold";
     case "Contract":
-      return "bg-orange-50 text-orange-800 border border-orange-200 rounded-sm px-3 py-1 font-semibold";
+      return "bg-orange-50 text-orange-800 border border-orange-200 rounded-sm px-2 py-1 font-semibold";
     case "Internship":
-      return "bg-purple-50 text-purple-800 border border-purple-200 rounded-sm px-3 py-1 font-semibold";
+      return "bg-purple-50 text-purple-800 border border-purple-200 rounded-sm px-2 py-1 font-semibold";
     default:
-      return "bg-gray-50 text-gray-800 border border-gray-200 rounded-sm px-3 py-1 font-semibold";
+      return "bg-gray-50 text-gray-800 border border-gray-200 rounded-sm px-2 py-1 font-semibold";
   }
 };
 
@@ -58,10 +62,17 @@ export default function MyJobsPage() {
   const [applicants, setApplicants] = useState([]);
   const [applicantsLoading, setApplicantsLoading] = useState(false);
 
-  const fetchJobs = async (page = 1, limit = 10, search = "") => {
+  const [jobTypeFilter, setJobTypeFilter] = useState("");
+
+  const fetchJobs = async (page = 1, limit = 10) => {
     try {
       setLoading(true);
-      const query = { page, limit, keyword: search?.trim() };
+      const query = {
+        page,
+        limit,
+        keyword: keyword?.trim(),
+        jobType: jobTypeFilter || undefined,
+      };
       const res = await getMyJobs(query);
       setJobs(res.data);
       setPagination({ current: page, pageSize: limit, total: res.total });
@@ -78,10 +89,12 @@ export default function MyJobsPage() {
 
   const handleTableChange = (newPag) =>
     fetchJobs(newPag.current, newPag.pageSize, keyword);
-  const handleSearch = () => fetchJobs(1, pagination.pageSize, keyword);
+  const handleSearch = () => fetchJobs(1, pagination.pageSize);
 
   const handleDelete = async (id) => {
+    console.log("Deleting job with id:", id);
     try {
+      setLoading(true);
       const res = await deleteMyJob(id);
       if (res.success) {
         messageApi.success("Xóa công việc thành công");
@@ -89,6 +102,8 @@ export default function MyJobsPage() {
       } else messageApi.error("Xóa thất bại");
     } catch {
       messageApi.error("Xóa thất bại");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -111,7 +126,6 @@ export default function MyJobsPage() {
       setApplicantsLoading(false);
     }
   };
-  console.log(applicants);
 
   const handleCloseApplicantsModal = () => {
     setApplicantsModalVisible(false);
@@ -194,7 +208,7 @@ export default function MyJobsPage() {
           <Menu className="w-44" selectable={false}>
             <Menu.Item
               key="view"
-              onClick={() => navigate(`/company/my-jobs/${record._id}`)}
+              onClick={() => navigate(`/company/my-jobs/update/${record._id}`)}
               className="flex items-center gap-2 px-3 py-2"
             >
               <EyeOutlined className="text-base text-gray-600 mr-2" />
@@ -249,31 +263,25 @@ export default function MyJobsPage() {
     },
   ];
 
-  const getStatusDisplay = (status) => {
-    const statusMap = {
-      pending: {
-        text: "Chờ xử lý",
-        class: "bg-yellow-50 text-yellow-800 border-yellow-200",
-      },
-      reviewing: {
-        text: "Đang xem xét",
-        class: "bg-blue-50 text-blue-800 border-blue-200",
-      },
-      approved: {
-        text: "Phù hợp",
-        class: "bg-green-50 text-green-800 border-green-200",
-      },
-      rejected: {
-        text: "Từ chối",
-        class: "bg-red-50 text-red-800 border-red-200",
-      },
-    };
-    return (
-      statusMap[status] || {
-        text: status,
-        class: "bg-gray-50 text-gray-800 border-gray-200",
+  const handleChangeStatusApplicant = async (applicantId, newStatus) => {
+    try {
+      setLoading(true);
+      const response = await updateStatusApplicant(applicantId, newStatus);
+      if (response.success) {
+        setApplicants((prev) =>
+          prev.map((applicant) =>
+            applicant._id === applicantId
+              ? { ...applicant, status: newStatus.toString() }
+              : applicant
+          )
+        );
+        messageApi.success("Cập nhật trạng thái ứng viên thành công");
       }
-    );
+    } catch (error) {
+      console.error("Failed to update applicant status", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const applicantsColumns = [
@@ -342,14 +350,30 @@ export default function MyJobsPage() {
       dataIndex: "status",
       key: "status",
       align: "center",
-      render: (status) => {
-        const { text, class: statusClass } = getStatusDisplay(status);
+      render: (_, record) => {
         return (
-          <span
-            className={`px-3 py-1 rounded-sm border font-semibold text-xs ${statusClass}`}
+          <Select
+            className={`px-2 py-1 w-30  `}
+            onChange={(newStatus) =>
+              handleChangeStatusApplicant(record._id, newStatus)
+            }
+            defaultValue="pending"
+            value={record.status}
           >
-            {text}
-          </span>
+            <Option value="pending">
+              <span className="text-yellow-500">Chờ xử lý</span>
+            </Option>
+            <Option value="reviewed">
+              <span className="text-blue-500">Đã xem</span>
+            </Option>
+            <Option value="accepted">
+              <span className="text-green-500">Chấp nhận</span>
+            </Option>
+
+            <Option value="rejected">
+              <span className="text-red-500">Từ chối</span>
+            </Option>
+          </Select>
         );
       },
     },
@@ -391,32 +415,31 @@ export default function MyJobsPage() {
           </h1>
 
           <div className="flex items-center gap-2">
-            <div className="flex items-center bg-white border border-gray-200 rounded-md px-3 py-1 shadow-sm">
-              <SearchOutlined className="text-gray-400 mr-2" />
-              <Input
-                placeholder="Tìm kiếm..."
-                value={keyword}
-                onChange={(e) => setKeyword(e.target.value)}
-                onPressEnter={handleSearch}
-                style={{ width: 200 }}
-              />
-            </div>
-
-            <Button
-              type="default"
-              onClick={handleSearch}
-              className="border border-gray-200 bg-white hover:bg-gray-50"
+            <Input
+              placeholder="Tìm kiếm ..."
+              value={keyword}
+              onChange={(e) => setKeyword(e.target.value)}
+              onPressEnter={() => fetchJobs(1)}
+              style={{ width: 250 }}
+              prefix={<SearchOutlined />}
+            />
+            <Select
+              placeholder="Chọn loại hình"
+              value={jobTypeFilter || "all"}
+              onChange={(value) => setJobTypeFilter(value)}
+              allowClear
+              style={{ width: 150 }}
+              defaultValue="all"
             >
+              <Option value="all">Tất cả</Option>
+
+              <Option value="Full-time">Full-time</Option>
+              <Option value="Part-time">Part-time</Option>
+              <Option value="Contract">Contract</Option>
+              <Option value="Internship">Internship</Option>
+            </Select>
+            <Button type="default" onClick={() => fetchJobs(1)}>
               Tìm
-            </Button>
-
-            <Button
-              type="primary"
-              icon={<PlusOutlined />}
-              onClick={() => navigate("/company/my-jobs/create")}
-              className="bg-primaryGreen border-primaryGreen hover:bg-green-700"
-            >
-              Đăng tin mới
             </Button>
           </div>
         </div>
@@ -433,7 +456,6 @@ export default function MyJobsPage() {
               showTotal: (t) => `Tổng ${t} công việc`,
             }}
             onChange={handleTableChange}
-            bordered={false}
             sticky
             rowClassName={() => "hover:bg-gray-50 transition-colors"}
             locale={{ emptyText: "Chưa có công việc nào" }}
@@ -462,7 +484,7 @@ export default function MyJobsPage() {
             Đóng
           </Button>,
         ]}
-        width={1000}
+        width={1300}
         centered
       >
         <div className="mt-4">

@@ -11,7 +11,7 @@ import { authMiddleware } from "../../middlewares/admin/auth.middleware.js";
 
 const router = express.Router();
 
-// Company user routes for managing their own jobs
+
 router.get("/", authMiddleware, getMyJobs);
 router.get("/:id", authMiddleware, getMyJobById);
 router.post("/", authMiddleware, createMyJob);

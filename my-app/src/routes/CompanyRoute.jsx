@@ -16,7 +16,7 @@ const companyRoutes = [
         element: <CompanyLayout />,
         children: [
           {
-            path: "my-company",
+            path: "profile",
             element: <MyCompany />,
           },
           {

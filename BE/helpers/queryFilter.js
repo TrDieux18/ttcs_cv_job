@@ -62,11 +62,15 @@ export const buildJobFilter = (queryParams) => {
       "benefits",
       "specificAddress",
     ],
-    exactFields: ["jobType", "company"],
+    exactFields: ["company"],
     booleanFields: ["isFeatured"],
     useLocation: true,
     textSearchField: "keyword",
   });
+
+  if (queryParams.jobType && queryParams.jobType !== "all") {
+    filter.jobType = { $regex: new RegExp(`^${queryParams.jobType}$`, "i") };
+  }
 
   if (queryParams.search) {
     const regex = new RegExp(queryParams.search, "i");
@@ -76,7 +80,7 @@ export const buildJobFilter = (queryParams) => {
       { category: regex },
       { level: regex },
       { location: regex },
-      { jobType: regex },
+  
     ];
   }
 

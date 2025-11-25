@@ -19,6 +19,8 @@ import {
   getMyJobById,
 } from "@services/company/JobService";
 import dayjs from "dayjs";
+import { toHtmlList } from "@helpers/toHtmlList";
+import { htmlListToText } from "@helpers/htmlListToText";
 
 const { TextArea } = Input;
 
@@ -28,12 +30,6 @@ const MyJobForm = ({ mode }) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const isEdit = mode === "update";
-
-  useEffect(() => {
-    if (isEdit && id) {
-      fetchJob();
-    }
-  }, [id, isEdit]);
 
   const fetchJob = async () => {
     try {
@@ -45,6 +41,8 @@ const MyJobForm = ({ mode }) => {
           applicationDeadline: response.data.applicationDeadline
             ? dayjs(response.data.applicationDeadline)
             : null,
+          requirements: htmlListToText(response.data.requirements || ""),
+          benefits: htmlListToText(response.data.benefits || ""),
           keywords: response.data.keywords?.join(", "),
         });
       }
@@ -56,13 +54,25 @@ const MyJobForm = ({ mode }) => {
     }
   };
 
+  useEffect(() => {
+    if (isEdit && id) {
+      fetchJob();
+    }
+  }, [id, isEdit]);
+
   const handleSubmit = async (values) => {
     try {
+      setLoading(true);
       const jobData = {
         ...values,
         applicationDeadline: values.applicationDeadline
           ? values.applicationDeadline.toISOString()
           : null,
+        benefits: toHtmlList(values.benefits || ""),
+        requirements: toHtmlList(values.requirements || ""),
+        keywords: values.keywords
+          ? values.keywords.split(",").map((kw) => kw.trim())
+          : [],
       };
 
       let response;
@@ -82,16 +92,17 @@ const MyJobForm = ({ mode }) => {
       }
     } catch (error) {
       message.error("Đã xảy ra lỗi!");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 py-10 px-4">
-      <div className="mx-auto max-w-5xl">
-        {/* Header */}
+    <div className="min-h-screen py-5 px-4">
+      <div className="mx-auto max-w-6xl">
         <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-emerald-600">
+            <p className="font-semibold uppercase tracking-[0.25em] text-blue-400">
               {isEdit ? "Cập nhật tin tuyển dụng" : "Tạo tin tuyển dụng mới"}
             </p>
             <h1 className="mt-2 text-2xl sm:text-3xl font-semibold text-slate-900">
@@ -102,15 +113,6 @@ const MyJobForm = ({ mode }) => {
               viên tiềm năng.
             </p>
           </div>
-          <div className="flex justify-end">
-            <Button
-              type="default"
-              icon={<ArrowLeftOutlined />}
-              onClick={() => navigate(-1)}
-            >
-              Quay lại
-            </Button>
-          </div>
         </div>
 
         <Form
@@ -119,13 +121,10 @@ const MyJobForm = ({ mode }) => {
           onFinish={handleSubmit}
           className="space-y-6"
         >
-          <Card
-            className="border-0 shadow-xl rounded-2xl bg-white/90 backdrop-blur-sm"
-            bodyStyle={{ padding: 24 }}
-          >
+          <Card className="border-0 shadow-xl rounded-2xl bg-white/90 backdrop-blur-sm">
             <Row gutter={[16, 16]}>
               <Col span={24}>
-                <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-500">
+                <h2 className="text-[22px] font-semibold uppercase tracking-wide text-slate-500">
                   Thông tin chung
                 </h2>
               </Col>
@@ -183,7 +182,7 @@ const MyJobForm = ({ mode }) => {
               </Col>
 
               <Col span={24}>
-                <h2 className="mt-2 mb-3 text-sm font-semibold uppercase tracking-wide text-slate-500">
+                <h2 className="text-[22px] font-semibold uppercase tracking-wide text-slate-500">
                   Chi tiết tuyển dụng
                 </h2>
               </Col>
@@ -235,10 +234,13 @@ const MyJobForm = ({ mode }) => {
                   label="Số lượng tuyển"
                   name="hiringQuantity"
                   initialValue={1}
+                  className="w-full"
                 >
                   <InputNumber
                     min={1}
-                    className="w-full rounded-lg border-slate-200 bg-slate-50"
+                    style={{ width: "100%" }}
+                    addonAfter="ứng viên"
+                    className="rounded-lg border-slate-200 bg-slate-50"
                   />
                 </Form.Item>
               </Col>
@@ -253,7 +255,7 @@ const MyJobForm = ({ mode }) => {
               </Col>
 
               <Col span={24}>
-                <h2 className="mt-2 mb-3 text-sm font-semibold uppercase tracking-wide text-slate-500">
+                <h2 className="text-[22px] font-semibold uppercase tracking-wide text-slate-500">
                   Yêu cầu ứng viên
                 </h2>
               </Col>
@@ -299,14 +301,14 @@ const MyJobForm = ({ mode }) => {
                 <Form.Item label="Yêu cầu công việc" name="requirements">
                   <TextArea
                     rows={4}
-                    placeholder="- Yêu cầu 1&#10;- Yêu cầu 2&#10;..."
+                    placeholder="Yêu cầu 1&#10;Yêu cầu 2&#10;..."
                     className="rounded-lg border-slate-200 bg-slate-50 focus:bg-white"
                   />
                 </Form.Item>
               </Col>
 
               <Col span={24}>
-                <h2 className="mt-2 mb-3 text-sm font-semibold uppercase tracking-wide text-slate-500">
+                <h2 className="text-[22px] font-semibold uppercase tracking-wide text-slate-500">
                   Quyền lợi & từ khóa
                 </h2>
               </Col>
@@ -315,7 +317,7 @@ const MyJobForm = ({ mode }) => {
                 <Form.Item label="Quyền lợi" name="benefits">
                   <TextArea
                     rows={4}
-                    placeholder="- Lương tháng 13&#10;- Bảo hiểm đầy đủ&#10;..."
+                    placeholder="Lương tháng 13&#10;Bảo hiểm đầy đủ&#10;..."
                     className="rounded-lg border-slate-200 bg-slate-50 focus:bg-white"
                   />
                 </Form.Item>
@@ -348,7 +350,7 @@ const MyJobForm = ({ mode }) => {
                       type="primary"
                       htmlType="submit"
                       loading={loading}
-                      className="!bg-emerald-500 hover:!bg-emerald-600 !border-none"
+                      className="!bg-blue-400 hover:!bg-blue-500 !border-none"
                     >
                       {isEdit ? "Cập nhật" : "Đăng tin"}
                     </Button>

@@ -176,102 +176,100 @@ const DetailCompany = () => {
           </motion.div>
 
           <motion.div
-            className="pl-7 w-[35%] flex flex-col"
+            className="pl-7 w-[35%] flex flex-col "
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <h2 className="text-[22px] font-bold text-gray-800 pb-6 pt-3">
+            <h2 className="text-[22px] font-bold text-gray-800 pb-4 pt-3">
               {jobs.length} việc làm đang tuyển dụng
             </h2>
 
-            {jobs.map((job) => (
-              <motion.div
-                key={job._id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className={`bg-white rounded-lg p-4 shadow-md cursor-pointer transition-all border-2 hover:shadow-lg
+            <div className="flex flex-col gap-3 overflow-y-hidden">
+              {jobs.map((job) => (
+                <motion.div
+                  key={job._id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  className={`bg-white rounded-lg p-4 shadow-md cursor-pointer transition-all border-2 hover:shadow-lg
                      border-transparent hover:border-gray-200
                 `}
-              >
-                <div className="flex justify-between items-center mb-3">
-                  <span className="text-gray-400 text-sm">
-                    {getRelativeTime(job.createdAt)}
-                  </span>
-                  {job.isFeatured && (
-                    <span className="bg-orange-500 text-white px-3 py-1 rounded-md text-xs font-bold">
-                      HOT
-                    </span>
-                  )}
-                </div>
-
-                <a
-                  href={`/jobs/${job._id}`}
-                  className="text-lg font-bold text-gray-800 mb-3 hover:text-red-500 transition-colors duration-200 block"
                 >
-                  {job.title}
-                </a>
-
-                {/* Company Info */}
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-12 h-12 rounded flex items-center justify-center text-white font-bold text-xl">
-                    <img
-                      src={company?.logo.url}
-                      style={{
-                        objectFit: "cover",
-                        width: "100%",
-                        height: "100%",
-                      }}
-                    />
-                  </div>
-                  <span className="text-gray-700 font-medium">
-                    {company?.user.fullName || "Company"}
-                  </span>
-                </div>
-
-                <div className="flex items-center gap-2 text-green-600 font-semibold  ">
-                  <LuDollarSign size={18} />
-                  <span>{job.salary}</span>
-                </div>
-
-                <hr className="border-b border-dashed border-[#dedede] my-3" />
-
-                {job.experienceRequirement && (
-                  <div className="flex items-center gap-2 text-gray-500 text-sm mb-2">
-                    <span>✓ {job.experienceRequirement}</span>
-                  </div>
-                )}
-
-                {/* Category */}
-                <div className="flex items-center gap-2 text-gray-600 text-sm mb-2">
-                  <LuBriefcase size={16} />
-                  <span>{job.category}</span>
-                </div>
-
-                {/* Location */}
-                <div className="flex items-center gap-2 text-gray-600 text-sm mb-3">
-                  <LuMapPin size={16} />
-                  <span>
-                    {job.jobType} • {job.location}
-                  </span>
-                </div>
-
-                {/* Keywords/Skills */}
-                {job.keywords && job.keywords.length > 0 && (
-                  <div className="flex flex-wrap gap-2">
-                    {job.keywords.slice(0, 4).map((keyword, idx) => (
-                      <span
-                        key={idx}
-                        className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:outline hover:outline-gray-300 "
-                      >
-                        {keyword}
+                  <div className="flex justify-between items-center mb-3">
+                    <span className="text-gray-400 text-sm">
+                      {getRelativeTime(job.createdAt)}
+                    </span>
+                    {job.isFeatured && (
+                      <span className="bg-orange-500 text-white px-3 py-1 rounded-md text-xs font-bold">
+                        HOT
                       </span>
-                    ))}
+                    )}
                   </div>
-                )}
-              </motion.div>
-            ))}
+
+                  <a
+                    href={`/jobs/${job._id}`}
+                    className="text-lg font-bold text-gray-800 mb-3 hover:text-red-500 transition-colors duration-200 block"
+                  >
+                    {job.title}
+                  </a>
+
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-12 h-12 rounded flex items-center justify-center text-white font-bold text-xl">
+                      <img
+                        src={company?.logo.url}
+                        style={{
+                          objectFit: "cover",
+                          width: "100%",
+                          height: "100%",
+                        }}
+                      />
+                    </div>
+                    <span className="text-gray-700 font-medium">
+                      {company?.user.fullName || "Company"}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-2 text-green-600 font-semibold  ">
+                    <LuDollarSign size={18} />
+                    <span>{job.salary}</span>
+                  </div>
+
+                  <hr className="border-b border-dashed border-[#dedede] my-3" />
+
+                  {job.experienceRequirement && (
+                    <div className="flex items-center gap-2 text-gray-500 text-sm mb-2">
+                      <span>✓ {job.experienceRequirement}</span>
+                    </div>
+                  )}
+
+                  <div className="flex items-center gap-2 text-gray-600 text-sm mb-2">
+                    <LuBriefcase size={16} />
+                    <span>{job.category}</span>
+                  </div>
+
+                  <div className="flex items-center gap-2 text-gray-600 text-sm mb-3">
+                    <LuMapPin size={16} />
+                    <span>
+                      {job.jobType} • {job.location}
+                    </span>
+                  </div>
+
+                  {job.keywords && job.keywords.length > 0 && (
+                    <div className="flex flex-wrap gap-2">
+                      {job.keywords.slice(0, 4).map((keyword, idx) => (
+                        <span
+                          key={idx}
+                          className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:outline hover:outline-gray-300 "
+                        >
+                          {keyword}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         </div>
       </motion.section>

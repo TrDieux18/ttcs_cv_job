@@ -46,10 +46,6 @@ const WorkExperience = ({ cvData: experience, updatedCvData }) => {
       to: isStudying ? "Hiện tại" : tempData.to,
     };
 
-    console.log("💼 WorkExperience state before save:", tempData);
-    console.log("💼 WorkExperience updated data:", updatedData);
-    console.log("💼 isStudying:", isStudying);
-
     const formData = new FormData();
     formData.append("experience", JSON.stringify([updatedData]));
     console.log("📤 FormData experience:", JSON.stringify([updatedData]));

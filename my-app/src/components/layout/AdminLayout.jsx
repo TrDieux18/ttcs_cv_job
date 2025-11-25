@@ -8,11 +8,10 @@ import {
   TeamOutlined,
   SettingOutlined,
   PartitionOutlined,
-  DownOutlined,
   BankOutlined,
   CarryOutOutlined,
 } from "@ant-design/icons";
-import { Layout, Menu, Dropdown, Button, message, theme } from "antd";
+import { Layout, Menu, Button, message, theme } from "antd";
 import { Outlet, useNavigate } from "react-router-dom";
 import { logout } from "@services/common/AuthService";
 import { useSelector } from "react-redux";
@@ -27,8 +26,19 @@ const AdminLayout = () => {
   const [messageApi, contextHolder] = message.useMessage();
 
   const {
-    token: { colorBgContainer, borderRadiusLG },
+    token: { colorBgContainer },
   } = theme.useToken();
+
+  const handleLogout = async () => {
+    const response = await logout();
+    if (response.success) {
+      localStorage.removeItem("user");
+      messageApi.success("Đăng xuất thành công");
+      setTimeout(() => navigate("/admin/auth/login"), 800);
+    } else {
+      messageApi.error("Đăng xuất thất bại");
+    }
+  };
 
   const sidebarItems = [
     {
@@ -66,41 +76,21 @@ const AdminLayout = () => {
       icon: <LuFileUser />,
       label: "Hồ sơ ứng viên",
     },
+
+    {
+      key: "logout",
+      icon: <LogoutOutlined />,
+      label: "Đăng xuất",
+      danger: true,
+    },
   ];
 
-  const profileMenu = {
-    items: [
-      {
-        key: "profile",
-        label: "Hồ sơ cá nhân",
-        icon: <UserOutlined />,
-      },
-      { type: "divider" },
-      {
-        key: "logout",
-        label: "Đăng xuất",
-        icon: <LogoutOutlined />,
-        danger: true,
-      },
-    ],
-    onClick: async ({ key }) => {
-      if (key === "logout") {
-        const response = await logout();
-        if (response.success) {
-          localStorage.removeItem("user");
-          messageApi.success("Đăng xuất thành công");
-          setTimeout(() => navigate("/admin/auth/login"), 800);
-        } else {
-          messageApi.error("Đăng xuất thất bại");
-        }
-      } else if (key === "profile") {
-        navigate("/admin/profile");
-      }
-    },
-  };
-
   const handleMenuClick = ({ key }) => {
-    navigate(key);
+    if (key === "logout") {
+      handleLogout();
+    } else {
+      navigate(key);
+    }
   };
 
   return (
@@ -121,42 +111,26 @@ const AdminLayout = () => {
         <div
           className="demo-logo-vertical text-center py-2 text-lg font-bold flex items-center justify-center"
           style={{ cursor: "pointer" }}
-          onClick={() => navigate("/admin/dashboard")}
+          onClick={() => navigate("/company/my-jobs")}
         >
           {collapsed ? (
-            <img
-              src={user.avatar}
-              alt="avatar"
-              className="w-8 h-8 rounded-full border object-cover"
-            />
+            <div className="flex items-center gap-2 px-3 py-1 rounded-lg w-[78%] justify-center">
+              <img
+                src={user?.avatar || "https://via.placeholder.com/40"}
+                alt="avatar"
+                className="w-8 h-8 rounded-full border object-cover"
+              />
+            </div>
           ) : (
-            <div className="w-[90%] px-2 py-1  rounded-lg bg-[#fff] border-[#eee] border-[2px]">
-              <Dropdown
-                menu={profileMenu}
-                trigger={["click"]}
-                placement="bottom"
-                arrow
-                overlayClassName="custom-dropdown-two"
-              >
-                <div className="flex justify-between items-center gap-2 cursor-pointer select-none  ">
-                  <div className="flex items-center gap-1">
-                    <img
-                      src={user.avatar}
-                      alt="avatar"
-                      className="w-8 h-8 rounded-full border object-cover"
-                    />
-                    <span className="text-gray-700 font-medium">
-                      {user.fullName}
-                    </span>
-                  </div>
-                  <DownOutlined
-                    style={{
-                      fontSize: 14,
-                      fontWeight: 600,
-                    }}
-                  />
-                </div>
-              </Dropdown>
+            <div className="flex items-center gap-2 px-3 py-1 rounded-lg w-[78%] justify-center">
+              <img
+                src={user?.avatar || "https://via.placeholder.com/40"}
+                alt="avatar"
+                className="w-8 h-8 rounded-full border object-cover"
+              />
+              <span className="text-gray-700 font-medium text-[15px]">
+                {user?.fullName || user?.companyName || "Công ty"}
+              </span>
             </div>
           )}
         </div>
@@ -201,7 +175,6 @@ const AdminLayout = () => {
           style={{
             padding: "24px",
             background: colorBgContainer,
-
             minHeight: 280,
           }}
         >

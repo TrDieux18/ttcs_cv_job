@@ -9,7 +9,7 @@ import { authMiddleware } from "../../middlewares/admin/auth.middleware.js";
 
 const router = express.Router();
 
-// Company user routes (yêu cầu đăng nhập)
+
 router.get("/", authMiddleware, getMyCompany);
 router.post("/", upload.single("logo"), authMiddleware, createMyCompany);
 router.patch("/", upload.single("logo"), authMiddleware, updateMyCompany);

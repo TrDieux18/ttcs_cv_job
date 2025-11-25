@@ -1,242 +1,226 @@
 import { Button, Card, Col, Form, Image, Input, Row, message } from "antd";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { BuildOutlined } from "@ant-design/icons";
-import {
-  getMyCompany,
-  createMyCompany,
-  updateMyCompany,
-} from "@services/company/CompanyService";
+import { useNavigate } from "react-router-dom";
+import { getMyCompany } from "@services/company/CompanyService";
 
-const styleButton = {
-  border: "none",
-  padding: "8px 10px",
-  backgroundColor: "#3875F6",
-  color: "#fff",
-  fontSize: "15px",
-  fontWeight: "600",
-};
+import { updateMyCompany } from "@services/company/CompanyService";
 
-const styleInput = {
-  border: "none",
-  padding: "8px 10px",
-  backgroundColor: "#f9f9f9",
-  color: "#000",
-  fontSize: "15px",
-  fontWeight: "600",
-};
-
-const styleLabelSpan = {
-  fontWeight: 600,
-  color: "#d0d0d0",
-  fontSize: "14px",
-};
+const { TextArea } = Input;
 
 const MyCompany = () => {
   const [form] = Form.useForm();
   const [preview, setPreview] = useState("");
-  const [companyData, setCompanyData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [hasCompany, setHasCompany] = useState(false);
   const navigate = useNavigate();
 
+  const [companyData, setCompanyData] = useState(null);
   useEffect(() => {
-    fetchMyCompany();
+    const fetchCompanyData = async () => {
+      try {
+        const response = await getMyCompany();
+        if (response.success) {
+          setCompanyData(response.data);
+          form.setFieldsValue(response.data);
+          setPreview(
+            response.data.logo?.public_id || response.data.logo?.url || ""
+          );
+        }
+      } catch (error) {
+        console.error("Error loading company data:", error);
+      }
+    };
+    fetchCompanyData();
   }, []);
 
-  const fetchMyCompany = async () => {
+  const handleSubmit = async (values) => {
+    setLoading(true);
     try {
-      setLoading(true);
-      const response = await getMyCompany();
-      if (response.success && response.data) {
-        setCompanyData(response.data);
-        setHasCompany(true);
-        form.setFieldsValue({
-          headline: response.data.headline,
-          description: response.data.description,
-          website: response.data.website,
-          location: response.data.location,
-          size: response.data.size,
-        });
-        if (response.data.logo?.url) {
-          setPreview(response.data.logo.url);
-        }
-      }
-    } catch (error) {
-      console.error("Error fetching company:", error);
-      setHasCompany(false);
+      const logoFile = document.getElementById("companyLogo")?.files?.[0];
+      const payload = {
+        ...values,
+        _id: companyData._id,
+        logo: logoFile ? logoFile : null,
+      };
+
+      const response = await updateMyCompany(payload);
+
+      message.success("Cập nhật công ty thành công!");
+      navigate("/company/profile");
     } finally {
       setLoading(false);
     }
   };
 
-  const handleSubmit = async (values) => {
-    const formData = new FormData();
-    Object.keys(values).forEach((key) => {
-      if (values[key] !== undefined && values[key] !== null) {
-        formData.append(key, values[key]);
-      }
-    });
-
-    const fileInput = document.getElementById("logoInput");
-    if (fileInput?.files?.[0]) {
-      formData.append("logo", fileInput.files[0]);
-    }
-
-    try {
-      let response;
-      if (hasCompany) {
-        response = await updateMyCompany(formData);
-      } else {
-        response = await createMyCompany(formData);
-      }
-
-      if (response.success) {
-        message.success(
-          hasCompany
-            ? "Cập nhật công ty thành công!"
-            : "Tạo công ty thành công!"
-        );
-        fetchMyCompany();
-      } else {
-        message.error(response.errors?.[0] || "Đã xảy ra lỗi!");
-      }
-    } catch (error) {
-      message.error("Đã xảy ra lỗi!");
-    }
-  };
-
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-semibold mb-4">
-        {hasCompany ? "Thông tin công ty của bạn" : "Tạo công ty mới"}
-      </h1>
-      <Form layout="vertical" form={form} onFinish={handleSubmit}>
-        <Row gutter={24}>
-          <Col span={8}>
-            <Card>
-              <div className="flex flex-col items-center">
-                {preview ? (
-                  <Image
-                    height={150}
-                    width={150}
-                    src={preview}
-                    style={{
-                      borderRadius: "8px",
-                      objectFit: "cover",
-                    }}
-                    preview={false}
-                  />
-                ) : (
-                  <div
-                    style={{
-                      width: 150,
-                      height: 150,
-                      borderRadius: "8px",
-                      backgroundColor: "#f0f0f0",
-                      color: "#888",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontSize: 48,
-                    }}
-                  >
-                    <BuildOutlined />
-                  </div>
-                )}
-                <input
-                  type="file"
-                  id="logoInput"
-                  accept="image/*"
-                  style={{ display: "none" }}
-                  onChange={(e) => {
-                    const file = e.target.files?.[0];
-                    if (file) {
-                      const previewUrl = URL.createObjectURL(file);
-                      setPreview(previewUrl);
-                    }
-                  }}
-                />
-                <Button
-                  type="primary"
-                  style={{ ...styleButton, marginTop: 16 }}
-                  onClick={() => document.getElementById("logoInput")?.click()}
-                >
-                  {preview ? "Đổi logo" : "Tải logo"}
-                </Button>
-              </div>
-            </Card>
-          </Col>
+    <div className="min-h-screen">
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h1 className="mt-2 text-2xl sm:text-3xl font-semibold text-slate-900">
+              Hồ sơ công ty
+            </h1>
+            <p className="mt-2 text-sm text-slate-500">
+              Hãy cung cấp thông tin rõ ràng để ứng viên hiểu hơn về doanh
+              nghiệp.
+            </p>
+          </div>
+        </div>
 
-          <Col span={16}>
-            <Card>
-              <Row gutter={[20, 10]}>
-                <Col span={24}>
-                  <Form.Item
-                    label={<span style={styleLabelSpan}>Tiêu đề</span>}
-                    name="headline"
-                  >
-                    <Input placeholder="Nhập tiêu đề công ty" style={styleInput} />
-                  </Form.Item>
-                </Col>
+        <Form
+          layout="vertical"
+          form={form}
+          onFinish={handleSubmit}
+          className="space-y-6"
+        >
+          <Card className="border-0 shadow-xl rounded-2xl bg-white/90 backdrop-blur-sm">
+            <Row gutter={[20, 20]}>
+              <Col span={24}>
+                <h2 className="text-[22px] font-semibold uppercase tracking-wide text-slate-500">
+                  Thông tin công ty
+                </h2>
+              </Col>
 
-                <Col span={24}>
-                  <Form.Item
-                    label={<span style={styleLabelSpan}>Mô tả</span>}
-                    name="description"
-                  >
-                    <Input.TextArea
-                      placeholder="Mô tả về công ty"
-                      style={styleInput}
-                      rows={4}
+              <Col span={8}>
+                <div className="flex flex-col ">
+                  {preview ? (
+                    <Image
+                      height={160}
+                      width={160}
+                      src={preview}
+                      className="rounded-xl object-cover"
+                      preview={false}
                     />
-                  </Form.Item>
-                </Col>
+                  ) : (
+                    <div className="w-[160px] h-[160px] bg-slate-100 rounded-xl flex items-center justify-center text-slate-400 text-5xl">
+                      <BuildOutlined />
+                    </div>
+                  )}
 
-                <Col span={12}>
-                  <Form.Item
-                    label={<span style={styleLabelSpan}>Website</span>}
-                    name="website"
+                  <input
+                    id="companyLogo"
+                    type="file"
+                    accept="image/*"
+                    style={{
+                      display: "none",
+                    }}
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) setPreview(URL.createObjectURL(file));
+                    }}
+                  />
+
+                  <Button
+                    type="primary"
+                    className="!mt-4 !bg-blue-400 hover:!bg-blue-500 !border-none !w-[160px]"
+                    onClick={() =>
+                      document.getElementById("companyLogo")?.click()
+                    }
                   >
-                    <Input placeholder="https://..." style={styleInput} />
-                  </Form.Item>
-                </Col>
+                    {preview ? "Đổi logo" : "Tải logo"}
+                  </Button>
+                </div>
+              </Col>
 
-                <Col span={12}>
-                  <Form.Item
-                    label={<span style={styleLabelSpan}>Địa điểm</span>}
-                    name="location"
-                  >
-                    <Input placeholder="Hanoi, Vietnam" style={styleInput} />
-                  </Form.Item>
-                </Col>
-
-                <Col span={24}>
-                  <Form.Item
-                    label={<span style={styleLabelSpan}>Quy mô</span>}
-                    name="size"
-                  >
-                    <Input placeholder="50-200" style={styleInput} />
-                  </Form.Item>
-                </Col>
-
-                <Col span={24}>
-                  <div className="flex justify-end">
-                    <Button
-                      type="primary"
-                      htmlType="submit"
-                      style={styleButton}
-                      loading={loading}
+              <Col span={16}>
+                <Row gutter={[16, 16]}>
+                  <Col span={24}>
+                    <Form.Item
+                      label="Tiêu đề"
+                      name="headline"
+                      rules={[{ required: true }]}
                     >
-                      {hasCompany ? "Cập nhật" : "Tạo mới"}
-                    </Button>
-                  </div>
-                </Col>
-              </Row>
-            </Card>
-          </Col>
-        </Row>
-      </Form>
+                      <Input
+                        placeholder="Global IT Services Company"
+                        size="large"
+                      />
+                    </Form.Item>
+                  </Col>
+
+                  <Col span={24}>
+                    <Form.Item label="Mô tả" name="description">
+                      <TextArea placeholder="Mô tả ngắn về công ty" rows={4} />
+                    </Form.Item>
+                  </Col>
+
+                  <Col span={12}>
+                    <Form.Item label="Website" name="website">
+                      <Input placeholder="https://..." />
+                    </Form.Item>
+                  </Col>
+
+                  <Col span={12}>
+                    <Form.Item label="Địa điểm" name="location">
+                      <Input placeholder="Hanoi, Da Nang, Ho Chi Minh" />
+                    </Form.Item>
+                  </Col>
+
+                  <Col span={12}>
+                    <Form.Item label="Quy mô" name="size">
+                      <Input placeholder="10, 50-100, 1000+..." />
+                    </Form.Item>
+                  </Col>
+
+                  <Col span={12}>
+                    <Form.Item label="Loại hình công ty" name="companyModel">
+                      <Input placeholder="Công ty Cổ phần, Tập đoàn..." />
+                    </Form.Item>
+                  </Col>
+
+                  <Col span={12}>
+                    <Form.Item label="Lĩnh vực" name="industry">
+                      <Input placeholder="Công nghệ thông tin..." />
+                    </Form.Item>
+                  </Col>
+
+                  <Col span={12}>
+                    <Form.Item label="Quốc gia" name="country">
+                      <Input placeholder="Việt Nam" />
+                    </Form.Item>
+                  </Col>
+
+                  <Col span={12}>
+                    <Form.Item label="Năm thành lập" name="foundedYear">
+                      <Input placeholder="1999" />
+                    </Form.Item>
+                  </Col>
+
+                  <Col span={12}>
+                    <Form.Item label="Thời gian làm việc" name="workTime">
+                      <Input placeholder="Thứ 2 – Thứ 6" />
+                    </Form.Item>
+                  </Col>
+
+                  <Col span={24}>
+                    <Form.Item label="Giới thiệu công ty" name="about">
+                      <TextArea
+                        rows={5}
+                        placeholder="Giới thiệu chi tiết hơn về công ty..."
+                      />
+                    </Form.Item>
+                  </Col>
+                </Row>
+              </Col>
+
+              <Col span={24}>
+                <div className="border-t border-gray-200 pt-4 flex justify-end gap-2">
+                  <Button onClick={() => navigate("/company/profile")}>
+                    Hủy
+                  </Button>
+                  <Button
+                    type="primary"
+                    loading={loading}
+                    htmlType="submit"
+                    className="!bg-blue-400 hover:!bg-blue-500 !border-none"
+                  >
+                    Cập nhật
+                  </Button>
+                </div>
+              </Col>
+            </Row>
+          </Card>
+        </Form>
+      </div>
     </div>
   );
 };

@@ -18,7 +18,6 @@ import DetailJob from "@pages/client/Jobs/components/DetailJob";
 import CV from "../pages/client/CV";
 
 const clientRoutes = [
-  // CV route - standalone without layout
   {
     path: "/cv",
     element: <CV />,

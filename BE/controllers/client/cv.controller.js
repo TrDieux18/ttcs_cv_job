@@ -159,7 +159,7 @@ export const updateCv = async (req, res) => {
       Array.isArray(projectsArr)
     ) {
       updateData.projects = projectsArr;
-    }
+        }
     if (
       certificatesArr !== null &&
       certificatesArr !== undefined &&

@@ -1,11 +1,9 @@
 import Company from "../../models/company.model.js";
 import { uploadToCloudinary } from "../../middlewares/admin/uploadCloudinary.middleware.js";
 
-// ✅ Lấy thông tin công ty của user hiện tại
 export const getMyCompany = async (req, res) => {
   try {
-    console.log("res.locals:", res.locals.user);
-    const userId = res.locals.user.id; // từ auth middleware
+    const userId = res.locals.user.id;
     console.log("User ID:", userId);
 
     const company = await Company.findOne({ user: userId }).populate(
@@ -27,14 +25,24 @@ export const getMyCompany = async (req, res) => {
   }
 };
 
-// ✅ Cập nhật thông tin công ty của user hiện tại
 export const updateMyCompany = async (req, res) => {
   let uploadedFile = null;
   try {
-    const userId = req.user._id;
-    const { headline, description, website, location, size } = req.body;
+    const {
+      _id,
+      headline,
+      description,
+      website,
+      location,
+      size,
+      companyModel,
+      industry,
+      country,
+      workTime,
+      about,
+    } = req.body;
 
-    const company = await Company.findOne({ user: userId });
+    const company = await Company.findById(_id);
 
     if (!company) {
       return res.status(404).json({
@@ -43,30 +51,34 @@ export const updateMyCompany = async (req, res) => {
       });
     }
 
-    // Cập nhật các field
     if (headline) company.headline = headline;
     if (description) company.description = description;
     if (website) company.website = website;
     if (location) company.location = location;
     if (size) company.size = size;
+    if (companyModel) company.companyModel = companyModel;
+    if (industry) company.industry = industry;
+    if (country) company.country = country;
+    if (workTime) company.workTime = workTime;
+    if (about) company.about = about;
 
-    // Upload logo mới nếu có
     if (req.file && req.file.buffer) {
       uploadedFile = await uploadToCloudinary(req.file.buffer, "companies");
       company.logo = {
-        url: uploadedFile.secure_url,
-        public_id: uploadedFile.public_id,
+        public_id: uploadedFile.secure_url,
       };
     }
 
+    console.log("Updated company data:", uploadedFile);
+
     const updated = await company.save();
+
     return res.json({
       success: true,
       message: "Cập nhật công ty thành công",
       data: updated,
     });
   } catch (error) {
-    // Rollback uploaded file on error
     if (uploadedFile?.public_id) {
       try {
         const cloudinary = (await import("../../configs/cloudinary.js"))
@@ -79,11 +91,10 @@ export const updateMyCompany = async (req, res) => {
   }
 };
 
-// ✅ Tạo công ty cho user hiện tại (nếu chưa có)
 export const createMyCompany = async (req, res) => {
   let uploadedFile = null;
   try {
-    const userId = req.user._id;
+    const userId = res.locals.user.id;
     const {
       headline = "",
       description = "",

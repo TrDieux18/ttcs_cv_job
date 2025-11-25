@@ -111,19 +111,6 @@ const DetailCV = () => {
             <div className="flex items-center gap-3 text-[15px]">
               <LuFileUser color="#1677ff" size={24} />
 
-              {/* Nút xem
-              <a
-                href={`https://docs.google.com/gview?url=${encodeURIComponent(
-                  `${cv.fileUrl}.pdf`
-                )}&embedded=true`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 font-medium"
-              >
-                Xem CV
-              </a> */}
-
-              {/* Nút tải */}
               <button
                 onClick={() =>
                   handleDownload(
@@ -146,7 +133,10 @@ const DetailCV = () => {
               <Space wrap>
                 {cv.skills.map((skill, index) => (
                   <Tag key={index} color="blue">
-                    {skill}
+                    {typeof skill === "string" ? skill : skill?.name || "N/A"}
+                    {typeof skill === "object" &&
+                      skill?.experience &&
+                      ` (${skill.experience})`}
                   </Tag>
                 ))}
               </Space>

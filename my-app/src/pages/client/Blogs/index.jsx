@@ -115,7 +115,6 @@ const BlogPage = () => {
           ))}
         </div>
 
-        {/* Featured Blog */}
         {featured && (
           <motion.div
             className="grid md:grid-cols-2 gap-10 items-center bg-gradient-to-r from-[#0a3d2e] to-[#1d7a57] rounded-3xl p-10 mb-10 shadow-2xl relative cursor-pointer overflow-hidden"
