@@ -8,15 +8,14 @@ import "./LayoutDefault.scss";
 import {
   LuBell,
   LuBriefcase,
-  LuFileText,
-  LuInbox,
   LuLayoutDashboard,
   LuLogOut,
   LuSettings,
   LuUser,
 } from "react-icons/lu";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser, logout as userLogout } from "@store/UserReducer";
+import { logout as userLogout } from "@store/UserReducer";
+import NotificationBell from "@components/NotificationBell";
 
 const LayoutDefault = () => {
   const user = useSelector((state) => state.user.user);
@@ -49,20 +48,20 @@ const LayoutDefault = () => {
     },
 
     {
-      key: "profile",
-      label: "Hồ sơ cá nhân",
-      icon: <LuUser size={16} />,
-    },
-    {
-      key: "job",
+      key: "my-jobs",
       label: "Việc làm của tôi",
       icon: <LuBriefcase size={16} />,
     },
 
     {
-      key: "notification",
+      key: "notifications",
       label: "Thông báo",
       icon: <LuBell size={16} />,
+    },
+    {
+      key: "setting",
+      label: "Cài đặt",
+      icon: <LuSettings size={16} />,
     },
 
     {
@@ -108,8 +107,10 @@ const LayoutDefault = () => {
     onClick: async ({ key }) => {
       if (key === "logout") {
         handleLogout();
+      } else if (key === "dashboard") {
+        navigate("/dashboard");
       } else {
-        navigate(`/${key}`);
+        navigate(`/dashboard/${key}`);
       }
     },
   };
@@ -119,7 +120,8 @@ const LayoutDefault = () => {
       <header className="layout-header bg-gradient-to-r from-green-700 to-teal-500 fixed top-0 left-0 right-0 z-50 shadow-md">
         <div className="layout-header__logo">
           <NavLink to={"/"}>
-            <img className="w-25" src="./logo.png" alt="Logo" />
+            LOGO
+            {/* <img className="w-25" src="@assets/image/logo.png" alt="Logo" /> */}
           </NavLink>
         </div>
         <div className="layout-header__menu">
@@ -143,7 +145,9 @@ const LayoutDefault = () => {
         </div>
         <div className="layout-header__account">
           {user ? (
-            <div>
+            <div className="flex items-center gap-3">
+              <NotificationBell />
+
               <Dropdown
                 menu={profieMenu}
                 trigger={["hover"]}

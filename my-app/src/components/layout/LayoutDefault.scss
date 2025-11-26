@@ -245,3 +245,24 @@
     }
   }
 }
+
+.custom-tabs {
+  .ant-tabs-nav {
+    margin-bottom: 0 !important;
+  }
+  .ant-tabs-tab-btn:hover {
+    font-weight: 600 !important;
+    color: #16a34a !important;
+  }
+
+  .ant-tabs-tab-active {
+    .ant-tabs-tab-btn {
+      font-weight: 600 !important;
+      color: #16a34a !important;
+    }
+  }
+  .ant-tabs-ink-bar {
+    border-bottom: 2px solid #22c55e !important;
+    color: #16a34a !important;
+  }
+}

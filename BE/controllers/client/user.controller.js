@@ -6,6 +6,7 @@ import {
   cleanValue,
 } from "../../helpers/buildUpdateProfileData.js";
 import { capitalizeFirstLetter } from "../../helpers/capitalizeFirstLetter.js";
+import bcrypt from "bcrypt";
 
 export const getProfileUser = async (req, res) => {
   try {
@@ -99,5 +100,61 @@ export const updateProfileUser = async (req, res) => {
       } catch (rollbackErr) {}
     }
     res.status(500).json({ success: false, message: "Lỗi server" });
+  }
+};
+
+export const changePassword = async (req, res) => {
+  try {
+    const userId = res.locals.user.id;
+    const { currentPassword, newPassword } = req.body;
+
+    if (!currentPassword || !newPassword) {
+      return res.status(400).json({
+        success: false,
+        message: "Vui lòng cung cấp đầy đủ thông tin",
+      });
+    }
+
+    if (newPassword.length < 6) {
+      return res.status(400).json({
+        success: false,
+        message: "Mật khẩu mới phải có ít nhất 6 ký tự",
+      });
+    }
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "Người dùng không tồn tại",
+      });
+    }
+
+    const isMatch = await bcrypt.compare(currentPassword, user.password);
+
+    if (!isMatch) {
+      return res.status(400).json({
+        success: false,
+        message: "Mật khẩu hiện tại không đúng",
+      });
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    await User.findByIdAndUpdate(userId, {
+      password: hashedPassword,
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Đổi mật khẩu thành công",
+    });
+  } catch (err) {
+    console.error("Error changing password:", err);
+    res.status(500).json({
+      success: false,
+      message: "Lỗi server",
+    });
   }
 };

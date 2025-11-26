@@ -17,6 +17,13 @@ import DetailCompany from "@pages/client/Companies/components/DetailCompany";
 import DetailJob from "@pages/client/Jobs/components/DetailJob";
 import CV from "../pages/client/CV";
 
+import AccountLayout from "../pages/client/Dashboard";
+import Dashboard from "../pages/client/Dashboard/components/Dashboard";
+import Profile from "../pages/client/Templates/Profile";
+import MyJobs from "../pages/client/Dashboard/components/MyJobs";
+import Notification from "../pages/client/Dashboard/components/Notificantion";
+import Setting from "../pages/client/Dashboard/components/Setting";
+
 const clientRoutes = [
   {
     path: "/cv",
@@ -69,6 +76,29 @@ const clientRoutes = [
       {
         path: "register",
         element: <Register />,
+      },
+      {
+        path: "dashboard",
+        element: <AccountLayout />,
+        children: [
+          {
+            index: true,
+            element: <Dashboard />,
+          },
+
+          {
+            path: "my-jobs",
+            element: <MyJobs />,
+          },
+          {
+            path: "notifications",
+            element: <Notification />,
+          },
+          {
+            path: "setting",
+            element: <Setting />,
+          },
+        ],
       },
 
       {

@@ -1,5 +1,4 @@
 export const checkPermission = (permission) => {
-  console.log("Checking permission middleware for:", permission);
   return (req, res, next) => {
     const admin = res.locals.user;
 

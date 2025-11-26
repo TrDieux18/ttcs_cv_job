@@ -4,10 +4,17 @@ import { motion } from "framer-motion";
 import { getCompanyBySlug } from "@services/client/CompanyService";
 import { LuBriefcase, LuDollarSign, LuEarth, LuMapPin } from "react-icons/lu";
 import { getRelativeTime } from "@helpers/getRelavtiveTime";
+import { useSelector } from "react-redux";
+import { followCompany } from "@services/client/FollowCompanyService";
 
 const DetailCompany = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
+
+  const followedCompanies = useSelector(
+    (state) => state.followedCompanies.followedCompanies
+  );
+  console.log("Followed companies from store:", followedCompanies);
   const [jobs, setJobs] = useState([]);
   const [company, setCompany] = useState(null);
 
@@ -15,7 +22,7 @@ const DetailCompany = () => {
 
   const handleScrollToJobs = () => {
     jobSectionRef.current?.scrollIntoView({
-      behavior: "smooth", // Cuộn mượt
+      behavior: "smooth",
       block: "start",
     });
   };
@@ -27,7 +34,7 @@ const DetailCompany = () => {
     const fetchCompanyDetail = async () => {
       try {
         const response = await getCompanyBySlug(slug);
-        console.log("Company details:", response);
+
         if (response.success) {
           setCompany(response.data.company || null);
           setJobs(response.data.jobs || []);
@@ -38,7 +45,16 @@ const DetailCompany = () => {
     };
     fetchCompanyDetail();
   }, [slug]);
-  console.log("Rendered company:", jobs, company);
+
+  const handleFollowCompany = async (companyId) => {
+    console.log("Follow company with ID:", companyId);
+
+    try {
+      const response = await followCompany(companyId);
+    } catch (error) {
+      console.error("Error following company:", error);
+    }
+  };
 
   if (!company) {
     return (
@@ -57,7 +73,6 @@ const DetailCompany = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        {/* Company Header */}
         <motion.div
           className="bg-gradient-to-r from-green-700 to-teal-500 text-white py-12"
           initial={{ opacity: 0, y: 20 }}
@@ -96,7 +111,10 @@ const DetailCompany = () => {
                 </div>
 
                 <div className="flex items-center gap-4">
-                  <button className="w-40 px-6 py-2.5 bg-white text-teal-600 rounded-sm shadow-md hover:bg-gray-50 transition-all duration-300 font-semibold">
+                  <button
+                    onClick={() => handleFollowCompany(company._id)}
+                    className="w-40 px-6 py-2.5 bg-white text-teal-600 rounded-sm shadow-md hover:bg-gray-50 transition-all duration-300 font-semibold"
+                  >
                     Theo dõi
                   </button>
                   <button className="w-40 px-6 py-2.5 bg-white/20 text-white rounded-sm hover:bg-white/30 transition-all duration-300 font-semibold">

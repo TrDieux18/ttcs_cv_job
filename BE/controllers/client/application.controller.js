@@ -36,13 +36,30 @@ export const applyJob = async (req, res) => {
 export const getMyApplications = async (req, res) => {
   try {
     const userId = res.locals.user.id;
-    console.log("Fetching applications for User ID:", userId);
-    const applications = await Application.find({ user: userId }).select("job");
-    console.log("Applications:", applications);
+
+    const applications = await Application.find({
+      user: new Types.ObjectId(userId),
+    }).populate({
+      path: "job",
+      populate: { path: "company" },
+    });
 
     return res.status(200).json({ success: true, data: applications });
   } catch (error) {
     console.error("getMyApplications error:", error);
     return res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+export const getCountOfApplicantsByUserId = async (req, res) => {
+  try {
+    const userId = res.locals.user.id;
+    const count = await Application.countDocuments({
+      user: new Types.ObjectId(userId),
+    });
+    console.log("Applicant count for user:", count);
+    return res.status(200).json({ success: true, data: count });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: "Server error" });
   }
 };

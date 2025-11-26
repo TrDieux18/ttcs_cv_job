@@ -18,7 +18,6 @@ const UploadCV = ({ cvData, updatedCvData }) => {
     const firstCv = cvData?.[0];
     setFileUrl(firstCv?.fileUrl || "");
   }, [cvData]);
-  console.log("📄 UploadCV fileUrl:", fileUrl);
 
   const handleOpenDialog = () => {
     setFile(null);
@@ -95,7 +94,7 @@ const UploadCV = ({ cvData, updatedCvData }) => {
     <div className="w-200 h-auto bg-white rounded-lg shadow-sm relative">
       <div className="w-full h-auto p-4">
         <div className="flex justify-between items-center">
-          <h1 className="text-[22px] font-bold">Upload CV</h1>
+          <h1 className="text-[22px] font-bold">Hồ sơ đính kèm</h1>
           <button onClick={handleOpenDialog}>
             <LuCirclePlus className="size-4 text-red-600 hover:scale-110 transition-transform" />
           </button>
@@ -142,7 +141,7 @@ const UploadCV = ({ cvData, updatedCvData }) => {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white rounded-md shadow-lg w-250 text-left">
             <h1 className="text-[22px] font-semibold px-8 py-4 border-b border-gray-300">
-              Upload CV
+              Hồ sơ đính kèm
             </h1>
 
             <div className="px-8 py-6">

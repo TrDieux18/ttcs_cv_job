@@ -54,15 +54,11 @@ const Skills = ({ cvData, updatedCvData }) => {
 
   useEffect(() => {
     const firstCv = cvData?.[0];
-    console.log("Skills from cvData:", firstCv?.skills);
 
     if (firstCv?.skills && Array.isArray(firstCv.skills)) {
-      // Nếu là array of objects {name, experience}
       if (firstCv.skills.length > 0 && typeof firstCv.skills[0] === "object") {
         setSkills(firstCv.skills);
-      }
-      // Nếu là array of strings (dữ liệu cũ)
-      else if (
+      } else if (
         firstCv.skills.length > 0 &&
         typeof firstCv.skills[0] === "string"
       ) {

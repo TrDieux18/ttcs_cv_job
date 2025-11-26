@@ -20,6 +20,13 @@ import {
   getApplicationsByUser,
 } from "@services/client/ApplicationService";
 import { addAppliedJob, setAppliedJobs } from "@store/AppliedReducer";
+import { createSaveJob } from "@services/client/SaveJobService";
+import { getSavedJobsByUser } from "@services/client/SaveJobService";
+import { setSavedJobs } from "@store/SavedJobReducer";
+import { FaHeart } from "react-icons/fa";
+import { removeSavedJob } from "@store/SavedJobReducer";
+import { addSavedJob } from "@store/SavedJobReducer";
+import { deleteSaveJob } from "@services/client/SaveJobService";
 
 const optionCity = [
   {
@@ -37,8 +44,6 @@ const optionCity = [
 ];
 
 export default function JobList() {
-
-
   const user = useSelector((state) => state.user.user);
   const appliedJobIds = useSelector((state) => state.appliedJobs.appliedJobs);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -58,6 +63,7 @@ export default function JobList() {
   );
   const [pageSize] = useState(5);
   const [totalJobs, setTotalJobs] = useState(0);
+  const savedJobIds = useSelector((state) => state.savedJobs.savedJobs);
 
   const [notificationApi, contextHolder] = notification.useNotification();
   const dispatch = useDispatch();
@@ -149,10 +155,20 @@ export default function JobList() {
   const fetchAppliedJobs = async () => {
     if (!user) return;
     try {
-      const response = await getApplicationsByUser();
+      const [response, savedJobsResponse] = await Promise.all([
+        getApplicationsByUser(),
+        getSavedJobsByUser(),
+      ]);
       if (response.success && response.data) {
         const jobIds = response.data.map((app) => app.job?._id || app.job);
         dispatch(setAppliedJobs(jobIds));
+      }
+
+      if (savedJobsResponse.success) {
+        const savedJobs = savedJobsResponse.data;
+
+        const savedJobIds = savedJobs.map((job) => job.job._id || job.job);
+        dispatch(setSavedJobs(savedJobIds));
       }
     } catch (error) {
       console.error("Error fetching applied jobs:", error);
@@ -195,6 +211,50 @@ export default function JobList() {
       });
     } catch (error) {
       console.error("Error applying for job:", error);
+    }
+  };
+
+  const handleSaveJob = async (jobId) => {
+    if (!jobId) return;
+
+    try {
+      const response = await createSaveJob(jobId);
+      if (!response.success) {
+        notificationApi.error({
+          message: "Lưu công việc thất bại",
+          description: "Đã có lỗi xảy ra khi lưu công việc.",
+        });
+        return;
+      }
+      dispatch(addSavedJob(jobId));
+      notificationApi.success({
+        message: "Lưu công việc thành công",
+        description: "Bạn đã lưu công việc thành công.",
+      });
+    } catch (error) {
+      console.error("Error saving job:", error);
+    }
+  };
+
+  const handleUndoSaveJob = async (jobId) => {
+    if (!jobId) return;
+
+    try {
+      const response = await deleteSaveJob(jobId);
+      if (!response.success) {
+        notificationApi.error({
+          message: "Hủy lưu công việc thất bại",
+          description: "Đã có lỗi xảy ra khi hủy lưu công việc.",
+        });
+        return;
+      }
+      dispatch(removeSavedJob(jobId));
+      notificationApi.success({
+        message: "Hủy lưu công việc thành công",
+        description: "Bạn đã hủy lưu công việc thành công.",
+      });
+    } catch (error) {
+      console.error("Error undoing save job:", error);
     }
   };
 
@@ -248,7 +308,6 @@ export default function JobList() {
         </div>
       </div>
 
-      {/* DANH SÁCH JOB */}
       <div className="max-w-7xl mx-auto px-4 py-2">
         {loading ? (
           <div className="text-center py-20">
@@ -274,7 +333,6 @@ export default function JobList() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-[40%_60%] gap-6">
-              {/* Left: Job List - Can scroll freely */}
               <div className="space-y-4 overflow-y-auto pr-2 scrollbar-hide">
                 {jobs.map((job) => (
                   <motion.div
@@ -367,7 +425,6 @@ export default function JobList() {
                 ))}
               </div>
 
-              {/* Right: Job Detail*/}
               {selectedJob && (
                 <motion.div
                   key={selectedJob._id}
@@ -377,7 +434,6 @@ export default function JobList() {
                   className="bg-white rounded-lg shadow-lg sticky top-20 h-[calc(100vh-90px)] flex flex-col"
                 >
                   <div className="p-6 pb-2 bg-white rounded-t-lg flex-shrink-0">
-                    {/* Header */}
                     <div className="flex items-start justify-between">
                       <div className="flex items-start gap-4">
                         <div className="w-24 h-24 rounded bg-white border-2 border-gray-200 flex items-center justify-center flex-shrink-0 overflow-hidden">
@@ -415,11 +471,26 @@ export default function JobList() {
                           </div>
                         </div>
                       </div>
-                      <button className="p-2 hover:bg-gray-100 rounded-full transition">
-                        <LuHeart
-                          size={28}
-                          className="text-red-400 hover:text-red-500"
-                        />
+
+                      <button
+                        onClick={() =>
+                          savedJobIds.includes(selectedJob._id)
+                            ? handleUndoSaveJob(selectedJob._id)
+                            : handleSaveJob(selectedJob._id)
+                        }
+                        className="p-2 hover:bg-gray-100 rounded-full transition"
+                      >
+                        {savedJobIds.includes(selectedJob._id) ? (
+                          <FaHeart
+                            size={28}
+                            className="text-red-400 hover:text-red-500"
+                          />
+                        ) : (
+                          <LuHeart
+                            size={28}
+                            className="text-red-400 hover:text-red-500"
+                          />
+                        )}
                       </button>
                     </div>
 

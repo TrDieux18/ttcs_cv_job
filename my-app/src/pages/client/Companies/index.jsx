@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 const Companies = () => {
   const navigate = useNavigate();
   const [companies, setCompanies] = useState([]);
+  const [followedCompanies, setFollowedCompanies] = useState([]);
   useEffect(() => {
     const fetchCompanies = async () => {
       try {

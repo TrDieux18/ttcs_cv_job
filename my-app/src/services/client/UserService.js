@@ -42,3 +42,18 @@ export const updateUserProfile = async (profileData) => {
     return new ApiResponse(false, null, [message]);
   }
 };
+
+export const changePassword = async (passwordData) => {
+  try {
+    const response = await axiosClient.patch(
+      "/user/change-password",
+      passwordData
+    );
+    const data = response.data;
+    return new ApiResponse(data.success, data.message);
+  } catch (error) {
+    console.error("Error changing password:", error);
+    const message = error.response?.data?.message || error.message;
+    return new ApiResponse(false, null, [message]);
+  }
+};
