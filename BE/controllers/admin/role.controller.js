@@ -31,7 +31,6 @@ export const updateRole = async (req, res) => {
   try {
     const { roleId } = req.params;
     const { title, description } = req.body;
-    console.log("Updating role:", roleId, title, description);
 
     const updatedRole = await Role.findByIdAndUpdate(
       {
@@ -59,7 +58,6 @@ export const updateRole = async (req, res) => {
 export const deleteRole = async (req, res) => {
   try {
     const { roleId } = req.params;
-    console.log(roleId);
 
     const deletedRole = await Role.findByIdAndDelete(roleId);
     if (!deletedRole) {

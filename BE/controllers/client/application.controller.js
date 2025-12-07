@@ -6,13 +6,11 @@ export const applyJob = async (req, res) => {
   try {
     const userId = res.locals.user.id;
     const { jobId } = req.body;
-    console.log("Job ID:", jobId);
 
-    console.log("User ID:", userId);
     const cv = await CV.findOne({ userId: new Types.ObjectId(userId) }).select(
       "_id"
     );
-    console.log("Found CV:", cv);
+
     if (!cv) {
       return res
         .status(404)
@@ -57,7 +55,7 @@ export const getCountOfApplicantsByUserId = async (req, res) => {
     const count = await Application.countDocuments({
       user: new Types.ObjectId(userId),
     });
-    console.log("Applicant count for user:", count);
+
     return res.status(200).json({ success: true, data: count });
   } catch (error) {
     return res.status(500).json({ success: false, message: "Server error" });

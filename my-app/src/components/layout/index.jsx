@@ -145,7 +145,7 @@ const LayoutDefault = () => {
         </div>
         <div className="layout-header__account">
           {user ? (
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
               <NotificationBell />
 
               <Dropdown
@@ -162,7 +162,7 @@ const LayoutDefault = () => {
                     <img
                       src={user.avatar}
                       alt="avatar"
-                      className="w-9 h-9 rounded-full border object-cover"
+                      className="w-10 h-10 rounded-full border object-cover"
                     />
                   ) : (
                     <div className="w-9 h-9 rounded-full border bg-gray-200 flex items-center justify-center text-gray-700 font-semibold">

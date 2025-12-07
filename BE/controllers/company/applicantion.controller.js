@@ -7,7 +7,6 @@ export const updateApplicantById = async (req, res) => {
   try {
     const { id } = req.params;
     const { status } = req.body;
-    console.log(id, status);
 
     const updated = await Application.findByIdAndUpdate(
       {

@@ -4,7 +4,6 @@ import { uploadToCloudinary } from "../../middlewares/admin/uploadCloudinary.mid
 export const getMyCompany = async (req, res) => {
   try {
     const userId = res.locals.user.id;
-    console.log("User ID:", userId);
 
     const company = await Company.findOne({ user: userId }).populate(
       "user",
@@ -68,8 +67,6 @@ export const updateMyCompany = async (req, res) => {
         public_id: uploadedFile.secure_url,
       };
     }
-
-    console.log("Updated company data:", uploadedFile);
 
     const updated = await company.save();
 

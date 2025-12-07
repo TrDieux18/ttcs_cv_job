@@ -12,7 +12,10 @@ export const getAllJobs = async (params = {}) => {
     const response = await axiosClient.get("/jobs", { params });
 
     const data = response.data;
-    return new ApiResponse(data.success, data.data, null, data.pagination);
+    if (!data.success) {
+      throw new Error(data.message || "Lấy công việc thất bại!");
+    }
+    return data;
   } catch (error) {
     console.error("Error fetching jobs:", error);
 

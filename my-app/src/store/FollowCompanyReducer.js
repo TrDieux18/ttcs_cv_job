@@ -1,7 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const getStoredCompanies = () => {
+  const data = localStorage.getItem("followedCompanies");
+
+  if (!data || data === "undefined") return [];
+
+  try {
+    return JSON.parse(data);
+  } catch {
+    return [];
+  }
+};
+
 const initialState = {
-  savedJobs: JSON.parse(localStorage.getItem("followedCompanies") || "[]"),
+  followedCompanies: getStoredCompanies(),
 };
 
 const followedCompaniesSlice = createSlice({
@@ -15,6 +27,7 @@ const followedCompaniesSlice = createSlice({
         JSON.stringify(state.followedCompanies)
       );
     },
+
     addFollowedCompany: (state, action) => {
       if (!state.followedCompanies.includes(action.payload)) {
         state.followedCompanies.push(action.payload);
@@ -24,10 +37,12 @@ const followedCompaniesSlice = createSlice({
         );
       }
     },
+
     removeFollowedCompany: (state, action) => {
       state.followedCompanies = state.followedCompanies.filter(
-        (jobId) => jobId !== action.payload
+        (id) => id !== action.payload
       );
+
       localStorage.setItem(
         "followedCompanies",
         JSON.stringify(state.followedCompanies)
@@ -41,4 +56,5 @@ export const {
   addFollowedCompany,
   removeFollowedCompany,
 } = followedCompaniesSlice.actions;
+
 export default followedCompaniesSlice.reducer;

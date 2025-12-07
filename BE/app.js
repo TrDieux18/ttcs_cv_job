@@ -73,6 +73,7 @@ app.use((req, res, next) => {
 app.use(SYSTEM.PATH_AUTH, authRoute);
 app.use(SYSTEM.PATH_ADMIN, adminRoute);
 app.use(SYSTEM.PATH_COMPANY, companyRoute);
+app.use(SYSTEM.PATH_ADMIN, adminRoute);
 app.use(SYSTEM.PATH_CLIENT, clientRoute);
 
 httpServer.listen(port, () => {

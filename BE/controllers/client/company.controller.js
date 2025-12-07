@@ -1,10 +1,10 @@
 import Company from "../../models/company.model.js";
 import Job from "../../models/job.model.js";
-import { buildCompanyFilter } from "../../helpers/queryFilter.js";
 
 export const getAllCompanies = async (req, res) => {
   try {
     const companies = await Company.find().populate("user", "fullName email");
+    console.log("Companies fetched:", companies);
     res.json({ success: true, data: companies });
   } catch (error) {
     console.error("Error fetching companies:", error);
@@ -21,7 +21,7 @@ export const getCompanyBySlug = async (req, res) => {
     );
 
     const jobs = await Job.find({ company: company._id });
-    console.log("Jobs for company:", jobs);
+
     if (!company) {
       return res.status(404).json({ message: "Company not found" });
     }

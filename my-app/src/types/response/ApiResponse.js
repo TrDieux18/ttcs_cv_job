@@ -1,6 +1,11 @@
-
 export class ApiResponse {
-  constructor(success, data = null, errors = [], message = "", pagination = null) {
+  constructor(
+    success,
+    data = null,
+    errors = [],
+    message = "",
+    pagination = null
+  ) {
     this.success = success;
     this.data = data;
     this.errors = errors;
@@ -8,7 +13,6 @@ export class ApiResponse {
     this.pagination = pagination;
   }
 }
-
 
 export class BulkUpdateResponse {
   constructor(

@@ -3,6 +3,8 @@ import { Tabs, Table, Tag, Typography, Button, Card } from "antd";
 import { useNavigate } from "react-router-dom";
 import { getApplicationsByUser } from "@services/client/ApplicationService";
 import { getSavedJobsByUser } from "@services/client/SaveJobService";
+import { getFollowedCompaniesByUser } from "@services/client/FollowCompanyService";
+import { LuEarth } from "react-icons/lu";
 
 const { Text } = Typography;
 
@@ -10,22 +12,28 @@ const MyJobs = () => {
   const [activeTab, setActiveTab] = useState("applied");
   const [appliedJobs, setAppliedJobs] = useState([]);
   const [savedJobs, setSavedJobs] = useState([]);
+  const [followedCompanies, setFollowedCompanies] = useState([]);
   const navigate = useNavigate();
 
+  // Fetch data
   useEffect(() => {
-    const fetchApplications = async () => {
+    const fetchData = async () => {
       try {
-        const [appliedResponse, savedResponse] = await Promise.all([
+        const [appliedRes, savedRes, followedRes] = await Promise.all([
           getApplicationsByUser(),
           getSavedJobsByUser(),
+          getFollowedCompaniesByUser(),
         ]);
-        if (appliedResponse.success) setAppliedJobs(appliedResponse.data);
-        if (savedResponse.success) setSavedJobs(savedResponse.data);
-      } catch (error) {
-        console.error("Error fetching applications:", error);
+
+        if (appliedRes.success) setAppliedJobs(appliedRes.data);
+        if (savedRes.success) setSavedJobs(savedRes.data);
+        if (followedRes.success) setFollowedCompanies(followedRes.data);
+      } catch (err) {
+        console.error("Error fetching data:", err);
       }
     };
-    fetchApplications();
+
+    fetchData();
   }, []);
 
   const appliedColumns = [
@@ -96,37 +104,116 @@ const MyJobs = () => {
 
   const savedColumns = appliedColumns.slice(0, 4);
 
-  const renderEmptyState = () => (
+  const followedColumns = [
+    {
+      title: "Logo",
+      key: "logo",
+      width: 80,
+      render: (_, record) => (
+        <img
+          src={record?.company?.logo?.url || "/default.png"}
+          alt="logo"
+          className="w-12 h-12 object-cover rounded-md"
+        />
+      ),
+    },
+    {
+      title: "Công ty",
+      key: "headline",
+      render: (_, record) => (
+        <div>{record.company?.headline || "Không có tên công ty"}</div>
+      ),
+    },
+    {
+      title: "Thành lập",
+      dataIndex: ["company", "foundedYear"],
+      key: "foundedYear",
+      align: "center",
+      render: (_, record) => record.company?.foundedYear || "-",
+    },
+    {
+      title: "Địa điểm",
+      dataIndex: ["company", "location"],
+      key: "location",
+      render: (loc) => loc || "Địa điểm không xác định",
+    },
+    {
+      title: "Thời gian làm việc",
+      dataIndex: ["company", "workTime"],
+      key: "workTime",
+      render: (_, record) => record.company?.workTime || "-",
+    },
+    {
+      title: "Website",
+      dataIndex: ["company", "website"],
+      key: "website",
+      align: "center",
+      render: (_, record) =>
+        record.company?.website ? (
+          <a
+            href={record.company.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 flex items-center justify-center"
+          >
+            <LuEarth size={18} />
+          </a>
+        ) : (
+          "-"
+        ),
+    },
+  ];
+
+  const renderEmptyState = (tab) => (
     <Card className="text-center py-16">
       <Text type="secondary" className="text-base mb-4 block">
-        Bạn chưa ứng tuyển vào công việc nào trong 12 tháng qua.
+        {tab === "applied" && "Bạn chưa ứng tuyển vào công việc nào."}
+        {tab === "saved" && "Bạn chưa lưu công việc nào."}
+        {tab === "followed" && "Bạn chưa theo dõi công ty nào."}
       </Text>
-      <Button
-        type="primary"
-        danger
-        size="large"
-        onClick={() => navigate("/jobs")}
-      >
-        Tìm việc ngay
-      </Button>
+      {tab !== "followed" && (
+        <Button
+          type="primary"
+          danger
+          size="large"
+          onClick={() => navigate("/jobs")}
+        >
+          Tìm việc ngay
+        </Button>
+      )}
     </Card>
   );
 
-  const renderJobList = (jobs, tab) => {
-    if (!jobs || jobs.length === 0) return renderEmptyState();
+  const renderJobList = (data, tab) => {
+    if (!data || data.length === 0) return renderEmptyState(tab);
+
+    const columns =
+      tab === "applied"
+        ? appliedColumns
+        : tab === "saved"
+        ? savedColumns
+        : followedColumns;
 
     return (
       <div className="bg-white rounded-md shadow-sm p-4">
         <Table
-          columns={tab === "applied" ? appliedColumns : savedColumns}
-          dataSource={jobs}
+          columns={columns}
+          dataSource={data}
           rowKey={(record) => record._id}
           pagination={false}
-          onRow={(record) => ({
-            onClick: () => navigate(`/jobs/${record.job._id}`),
-          })}
+          onRow={(record) =>
+            tab === "followed"
+              ? {
+                  onClick: () => navigate(`/companies/${record.company.slug}`),
+                }
+              : {
+                  onClick: () => navigate(`/jobs/${record.job._id}`),
+                }
+          }
           rowClassName={() =>
-            "cursor-pointer hover:bg-gray-50 transition-all duration-150"
+            tab === "followed"
+              ? "cursor-pointer hover:bg-gray-50 transition-all duration-150"
+              : "cursor-pointer hover:bg-gray-50 transition-all duration-150"
           }
         />
       </div>
@@ -152,6 +239,15 @@ const MyJobs = () => {
         </span>
       ),
     },
+    {
+      key: "followed",
+      label: (
+        <span className="flex items-center gap-1">
+          <span className="font-semibold">Đã theo dõi</span>
+          <Tag>{followedCompanies.length}</Tag>
+        </span>
+      ),
+    },
   ];
 
   return (
@@ -171,9 +267,10 @@ const MyJobs = () => {
       </div>
 
       <div>
-        {activeTab === "applied"
-          ? renderJobList(appliedJobs, "applied")
-          : renderJobList(savedJobs, "saved")}
+        {activeTab === "applied" && renderJobList(appliedJobs, "applied")}
+        {activeTab === "saved" && renderJobList(savedJobs, "saved")}
+        {activeTab === "followed" &&
+          renderJobList(followedCompanies, "followed")}
       </div>
     </div>
   );

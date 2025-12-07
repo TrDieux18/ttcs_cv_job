@@ -10,7 +10,7 @@ export const getSavedJobByUser = async (req, res) => {
       path: "job",
       populate: { path: "company" },
     });
-    console.log(savedJobs);
+
     res.status(200).json({ success: true, data: savedJobs });
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });

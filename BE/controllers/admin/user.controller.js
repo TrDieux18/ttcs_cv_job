@@ -9,7 +9,7 @@ export const getAllUsers = async (req, res) => {
     const { page = 1, limit = 5, search = "", isActive = "all" } = req.query;
 
     const filter = buildUserFilter(req.query);
-    console.log("Initial filter:", filter);
+
     filter.deleted = false;
 
     if (search.trim()) {

@@ -17,6 +17,9 @@ const Dashboard = () => {
   const [fileUrl, setFileUrl] = useState("");
   const [countAppliedJobs, setCountAppliedJobs] = useState(0);
   const savedJobs = useSelector((state) => state.savedJobs.savedJobs);
+  const followedCompanies = useSelector(
+    (state) => state.followedCompanies.followedCompanies
+  );
 
   useEffect(() => {
     const fetchCV = async () => {
@@ -124,7 +127,9 @@ const Dashboard = () => {
             className="w-80 h-28 p-2 rounded-sm bg-[#EDF8EA] hover:outline hover:outline-green-600"
           >
             <p>Công ty theo dõi</p>
-            <span className="text-[36px] text-green-700 font-bold">0</span>
+            <span className="text-[36px] text-green-700 font-bold">
+              {followedCompanies.length || 0}
+            </span>
           </div>
         </div>
       </div>

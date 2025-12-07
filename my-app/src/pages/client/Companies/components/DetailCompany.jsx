@@ -4,17 +4,22 @@ import { motion } from "framer-motion";
 import { getCompanyBySlug } from "@services/client/CompanyService";
 import { LuBriefcase, LuDollarSign, LuEarth, LuMapPin } from "react-icons/lu";
 import { getRelativeTime } from "@helpers/getRelavtiveTime";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { followCompany } from "@services/client/FollowCompanyService";
+import { message } from "antd";
+import { addFollowedCompany } from "@store/FollowCompanyReducer";
+import { removeFollowedCompany } from "@store/FollowCompanyReducer";
+import { unfollowCompany } from "@services/client/FollowCompanyService";
 
 const DetailCompany = () => {
   const { slug } = useParams();
-  const navigate = useNavigate();
 
   const followedCompanies = useSelector(
     (state) => state.followedCompanies.followedCompanies
   );
-  console.log("Followed companies from store:", followedCompanies);
+
+  const dispatch = useDispatch();
+
   const [jobs, setJobs] = useState([]);
   const [company, setCompany] = useState(null);
 
@@ -47,12 +52,31 @@ const DetailCompany = () => {
   }, [slug]);
 
   const handleFollowCompany = async (companyId) => {
-    console.log("Follow company with ID:", companyId);
-
     try {
       const response = await followCompany(companyId);
+      if (response.success) {
+        dispatch(addFollowedCompany(companyId));
+        message.success("Đã theo dõi công ty thành công!");
+      } else {
+        message.error(response.message || "Theo dõi công ty thất bại.");
+      }
     } catch (error) {
       console.error("Error following company:", error);
+    }
+  };
+
+  const handleUnfollowCompany = async (companyId) => {
+    console.log("Unfollow company with ID:", companyId);
+    try {
+      const response = await unfollowCompany(companyId);
+      if (response.success) {
+        dispatch(removeFollowedCompany(companyId));
+        message.success("Đã bỏ theo dõi công ty thành công!");
+      } else {
+        message.error(response.message || "Bỏ theo dõi công ty thất bại.");
+      }
+    } catch (error) {
+      console.error("Error unfollowing company:", error);
     }
   };
 
@@ -83,7 +107,7 @@ const DetailCompany = () => {
             <div className="flex items-center gap-8">
               <div className="w-36 h-36 rounded-md overflow-hidden bg-white shadow-xl flex-shrink-0">
                 <img
-                  src={company?.logo?.url || "https://via.placeholder.com/128"}
+                  src={company?.logo?.url || company?.logo?.public_id}
                   alt={company?.user?.fullName}
                   className="w-full h-full object-cover"
                 />
@@ -112,10 +136,18 @@ const DetailCompany = () => {
 
                 <div className="flex items-center gap-4">
                   <button
-                    onClick={() => handleFollowCompany(company._id)}
+                    onClick={() => {
+                      if (followedCompanies.includes(company._id)) {
+                        handleUnfollowCompany(company._id);
+                      } else {
+                        handleFollowCompany(company._id);
+                      }
+                    }}
                     className="w-40 px-6 py-2.5 bg-white text-teal-600 rounded-sm shadow-md hover:bg-gray-50 transition-all duration-300 font-semibold"
                   >
-                    Theo dõi
+                    {followedCompanies.includes(company._id)
+                      ? "Bỏ theo dõi"
+                      : "Theo dõi"}
                   </button>
                   <button className="w-40 px-6 py-2.5 bg-white/20 text-white rounded-sm hover:bg-white/30 transition-all duration-300 font-semibold">
                     Viết đánh giá
@@ -133,7 +165,7 @@ const DetailCompany = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <div className="bg-white shadow-md rounded-xl px-6 py-8 border border-[#ddd] mb-4">
+            <div className="bg-white shadow-sm rounded-xl px-6 py-8 border border-[#ddd] mb-4">
               <h2 className="text-2xl font-bold pb-4 text-gray-800 border-b border-dashed border-[#dedede]">
                 Thông tin chung
               </h2>
@@ -170,7 +202,7 @@ const DetailCompany = () => {
               </div>
             </div>
 
-            <div className="bg-white shadow-md rounded-xl px-6 py-8 border border-[#ddd]">
+            <div className="bg-white shadow-sm rounded-xl px-6 py-8 border border-[#ddd]">
               <h2 className="text-2xl font-bold pb-4 text-gray-800 border-b border-dashed border-[#dedede]">
                 Giới thiệu công ty
               </h2>
@@ -194,30 +226,31 @@ const DetailCompany = () => {
           </motion.div>
 
           <motion.div
-            className="pl-7 w-[35%] flex flex-col "
+            className="pl-7 w-[35%] flex flex-col overflow-hidden "
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <h2 className="text-[22px] font-bold text-gray-800 pb-4 pt-3">
+            <h2 className="text-[22px] font-bold text-gray-800 pb-4 ">
               {jobs.length} việc làm đang tuyển dụng
             </h2>
 
-            <div className="flex flex-col gap-3 overflow-y-hidden">
+            <div className="flex flex-col gap-4 overflow-y-auto h-[calc(100vh-167px)] pr-2">
               {jobs.map((job) => (
                 <motion.div
                   key={job._id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                  className={`bg-white rounded-lg p-4 shadow-md cursor-pointer transition-all border-2 hover:shadow-lg
-                     border-transparent hover:border-gray-200
-                `}
+                  transition={{ duration: 0.4 }}
+                  className="bg-white rounded-xl p-5 shadow-md cursor-pointer
+                 border-2 border-gray-100 hover:border-gray-300  
+                 transition-all duration-200"
                 >
                   <div className="flex justify-between items-center mb-3">
                     <span className="text-gray-400 text-sm">
                       {getRelativeTime(job.createdAt)}
                     </span>
+
                     {job.isFeatured && (
                       <span className="bg-orange-500 text-white px-3 py-1 rounded-md text-xs font-bold">
                         HOT
@@ -227,36 +260,34 @@ const DetailCompany = () => {
 
                   <a
                     href={`/jobs/${job._id}`}
-                    className="text-lg font-bold text-gray-800 mb-3 hover:text-red-500 transition-colors duration-200 block"
+                    className="text-xl font-semibold text-gray-900 mb-3 
+                   hover:text-red-500 transition-colors block"
                   >
                     {job.title}
                   </a>
 
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="w-12 h-12 rounded flex items-center justify-center text-white font-bold text-xl">
+                    <div className="w-12 h-12 rounded bg-gray-100 flex items-center justify-center overflow-hidden">
                       <img
                         src={company?.logo.url}
-                        style={{
-                          objectFit: "cover",
-                          width: "100%",
-                          height: "100%",
-                        }}
+                        className="w-full h-full object-cover"
                       />
                     </div>
-                    <span className="text-gray-700 font-medium">
+
+                    <span className="text-gray-700 font-medium text-base">
                       {company?.user.fullName || "Company"}
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-2 text-green-600 font-semibold  ">
+                  <div className="flex items-center gap-2 text-green-600 font-semibold text-lg mb-3">
                     <LuDollarSign size={18} />
                     <span>{job.salary}</span>
                   </div>
 
-                  <hr className="border-b border-dashed border-[#dedede] my-3" />
+                  <hr className="border-dashed border-gray-300 my-3" />
 
                   {job.experienceRequirement && (
-                    <div className="flex items-center gap-2 text-gray-500 text-sm mb-2">
+                    <div className="flex items-center gap-2 text-gray-600 text-sm mb-2">
                       <span>✓ {job.experienceRequirement}</span>
                     </div>
                   )}
@@ -273,12 +304,14 @@ const DetailCompany = () => {
                     </span>
                   </div>
 
-                  {job.keywords && job.keywords.length > 0 && (
+                  {/* Keywords */}
+                  {job.keywords?.length > 0 && (
                     <div className="flex flex-wrap gap-2">
                       {job.keywords.slice(0, 4).map((keyword, idx) => (
                         <span
                           key={idx}
-                          className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:outline hover:outline-gray-300 "
+                          className="px-3 py-1 bg-gray-100 text-gray-700 
+                         rounded-full text-sm hover:outline hover:outline-gray-300"
                         >
                           {keyword}
                         </span>

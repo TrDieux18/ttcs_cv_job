@@ -38,9 +38,10 @@ export const followCompany = async (companyId) => {
 };
 
 export const unfollowCompany = async (followCompanyId) => {
+  console.log("Unfollowing company with ID:", followCompanyId);
   try {
     const response = await axiosClient.delete(
-      `/follow-company/${followCompanyId}`
+      `/follow-company/${followCompanyId}/deleted`
     );
     const data = response.data;
     if (!data.success) {

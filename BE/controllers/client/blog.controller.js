@@ -7,10 +7,8 @@ export const getBlogs = async (req, res) => {
   page = Math.max(1, parseInt(page));
   limit = Math.min(50, parseInt(limit));
 
-  // Sử dụng helper để build filter cơ bản
   const query = buildBlogFilter(req.query);
 
-  // Thêm logic search riêng cho blog (search nhiều field)
   if (search) {
     query.$or = [
       { title: { $regex: search, $options: "i" } },
@@ -18,7 +16,6 @@ export const getBlogs = async (req, res) => {
     ];
   }
 
-  // Lọc theo tag
   if (tag) query.tags = tag;
 
   const total = await Blog.countDocuments(query);
@@ -81,7 +78,6 @@ export const toggleLike = async (req, res) => {
     res.status(400);
     throw new Error("Invalid blog ID");
   }
-  console.log("User ID:", res.locals.user.id);
 
   const idx = blog.likes.findIndex((l) => l.equals(res.locals.user.id));
 

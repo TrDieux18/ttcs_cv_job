@@ -127,7 +127,6 @@ export const createMyJob = async (req, res) => {
       specificAddress,
       keywords: keywords,
     });
-    console.log(job);
 
     const saved = await job.save();
 

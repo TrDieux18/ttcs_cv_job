@@ -21,6 +21,8 @@ const Notification = () => {
   const [activeTab, setActiveTab] = useState("all");
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [allNotifications, setAllNotifications] = useState([]);
+
   const [totalCounts, setTotalCounts] = useState({
     all: 0,
     unseen: 0,
@@ -28,7 +30,7 @@ const Notification = () => {
   });
   const [pagination, setPagination] = useState({
     current: 1,
-    pageSize: 10,
+    pageSize: 8,
     total: 0,
   });
   const navigate = useNavigate();
@@ -45,24 +47,24 @@ const Notification = () => {
         limit: pagination.pageSize,
       };
 
-      if (activeTab === "unseen") {
-        params.unreadOnly = "true";
-      }
-
       const response = await getNotifications(params);
+
       if (response.success) {
-        let data = response.data;
         const allData = response.data;
 
+        setAllNotifications(allData);
+
+        let filtered = allData;
+
         if (activeTab === "seen") {
-          data = data.filter((n) => n.read);
+          filtered = allData.filter((n) => n.read);
         } else if (activeTab === "unseen") {
-          data = data.filter((n) => !n.read);
+          filtered = allData.filter((n) => !n.read);
         }
 
-        setNotifications(data);
+        setNotifications(filtered);
 
-        // Cập nhật số lượng cho tất cả các tabs
+        
         setTotalCounts({
           all: allData.length,
           unseen: allData.filter((n) => !n.read).length,
@@ -114,7 +116,6 @@ const Notification = () => {
     }
   };
 
-  const allNotifications = notifications;
   const unseenNotifications = notifications.filter((n) => !n.read);
   const seenNotifications = notifications.filter((n) => n.read);
 
@@ -269,7 +270,7 @@ const Notification = () => {
         <Table
           dataSource={
             activeTab === "all"
-              ? allNotifications
+              ? notifications
               : activeTab === "unseen"
               ? unseenNotifications
               : seenNotifications

@@ -111,16 +111,6 @@ const NotificationBell = () => {
     return icons[type] || icons.other;
   };
 
-  const getTypeColor = (type) => {
-    const colors = {
-      application_status: "#1890ff",
-      job_posted: "#52c41a",
-      application_received: "#faad14",
-      other: "#8c8c8c",
-    };
-    return colors[type] || colors.other;
-  };
-
   const dropdownContent = (
     <div
       style={{
@@ -402,44 +392,51 @@ const NotificationBell = () => {
   );
 
   return (
-    <Dropdown
-      dropdownRender={() => dropdownContent}
-      trigger={["click"]}
-      open={open}
-      onOpenChange={setOpen}
-      placement="bottomRight"
-    >
-      <Badge
-        count={unreadCount}
-        offset={[-4, 4]}
-        size="small"
-        style={{
-          backgroundColor: "#ff4d4f",
-          boxShadow: "0 0 0 2px #fff",
-        }}
-      >
-        <Button
-          type="text"
-          icon={<BellOutlined style={{ fontSize: 22 }} />}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: 42,
-            height: 42,
-            borderRadius: "50%",
-            transition: "all 0.3s ease",
-            color: "white",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.2)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = "transparent";
-          }}
-        />
-      </Badge>
-    </Dropdown>
+    <>
+      <div className="bg-[#69C3B3] rounded-full relative">
+        <Dropdown
+          dropdownRender={() => dropdownContent}
+          trigger={["hover"]}
+          open={open}
+          onOpenChange={setOpen}
+          placement="bottomRight"
+        >
+          <Badge
+            count={unreadCount}
+            offset={[-4, 4]}
+            size="small"
+            style={{
+              backgroundColor: "#ff4d4f",
+              boxShadow: "0 0 0 2px #fff",
+              position: "absolute",
+              top: 2,
+              right: 3,
+            }}
+          >
+            <Button
+              type="text"
+              icon={<BellOutlined style={{ fontSize: 22 }} />}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 42,
+                height: 42,
+                borderRadius: "50%",
+                transition: "all 0.3s ease",
+                color: "white",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.2)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "transparent";
+              }}
+            />
+          </Badge>
+        </Dropdown>
+      </div>
+    </>
   );
 };
 

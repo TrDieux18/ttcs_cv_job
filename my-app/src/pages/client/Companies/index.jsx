@@ -3,18 +3,43 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { HiLocationMarker, HiUserGroup } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getFollowedCompaniesByUser } from "@services/client/FollowCompanyService";
+import { setFollowedCompanies } from "@store/FollowCompanyReducer";
 
 const Companies = () => {
   const navigate = useNavigate();
   const [companies, setCompanies] = useState([]);
-  const [followedCompanies, setFollowedCompanies] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const dispatch = useDispatch();
   useEffect(() => {
     const fetchCompanies = async () => {
       try {
-        const response = await getAllCompanies();
-        setCompanies(response.data);
+        setLoading(true);
+        const [response, responseFollowed] = await Promise.all([
+          getAllCompanies(),
+          getFollowedCompaniesByUser(),
+        ]);
+        console.log("Companies data:", response.data);
+
+        if (response.success && response.data) {
+          setCompanies(response.data);
+        } else {
+          setCompanies([]);
+        }
+
+        if (responseFollowed.success) {
+          const followedCompanyIds = responseFollowed.data.map(
+            (item) => item.company._id || item.company
+          );
+          dispatch(setFollowedCompanies(followedCompanyIds));
+        }
       } catch (error) {
         console.error("Error fetching companies:", error);
+        setCompanies([]);
+      } finally {
+        setLoading(false);
       }
     };
     fetchCompanies();
@@ -46,66 +71,79 @@ const Companies = () => {
         </motion.section>
 
         <div className="w-[80%] mx-auto py-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {companies.map((com) => (
-              <motion.div
-                key={com._id}
-                className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer border border-gray-100"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                whileHover={{ y: -5 }}
-              >
-                <div className="relative h-32 bg-gradient-to-r from-green-600 to-teal-500">
-                  <div className="absolute -bottom-10 left-6">
-                    <div className="w-15 h-15 bg-white rounded-md overflow-hidden shadow-lg  flex items-center justify-center ">
-                      <img
-                        src={com.logo?.url || "https://via.placeholder.com/80"}
-                        alt={com.user?.fullName}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pt-14 px-6 pb-6">
-                  <h3 className="text-xl font-bold text-gray-800 mb-2 line-clamp-1">
-                    {com.user?.fullName}
-                  </h3>
-
-                  <p className="text-sm text-teal-600 font-medium mb-3 line-clamp-1">
-                    {com.headline}
-                  </p>
-
-                  <p className="text-sm text-gray-600 mb-4 line-clamp-2 h-10">
-                    {com.description}
-                  </p>
-
-                  {/* Company Details */}
-                  <div className="space-y-2 mb-4">
-                    <div className="flex items-center text-sm text-gray-500">
-                      <HiLocationMarker className="w-4 h-4 mr-2 flex-shrink-0" />
-                      <span className="line-clamp-1">{com.location}</span>
-                    </div>
-
-                    <div className="flex items-center text-sm text-gray-500">
-                      <HiUserGroup className="w-4 h-4 mr-2 flex-shrink-0" />
-                      <span>{com.size} nhân viên</span>
+          {loading ? (
+            <div className="text-center py-20">
+              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
+              <p className="mt-4 text-gray-600">Đang tải công ty...</p>
+            </div>
+          ) : companies.length === 0 ? (
+            <div className="text-center py-20">
+              <p className="text-gray-600 text-lg">
+                Không tìm thấy công ty nào
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {companies.map((com) => (
+                <motion.div
+                  key={com._id}
+                  className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer border border-gray-100"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                  whileHover={{ y: -5 }}
+                >
+                  <div className="relative h-32 bg-gradient-to-r from-green-600 to-teal-500">
+                    <div className="absolute -bottom-10 left-6">
+                      <div className="w-15 h-15 bg-white rounded-md overflow-hidden shadow-lg  flex items-center justify-center ">
+                        <img
+                          src={
+                            com.logo?.url || "https://via.placeholder.com/80"
+                          }
+                          alt={com.user?.fullName}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
                     </div>
                   </div>
 
-                  {/* Action Button */}
-                  <button
-                    onClick={() => navigate(`/companies/${com.slug}`)}
-                    className="w-full py-2.5 bg-gradient-to-r from-green-600 to-teal-500 text-white rounded-lg font-semibold hover:from-green-700 hover:to-teal-600 transition-all duration-300"
-                  >
-                    Xem chi tiết
-                  </button>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                  <div className="pt-14 px-6 pb-6">
+                    <h3 className="text-xl font-bold text-gray-800 mb-2 line-clamp-1">
+                      {com.user?.fullName}
+                    </h3>
+
+                    <p className="text-sm text-teal-600 font-medium mb-3 line-clamp-1">
+                      {com.headline}
+                    </p>
+
+                    <p className="text-sm text-gray-600 mb-4 line-clamp-2 h-10">
+                      {com.description}
+                    </p>
+
+                    <div className="space-y-2 mb-4">
+                      <div className="flex items-center text-sm text-gray-500">
+                        <HiLocationMarker className="w-4 h-4 mr-2 flex-shrink-0" />
+                        <span className="line-clamp-1">{com.location}</span>
+                      </div>
+
+                      <div className="flex items-center text-sm text-gray-500">
+                        <HiUserGroup className="w-4 h-4 mr-2 flex-shrink-0" />
+                        <span>{com.size} nhân viên</span>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() => navigate(`/companies/${com.slug}`)}
+                      className="w-full py-2.5 bg-gradient-to-r from-green-600 to-teal-500 text-white rounded-lg font-semibold hover:from-green-700 hover:to-teal-600 transition-all duration-300"
+                    >
+                      Xem chi tiết
+                    </button>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </>

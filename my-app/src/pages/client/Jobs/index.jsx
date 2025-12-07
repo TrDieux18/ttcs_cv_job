@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
+import { NavLink, useSearchParams } from "react-router-dom";
 import { getAllJobs } from "@services/client/JobsService";
 import { Select, Input, Button, Pagination, notification, Space } from "antd";
 import {
@@ -111,23 +111,27 @@ export default function JobList() {
       updateURLParams(params);
 
       const response = await getAllJobs(params);
+      console.log("Jobs response:", response);
 
       if (response.success) {
         const jobsData = response.data || [];
-        setJobs(jobsData);
-        setTotalJobs(response.pagination?.total || jobsData.length);
 
-        if (jobsData.length > 0) {
-          setSelectedJob(jobsData[0]);
-        } else {
-          setSelectedJob(null);
-        }
+        setJobs(jobsData);
+        setTotalJobs(response.total);
+        setCurrentPage(response.page);
+
+        setSelectedJob(jobsData.length > 0 ? jobsData[0] : null);
       }
     } catch (error) {
       console.error("Error loading jobs:", error);
     } finally {
       setLoading(false);
     }
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    fetchJobs(page);
   };
 
   const updateURLParams = (params) => {
@@ -181,11 +185,6 @@ export default function JobList() {
   const handleSearch = () => {
     setCurrentPage(1);
     fetchJobs(1);
-  };
-
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleApplication = async (jobId) => {
@@ -664,7 +663,6 @@ export default function JobList() {
               )}
             </div>
 
-            {/* Pagination */}
             {totalJobs > pageSize && (
               <div className="flex justify-center mt-8">
                 <Pagination

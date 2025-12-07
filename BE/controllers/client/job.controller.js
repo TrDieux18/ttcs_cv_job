@@ -5,25 +5,36 @@ import { buildJobFilter } from "../../helpers/queryFilter.js";
 
 export const getAllJobs = async (req, res) => {
   try {
-   
     const filter = buildJobFilter(req.query);
 
-    const jobs = await Job.find(filter)
-      .populate({
-        path: "company",
-        select: "logo user slug",
-        populate: {
-          path: "user",
-          select: "fullName",
-        },
-      })
-      .sort({ createdAt: -1 })
-      .lean();
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 5;
+    const skip = (page - 1) * limit;
+
+    const [jobs, total] = await Promise.all([
+      Job.find(filter)
+        .populate({
+          path: "company",
+          select: "logo user slug",
+          populate: {
+            path: "user",
+            select: "fullName",
+          },
+        })
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit)
+        .lean(),
+      Job.countDocuments(filter),
+    ]);
+    console.log("Jobs fetched:", jobs);
 
     res.json({
       success: true,
       data: jobs,
-      total: jobs.length,
+      total,
+      page,
+      totalPages: Math.ceil(total / limit),
     });
   } catch (error) {
     console.error("Error fetching jobs:", error);
@@ -37,7 +48,7 @@ export const getAllJobs = async (req, res) => {
 export const getJobById = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log("Fetching job with ID:", id);
+
     const job = await Job.findById({ _id: id }).populate({
       path: "company",
       populate: {
