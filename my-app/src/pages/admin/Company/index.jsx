@@ -1,21 +1,9 @@
 import { useEffect, useState } from "react";
-import {
-  getAllCompanies,
-  deleteCompany,
-} from "@services/admin/CompanyService";
-import {
-  Button,
-  Dropdown,
-  message,
-  Popconfirm,
-  Table,
-  Input,
-  Image,
-} from "antd";
-import { NavLink, useNavigate } from "react-router-dom";
+import { getAllCompanies, deleteCompany } from "@services/admin/CompanyService";
+import { Button, Dropdown, message, Table, Input, Image } from "antd";
+import { useNavigate } from "react-router-dom";
 import {
   DeleteOutlined,
-  EditOutlined,
   EyeOutlined,
   MoreOutlined,
   SearchOutlined,
@@ -96,13 +84,6 @@ const Company = () => {
       },
       { type: "divider" },
       {
-        key: "edit",
-        label: <span>Chỉnh sửa</span>,
-        icon: <EditOutlined style={{ fontSize: 15 }} />,
-        onClick: () => navigate(`/admin/companies/update/${record._id}`),
-      },
-      { type: "divider" },
-      {
         key: "delete",
         label: "Xóa",
         icon: <DeleteOutlined style={{ fontSize: 15 }} />,
@@ -177,35 +158,40 @@ const Company = () => {
   ];
 
   return (
-    <div>
+    <div className="p-6 bg-white min-h-screen">
       {contextHolder}
-      <div className="overflow-x-auto space-y-4 p-2">
-        <div className="flex justify-between items-center">
-          <h1 className="text-xl font-semibold">Danh sách công ty</h1>
-          <div className="flex gap-2 items-center">
-            <Input
-              placeholder="Tìm kiếm..."
-              value={keyword}
-              onChange={(e) => setKeyword(e.target.value)}
-              onPressEnter={handleSearch}
-              prefix={<SearchOutlined />}
-              style={{ width: 220 }}
-            />
-
-            <Button
-              type="primary"
-              onClick={handleSearch}
-              style={{ background: "#3875F6" }}
-            >
-              Tìm
-            </Button>
-
-            <Button type="primary" style={{ background: "#3875F6" }}>
-              <NavLink to="/admin/companies/create">Tạo mới</NavLink>
-            </Button>
-          </div>
+      <div className="max-w-full">
+        {/* Header */}
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold text-gray-900">Quản lý công ty</h1>
+          <p className="text-sm text-gray-500 mt-1">
+            Danh sách công ty đăng ký trong hệ thống
+          </p>
         </div>
 
+        {/* Filters */}
+        <div className="flex gap-3 mb-6">
+          <Input
+            placeholder="Tìm kiếm theo tên công ty..."
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+            onPressEnter={handleSearch}
+            prefix={<SearchOutlined />}
+            size="large"
+            style={{ width: 300 }}
+          />
+
+          <Button
+            type="primary"
+            size="large"
+            onClick={handleSearch}
+            icon={<SearchOutlined />}
+          >
+            Tìm kiếm
+          </Button>
+        </div>
+
+        {/* Table */}
         <Table
           bordered
           rowKey="_id"
@@ -214,16 +200,13 @@ const Company = () => {
             ...pagination,
             showSizeChanger: true,
             showTotal: (total) => `Tổng ${total} công ty`,
+            pageSizeOptions: ["10", "20", "50", "100"],
           }}
           onChange={handleTableChange}
-          style={{
-            background: "#f6f8fe",
-            borderRadius: 8,
-            overflow: "hidden",
-          }}
+          className="shadow-sm"
           dataSource={companies}
           columns={columns}
-          locale={{ emptyText: "Không có" }}
+          locale={{ emptyText: "Không có dữ liệu" }}
         />
       </div>
     </div>

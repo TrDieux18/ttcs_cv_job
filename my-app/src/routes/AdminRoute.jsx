@@ -9,13 +9,11 @@ import UserForm from "@pages/admin/User/components/UserForm";
 import DetailUser from "@pages/admin/User/components/DetailUser";
 import RolePermission from "@pages/admin/Role/components/RolePermission";
 import CV from "@pages/admin/CV";
-
-import CreateCV from "@pages/admin/CV/CreateCV";
 import DetailCV from "@pages/admin/CV/components/DetailCV";
 import Company from "@pages/admin/Company";
-import CompanyForm from "@pages/admin/Company/components/CompanyForm";
+import DetailCompany from "@pages/admin/Company/components/DetailCompany";
 import Job from "@pages/admin/Job";
-import JobForm from "@pages/admin/Job/components/JobForm";
+import DetailJob from "@pages/admin/Job/components/DetailJob";
 
 const adminRoutes = [
   {
@@ -51,10 +49,6 @@ const adminRoutes = [
             element: <CV />,
           },
           {
-            path: "cvs/create",
-            element: <CreateCV />,
-          },
-          {
             path: "cvs/detail/:_id",
             element: <DetailCV />,
           },
@@ -63,24 +57,16 @@ const adminRoutes = [
             element: <Company />,
           },
           {
-            path: "companies/create",
-            element: <CompanyForm mode="create" />,
-          },
-          {
-            path: "companies/update/:id",
-            element: <CompanyForm mode="update" />,
+            path: "companies/detail/:id",
+            element: <DetailCompany />,
           },
           {
             path: "jobs",
             element: <Job />,
           },
           {
-            path: "jobs/create",
-            element: <JobForm mode="create" />,
-          },
-          {
-            path: "jobs/update/:id",
-            element: <JobForm mode="update" />,
+            path: "jobs/detail/:id",
+            element: <DetailJob />,
           },
         ],
       },

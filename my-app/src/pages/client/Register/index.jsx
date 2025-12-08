@@ -66,7 +66,6 @@ const Register = () => {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Vai trò */}
           <div className="grid grid-cols-2 gap-4 mb-6">
             <button
               type="button"
@@ -92,7 +91,6 @@ const Register = () => {
             </button>
           </div>
 
-          {/* Họ và tên */}
           <div>
             <label
               htmlFor="fullName"
@@ -115,7 +113,6 @@ const Register = () => {
             />
           </div>
 
-          {/* Username */}
           <div>
             <label
               htmlFor="username"
@@ -135,7 +132,6 @@ const Register = () => {
             />
           </div>
 
-          {/* Email */}
           <div>
             <label
               htmlFor="email"
@@ -159,7 +155,6 @@ const Register = () => {
             />
           </div>
 
-          {/* Mật khẩu */}
           <div>
             <label
               htmlFor="password"
@@ -179,7 +174,6 @@ const Register = () => {
             />
           </div>
 
-          {/* Submit */}
           <button
             type="submit"
             disabled={isSubmitting}
@@ -189,7 +183,6 @@ const Register = () => {
           </button>
         </form>
 
-        {/* Link Login */}
         <p className="mt-8 text-center text-sm text-gray-600">
           Đã có tài khoản?{" "}
           <Link

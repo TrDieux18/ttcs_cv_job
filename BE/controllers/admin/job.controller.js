@@ -2,7 +2,6 @@ import Job from "../../models/job.model.js";
 import Company from "../../models/company.model.js";
 import { buildJobFilter } from "../../helpers/queryFilter.js";
 
-
 export const getAllJobsAdmin = async (req, res) => {
   try {
     const { page = 1, limit = 10, search = "", status = "all" } = req.query;
@@ -41,8 +40,7 @@ export const getAllJobsAdmin = async (req, res) => {
   }
 };
 
-// ✅ GET JOB BY ID (Admin)
-export const getJobByIdAdmin = async (req, res) => {
+export const getJobById = async (req, res) => {
   try {
     const id = req.params.id;
     const job = await Job.findById(id).populate({
@@ -52,9 +50,7 @@ export const getJobByIdAdmin = async (req, res) => {
     });
 
     if (!job) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Job not found" });
+      return res.status(404).json({ success: false, message: "Job not found" });
     }
 
     return res.json({ success: true, data: job });
@@ -63,7 +59,6 @@ export const getJobByIdAdmin = async (req, res) => {
     return res.status(500).json({ success: false, message: error.message });
   }
 };
-
 
 export const createJobAdmin = async (req, res) => {
   try {
@@ -88,7 +83,7 @@ export const createJobAdmin = async (req, res) => {
       isFeatured,
     } = req.body;
 
-    // Validate required fields
+
     if (!title || !description || !company || !location) {
       return res.status(400).json({
         success: false,
@@ -96,7 +91,6 @@ export const createJobAdmin = async (req, res) => {
       });
     }
 
-    // Check company exists
     const companyExists = await Company.findById(company);
     if (!companyExists) {
       return res.status(400).json({
@@ -136,7 +130,6 @@ export const createJobAdmin = async (req, res) => {
   }
 };
 
-
 export const updateJobAdmin = async (req, res) => {
   try {
     const id = req.params.id;
@@ -163,12 +156,10 @@ export const updateJobAdmin = async (req, res) => {
 
     const job = await Job.findById(id);
     if (!job) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Job not found" });
+      return res.status(404).json({ success: false, message: "Job not found" });
     }
 
-    // Update fields
+
     if (title) job.title = title;
     if (description) job.description = description;
     if (company) job.company = company;
@@ -186,8 +177,7 @@ export const updateJobAdmin = async (req, res) => {
       job.experienceRequirement = experienceRequirement;
     if (applicationDeadline) job.applicationDeadline = applicationDeadline;
     if (specificAddress) job.specificAddress = specificAddress;
-    if (keywords)
-      job.keywords = keywords.split(",").map((k) => k.trim());
+    if (keywords) job.keywords = keywords.split(",").map((k) => k.trim());
     if (isFeatured !== undefined) job.isFeatured = isFeatured;
 
     const updated = await job.save();
@@ -204,16 +194,13 @@ export const updateJobAdmin = async (req, res) => {
   }
 };
 
-// ✅ DELETE JOB (Admin)
-export const deleteJobAdmin = async (req, res) => {
+export const deleteJob = async (req, res) => {
   try {
     const id = req.params.id;
     const deleted = await Job.findByIdAndDelete(id);
 
     if (!deleted) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Job not found" });
+      return res.status(404).json({ success: false, message: "Job not found" });
     }
 
     return res.json({ success: true, message: "Xóa job thành công" });

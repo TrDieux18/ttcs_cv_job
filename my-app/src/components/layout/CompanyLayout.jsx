@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -8,12 +8,14 @@ import {
   ProfileOutlined,
   BarChartOutlined,
 } from "@ant-design/icons";
-import { Layout, Menu, Button, message, theme } from "antd";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Layout, Menu, Button, message, theme, Badge } from "antd";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout as logoutAction } from "@store/UserReducer";
 import { logout as logoutService } from "@services/common/AuthService";
 import { deleteAllCookies } from "@helpers/cookie";
+import { getApplicantStats } from "@services/company/ApplicantService";
+import NotificationBell from "@components/NotificationBell";
 
 const { Header, Sider, Content } = Layout;
 
@@ -21,13 +23,31 @@ const CompanyLayout = () => {
   const user = useSelector((state) => state.user.user);
 
   const [collapsed, setCollapsed] = useState(false);
+  const [pendingCount, setPendingCount] = useState(0);
   const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useDispatch();
   const [messageApi, contextHolder] = message.useMessage();
 
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+
+  // Fetch statistics on mount and when route changes
+  useEffect(() => {
+    fetchStats();
+  }, [location.pathname]);
+
+  const fetchStats = async () => {
+    try {
+      const res = await getApplicantStats();
+      if (res.success) {
+        setPendingCount(res.data.pending || 0);
+      }
+    } catch (error) {
+      console.error("Error fetching stats:", error);
+    }
+  };
 
   const sidebarItems = [
     {
@@ -43,12 +63,26 @@ const CompanyLayout = () => {
     {
       key: "/company/cvs",
       icon: <ProfileOutlined />,
-      label: "Quản lý CV",
+      label: (
+        <span className="flex items-center justify-between">
+          <span>Quản lý CV</span>
+          {pendingCount > 0 && (
+            <Badge
+              count={pendingCount}
+              style={{
+                backgroundColor: "#2563eb",
+                marginLeft: "8px",
+              }}
+              overflowCount={99}
+            />
+          )}
+        </span>
+      ),
     },
     {
       key: "/company/reports",
       icon: <BarChartOutlined />,
-      label: "Báo cáo ",
+      label: "Báo cáo",
     },
 
     {
@@ -143,6 +177,7 @@ const CompanyLayout = () => {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
+            borderBottom: "1px solid #f0f0f0",
           }}
         >
           <Button
@@ -155,6 +190,13 @@ const CompanyLayout = () => {
               height: 48,
             }}
           />
+
+          <div className="flex items-center gap-4">
+            <NotificationBell 
+              bgColor="#2563eb"
+              hoverColor="rgba(37, 99, 235, 0.8)" 
+            />
+          </div>
         </Header>
 
         <Content

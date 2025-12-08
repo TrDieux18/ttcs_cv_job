@@ -1,10 +1,10 @@
 import express from "express";
 import {
   getAllJobsAdmin,
-  getJobByIdAdmin,
+  getJobById,
   createJobAdmin,
   updateJobAdmin,
-  deleteJobAdmin,
+  deleteJob,
 } from "../../controllers/admin/job.controller.js";
 import { checkPermission } from "../../middlewares/admin/checkPermission.middleware.js";
 import { PERMISSIONS } from "../../enums/permissons.enum.js";
@@ -22,7 +22,7 @@ router.get(
   "/detail/:id",
   authMiddleware,
   checkPermission(PERMISSIONS.JOB_VIEW),
-  getJobByIdAdmin
+  getJobById
 );
 router.post(
   "/create",
@@ -40,7 +40,7 @@ router.delete(
   "/delete/:id",
   authMiddleware,
   checkPermission(PERMISSIONS.JOB_DELETE),
-  deleteJobAdmin
+  deleteJob
 );
 
 export default router;

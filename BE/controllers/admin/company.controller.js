@@ -102,7 +102,7 @@ export const createCompany = async (req, res) => {
     const saved = await company.save();
     return res.status(201).json({ success: true, data: saved });
   } catch (error) {
-    // Rollback uploaded file on error
+
     if (uploadedFile?.public_id) {
       try {
         const cloudinary = (await import("../../configs/cloudinary.js"))
@@ -148,7 +148,7 @@ export const updateCompany = async (req, res) => {
       data: updated,
     });
   } catch (error) {
-    // Rollback uploaded file on error
+
     if (uploadedFile?.public_id) {
       try {
         const cloudinary = (await import("../../configs/cloudinary.js"))

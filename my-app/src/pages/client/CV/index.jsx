@@ -82,9 +82,7 @@ const CV = () => {
     );
   }
 
-  // Sidebar Component
   const Sidebar = () => {
-    // Use user's avatar if available, otherwise fallback to default
     const avatarSrc = profileData?.avatar || avatar;
 
     return (
@@ -99,7 +97,6 @@ const CV = () => {
           gap: "24px",
         }}
       >
-        {/* Avatar */}
         <div style={{ textAlign: "center", marginBottom: "10px" }}>
           <img
             src={avatarSrc}
@@ -115,7 +112,6 @@ const CV = () => {
           />
         </div>
 
-        {/* About Section */}
         {profileData?.introduction && profileData.introduction.length > 0 && (
           <div>
             <h2
@@ -143,7 +139,6 @@ const CV = () => {
           </div>
         )}
 
-        {/* Contact Section */}
         <div>
           <h2
             style={{
@@ -193,7 +188,6 @@ const CV = () => {
           </div>
         </div>
 
-        {/* Skills Section */}
         {cvData?.skills && cvData.skills.length > 0 && (
           <div>
             <h2
@@ -243,7 +237,6 @@ const CV = () => {
           </div>
         )}
 
-        {/* Languages Section */}
         {profileData?.foreignLanguages &&
           profileData.foreignLanguages.length > 0 && (
             <div>
@@ -286,10 +279,8 @@ const CV = () => {
     );
   };
 
-  // Main Content Component
   const MainContent = () => (
     <div style={{ flex: 1, padding: "30px 25px" }}>
-      {/* Header with Name */}
       <div style={{ marginBottom: "25px" }}>
         <h1
           style={{
@@ -324,7 +315,6 @@ const CV = () => {
         />
       </div>
 
-      {/* Education Section */}
       {cvData?.education &&
         cvData.education.length > 0 &&
         cvData.education[0]?.school && (
@@ -378,7 +368,6 @@ const CV = () => {
           </div>
         )}
 
-      {/* Work Experience Section */}
       {cvData?.experience &&
         cvData.experience.length > 0 &&
         cvData.experience[0]?.position && (
@@ -492,7 +481,6 @@ const CV = () => {
           </div>
         )}
 
-      {/* Projects Section */}
       {cvData?.projects &&
         cvData.projects.length > 0 &&
         cvData.projects[0]?.name && (
@@ -585,7 +573,6 @@ const CV = () => {
           </div>
         )}
 
-      {/* Certificates Section */}
       {cvData?.certificates &&
         cvData.certificates.length > 0 &&
         cvData.certificates[0]?.name && (
@@ -649,7 +636,6 @@ const CV = () => {
           </div>
         )}
 
-      {/* Awards Section */}
       {cvData?.awards && cvData.awards.length > 0 && cvData.awards[0]?.name && (
         <div style={{ marginBottom: "22px" }}>
           <h2

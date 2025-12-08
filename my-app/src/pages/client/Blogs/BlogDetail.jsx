@@ -172,9 +172,7 @@ const BlogDetail = () => {
       const likedBlogs = JSON.parse(localStorage.getItem("likedBlogs") || "{}");
       likedBlogs[id] = newLikedState;
       localStorage.setItem("likedBlogs", JSON.stringify(likedBlogs));
-    } catch (e) {
-      // Silent fail for localStorage
-    }
+    } catch (e) {}
 
     try {
       const res = await toggleLike(id, token);
@@ -187,9 +185,7 @@ const BlogDetail = () => {
           );
           likedBlogs[id] = res.data.data.liked;
           localStorage.setItem("likedBlogs", JSON.stringify(likedBlogs));
-        } catch (e) {
-          // Silent fail for localStorage
-        }
+        } catch (e) {}
       }
     } catch (err) {
       setLiked(originalLiked);
@@ -200,14 +196,11 @@ const BlogDetail = () => {
         );
         likedBlogs[id] = originalLiked;
         localStorage.setItem("likedBlogs", JSON.stringify(likedBlogs));
-      } catch (e) {
-        // Silent fail for localStorage
-      }
+      } catch (e) {}
       alert("Có lỗi xảy ra, không thể thay đổi trạng thái thích.");
     }
   };
 
-  
   if (loading && !blog) {
     return (
       <div className="flex justify-center items-center min-h-[70vh]">
@@ -268,12 +261,10 @@ const BlogDetail = () => {
             </motion.div>
           )}
 
-          {/* Title */}
           <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-5 leading-tight">
             {blog.title}{" "}
           </h1>
 
-          {/* Meta Info */}
           <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-gray-600 mb-8 border-b border-gray-200 pb-6">
             <div className="flex items-center gap-1.5" title="Ngày đăng">
               <LuClock size={15} />
@@ -328,13 +319,11 @@ const BlogDetail = () => {
             </span>
           </div>
 
-          {/* Comments Section */}
           <div className="mt-16 pt-10 border-t border-gray-200">
             <h2 className="text-2xl font-bold text-gray-800 mb-8">
               Bình luận ({blog.comments?.length || 0})
             </h2>
 
-            {/* Comment Input */}
             <div className="mb-10 p-6 bg-slate-100 rounded-lg border border-gray-200 shadow-sm">
               <h3 className="text-lg font-semibold text-gray-800 mb-4">
                 {token
@@ -364,7 +353,6 @@ const BlogDetail = () => {
               </div>
             </div>
 
-            {/* Comments List */}
             <div className="space-y-5">
               {Array.isArray(blog?.comments) && blog.comments.length > 0 ? (
                 [...blog.comments]
@@ -419,14 +407,12 @@ const BlogDetail = () => {
           </div>
         </motion.div>
 
-        {/* --- Sidebar --- */}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           className="lg:col-span-1 space-y-6 sticky top-6"
         >
-          {/* Author Info */}
           {blog.author && (
             <div className="bg-white rounded-xl shadow-xl p-6 border border-gray-200">
               <h3 className="text-lg font-semibold text-gray-800 mb-4 pb-3 border-b border-gray-200">
@@ -448,7 +434,6 @@ const BlogDetail = () => {
             </div>
           )}
 
-          {/* Similar Blogs */}
           <div className="bg-white rounded-xl shadow-xl p-6 border border-gray-200">
             <h3 className="text-lg font-semibold text-gray-800 mb-4 pb-3 border-b border-gray-200">
               Bài viết liên quan

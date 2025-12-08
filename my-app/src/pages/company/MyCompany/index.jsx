@@ -53,14 +53,12 @@ const MyCompany = () => {
   };
 
   return (
-    <div className="min-h-screen">
-      <div className="mx-auto max-w-6xl">
-        <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+    <div className="min-h-screen bg-white">
+      <div className="mx-auto max-w-6xl px-8 py-6">
+        <div className="mb-8 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <h1 className="mt-2 text-2xl sm:text-3xl font-semibold text-slate-900">
-              Hồ sơ công ty
-            </h1>
-            <p className="mt-2 text-sm text-slate-500">
+            <h1 className="text-2xl font-bold text-gray-900">Hồ sơ công ty</h1>
+            <p className="mt-1 text-sm text-gray-500">
               Hãy cung cấp thông tin rõ ràng để ứng viên hiểu hơn về doanh
               nghiệp.
             </p>
@@ -73,10 +71,10 @@ const MyCompany = () => {
           onFinish={handleSubmit}
           className="space-y-6"
         >
-          <Card className="border-0 shadow-xl rounded-2xl bg-white/90 backdrop-blur-sm">
+          <Card className="shadow-sm border border-gray-200 rounded-lg">
             <Row gutter={[20, 20]}>
               <Col span={24}>
-                <h2 className="text-[22px] font-semibold uppercase tracking-wide text-slate-500">
+                <h2 className="text-lg font-semibold text-gray-800">
                   Thông tin công ty
                 </h2>
               </Col>
@@ -112,7 +110,7 @@ const MyCompany = () => {
 
                   <Button
                     type="primary"
-                    className="!mt-4 !bg-blue-400 hover:!bg-blue-500 !border-none !w-[160px]"
+                    className="!mt-4 !bg-[#22c55e] hover:!bg-[#16a34a] !border-none !w-[160px] !rounded-lg"
                     onClick={() =>
                       document.getElementById("companyLogo")?.click()
                     }
@@ -211,7 +209,7 @@ const MyCompany = () => {
                     type="primary"
                     loading={loading}
                     htmlType="submit"
-                    className="!bg-blue-400 hover:!bg-blue-500 !border-none"
+                    className="!bg-[#22c55e] hover:!bg-[#16a34a] !border-none !rounded-lg"
                   >
                     Cập nhật
                   </Button>

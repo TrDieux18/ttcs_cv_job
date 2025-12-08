@@ -101,7 +101,7 @@ const CompanyForm = ({ mode }) => {
 
   const handleSubmit = async (values) => {
     const formData = new FormData();
-    
+
     // Append tất cả fields từ form values
     Object.keys(values).forEach((key) => {
       if (values[key] !== undefined && values[key] !== null) {
@@ -142,270 +142,179 @@ const CompanyForm = ({ mode }) => {
   };
 
   return (
-    <div className="overflow-x-auto space-y-4 ">
-      <Form layout="vertical" form={form} onFinish={handleSubmit}>
-        <Row
-          style={{
-            display: "flex",
-            alignItems: "stretch",
-          }}
-        >
-          <Col span={10}>
-            <Card
-              style={styleOutermostCard}
-              styles={{
-                body: {
-                  padding: 0,
-                },
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                {preview ? (
-                  <Image
-                    height={120}
-                    width={120}
-                    src={preview}
-                    style={{
-                      borderRadius: "8px",
-                      objectFit: "cover",
-                    }}
-                    preview={false}
-                  />
-                ) : (
-                  <div
-                    style={{
-                      width: 120,
-                      height: 120,
-                      borderRadius: "8px",
-                      backgroundColor: "#f0f0f0",
-                      color: "#888",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontSize: 48,
-                      fontWeight: 600,
-                    }}
-                  >
-                    <BuildOutlined />
-                  </div>
-                )}
-                <input
-                  type="file"
-                  id="logoInput"
-                  accept="image/*"
-                  style={{ display: "none" }}
-                  onChange={(e) => {
-                    const file = e.target.files?.[0];
-                    if (file) {
-                      const previewUrl = URL.createObjectURL(file);
-                      setPreview(previewUrl);
-                    }
-                  }}
-                />
-                <Button
-                  type="primary"
-                  style={{
-                    ...styleButton,
-                    width: "30%",
-                    margin: "10px 0 0 5px",
-                  }}
-                  onClick={() => document.getElementById("logoInput")?.click()}
-                >
-                  {preview ? "Đổi logo" : "Tải logo"}
-                </Button>
-
-                {isEdit && (
-                  <div className="mt-4">
-                    <h2 className="text-xl font-semibold">
-                      {companyData?.headline || "Công ty"}
-                    </h2>
-                    <span className="font-medium text-gray-300">
-                      User: {companyData?.user?.fullName || "—"}
-                    </span>
-                  </div>
-                )}
-              </div>
-              {isEdit && (
-                <>
-                  <div className="mt-3 flex items-center gap-2">
-                    <h2 className="bg-[#f9f9f9] px-1.5 py-1 rounded-xl border-2 border-[#eee] w-fit">
-                      <span className="text-[#000] text-4 font-medium">
-                        Company ID:
-                      </span>
-                      <span className="text-[10px] font-medium text-[#888]">
-                        {companyData?._id}
-                      </span>
-                    </h2>
-                    <Button
-                      style={{
-                        backgroundColor: "#f9f9f9",
-                        padding: "6px 8px",
-                        border: "2px solid #eee",
-                        borderRadius: "16px",
-                        color: " #000",
-                        fontWeight: 600,
-                        fontSize: "12px",
-                      }}
-                      onClick={() =>
-                        navigator.clipboard.writeText(companyData?._id)
-                      }
-                    >
-                      Copy
-                    </Button>
-                  </div>
-                  <div className="mt-4 flex flex-col  items-start">
-                    <Popconfirm
-                      cancelText="Hủy"
-                      okText="Xóa"
-                      title="Bạn có chắc chắn xóa công ty này?"
-                    >
-                      <Button
-                        style={{
-                          padding: 0,
-                          fontWeight: 500,
-                        }}
-                        onMouseEnter={(e) =>
-                          (e.target.style.backgroundColor = "#ffffff")
-                        }
-                        onMouseLeave={(e) =>
-                          (e.target.style.backgroundColor = "#ffffff")
-                        }
-                        danger
-                        type="text"
-                        icon={<DeleteOutlined />}
-                      >
-                        Xóa công ty
-                      </Button>
-                    </Popconfirm>
-                  </div>
-                </>
-              )}
-            </Card>
-          </Col>
-
-          <Col span={14}>
-            <Card
-              style={styleOutermostCard}
-              styles={{
-                body: {
-                  display: "flex",
-                  flexDirection: "column",
-                  padding: 0,
-                },
-              }}
-            >
+    <div className="p-6 bg-white min-h-screen">
+      <div className="max-w-full">
+        {/* Header */}
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold text-gray-900">
+            {isEdit ? "Chỉnh sửa công ty" : "Tạo công ty mới"}
+          </h1>
+          <p className="text-sm text-gray-500 mt-1">
+            {isEdit
+              ? "Cập nhật thông tin công ty trong hệ thống"
+              : "Thêm công ty mới vào hệ thống"}
+          </p>
+        </div>
+        <Form layout="vertical" form={form} onFinish={handleSubmit}>
+          <Row
+            style={{
+              display: "flex",
+              alignItems: "stretch",
+            }}
+          >
+            <Col span={10}>
               <Card
-                style={{ border: "2px solid #eee" }}
+                style={styleOutermostCard}
                 styles={{
                   body: {
-                    padding: "10px 15px",
+                    padding: 0,
                   },
                 }}
               >
-                <Row gutter={[20, 10]}>
-                  <Col
-                    span={24}
-                    style={{
-                      fontSize: 18,
-                      fontWeight: 600,
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  {preview ? (
+                    <Image
+                      height={120}
+                      width={120}
+                      src={preview}
+                      style={{
+                        borderRadius: "8px",
+                        objectFit: "cover",
+                      }}
+                      preview={false}
+                    />
+                  ) : (
+                    <div
+                      style={{
+                        width: 120,
+                        height: 120,
+                        borderRadius: "8px",
+                        backgroundColor: "#f0f0f0",
+                        color: "#888",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontSize: 48,
+                        fontWeight: 600,
+                      }}
+                    >
+                      <BuildOutlined />
+                    </div>
+                  )}
+                  <input
+                    type="file"
+                    id="logoInput"
+                    accept="image/*"
+                    style={{ display: "none" }}
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) {
+                        const previewUrl = URL.createObjectURL(file);
+                        setPreview(previewUrl);
+                      }
                     }}
+                  />
+                  <Button
+                    type="primary"
+                    style={{
+                      ...styleButton,
+                      width: "30%",
+                      margin: "10px 0 0 5px",
+                    }}
+                    onClick={() =>
+                      document.getElementById("logoInput")?.click()
+                    }
                   >
-                    Thông tin công ty
-                  </Col>
+                    {preview ? "Đổi logo" : "Tải logo"}
+                  </Button>
 
-                  <Col span={24}>
-                    <Form.Item
-                      label={<span style={styleLabelSpan}>User</span>}
-                      style={{ margin: 0 }}
-                      name="user"
-                      rules={[
-                        {
-                          required: true,
-                          message: "Vui lòng chọn user.",
-                        },
-                      ]}
-                    >
-                      <Select
-                        placeholder="Chọn user"
-                        showSearch
-                        optionFilterProp="children"
-                        style={{ height: 39.56, backgroundColor: "#f9f9f9" }}
+                  {isEdit && (
+                    <div className="mt-4">
+                      <h2 className="text-xl font-semibold">
+                        {companyData?.headline || "Công ty"}
+                      </h2>
+                      <span className="font-medium text-gray-300">
+                        User: {companyData?.user?.fullName || "—"}
+                      </span>
+                    </div>
+                  )}
+                </div>
+                {isEdit && (
+                  <>
+                    <div className="mt-3 flex items-center gap-2">
+                      <h2 className="bg-[#f9f9f9] px-1.5 py-1 rounded-xl border-2 border-[#eee] w-fit">
+                        <span className="text-[#000] text-4 font-medium">
+                          Company ID:
+                        </span>
+                        <span className="text-[10px] font-medium text-[#888]">
+                          {companyData?._id}
+                        </span>
+                      </h2>
+                      <Button
+                        style={{
+                          backgroundColor: "#f9f9f9",
+                          padding: "6px 8px",
+                          border: "2px solid #eee",
+                          borderRadius: "16px",
+                          color: " #000",
+                          fontWeight: 600,
+                          fontSize: "12px",
+                        }}
+                        onClick={() =>
+                          navigator.clipboard.writeText(companyData?._id)
+                        }
                       >
-                        {users.map((user) => (
-                          <Select.Option key={user._id} value={user._id}>
-                            <span style={{ fontWeight: 600 }}>
-                              {user.fullName} ({user.email})
-                            </span>
-                          </Select.Option>
-                        ))}
-                      </Select>
-                    </Form.Item>
-                  </Col>
-
-                  <Col span={24}>
-                    <Form.Item
-                      label={<span style={styleLabelSpan}>Tiêu đề</span>}
-                      style={{ margin: 0 }}
-                      name="headline"
-                    >
-                      <Input placeholder="Nhập tiêu đề" style={styleInput} />
-                    </Form.Item>
-                  </Col>
-
-                  <Col span={24}>
-                    <Form.Item
-                      label={<span style={styleLabelSpan}>Mô tả</span>}
-                      style={{ margin: 0 }}
-                      name="description"
-                    >
-                      <Input.TextArea
-                        placeholder="Nhập mô tả"
-                        style={styleInput}
-                        rows={4}
-                      />
-                    </Form.Item>
-                  </Col>
-
-                  <Col span={12}>
-                    <Form.Item
-                      label={<span style={styleLabelSpan}>Website</span>}
-                      style={{ margin: 0 }}
-                      name="website"
-                    >
-                      <Input placeholder="https://..." style={styleInput} />
-                    </Form.Item>
-                  </Col>
-
-                  <Col span={12}>
-                    <Form.Item
-                      label={<span style={styleLabelSpan}>Địa điểm</span>}
-                      style={{ margin: 0 }}
-                      name="location"
-                    >
-                      <Input placeholder="Hanoi, Vietnam" style={styleInput} />
-                    </Form.Item>
-                  </Col>
-
-                  <Col span={24}>
-                    <Form.Item
-                      label={<span style={styleLabelSpan}>Quy mô</span>}
-                      style={{ margin: 0 }}
-                      name="size"
-                    >
-                      <Input placeholder="50-200" style={styleInput} />
-                    </Form.Item>
-                  </Col>
-                </Row>
+                        Copy
+                      </Button>
+                    </div>
+                    <div className="mt-4 flex flex-col  items-start">
+                      <Popconfirm
+                        cancelText="Hủy"
+                        okText="Xóa"
+                        title="Bạn có chắc chắn xóa công ty này?"
+                      >
+                        <Button
+                          style={{
+                            padding: 0,
+                            fontWeight: 500,
+                          }}
+                          onMouseEnter={(e) =>
+                            (e.target.style.backgroundColor = "#ffffff")
+                          }
+                          onMouseLeave={(e) =>
+                            (e.target.style.backgroundColor = "#ffffff")
+                          }
+                          danger
+                          type="text"
+                          icon={<DeleteOutlined />}
+                        >
+                          Xóa công ty
+                        </Button>
+                      </Popconfirm>
+                    </div>
+                  </>
+                )}
               </Card>
+            </Col>
 
-              {isEdit && (
+            <Col span={14}>
+              <Card
+                style={styleOutermostCard}
+                styles={{
+                  body: {
+                    display: "flex",
+                    flexDirection: "column",
+                    padding: 0,
+                  },
+                }}
+              >
                 <Card
-                  style={{ border: "2px solid #eee", margin: "15px 0" }}
+                  style={{ border: "2px solid #eee" }}
                   styles={{
                     body: {
                       padding: "10px 15px",
@@ -420,48 +329,158 @@ const CompanyForm = ({ mode }) => {
                         fontWeight: 600,
                       }}
                     >
-                      Khác
+                      Thông tin công ty
                     </Col>
 
                     <Col span={24}>
                       <Form.Item
-                        label={<span style={styleLabelSpan}>Ngày tạo</span>}
+                        label={<span style={styleLabelSpan}>User</span>}
                         style={{ margin: 0 }}
-                        name="createdAt"
+                        name="user"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Vui lòng chọn user.",
+                          },
+                        ]}
                       >
-                        <Input style={styleInput} disabled />
+                        <Select
+                          placeholder="Chọn user"
+                          showSearch
+                          optionFilterProp="children"
+                          style={{ height: 39.56, backgroundColor: "#f9f9f9" }}
+                        >
+                          {users.map((user) => (
+                            <Select.Option key={user._id} value={user._id}>
+                              <span style={{ fontWeight: 600 }}>
+                                {user.fullName} ({user.email})
+                              </span>
+                            </Select.Option>
+                          ))}
+                        </Select>
                       </Form.Item>
                     </Col>
 
                     <Col span={24}>
                       <Form.Item
-                        label={
-                          <span style={styleLabelSpan}>Cập nhật gần nhất</span>
-                        }
+                        label={<span style={styleLabelSpan}>Tiêu đề</span>}
                         style={{ margin: 0 }}
-                        name="updatedAt"
+                        name="headline"
                       >
-                        <Input style={styleInput} disabled />
+                        <Input placeholder="Nhập tiêu đề" style={styleInput} />
+                      </Form.Item>
+                    </Col>
+
+                    <Col span={24}>
+                      <Form.Item
+                        label={<span style={styleLabelSpan}>Mô tả</span>}
+                        style={{ margin: 0 }}
+                        name="description"
+                      >
+                        <Input.TextArea
+                          placeholder="Nhập mô tả"
+                          style={styleInput}
+                          rows={4}
+                        />
+                      </Form.Item>
+                    </Col>
+
+                    <Col span={12}>
+                      <Form.Item
+                        label={<span style={styleLabelSpan}>Website</span>}
+                        style={{ margin: 0 }}
+                        name="website"
+                      >
+                        <Input placeholder="https://..." style={styleInput} />
+                      </Form.Item>
+                    </Col>
+
+                    <Col span={12}>
+                      <Form.Item
+                        label={<span style={styleLabelSpan}>Địa điểm</span>}
+                        style={{ margin: 0 }}
+                        name="location"
+                      >
+                        <Input
+                          placeholder="Hanoi, Vietnam"
+                          style={styleInput}
+                        />
+                      </Form.Item>
+                    </Col>
+
+                    <Col span={24}>
+                      <Form.Item
+                        label={<span style={styleLabelSpan}>Quy mô</span>}
+                        style={{ margin: 0 }}
+                        name="size"
+                      >
+                        <Input placeholder="50-200" style={styleInput} />
                       </Form.Item>
                     </Col>
                   </Row>
                 </Card>
-              )}
-              <div className="flex  justify-end">
-                <Button
-                  style={{
-                    ...styleButton,
-                    width: "15%",
-                  }}
-                  htmlType="submit"
-                >
-                  {isEdit ? "Cập nhật" : "Tạo mới"}
-                </Button>
-              </div>
-            </Card>
-          </Col>
-        </Row>
-      </Form>
+
+                {isEdit && (
+                  <Card
+                    style={{ border: "2px solid #eee", margin: "15px 0" }}
+                    styles={{
+                      body: {
+                        padding: "10px 15px",
+                      },
+                    }}
+                  >
+                    <Row gutter={[20, 10]}>
+                      <Col
+                        span={24}
+                        style={{
+                          fontSize: 18,
+                          fontWeight: 600,
+                        }}
+                      >
+                        Khác
+                      </Col>
+
+                      <Col span={24}>
+                        <Form.Item
+                          label={<span style={styleLabelSpan}>Ngày tạo</span>}
+                          style={{ margin: 0 }}
+                          name="createdAt"
+                        >
+                          <Input style={styleInput} disabled />
+                        </Form.Item>
+                      </Col>
+
+                      <Col span={24}>
+                        <Form.Item
+                          label={
+                            <span style={styleLabelSpan}>
+                              Cập nhật gần nhất
+                            </span>
+                          }
+                          style={{ margin: 0 }}
+                          name="updatedAt"
+                        >
+                          <Input style={styleInput} disabled />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                  </Card>
+                )}
+                <div className="flex justify-end">
+                  <Button
+                    type="primary"
+                    size="large"
+                    className="min-w-[150px]"
+                    htmlType="submit"
+                  >
+                    {isEdit ? "Cập nhật" : "Tạo mới"}
+                  </Button>
+                </div>
+              </Card>
+            </Col>
+          </Row>
+        </Form>
+      </div>
     </div>
   );
 };

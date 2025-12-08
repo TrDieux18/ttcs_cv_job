@@ -207,45 +207,58 @@ const User = () => {
   ];
 
   return (
-    <div>
+    <div className="p-6 bg-white min-h-screen">
       {contextHolder}
-      <div className="overflow-x-auto space-y-4 p-2">
-        <div className="flex justify-between items-center">
-          <h1 className="text-xl font-semibold">Danh sách tài khoản</h1>
-          <div className="flex gap-2 items-center">
-            <Input
-              placeholder="Tìm kiếm..."
-              value={keyword}
-              onChange={(e) => setKeyword(e.target.value)}
-              onPressEnter={handleSearch}
-              prefix={<SearchOutlined />}
-              style={{ width: 220 }}
-            />
-
-            <Select
-              value={status}
-              style={{ width: 160 }}
-              onChange={handleStatusChange}
-            >
-              <Option value="all">Tất cả</Option>
-              <Option value="true">Hoạt động</Option>
-              <Option value="false">Ngừng hoạt động</Option>
-            </Select>
-
-            <Button
-              type="primary"
-              onClick={handleSearch}
-              style={{ background: "#3875F6" }}
-            >
-              Tìm
-            </Button>
-
-            <Button type="primary" style={{ background: "#3875F6" }}>
-              <NavLink to="/admin/users/create">Tạo mới</NavLink>
-            </Button>
+      <div className="max-w-full">
+        {/* Header */}
+        <div className="flex justify-between items-center mb-6">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">
+              Quản lý người dùng
+            </h1>
+            <p className="text-sm text-gray-500 mt-1">
+              Danh sách tài khoản người dùng trong hệ thống
+            </p>
           </div>
+          <Button type="primary" size="large" style={{ background: "#1890ff" }}>
+            <NavLink to="/admin/users/create">+ Tạo mới</NavLink>
+          </Button>
         </div>
 
+        {/* Filters */}
+        <div className="flex gap-3 mb-6">
+          <Input
+            placeholder="Tìm kiếm theo tên, email..."
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+            onPressEnter={handleSearch}
+            prefix={<SearchOutlined />}
+            size="large"
+            style={{ width: 300 }}
+          />
+
+          <Select
+            value={status}
+            size="large"
+            style={{ width: 180 }}
+            onChange={handleStatusChange}
+          >
+            <Option value="all">Tất cả trạng thái</Option>
+            <Option value="true">Hoạt động</Option>
+            <Option value="false">Ngừng hoạt động</Option>
+          </Select>
+
+          <Button
+            type="primary"
+            size="large"
+            onClick={handleSearch}
+            icon={<SearchOutlined />}
+          >
+            Tìm kiếm
+          </Button>
+        </div>
+
+        {/* Table */}
         <Table
           bordered
           rowKey="_id"
@@ -254,16 +267,13 @@ const User = () => {
             ...pagination,
             showSizeChanger: true,
             showTotal: (total) => `Tổng ${total} người dùng`,
+            pageSizeOptions: ["5", "10", "20", "50"],
           }}
           onChange={handleTableChange}
-          style={{
-            background: "#f6f8fe",
-            borderRadius: 8,
-            overflow: "hidden",
-          }}
+          className="shadow-sm"
           dataSource={users}
           columns={columns}
-          locale={{ emptyText: "Không có" }}
+          locale={{ emptyText: "Không có dữ liệu" }}
         />
       </div>
     </div>

@@ -16,6 +16,7 @@ import {
   Menu,
   Modal,
   Select,
+  Card,
 } from "antd";
 import {
   DeleteOutlined,
@@ -25,9 +26,11 @@ import {
   EyeOutlined,
   MoreOutlined,
   UserOutlined,
+  FileTextOutlined,
 } from "@ant-design/icons";
 
 import { updateStatusApplicant } from "@services/company/ApplicantService";
+import CVPreviewModal from "./components/CVPreviewModal";
 
 const { Option } = Select;
 const tagClass = (jobType) => {
@@ -61,6 +64,9 @@ export default function MyJobsPage() {
   const [selectedJob, setSelectedJob] = useState(null);
   const [applicants, setApplicants] = useState([]);
   const [applicantsLoading, setApplicantsLoading] = useState(false);
+
+  const [cvPreviewVisible, setCvPreviewVisible] = useState(false);
+  const [selectedApplicant, setSelectedApplicant] = useState(null);
 
   const [jobTypeFilter, setJobTypeFilter] = useState("");
 
@@ -133,6 +139,11 @@ export default function MyJobsPage() {
     setApplicants([]);
   };
 
+  const handleViewCVPreview = (applicant) => {
+    setSelectedApplicant(applicant);
+    setCvPreviewVisible(true);
+  };
+
   const columns = [
     {
       title: "STT",
@@ -192,7 +203,7 @@ export default function MyJobsPage() {
           type="link"
           icon={<UserOutlined />}
           onClick={() => handleViewApplicants(record)}
-          className="text-topcvBlue hover:text-blue-700"
+          className="text-blue-600 hover:text-blue-700 font-medium"
         >
           Xem
         </Button>
@@ -387,6 +398,15 @@ export default function MyJobsPage() {
           <Button
             type="link"
             size="small"
+            icon={<FileTextOutlined />}
+            onClick={() => handleViewCVPreview(record)}
+            className="text-blue-600 hover:text-blue-700"
+          >
+            Hồ sơ
+          </Button>
+          <Button
+            type="link"
+            size="small"
             icon={<EyeOutlined />}
             onClick={() => {
               if (record.cv?.fileUrl) {
@@ -395,7 +415,7 @@ export default function MyJobsPage() {
                 messageApi.warning("CV không khả dụng");
               }
             }}
-            className="text-topcvBlue hover:text-blue-700"
+            className="text-blue-600 hover:text-blue-700"
           >
             Xem CV
           </Button>
@@ -408,58 +428,79 @@ export default function MyJobsPage() {
     <>
       {contextHolder}
 
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-semibold text-gray-900">
-            TIN TUYỂN DỤNG
-          </h1>
-
-          <div className="flex items-center gap-2">
-            <Input
-              placeholder="Tìm kiếm ..."
-              value={keyword}
-              onChange={(e) => setKeyword(e.target.value)}
-              onPressEnter={() => fetchJobs(1)}
-              style={{ width: 250 }}
-              prefix={<SearchOutlined />}
-            />
-            <Select
-              placeholder="Chọn loại hình"
-              value={jobTypeFilter || "all"}
-              onChange={(value) => setJobTypeFilter(value)}
-              allowClear
-              style={{ width: 150 }}
-              defaultValue="all"
+      <div className="min-h-screen bg-white">
+        <div className="mx-auto max-w-7xl px-8 py-6">
+          <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">
+                Tin tuyển dụng
+              </h1>
+              <p className="mt-1 text-sm text-gray-500">
+                Quản lý các tin tuyển dụng và ứng viên của bạn
+              </p>
+            </div>
+            <Button
+              type="primary"
+              icon={<PlusOutlined />}
+              size="large"
+              onClick={() => navigate("/company/my-jobs/create")}
+              className="!bg-blue-600 hover:!bg-blue-700 !border-none !rounded-lg !font-medium"
             >
-              <Option value="all">Tất cả</Option>
-
-              <Option value="Full-time">Full-time</Option>
-              <Option value="Part-time">Part-time</Option>
-              <Option value="Contract">Contract</Option>
-              <Option value="Internship">Internship</Option>
-            </Select>
-            <Button type="default" onClick={() => fetchJobs(1)}>
-              Tìm
+              Tạo tin tuyển dụng
             </Button>
           </div>
-        </div>
 
-        <div className="bg-white border border-gray-200 rounded-lg shadow-card p-4">
-          <Table
-            rowKey="_id"
-            loading={loading}
-            columns={columns}
-            dataSource={jobs}
-            pagination={{
-              ...pagination,
-              showSizeChanger: true,
-              showTotal: (t) => `Tổng ${t} công việc`,
-            }}
-            onChange={handleTableChange}
-            sticky
-            rowClassName={() => "hover:bg-gray-50 transition-colors"}
-            locale={{ emptyText: "Chưa có công việc nào" }}
-          />
+          <Card className="shadow-sm border border-gray-200 rounded-lg">
+            <div className="mb-4 flex flex-col sm:flex-row gap-3">
+              <Input
+                placeholder="Tìm kiếm công việc..."
+                value={keyword}
+                onChange={(e) => setKeyword(e.target.value)}
+                onPressEnter={() => fetchJobs(1)}
+                style={{ width: 300 }}
+                prefix={<SearchOutlined className="text-gray-400" />}
+                className="!rounded-lg"
+              />
+              <Select
+                placeholder="Tất cả"
+                value={jobTypeFilter || "all"}
+                onChange={(value) => setJobTypeFilter(value)}
+                style={{ width: 150 }}
+                className="!rounded-lg"
+                defaultValue="all"
+              >
+                <Option value="all">Tất cả</Option>
+                <Option value="Full-time">Full-time</Option>
+                <Option value="Part-time">Part-time</Option>
+                <Option value="Contract">Contract</Option>
+                <Option value="Internship">Internship</Option>
+              </Select>
+              <Button
+                type="default"
+                onClick={() => fetchJobs(1)}
+                icon={<SearchOutlined />}
+                className="!rounded-lg"
+              >
+                Tìm kiếm
+              </Button>
+            </div>
+
+            <Table
+              rowKey="_id"
+              loading={loading}
+              columns={columns}
+              dataSource={jobs}
+              pagination={{
+                ...pagination,
+                showSizeChanger: true,
+                showTotal: (t) => `Tổng ${t} công việc`,
+              }}
+              onChange={handleTableChange}
+              sticky
+              rowClassName={() => "hover:bg-gray-50 transition-colors"}
+              locale={{ emptyText: "Chưa có công việc nào" }}
+            />
+          </Card>
         </div>
       </div>
 
@@ -484,7 +525,7 @@ export default function MyJobsPage() {
             Đóng
           </Button>,
         ]}
-        width={1300}
+        width={1400}
         centered
       >
         <div className="mt-4">
@@ -504,6 +545,13 @@ export default function MyJobsPage() {
           />
         </div>
       </Modal>
+
+      <CVPreviewModal
+        visible={cvPreviewVisible}
+        onClose={() => setCvPreviewVisible(false)}
+        applicant={selectedApplicant}
+        loading={false}
+      />
     </>
   );
 }

@@ -5,6 +5,7 @@ import {
   PushpinOutlined,
   DeleteOutlined,
   MoreOutlined,
+  SearchOutlined,
 } from "@ant-design/icons";
 import {
   Table,
@@ -14,56 +15,29 @@ import {
   Popconfirm,
   message,
   Tag,
-  Pagination,
+  Card,
+  Tabs,
 } from "antd";
+import { getAllApplicants } from "@services/company/ApplicantService";
 
 const { Search } = Input;
 
-// Mock API -------------------------------------------------------
-const mockFetchCVs = async ({ page = 1, limit = 10, keyword = "" } = {}) => {
-  const total = 3;
-  const items = Array.from({
-    length: Math.min(limit, total - (page - 1) * limit),
-  }).map((_, i) => {
-    const idx = (page - 1) * limit + i + 1;
-    return {
-      _id: `cv-${idx}`,
-      name: `Ứng viên ${idx}`,
-      title: ["Senior Frontend", "Backend Engineer", "QA Tester"][idx % 3],
-      position: ["Frontend Developer", "Backend Developer", "Tester"][idx % 3],
-      status: ["Mới", "Đang xử lý", "Từ chối"][idx % 3],
-      submittedAt: new Date(Date.now() - idx * 86400000).toISOString(),
-    };
-  });
-
-  await new Promise((r) => setTimeout(r, 200));
-  return { data: items, total };
-};
-
-const mockDeleteCV = async () => {
-  await new Promise((r) => setTimeout(r, 150));
-  return { success: true };
-};
-
-const mockPinCV = async () => {
-  await new Promise((r) => setTimeout(r, 150));
-  return { success: true };
-};
-
-// ---------------------------------------------------------------
-
 const StatusTag = ({ status }) => {
   const map = {
-    Mới: "blue",
-    "Đang xử lý": "gold",
-    "Từ chối": "red",
+    pending: { color: "blue", label: "Chờ xử lý" },
+    reviewing: { color: "orange", label: "Đang xem xét" },
+    reviewed: { color: "purple", label: "Đã xem xét" },
+    accepted: { color: "green", label: "Đã chấp nhận" },
+    rejected: { color: "red", label: "Từ chối" },
   };
-  return <Tag color={map[status]}>{status}</Tag>;
+  const config = map[status] || { color: "default", label: status };
+  return <Tag color={config.color}>{config.label}</Tag>;
 };
 
 export default function CVManagementPage() {
   const navigate = useNavigate();
 
+  const [activeTab, setActiveTab] = useState("all");
   const [keyword, setKeyword] = useState("");
   const [cvs, setCvs] = useState([]);
   const [page, setPage] = useState(1);
@@ -73,15 +47,59 @@ export default function CVManagementPage() {
 
   const [messageApi, contextHolder] = message.useMessage();
 
-  const fetchData = async (p = 1, l = limit, q = keyword) => {
+  const fetchData = async (
+    p = 1,
+    l = limit,
+    q = keyword,
+    status = activeTab
+  ) => {
     setLoading(true);
     try {
-      const res = await mockFetchCVs({ page: p, limit: l, keyword: q });
-      setCvs(res.data);
-      setTotal(res.total);
-      setPage(p);
-    } catch {
+      const params = {
+        page: p,
+        limit: l,
+      };
+
+      if (q.trim()) {
+        params.keyword = q;
+      }
+
+      if (status !== "all") {
+        params.status = status;
+      }
+
+      const res = await getAllApplicants(params);
+
+      console.log("API Response:", res); // Debug
+
+      if (res.success) {
+        const { applications, pagination } = res.data || {};
+
+        const transformedData = (applications || []).map((app) => ({
+          _id: app._id,
+          name: app.user?.fullName || "N/A",
+          email: app.user?.email || "N/A",
+          phone: app.user?.phone || "N/A",
+          title: app.cv?.title || "N/A",
+          position: app.job?.title || "N/A",
+          status: app.status,
+          submittedAt: app.createdAt,
+          cvUrl: app.cv?.fileUrl,
+        }));
+
+        setCvs(transformedData);
+        setTotal(pagination?.total || 0);
+        setPage(p);
+      } else {
+        messageApi.error(res.message || "Không thể tải dữ liệu");
+        setCvs([]);
+        setTotal(0);
+      }
+    } catch (error) {
       messageApi.error("Không thể tải dữ liệu");
+      console.error(error);
+      setCvs([]);
+      setTotal(0);
     } finally {
       setLoading(false);
     }
@@ -89,53 +107,37 @@ export default function CVManagementPage() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [activeTab]);
 
-  const onSearch = () => fetchData(1, limit, keyword);
+  const onSearch = () => fetchData(1, limit, keyword, activeTab);
 
   const handleDelete = async (id) => {
-    setLoading(true);
-    const res = await mockDeleteCV(id);
-    if (res.success) {
-      message.success("Xóa thành công");
-      fetchData(page, limit, keyword);
-    }
-    setLoading(false);
+    messageApi.warning("Chức năng xóa đang được phát triển");
   };
 
   const handlePin = async (id) => {
-    setLoading(true);
-    const res = await mockPinCV(id);
-    if (res.success) {
-      message.success("Đã ghim CV");
-    }
-    setLoading(false);
+    messageApi.warning("Chức năng ghim đang được phát triển");
   };
 
-  // Dropdown Menu Items --------------------------------------
   const rowMenuItems = (record) => [
     {
       key: "1",
       label: (
-        <span
-          onClick={() => navigate(`/company/cvs/${record._id}`)}
-          className="flex items-center gap-2"
-        >
+        <span className="flex items-center gap-2">
           <EyeOutlined /> Xem chi tiết
         </span>
       ),
+      onClick: () => navigate(`/company/cvs/${record._id}`),
     },
     { type: "divider" },
     {
       key: "2",
       label: (
-        <span
-          onClick={() => handlePin(record._id)}
-          className="flex items-center gap-2"
-        >
+        <span className="flex items-center gap-2">
           <PushpinOutlined /> Ghim
         </span>
       ),
+      onClick: () => handlePin(record._id),
     },
     { type: "divider" },
     {
@@ -169,12 +171,16 @@ export default function CVManagementPage() {
       dataIndex: "name",
     },
     {
-      title: "Tiêu đề",
+      title: "Email",
+      dataIndex: "email",
+    },
+    {
+      title: "Tiêu đề CV",
       dataIndex: "title",
       align: "center",
     },
     {
-      title: "Vị trí",
+      title: "Vị trí ứng tuyển",
       dataIndex: "position",
       align: "center",
     },
@@ -188,7 +194,7 @@ export default function CVManagementPage() {
       title: "Ngày gửi",
       dataIndex: "submittedAt",
       align: "center",
-      render: (v) => new Date(v).toLocaleDateString(),
+      render: (v) => new Date(v).toLocaleDateString("vi-VN"),
     },
     {
       title: "Hành động",
@@ -208,48 +214,89 @@ export default function CVManagementPage() {
     },
   ];
 
+  const tabItems = [
+    {
+      key: "all",
+      label: "Tất cả",
+    },
+    {
+      key: "pending",
+      label: "Chờ xử lý",
+    },
+    {
+      key: "accepted",
+      label: "Đã chấp nhận",
+    },
+    {
+      key: "rejected",
+      label: "Đã từ chối",
+    },
+  ];
+
   return (
-    <div className="space-y-4">
+    <div className="min-h-screen bg-white">
       {contextHolder}
 
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold text-gray-900">Quản lý CV</h1>
+      <div className="mx-auto max-w-7xl px-8 py-6">
+        <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">Quản lý CV</h1>
+            <p className="mt-1 text-sm text-gray-500">
+              Quản lý và theo dõi các CV ứng tuyển
+            </p>
+          </div>
+        </div>
 
-        <div className="flex items-center gap-2">
-          <div className="flex items-center bg-white rounded-md px-1 py-1">
+        <Card className="shadow-sm border border-gray-200 rounded-lg">
+          <Tabs
+            activeKey={activeTab}
+            onChange={(key) => {
+              setActiveTab(key);
+              setPage(1);
+            }}
+            items={tabItems}
+            className="mb-4"
+          />
+
+          <div className="mb-4">
             <Search
-              placeholder="Tìm kiếm CV…"
+              placeholder="Tìm kiếm theo tên hoặc email…"
               allowClear
               onSearch={onSearch}
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
-              style={{ width: 200 }}
+              style={{ width: 350 }}
+              prefix={<SearchOutlined className="text-gray-400" />}
+              className="!rounded-lg"
             />
           </div>
-        </div>
-      </div>
 
-      <div className="bg-white border border-gray-200 rounded-lg shadow-card p-4">
-        <Table
-          rowKey="_id"
-          loading={loading}
-          columns={columns}
-          dataSource={cvs}
-          pagination={{
-            current: page,
-            pageSize: limit,
-            total: total,
-            showSizeChanger: true,
-            showTotal: (t) => `Tổng ${t} CV`,
-          }}
-          onChange={(pagination) => {
-            setLimit(pagination.pageSize);
-            fetchData(pagination.current, pagination.pageSize, keyword);
-          }}
-          sticky
-          rowClassName={() => "hover:bg-gray-50 transition-colors"}
-          locale={{ emptyText: "Chưa có CV nào" }}
-        />
+          <Table
+            rowKey="_id"
+            loading={loading}
+            columns={columns}
+            dataSource={cvs}
+            pagination={{
+              current: page,
+              pageSize: limit,
+              total: total,
+              showSizeChanger: true,
+              showTotal: (t) => `Tổng ${t} CV`,
+            }}
+            onChange={(pagination) => {
+              setLimit(pagination.pageSize);
+              fetchData(
+                pagination.current,
+                pagination.pageSize,
+                keyword,
+                activeTab
+              );
+            }}
+            sticky
+            rowClassName={() => "hover:bg-gray-50 transition-colors"}
+            locale={{ emptyText: "Chưa có CV nào" }}
+          />
+        </Card>
       </div>
     </div>
   );

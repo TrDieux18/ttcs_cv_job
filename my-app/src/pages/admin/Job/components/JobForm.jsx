@@ -107,164 +107,205 @@ const JobForm = ({ mode }) => {
   };
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-semibold mb-4">
-        {isEdit ? "Chỉnh sửa công việc" : "Tạo công việc mới"}
-      </h1>
-      <Form layout="vertical" form={form} onFinish={handleSubmit}>
-        <Card>
-          <Row gutter={[16, 16]}>
-            <Col span={24}>
-              <Form.Item
-                label="Tiêu đề"
-                name="title"
-                rules={[{ required: true, message: "Vui lòng nhập tiêu đề" }]}
-              >
-                <Input placeholder="Nhập tiêu đề công việc" />
-              </Form.Item>
-            </Col>
+    <div className="p-6 bg-white min-h-screen">
+      <div className="max-w-full">
+        {/* Header */}
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold text-gray-900">
+            {isEdit ? "Chỉnh sửa việc làm" : "Tạo việc làm mới"}
+          </h1>
+          <p className="text-sm text-gray-500 mt-1">
+            {isEdit
+              ? "Cập nhật thông tin việc làm"
+              : "Thêm việc làm mới vào hệ thống"}
+          </p>
+        </div>
 
-            <Col span={12}>
-              <Form.Item
-                label="Công ty"
-                name="company"
-                rules={[{ required: true, message: "Vui lòng chọn công ty" }]}
-              >
-                <Select placeholder="Chọn công ty" showSearch optionFilterProp="children">
-                  {companies.map((company) => (
-                    <Select.Option key={company._id} value={company._id}>
-                      {company.headline}
-                    </Select.Option>
-                  ))}
-                </Select>
-              </Form.Item>
-            </Col>
+        <Form layout="vertical" form={form} onFinish={handleSubmit}>
+          <Card>
+            <Row gutter={[16, 16]}>
+              <Col span={24}>
+                <Form.Item
+                  label="Tiêu đề"
+                  name="title"
+                  rules={[{ required: true, message: "Vui lòng nhập tiêu đề" }]}
+                >
+                  <Input placeholder="Nhập tiêu đề công việc" />
+                </Form.Item>
+              </Col>
 
-            <Col span={12}>
-              <Form.Item
-                label="Địa điểm"
-                name="location"
-                rules={[{ required: true, message: "Vui lòng nhập địa điểm" }]}
-              >
-                <Input placeholder="Hà Nội, Việt Nam" />
-              </Form.Item>
-            </Col>
-
-            <Col span={24}>
-              <Form.Item label="Mô tả" name="description" rules={[{ required: true }]}>
-                <TextArea rows={4} placeholder="Mô tả công việc" />
-              </Form.Item>
-            </Col>
-
-            <Col span={8}>
-              <Form.Item label="Loại hình" name="jobType">
-                <Select placeholder="Chọn loại hình">
-                  <Select.Option value="Full-time">Full-time</Select.Option>
-                  <Select.Option value="Part-time">Part-time</Select.Option>
-                  <Select.Option value="Contract">Contract</Select.Option>
-                  <Select.Option value="Internship">Internship</Select.Option>
-                </Select>
-              </Form.Item>
-            </Col>
-
-            <Col span={8}>
-              <Form.Item label="Lương" name="salary">
-                <Input placeholder="10-15 triệu VND" />
-              </Form.Item>
-            </Col>
-
-            <Col span={8}>
-              <Form.Item label="Danh mục" name="category">
-                <Input placeholder="IT, Marketing, ..." />
-              </Form.Item>
-            </Col>
-
-            <Col span={12}>
-              <Form.Item label="Cấp độ" name="level">
-                <Input placeholder="Nhân viên, Quản lý, ..." />
-              </Form.Item>
-            </Col>
-
-            <Col span={12}>
-              <Form.Item label="Số lượng tuyển" name="hiringQuantity">
-                <InputNumber min={1} style={{ width: "100%" }} />
-              </Form.Item>
-            </Col>
-
-            <Col span={12}>
-              <Form.Item label="Yêu cầu bằng cấp" name="degreeRequirement">
-                <Input placeholder="Đại học, Cao đẳng, ..." />
-              </Form.Item>
-            </Col>
-
-            <Col span={12}>
-              <Form.Item label="Yêu cầu kinh nghiệm" name="experienceRequirement">
-                <Input placeholder="1-2 năm, ..." />
-              </Form.Item>
-            </Col>
-
-            <Col span={12}>
-              <Form.Item label="Yêu cầu giới tính" name="genderRequirement">
-                <Select placeholder="Chọn">
-                  <Select.Option value="Không yêu cầu">Không yêu cầu</Select.Option>
-                  <Select.Option value="Nam">Nam</Select.Option>
-                  <Select.Option value="Nữ">Nữ</Select.Option>
-                </Select>
-              </Form.Item>
-            </Col>
-
-            <Col span={12}>
-              <Form.Item label="Hạn nộp hồ sơ" name="applicationDeadline">
-                <DatePicker style={{ width: "100%" }} format="DD/MM/YYYY" />
-              </Form.Item>
-            </Col>
-
-            <Col span={24}>
-              <Form.Item label="Yêu cầu công việc" name="requirements">
-                <TextArea rows={3} placeholder="Yêu cầu chi tiết" />
-              </Form.Item>
-            </Col>
-
-            <Col span={24}>
-              <Form.Item label="Quyền lợi" name="benefits">
-                <TextArea rows={3} placeholder="Quyền lợi được hưởng" />
-              </Form.Item>
-            </Col>
-
-            <Col span={24}>
-              <Form.Item label="Địa chỉ cụ thể" name="specificAddress">
-                <Input placeholder="Địa chỉ chi tiết" />
-              </Form.Item>
-            </Col>
-
-            <Col span={24}>
-              <Form.Item label="Từ khóa (ngăn cách bởi dấu phẩy)" name="keywords">
-                <Input placeholder="ReactJS, NodeJS, MongoDB" />
-              </Form.Item>
-            </Col>
-
-            {isEdit && (
               <Col span={12}>
-                <Form.Item label="Nổi bật" name="isFeatured" valuePropName="checked">
-                  <Select>
-                    <Select.Option value={true}>Có</Select.Option>
-                    <Select.Option value={false}>Không</Select.Option>
+                <Form.Item
+                  label="Công ty"
+                  name="company"
+                  rules={[{ required: true, message: "Vui lòng chọn công ty" }]}
+                >
+                  <Select
+                    placeholder="Chọn công ty"
+                    showSearch
+                    optionFilterProp="children"
+                  >
+                    {companies.map((company) => (
+                      <Select.Option key={company._id} value={company._id}>
+                        {company.headline}
+                      </Select.Option>
+                    ))}
                   </Select>
                 </Form.Item>
               </Col>
-            )}
 
-            <Col span={24}>
-              <div className="flex justify-end gap-2">
-                <Button onClick={() => navigate("/admin/jobs")}>Hủy</Button>
-                <Button type="primary" htmlType="submit" style={styleButton} loading={loading}>
-                  {isEdit ? "Cập nhật" : "Tạo mới"}
-                </Button>
-              </div>
-            </Col>
-          </Row>
-        </Card>
-      </Form>
+              <Col span={12}>
+                <Form.Item
+                  label="Địa điểm"
+                  name="location"
+                  rules={[
+                    { required: true, message: "Vui lòng nhập địa điểm" },
+                  ]}
+                >
+                  <Input placeholder="Hà Nội, Việt Nam" />
+                </Form.Item>
+              </Col>
+
+              <Col span={24}>
+                <Form.Item
+                  label="Mô tả"
+                  name="description"
+                  rules={[{ required: true }]}
+                >
+                  <TextArea rows={4} placeholder="Mô tả công việc" />
+                </Form.Item>
+              </Col>
+
+              <Col span={8}>
+                <Form.Item label="Loại hình" name="jobType">
+                  <Select placeholder="Chọn loại hình">
+                    <Select.Option value="Full-time">Full-time</Select.Option>
+                    <Select.Option value="Part-time">Part-time</Select.Option>
+                    <Select.Option value="Contract">Contract</Select.Option>
+                    <Select.Option value="Internship">Internship</Select.Option>
+                  </Select>
+                </Form.Item>
+              </Col>
+
+              <Col span={8}>
+                <Form.Item label="Lương" name="salary">
+                  <Input placeholder="10-15 triệu VND" />
+                </Form.Item>
+              </Col>
+
+              <Col span={8}>
+                <Form.Item label="Danh mục" name="category">
+                  <Input placeholder="IT, Marketing, ..." />
+                </Form.Item>
+              </Col>
+
+              <Col span={12}>
+                <Form.Item label="Cấp độ" name="level">
+                  <Input placeholder="Nhân viên, Quản lý, ..." />
+                </Form.Item>
+              </Col>
+
+              <Col span={12}>
+                <Form.Item label="Số lượng tuyển" name="hiringQuantity">
+                  <InputNumber min={1} style={{ width: "100%" }} />
+                </Form.Item>
+              </Col>
+
+              <Col span={12}>
+                <Form.Item label="Yêu cầu bằng cấp" name="degreeRequirement">
+                  <Input placeholder="Đại học, Cao đẳng, ..." />
+                </Form.Item>
+              </Col>
+
+              <Col span={12}>
+                <Form.Item
+                  label="Yêu cầu kinh nghiệm"
+                  name="experienceRequirement"
+                >
+                  <Input placeholder="1-2 năm, ..." />
+                </Form.Item>
+              </Col>
+
+              <Col span={12}>
+                <Form.Item label="Yêu cầu giới tính" name="genderRequirement">
+                  <Select placeholder="Chọn">
+                    <Select.Option value="Không yêu cầu">
+                      Không yêu cầu
+                    </Select.Option>
+                    <Select.Option value="Nam">Nam</Select.Option>
+                    <Select.Option value="Nữ">Nữ</Select.Option>
+                  </Select>
+                </Form.Item>
+              </Col>
+
+              <Col span={12}>
+                <Form.Item label="Hạn nộp hồ sơ" name="applicationDeadline">
+                  <DatePicker style={{ width: "100%" }} format="DD/MM/YYYY" />
+                </Form.Item>
+              </Col>
+
+              <Col span={24}>
+                <Form.Item label="Yêu cầu công việc" name="requirements">
+                  <TextArea rows={3} placeholder="Yêu cầu chi tiết" />
+                </Form.Item>
+              </Col>
+
+              <Col span={24}>
+                <Form.Item label="Quyền lợi" name="benefits">
+                  <TextArea rows={3} placeholder="Quyền lợi được hưởng" />
+                </Form.Item>
+              </Col>
+
+              <Col span={24}>
+                <Form.Item label="Địa chỉ cụ thể" name="specificAddress">
+                  <Input placeholder="Địa chỉ chi tiết" />
+                </Form.Item>
+              </Col>
+
+              <Col span={24}>
+                <Form.Item
+                  label="Từ khóa (ngăn cách bởi dấu phẩy)"
+                  name="keywords"
+                >
+                  <Input placeholder="ReactJS, NodeJS, MongoDB" />
+                </Form.Item>
+              </Col>
+
+              {isEdit && (
+                <Col span={12}>
+                  <Form.Item
+                    label="Nổi bật"
+                    name="isFeatured"
+                    valuePropName="checked"
+                  >
+                    <Select>
+                      <Select.Option value={true}>Có</Select.Option>
+                      <Select.Option value={false}>Không</Select.Option>
+                    </Select>
+                  </Form.Item>
+                </Col>
+              )}
+
+              <Col span={24}>
+                <div className="flex justify-end gap-2">
+                  <Button onClick={() => navigate("/admin/jobs")} size="large">
+                    Hủy
+                  </Button>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    size="large"
+                    loading={loading}
+                    className="min-w-[150px]"
+                  >
+                    {isEdit ? "Cập nhật" : "Tạo mới"}
+                  </Button>
+                </div>
+              </Col>
+            </Row>
+          </Card>
+        </Form>
+      </div>
     </div>
   );
 };

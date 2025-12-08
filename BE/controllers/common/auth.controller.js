@@ -85,7 +85,7 @@ export const verifyToken = async (req, res) => {
     }
 
     const decoded = jwt.verify(tokenOnServer, JWT_SECRET);
-    // console.log("decoded", decoded);
+
 
     if (!decoded || !decoded.id) {
       return res.status(401).json({ success: false });

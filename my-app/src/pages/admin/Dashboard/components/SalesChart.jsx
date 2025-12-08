@@ -6,32 +6,63 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  Legend,
 } from "recharts";
 
-const data = [
-  { month: "Jan", sales: 4000 },
-  { month: "Feb", sales: 3000 },
-  { month: "Mar", sales: 5000 },
-  { month: "Apr", sales: 4500 },
-  { month: "May", sales: 6000 },
-  { month: "Jun", sales: 7000 },
-];
+const SalesChart = ({ data = [] }) => {
+  // Fallback data if no data provided
+  const defaultData = [
+    { month: "T1", jobs: 0, applications: 0, cvs: 0 },
+    { month: "T2", jobs: 0, applications: 0, cvs: 0 },
+    { month: "T3", jobs: 0, applications: 0, cvs: 0 },
+    { month: "T4", jobs: 0, applications: 0, cvs: 0 },
+    { month: "T5", jobs: 0, applications: 0, cvs: 0 },
+    { month: "T6", jobs: 0, applications: 0, cvs: 0 },
+  ];
 
-const SalesChart = () => {
+  const chartData = data.length > 0 ? data : defaultData;
+
   return (
-    <div className="p-6 bg-white rounded-xl shadow-md">
-      <h2 className="text-lg font-semibold mb-4">Sales Overview</h2>
+    <div className="p-6 bg-white rounded-xl shadow-sm border border-gray-200">
+      <h2 className="text-lg font-semibold text-gray-800 mb-4">
+        Thống kê hoạt động 6 tháng gần đây
+      </h2>
       <ResponsiveContainer width="100%" height={300}>
-        <LineChart data={data}>
+        <LineChart data={chartData}>
           <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-          <XAxis dataKey="month" />
-          <YAxis />
-          <Tooltip />
+          <XAxis dataKey="month" stroke="#6b7280" />
+          <YAxis stroke="#6b7280" />
+          <Tooltip
+            contentStyle={{
+              backgroundColor: "#fff",
+              border: "1px solid #e5e7eb",
+              borderRadius: "8px",
+            }}
+          />
+          <Legend />
           <Line
             type="monotone"
-            dataKey="sales"
+            dataKey="jobs"
+            name="Tin tuyển dụng"
             stroke="#3b82f6"
             strokeWidth={2}
+            dot={{ fill: "#3b82f6" }}
+          />
+          <Line
+            type="monotone"
+            dataKey="applications"
+            name="Ứng tuyển"
+            stroke="#10b981"
+            strokeWidth={2}
+            dot={{ fill: "#10b981" }}
+          />
+          <Line
+            type="monotone"
+            dataKey="cvs"
+            name="CV mới"
+            stroke="#f59e0b"
+            strokeWidth={2}
+            dot={{ fill: "#f59e0b" }}
           />
         </LineChart>
       </ResponsiveContainer>

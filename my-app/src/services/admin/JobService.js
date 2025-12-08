@@ -8,7 +8,6 @@ const axiosClient = axios.create({
   headers: { "Content-Type": "application/json" },
 });
 
-// ✅ GET ALL JOBS (Admin)
 export const getAllJobsAdmin = async (query = {}) => {
   try {
     const response = await axiosClient.get("/jobs", { params: query });
@@ -19,7 +18,6 @@ export const getAllJobsAdmin = async (query = {}) => {
   }
 };
 
-// ✅ GET JOB BY ID (Admin)
 export const getJobByIdAdmin = async (jobId) => {
   try {
     const response = await axiosClient.get(`/jobs/detail/${jobId}`);
@@ -30,7 +28,6 @@ export const getJobByIdAdmin = async (jobId) => {
   }
 };
 
-// ✅ CREATE JOB (Admin)
 export const createJobAdmin = async (jobData) => {
   try {
     const response = await axiosClient.post("/jobs/create", jobData);
@@ -46,7 +43,6 @@ export const createJobAdmin = async (jobData) => {
   }
 };
 
-// ✅ UPDATE JOB (Admin)
 export const updateJobAdmin = async (jobId, jobData) => {
   try {
     const response = await axiosClient.patch(`/jobs/update/${jobId}`, jobData);
@@ -62,7 +58,6 @@ export const updateJobAdmin = async (jobId, jobData) => {
   }
 };
 
-// ✅ DELETE JOB (Admin)
 export const deleteJobAdmin = async (jobId) => {
   try {
     const response = await axiosClient.delete(`/jobs/delete/${jobId}`);

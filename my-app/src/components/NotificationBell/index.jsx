@@ -13,7 +13,10 @@ import { formatDistanceToNow } from "date-fns";
 import { vi } from "date-fns/locale";
 import { useNavigate } from "react-router-dom";
 
-const NotificationBell = () => {
+const NotificationBell = ({
+  bgColor = "#16a34a",
+  hoverColor = "rgba(255,255,255,0.2)",
+}) => {
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -70,7 +73,15 @@ const NotificationBell = () => {
     }
     setOpen(false);
 
-    if (notification.job?._id) {
+    // Nếu là notification báo cáo vi phạm từ admin
+    if (
+      notification.title?.includes("báo cáo vi phạm") &&
+      notification.job?._id
+    ) {
+      // Điều hướng đến trang quản lý job của company
+      navigate(`/company/my-jobs/update/${notification.job._id}`);
+    } else if (notification.job?._id) {
+      // Các notification thông thường về job
       navigate(`/jobs/${notification.job._id}`);
     }
   };
@@ -101,7 +112,12 @@ const NotificationBell = () => {
     }
   };
 
-  const getTypeIcon = (type) => {
+  const getTypeIcon = (type, title) => {
+    // Kiểm tra nếu là notification báo cáo vi phạm
+    if (title?.includes("báo cáo vi phạm")) {
+      return "⚠️";
+    }
+
     const icons = {
       application_status: "📋",
       job_posted: "💼",
@@ -244,14 +260,21 @@ const NotificationBell = () => {
                           width: 48,
                           height: 48,
                           borderRadius: 8,
-                          backgroundColor: "#f5f5f5",
+                          backgroundColor: item.title?.includes(
+                            "báo cáo vi phạm"
+                          )
+                            ? "#fff2e8"
+                            : "#f5f5f5",
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
                           fontSize: 24,
+                          border: item.title?.includes("báo cáo vi phạm")
+                            ? "2px solid #ff7875"
+                            : "none",
                         }}
                       >
-                        {getTypeIcon(item.type)}
+                        {getTypeIcon(item.type, item.title)}
                       </div>
                     }
                     title={
@@ -392,51 +415,45 @@ const NotificationBell = () => {
   );
 
   return (
-    <>
-      <div className="bg-[#69C3B3] rounded-full relative">
-        <Dropdown
-          dropdownRender={() => dropdownContent}
-          trigger={["hover"]}
-          open={open}
-          onOpenChange={setOpen}
-          placement="bottomRight"
+    <Dropdown
+      dropdownRender={() => dropdownContent}
+      trigger={["hover"]}
+      open={open}
+      onOpenChange={setOpen}
+      placement="bottomRight"
+    >
+      <Badge
+        count={unreadCount}
+        offset={[-4, 4]}
+        size="small"
+        style={{
+          backgroundColor: "#ff4d4f",
+          boxShadow: "0 0 0 2px #fff",
+        }}
+      >
+        <div
+          style={{
+            width: 42,
+            height: 42,
+            borderRadius: "50%",
+            backgroundColor: bgColor,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            cursor: "pointer",
+            transition: "all 0.3s ease",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = hoverColor;
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = bgColor;
+          }}
         >
-          <Badge
-            count={unreadCount}
-            offset={[-4, 4]}
-            size="small"
-            style={{
-              backgroundColor: "#ff4d4f",
-              boxShadow: "0 0 0 2px #fff",
-              position: "absolute",
-              top: 2,
-              right: 3,
-            }}
-          >
-            <Button
-              type="text"
-              icon={<BellOutlined style={{ fontSize: 22 }} />}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: 42,
-                height: 42,
-                borderRadius: "50%",
-                transition: "all 0.3s ease",
-                color: "white",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.2)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "transparent";
-              }}
-            />
-          </Badge>
-        </Dropdown>
-      </div>
-    </>
+          <BellOutlined style={{ fontSize: 20, color: "white" }} />
+        </div>
+      </Badge>
+    </Dropdown>
   );
 };
 

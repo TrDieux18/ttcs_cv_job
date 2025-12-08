@@ -173,9 +173,9 @@ const AdminLayout = () => {
 
         <Content
           style={{
-            padding: "24px",
-            background: colorBgContainer,
-            minHeight: 280,
+            padding: 0,
+            background: "#f5f5f5",
+            minHeight: "calc(100vh - 64px)",
           }}
         >
           <Outlet />

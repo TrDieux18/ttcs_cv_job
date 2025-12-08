@@ -2,14 +2,12 @@ import axios from "axios";
 import { ApiResponse } from "@types/response/ApiResponse";
 import { ADMIN_API } from "@types/api";
 
-// ✅ axiosClient dùng chung
 const axiosClient = axios.create({
   baseURL: ADMIN_API,
   withCredentials: true,
   headers: { "Content-Type": "application/json" },
 });
 
-// ✅ GET ALL COMPANIES (có query params)
 export const getAllCompanies = async (query = {}) => {
   try {
     const response = await axiosClient.get("/companies", { params: query });
@@ -20,7 +18,6 @@ export const getAllCompanies = async (query = {}) => {
   }
 };
 
-// ✅ GET COMPANY BY ID
 export const getCompanyById = async (companyId) => {
   try {
     const response = await axiosClient.get(`/companies/detail/${companyId}`);
@@ -31,7 +28,6 @@ export const getCompanyById = async (companyId) => {
   }
 };
 
-// ✅ CREATE COMPANY (FormData)
 export const createCompany = async (companyData) => {
   console.log("Company Data Service");
   for (const pair of companyData.entries()) {
@@ -61,7 +57,6 @@ export const createCompany = async (companyData) => {
   }
 };
 
-// ✅ UPDATE COMPANY (FormData)
 export const updateCompany = async (companyId, companyData) => {
   try {
     const response = await axios.patch(
@@ -86,7 +81,6 @@ export const updateCompany = async (companyId, companyData) => {
   }
 };
 
-// ✅ DELETE COMPANY
 export const deleteCompany = async (companyId) => {
   try {
     const response = await axiosClient.delete(`/companies/delete/${companyId}`);

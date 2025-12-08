@@ -29,14 +29,11 @@ const port = process.env.PORT;
 
 const __filename = fileURLToPath(import.meta.url);
 
-// Make io accessible to routes
 app.set("io", io);
 
-// Socket.IO connection handling
 io.on("connection", (socket) => {
   console.log("User connected:", socket.id);
 
-  // Join room based on userId
   socket.on("join", (userId) => {
     socket.join(`user_${userId}`);
     console.log(`User ${userId} joined room user_${userId}`);
@@ -63,12 +60,9 @@ app.use((req, res, next) => {
     query: req.query,
     body: req.body,
     params: req.params,
-    // cookies: req.cookies, // ✅ Xem cookie luôn ở đây
   });
   next();
 });
-
-// app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use(SYSTEM.PATH_AUTH, authRoute);
 app.use(SYSTEM.PATH_ADMIN, adminRoute);

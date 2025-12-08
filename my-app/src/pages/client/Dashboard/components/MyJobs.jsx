@@ -15,7 +15,6 @@ const MyJobs = () => {
   const [followedCompanies, setFollowedCompanies] = useState([]);
   const navigate = useNavigate();
 
-  // Fetch data
   useEffect(() => {
     const fetchData = async () => {
       try {

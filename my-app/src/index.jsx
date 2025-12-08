@@ -7,18 +7,16 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store/index.js";
 
-// 🧩 Import ConfigProvider từ antd
 import { ConfigProvider } from "antd";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-
   <Provider store={store}>
     <BrowserRouter>
       <ConfigProvider
         theme={{
           token: {
-            fontFamily: "Lexend, sans-serif", 
+            fontFamily: "Lexend, sans-serif",
           },
         }}
       >

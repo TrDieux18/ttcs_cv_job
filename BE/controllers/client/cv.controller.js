@@ -11,7 +11,10 @@ export const getCvById = async (req, res) => {
     const cv = await CV.findById({
       _id: cvId,
     })
-      .populate("userId", "fullName email avatar")
+      .populate(
+        "userId",
+        "fullName email avatar phoneNumber dateOfBirth address gender jobTitle introduction foreignLanguages socialLinks"
+      )
       .lean();
     if (!cv) {
       return res.status(404).json({ success: false, message: "CV not found" });
@@ -31,7 +34,10 @@ export const getCvByUserId = async (req, res) => {
     filter.userId = userId;
 
     const cvs = await CV.find(filter)
-      .populate("userId", "fullName email avatar")
+      .populate(
+        "userId",
+        "fullName email avatar phoneNumber dateOfBirth address gender jobTitle introduction foreignLanguages socialLinks"
+      )
       .lean();
 
     if (!cvs || cvs.length === 0) {
@@ -159,7 +165,7 @@ export const updateCv = async (req, res) => {
       Array.isArray(projectsArr)
     ) {
       updateData.projects = projectsArr;
-        }
+    }
     if (
       certificatesArr !== null &&
       certificatesArr !== undefined &&
@@ -178,7 +184,7 @@ export const updateCv = async (req, res) => {
       updateData.githubLink = githubLink;
     }
 
-    // Handle fileUrl (allow deletion by setting to empty string)
+
     if (req.body.fileUrl !== undefined) {
       updateData.fileUrl = req.body.fileUrl || null;
     }

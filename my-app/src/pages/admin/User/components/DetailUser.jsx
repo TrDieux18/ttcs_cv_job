@@ -97,126 +97,114 @@ const DetailUser = () => {
   console.log(preview);
 
   return (
-    <div className="overflow-x-auto space-y-4">
-      <Form layout="vertical" form={form}>
-        <Row
-          style={{
-            display: "flex",
-            alignItems: "stretch",
-          }}
-        >
-          <Col span={10}>
-            <Card
-              style={styleOutermostCard}
-              styles={{
-                body: {
-                  padding: 0,
-                },
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
+    <div className="p-6 bg-white min-h-screen">
+      <div className="max-w-full">
+        {/* Header */}
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold text-gray-900">
+            Chi tiết người dùng
+          </h1>
+          <p className="text-sm text-gray-500 mt-1">
+            Xem thông tin chi tiết của người dùng
+          </p>
+        </div>
+        <Form layout="vertical" form={form}>
+          <Row
+            style={{
+              display: "flex",
+              alignItems: "stretch",
+            }}
+          >
+            <Col span={10}>
+              <Card
+                style={styleOutermostCard}
+                styles={{
+                  body: {
+                    padding: 0,
+                  },
                 }}
               >
-                {preview ? (
-                  <Image
-                    src={preview}
-                    style={{
-                      width: 80,
-                      height: 80,
-                      borderRadius: "50%",
-                      objectFit: "cover",
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  {preview ? (
+                    <Image
+                      src={preview}
+                      style={{
+                        width: 80,
+                        height: 80,
+                        borderRadius: "50%",
+                        objectFit: "cover",
+                      }}
+                      preview={false}
+                    />
+                  ) : (
+                    <div
+                      style={{
+                        width: 80,
+                        height: 80,
+                        borderRadius: "50%",
+                        backgroundColor: "#041527",
+                        color: "#fff",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontSize: 28,
+                        fontWeight: 600,
+                      }}
+                    >
+                      {initialAvatar}
+                    </div>
+                  )}
+                  <input
+                    type="file"
+                    id="avatarInput"
+                    accept="image/*"
+                    style={{ display: "none" }}
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) {
+                        const previewUrl = URL.createObjectURL(file);
+                        setPreview(previewUrl);
+                      }
                     }}
-                    preview={false}
                   />
-                ) : (
-                  <div
+
+                  <div className="mt-4">
+                    <h2 className="text-xl font-semibold">{email}</h2>
+                    <span className="font-medium text-gray-300">
+                      Đăng nhập gần nhất: {signInTime}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="mt-3 flex items-center gap-2">
+                  <h2 className="bg-[#f9f9f9] px-1.5 py-1 rounded-xl border-2 border-[#eee] w-fit">
+                    <span className="text-[#000] text-4 font-medium">
+                      User ID:
+                    </span>
+                    <span className="text-[10px] font-medium text-[#888]">
+                      {userData?._id}
+                    </span>
+                  </h2>
+                  <Button
                     style={{
-                      width: 80,
-                      height: 80,
-                      borderRadius: "50%",
-                      backgroundColor: "#041527",
-                      color: "#fff",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontSize: 28,
+                      backgroundColor: "#f9f9f9",
+                      padding: "6px 8px",
+                      border: "2px solid #eee",
+                      borderRadius: "16px",
+                      color: " #000",
                       fontWeight: 600,
+                      fontSize: "12px",
                     }}
                   >
-                    {initialAvatar}
-                  </div>
-                )}
-                <input
-                  type="file"
-                  id="avatarInput"
-                  accept="image/*"
-                  style={{ display: "none" }}
-                  onChange={(e) => {
-                    const file = e.target.files?.[0];
-                    if (file) {
-                      const previewUrl = URL.createObjectURL(file);
-                      setPreview(previewUrl);
-                    }
-                  }}
-                />
-
-                <div className="mt-4">
-                  <h2 className="text-xl font-semibold">{email}</h2>
-                  <span className="font-medium text-gray-300">
-                    Đăng nhập gần nhất: {signInTime}
-                  </span>
+                    Copy
+                  </Button>
                 </div>
-              </div>
-
-              <div className="mt-3 flex items-center gap-2">
-                <h2 className="bg-[#f9f9f9] px-1.5 py-1 rounded-xl border-2 border-[#eee] w-fit">
-                  <span className="text-[#000] text-4 font-medium">
-                    User ID:
-                  </span>
-                  <span className="text-[10px] font-medium text-[#888]">
-                    {userData?._id}
-                  </span>
-                </h2>
-                <Button
-                  style={{
-                    backgroundColor: "#f9f9f9",
-                    padding: "6px 8px",
-                    border: "2px solid #eee",
-                    borderRadius: "16px",
-                    color: " #000",
-                    fontWeight: 600,
-                    fontSize: "12px",
-                  }}
-                >
-                  Copy
-                </Button>
-              </div>
-              <div className="mt-4 flex flex-col  items-start">
-                <Button
-                  style={{
-                    padding: 0,
-                    fontWeight: 500,
-                  }}
-                  onMouseEnter={(e) =>
-                    (e.target.style.backgroundColor = "#ffffff")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.target.style.backgroundColor = "#ffffff")
-                  }
-                  type="text"
-                  icon={<UserOutlined />}
-                >
-                  Hồ sơ cá nhân
-                </Button>
-
-                <Popconfirm
-                  cancelText="Hủy"
-                  okText="Xóa"
-                  title="Bạn có chắc chắn xóa người dùng này?"
-                >
+                <div className="mt-4 flex flex-col  items-start">
                   <Button
                     style={{
                       padding: 0,
@@ -228,246 +216,274 @@ const DetailUser = () => {
                     onMouseLeave={(e) =>
                       (e.target.style.backgroundColor = "#ffffff")
                     }
-                    danger
                     type="text"
-                    icon={<DeleteOutlined />}
+                    icon={<UserOutlined />}
                   >
-                    Xóa người dùng
+                    Hồ sơ cá nhân
                   </Button>
-                </Popconfirm>
-              </div>
-            </Card>
-          </Col>
 
-          <Col span={14}>
-            <Card
-              style={styleOutermostCard}
-              styles={{
-                body: {
-                  display: "flex",
-                  flexDirection: "column",
-                  padding: 0,
-                },
-              }}
-            >
+                  <Popconfirm
+                    cancelText="Hủy"
+                    okText="Xóa"
+                    title="Bạn có chắc chắn xóa người dùng này?"
+                  >
+                    <Button
+                      style={{
+                        padding: 0,
+                        fontWeight: 500,
+                      }}
+                      onMouseEnter={(e) =>
+                        (e.target.style.backgroundColor = "#ffffff")
+                      }
+                      onMouseLeave={(e) =>
+                        (e.target.style.backgroundColor = "#ffffff")
+                      }
+                      danger
+                      type="text"
+                      icon={<DeleteOutlined />}
+                    >
+                      Xóa người dùng
+                    </Button>
+                  </Popconfirm>
+                </div>
+              </Card>
+            </Col>
+
+            <Col span={14}>
               <Card
-                style={{ border: "2px solid #eee" }}
+                style={styleOutermostCard}
                 styles={{
                   body: {
-                    padding: "10px 15px",
+                    display: "flex",
+                    flexDirection: "column",
+                    padding: 0,
                   },
                 }}
               >
-                <Row gutter={[20, 10]}>
-                  <Col
-                    span={24}
-                    style={{
-                      fontSize: 18,
-                      fontWeight: 600,
-                    }}
-                  >
-                    Thông tin cá nhân
-                  </Col>
+                <Card
+                  style={{ border: "2px solid #eee" }}
+                  styles={{
+                    body: {
+                      padding: "10px 15px",
+                    },
+                  }}
+                >
+                  <Row gutter={[20, 10]}>
+                    <Col
+                      span={24}
+                      style={{
+                        fontSize: 18,
+                        fontWeight: 600,
+                      }}
+                    >
+                      Thông tin cá nhân
+                    </Col>
 
-                  <Col span={12}>
-                    <Form.Item
-                      label={<span style={styleLabelSpan}>Họ và tên</span>}
-                      style={{ margin: 0 }}
-                      name="fullName"
-                      rules={[
-                        {
-                          required: true,
-                          message: "Vui lòng nhập họ và tên.",
-                        },
-                      ]}
-                    >
-                      <Input
-                        placeholder="Nhập họ và tên"
-                        style={styleInput}
-                        onChange={(e) => {
-                          const fullName = e.target.value;
-                          const words = fullName.trim().split(" ");
-                          const intials =
-                            words[words.length - 1][0].toUpperCase();
-                          setInitialAvatar(intials);
-                        }}
-                        disabled
-                      />
-                    </Form.Item>
-                  </Col>
+                    <Col span={12}>
+                      <Form.Item
+                        label={<span style={styleLabelSpan}>Họ và tên</span>}
+                        style={{ margin: 0 }}
+                        name="fullName"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Vui lòng nhập họ và tên.",
+                          },
+                        ]}
+                      >
+                        <Input
+                          placeholder="Nhập họ và tên"
+                          style={styleInput}
+                          onChange={(e) => {
+                            const fullName = e.target.value;
+                            const words = fullName.trim().split(" ");
+                            const intials =
+                              words[words.length - 1][0].toUpperCase();
+                            setInitialAvatar(intials);
+                          }}
+                          disabled
+                        />
+                      </Form.Item>
+                    </Col>
 
-                  <Col span={12}>
-                    <Form.Item
-                      label={<span style={styleLabelSpan}>Tên tài khoản</span>}
-                      style={{ margin: 0 }}
-                      name="username"
-                      rules={[
-                        {
-                          required: true,
-                          message: "Vui lòng nhập tên tài khoản.",
-                        },
-                      ]}
-                      disabled
-                    >
-                      <Input
-                        placeholder="Nhập tên tài khoản"
-                        style={styleInput}
-                      />
-                    </Form.Item>
-                  </Col>
-
-                  <Col span={24}>
-                    <Form.Item
-                      label={
-                        <span style={styleLabelSpan}>Tài khoản email</span>
-                      }
-                      style={{ margin: 0 }}
-                      name="email"
-                      rules={[
-                        { required: true, message: "Vui lòng nhập email," },
-                        { type: "email", message: "Email không hợp lệ." },
-                      ]}
-                    >
-                      <Input
-                        placeholder="Nhập email"
-                        style={styleInput}
-                        onChange={(e) => {
-                          setEmail(e.target.value);
-                        }}
-                        disabled
-                      />
-                    </Form.Item>
-                  </Col>
-                  <Col span={24}>
-                    <Form.Item
-                      label={<span style={styleLabelSpan}>Mật khẩu</span>}
-                      style={{ margin: 0 }}
-                      name="password"
-                      rules={[
-                        { required: true, message: "Vui lòng nhập mật khẩu." },
-                      ]}
-                      disabled
-                    >
-                      <Input.Password
-                        placeholder="Nhập mật khẩu"
-                        style={styleInput}
-                      />
-                    </Form.Item>
-                  </Col>
-
-                  <Col span={12}>
-                    <Form.Item
-                      label={<span style={styleLabelSpan}>Trạng thái</span>}
-                      style={{ margin: 0 }}
-                      name="isActive"
-                      initialValue={true}
-                    >
-                      <Select
-                        style={{ height: 39.56, backgroundColor: "#f9f9f9" }}
+                    <Col span={12}>
+                      <Form.Item
+                        label={
+                          <span style={styleLabelSpan}>Tên tài khoản</span>
+                        }
+                        style={{ margin: 0 }}
+                        name="username"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Vui lòng nhập tên tài khoản.",
+                          },
+                        ]}
                         disabled
                       >
-                        <Select.Option value={true}>
-                          <span
-                            style={{
-                              color: "green",
-                              fontWeight: 600,
-                            }}
-                          >
-                            ● Hoạt động
-                          </span>
-                        </Select.Option>
-                        <Select.Option value={false}>
-                          <span
-                            style={{
-                              color: "red",
-                              fontWeight: 600,
-                            }}
-                          >
-                            ● Ngừng hoạt động
-                          </span>
-                        </Select.Option>
-                      </Select>
-                    </Form.Item>
-                  </Col>
-                  <Col span={12}>
-                    <Form.Item
-                      label={<span style={styleLabelSpan}>Vai trò</span>}
-                      style={{ margin: 0 }}
-                      name="role_id"
-                    >
-                      <Select
-                        placeholder="Chọn vai trò"
-                        optionLabelProp="label"
-                        style={{ height: 39.56, backgroundColor: "#f9f9f9" }}
+                        <Input
+                          placeholder="Nhập tên tài khoản"
+                          style={styleInput}
+                        />
+                      </Form.Item>
+                    </Col>
+
+                    <Col span={24}>
+                      <Form.Item
+                        label={
+                          <span style={styleLabelSpan}>Tài khoản email</span>
+                        }
+                        style={{ margin: 0 }}
+                        name="email"
+                        rules={[
+                          { required: true, message: "Vui lòng nhập email," },
+                          { type: "email", message: "Email không hợp lệ." },
+                        ]}
+                      >
+                        <Input
+                          placeholder="Nhập email"
+                          style={styleInput}
+                          onChange={(e) => {
+                            setEmail(e.target.value);
+                          }}
+                          disabled
+                        />
+                      </Form.Item>
+                    </Col>
+                    <Col span={24}>
+                      <Form.Item
+                        label={<span style={styleLabelSpan}>Mật khẩu</span>}
+                        style={{ margin: 0 }}
+                        name="password"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Vui lòng nhập mật khẩu.",
+                          },
+                        ]}
                         disabled
                       >
-                        {roles.map((role) => {
-                          return (
-                            <Select.Option
-                              key={role._id}
-                              value={role._id}
-                              label={
+                        <Input.Password
+                          placeholder="Nhập mật khẩu"
+                          style={styleInput}
+                        />
+                      </Form.Item>
+                    </Col>
+
+                    <Col span={12}>
+                      <Form.Item
+                        label={<span style={styleLabelSpan}>Trạng thái</span>}
+                        style={{ margin: 0 }}
+                        name="isActive"
+                        initialValue={true}
+                      >
+                        <Select
+                          style={{ height: 39.56, backgroundColor: "#f9f9f9" }}
+                          disabled
+                        >
+                          <Select.Option value={true}>
+                            <span
+                              style={{
+                                color: "green",
+                                fontWeight: 600,
+                              }}
+                            >
+                              ● Hoạt động
+                            </span>
+                          </Select.Option>
+                          <Select.Option value={false}>
+                            <span
+                              style={{
+                                color: "red",
+                                fontWeight: 600,
+                              }}
+                            >
+                              ● Ngừng hoạt động
+                            </span>
+                          </Select.Option>
+                        </Select>
+                      </Form.Item>
+                    </Col>
+                    <Col span={12}>
+                      <Form.Item
+                        label={<span style={styleLabelSpan}>Vai trò</span>}
+                        style={{ margin: 0 }}
+                        name="role_id"
+                      >
+                        <Select
+                          placeholder="Chọn vai trò"
+                          optionLabelProp="label"
+                          style={{ height: 39.56, backgroundColor: "#f9f9f9" }}
+                          disabled
+                        >
+                          {roles.map((role) => {
+                            return (
+                              <Select.Option
+                                key={role._id}
+                                value={role._id}
+                                label={
+                                  <span style={{ fontWeight: 600 }}>
+                                    {role.title}
+                                  </span>
+                                }
+                              >
                                 <span style={{ fontWeight: 600 }}>
                                   {role.title}
                                 </span>
-                              }
-                            >
-                              <span style={{ fontWeight: 600 }}>
-                                {role.title}
-                              </span>
-                            </Select.Option>
-                          );
-                        })}
-                      </Select>
-                    </Form.Item>
-                  </Col>
-                </Row>
-              </Card>
+                              </Select.Option>
+                            );
+                          })}
+                        </Select>
+                      </Form.Item>
+                    </Col>
+                  </Row>
+                </Card>
 
-              <Card
-                style={{ border: "2px solid #eee", margin: "15px 0" }}
-                styles={{
-                  body: {
-                    padding: "10px 15px",
-                  },
-                }}
-              >
-                <Row gutter={[20, 10]}>
-                  <Col
-                    span={24}
-                    style={{
-                      fontSize: 18,
-                      fontWeight: 600,
-                    }}
-                  >
-                    Khác
-                  </Col>
-
-                  <Col span={24}>
-                    <Form.Item
-                      label={<span style={styleLabelSpan}>Ngày tạo</span>}
-                      style={{ margin: 0 }}
-                      name="createdAt"
+                <Card
+                  style={{ border: "2px solid #eee", margin: "15px 0" }}
+                  styles={{
+                    body: {
+                      padding: "10px 15px",
+                    },
+                  }}
+                >
+                  <Row gutter={[20, 10]}>
+                    <Col
+                      span={24}
+                      style={{
+                        fontSize: 18,
+                        fontWeight: 600,
+                      }}
                     >
-                      <Input style={styleInput} disabled />
-                    </Form.Item>
-                  </Col>
+                      Khác
+                    </Col>
 
-                  <Col span={24}>
-                    <Form.Item
-                      label={<span style={styleLabelSpan}>Ngày sửa</span>}
-                      style={{ margin: 0 }}
-                      name="updatedAt"
-                    >
-                      <Input style={styleInput} disabled />
-                    </Form.Item>
-                  </Col>
-                </Row>
+                    <Col span={24}>
+                      <Form.Item
+                        label={<span style={styleLabelSpan}>Ngày tạo</span>}
+                        style={{ margin: 0 }}
+                        name="createdAt"
+                      >
+                        <Input style={styleInput} disabled />
+                      </Form.Item>
+                    </Col>
+
+                    <Col span={24}>
+                      <Form.Item
+                        label={<span style={styleLabelSpan}>Ngày sửa</span>}
+                        style={{ margin: 0 }}
+                        name="updatedAt"
+                      >
+                        <Input style={styleInput} disabled />
+                      </Form.Item>
+                    </Col>
+                  </Row>
+                </Card>
               </Card>
-            </Card>
-          </Col>
-        </Row>
-      </Form>
+            </Col>
+          </Row>
+        </Form>
+      </div>
     </div>
   );
 };

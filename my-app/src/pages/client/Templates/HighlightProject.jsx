@@ -17,7 +17,6 @@ const HighlightProject = ({ cvData, updatedCvData }) => {
     link: "",
   });
 
-  // Load project from cvData
   useEffect(() => {
     const firstCv = cvData?.[0];
     const firstProject = firstCv?.projects?.[0] || {};
@@ -66,7 +65,7 @@ const HighlightProject = ({ cvData, updatedCvData }) => {
       if (typeof val === "string") {
         return val.trim() === "" && val !== "Hiện tại";
       }
-      return !val; 
+      return !val;
     });
 
     if (hasEmpty) {

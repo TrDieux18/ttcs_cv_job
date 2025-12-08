@@ -100,7 +100,7 @@ export const createMyCompany = async (req, res) => {
       size = "",
     } = req.body;
 
-    // Kiểm tra user đã có company chưa
+
     const existing = await Company.findOne({ user: userId });
     if (existing) {
       return res.status(400).json({
@@ -118,7 +118,7 @@ export const createMyCompany = async (req, res) => {
       size,
     });
 
-    // Upload logo nếu có
+
     if (req.file && req.file.buffer) {
       uploadedFile = await uploadToCloudinary(req.file.buffer, "companies");
       company.logo = {
@@ -130,7 +130,7 @@ export const createMyCompany = async (req, res) => {
     const saved = await company.save();
     return res.status(201).json({ success: true, data: saved });
   } catch (error) {
-    // Rollback uploaded file on error
+
     if (uploadedFile?.public_id) {
       try {
         const cloudinary = (await import("../../configs/cloudinary.js"))

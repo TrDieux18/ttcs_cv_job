@@ -4,8 +4,6 @@ import { Types } from "mongoose";
 export const getNotifications = async (req, res) => {
   try {
     const userId = new Types.ObjectId(res.locals.user.id);
-    // console.log("[getNotifications] User ID from auth:", userId);
-    // console.log("[getNotifications] User ID type:", typeof userId);
     const { page = 1, limit = 20, unreadOnly = false } = req.query;
 
     const filter = {

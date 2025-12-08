@@ -4,6 +4,7 @@ import MyCompany from "@pages/company/MyCompany";
 import MyJobs from "@pages/company/MyJobs";
 import MyJobForm from "@pages/company/MyJobs/components/MyJobForm";
 import CVManagementPage from "@pages/company/MyJobs/CVManagementPage";
+import CVDetailPage from "@pages/company/MyJobs/CVDetailPage";
 import RecruitmentReportsPage from "@pages/company/MyJobs/RecruitmentReportsPage";
 
 const companyRoutes = [
@@ -34,6 +35,10 @@ const companyRoutes = [
           {
             path: "cvs",
             element: <CVManagementPage />,
+          },
+          {
+            path: "cvs/:id",
+            element: <CVDetailPage />,
           },
           {
             path: "reports",

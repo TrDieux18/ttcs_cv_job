@@ -112,44 +112,49 @@ const Role = () => {
   ];
 
   return (
-    <div>
-      <div className="overflow-x-auto space-y-4 p-2">
-        <div className="flex justify-between items-center">
-          <h1 className="text-xl font-semibold">Danh sách vai trò</h1>
+    <div className="p-6 bg-white min-h-screen">
+      <div className="max-w-full">
+        {/* Header */}
+        <div className="flex justify-between items-center mb-6">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">
+              Quản lý vai trò
+            </h1>
+            <p className="text-sm text-gray-500 mt-1">
+              Danh sách vai trò và phân quyền trong hệ thống
+            </p>
+          </div>
           <Button
             type="primary"
+            size="large"
             onClick={() =>
               setOpenModal({ visible: true, type: "create", record: null })
             }
-            style={{ background: "#3875F6" }}
           >
-            Tạo mới
+            + Tạo mới
           </Button>
         </div>
+
+        {/* Table */}
+        <Table
+          bordered
+          columns={columns}
+          dataSource={roles}
+          rowKey={(record) => record._id}
+          pagination={false}
+          className="shadow-sm"
+          locale={{ emptyText: "Không có dữ liệu" }}
+        />
+
+        <RoleModal
+          open={openModal.visible}
+          type={openModal.type}
+          record={openModal.record}
+          onCancel={() =>
+            setOpenModal({ visible: false, type: null, record: null })
+          }
+        />
       </div>
-
-      <Table
-        style={{
-          background: "#f6f8fe",
-          borderRadius: 8,
-          overflow: "hidden",
-        }}
-        bordered
-        columns={columns}
-        dataSource={roles}
-        rowKey={(record) => record._id}
-        pagination={false}
-        locale={{ emptyText: "Không có" }}
-      />
-
-      <RoleModal
-        open={openModal.visible}
-        type={openModal.type}
-        record={openModal.record}
-        onCancel={() =>
-          setOpenModal({ visible: false, type: null, record: null })
-        }
-      />
     </div>
   );
 };

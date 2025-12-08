@@ -141,7 +141,6 @@ export const updateUser = async (req, res) => {
       data: updatedUser,
     });
   } catch (error) {
-    // Rollback uploaded file on error
     if (uploadedFile?.public_id) {
       try {
         const cloudinary = (await import("../../configs/cloudinary.js"))

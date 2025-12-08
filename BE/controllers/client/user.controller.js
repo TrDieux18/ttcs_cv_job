@@ -65,7 +65,6 @@ export const updateProfileUser = async (req, res) => {
         .json({ success: false, message: "Người dùng không tồn tại" });
     }
 
-    // Kiểm tra dữ liệu có thay đổi không
     const hasChange = Object.entries(updateData).some(([key, value]) => {
       const oldValue = currentUser[key];
       if (Array.isArray(value) || typeof value === "object") {
@@ -80,7 +79,6 @@ export const updateProfileUser = async (req, res) => {
         .json({ success: true, message: "Không có dữ liệu thay đổi" });
     }
 
-    // Cập nhật
     const updatedUser = await User.findByIdAndUpdate(
       userId,
       { $set: updateData },
@@ -91,7 +89,6 @@ export const updateProfileUser = async (req, res) => {
 
     res.status(200).json({ success: true, data: updatedUser });
   } catch (err) {
-    // Rollback uploaded file on error
     if (uploadedFile?.public_id) {
       try {
         const cloudinary = (await import("../../configs/cloudinary.js"))

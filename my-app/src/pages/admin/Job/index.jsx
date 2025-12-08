@@ -1,21 +1,9 @@
 import { useEffect, useState } from "react";
-import {
-  getAllJobsAdmin,
-  deleteJobAdmin,
-} from "@services/admin/JobService";
-import {
-  Button,
-  Dropdown,
-  message,
-  Popconfirm,
-  Table,
-  Input,
-  Tag,
-} from "antd";
-import { NavLink, useNavigate } from "react-router-dom";
+import { getAllJobsAdmin, deleteJobAdmin } from "@services/admin/JobService";
+import { Button, Dropdown, message, Table, Input, Tag } from "antd";
+import { useNavigate } from "react-router-dom";
 import {
   DeleteOutlined,
-  EditOutlined,
   EyeOutlined,
   MoreOutlined,
   SearchOutlined,
@@ -96,13 +84,6 @@ const Job = () => {
       },
       { type: "divider" },
       {
-        key: "edit",
-        label: <span>Chỉnh sửa</span>,
-        icon: <EditOutlined style={{ fontSize: 15 }} />,
-        onClick: () => navigate(`/admin/jobs/update/${record._id}`),
-      },
-      { type: "divider" },
-      {
         key: "delete",
         label: "Xóa",
         icon: <DeleteOutlined style={{ fontSize: 15 }} />,
@@ -121,9 +102,9 @@ const Job = () => {
       render: (_, __, i) =>
         (pagination.current - 1) * pagination.pageSize + i + 1,
     },
-    { 
-      title: "Tiêu đề", 
-      dataIndex: "title", 
+    {
+      title: "Tiêu đề",
+      dataIndex: "title",
       align: "left",
       width: 250,
     },
@@ -133,9 +114,9 @@ const Job = () => {
       align: "center",
       render: (_, record) => record.company?.headline || "—",
     },
-    { 
-      title: "Địa điểm", 
-      dataIndex: "location", 
+    {
+      title: "Địa điểm",
+      dataIndex: "location",
       align: "center",
       width: 150,
     },
@@ -154,9 +135,9 @@ const Job = () => {
         return <Tag color={colorMap[jobType] || "default"}>{jobType}</Tag>;
       },
     },
-    { 
-      title: "Lương", 
-      dataIndex: "salary", 
+    {
+      title: "Lương",
+      dataIndex: "salary",
       align: "center",
       width: 150,
       render: (salary) => salary || "Thỏa thuận",
@@ -189,35 +170,40 @@ const Job = () => {
   ];
 
   return (
-    <div>
+    <div className="p-6 bg-white min-h-screen">
       {contextHolder}
-      <div className="overflow-x-auto space-y-4 p-2">
-        <div className="flex justify-between items-center">
-          <h1 className="text-xl font-semibold">Danh sách công việc</h1>
-          <div className="flex gap-2 items-center">
-            <Input
-              placeholder="Tìm kiếm..."
-              value={keyword}
-              onChange={(e) => setKeyword(e.target.value)}
-              onPressEnter={handleSearch}
-              prefix={<SearchOutlined />}
-              style={{ width: 220 }}
-            />
-
-            <Button
-              type="primary"
-              onClick={handleSearch}
-              style={{ background: "#3875F6" }}
-            >
-              Tìm
-            </Button>
-
-            <Button type="primary" style={{ background: "#3875F6" }}>
-              <NavLink to="/admin/jobs/create">Tạo mới</NavLink>
-            </Button>
-          </div>
+      <div className="max-w-full">
+        {/* Header */}
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold text-gray-900">Quản lý việc làm</h1>
+          <p className="text-sm text-gray-500 mt-1">
+            Danh sách công việc được đăng tuyển
+          </p>
         </div>
 
+        {/* Filters */}
+        <div className="flex gap-3 mb-6">
+          <Input
+            placeholder="Tìm kiếm theo tiêu đề công việc..."
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+            onPressEnter={handleSearch}
+            prefix={<SearchOutlined />}
+            size="large"
+            style={{ width: 300 }}
+          />
+
+          <Button
+            type="primary"
+            size="large"
+            onClick={handleSearch}
+            icon={<SearchOutlined />}
+          >
+            Tìm kiếm
+          </Button>
+        </div>
+
+        {/* Table */}
         <Table
           bordered
           rowKey="_id"
@@ -226,16 +212,13 @@ const Job = () => {
             ...pagination,
             showSizeChanger: true,
             showTotal: (total) => `Tổng ${total} công việc`,
+            pageSizeOptions: ["10", "20", "50", "100"],
           }}
           onChange={handleTableChange}
-          style={{
-            background: "#f6f8fe",
-            borderRadius: 8,
-            overflow: "hidden",
-          }}
+          className="shadow-sm"
           dataSource={jobs}
           columns={columns}
-          locale={{ emptyText: "Không có" }}
+          locale={{ emptyText: "Không có dữ liệu" }}
           scroll={{ x: 1200 }}
         />
       </div>

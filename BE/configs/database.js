@@ -4,17 +4,14 @@ const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URL);
 
-    // Sự kiện khi kết nối thành công
     mongoose.connection.on("connected", () => {
       console.log("✅ Mongoose connected to DB");
     });
 
-    // Sự kiện khi mất kết nối
     mongoose.connection.on("disconnected", () => {
       console.log("⚠️ Mongoose disconnected");
     });
 
-    // Sự kiện khi có lỗi
     mongoose.connection.on("error", (err) => {
       console.error("❌ Mongoose connection error:", err.message);
     });

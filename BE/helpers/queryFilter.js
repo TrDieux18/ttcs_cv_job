@@ -80,7 +80,6 @@ export const buildJobFilter = (queryParams) => {
       { category: regex },
       { level: regex },
       { location: regex },
-  
     ];
   }
 

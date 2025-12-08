@@ -2,14 +2,12 @@ import axios from "axios";
 import { ApiResponse } from "@types/response/ApiResponse";
 import { ADMIN_API } from "@types/api";
 
-// ✅ Khởi tạo axiosClient dùng chung
 const axiosClient = axios.create({
   baseURL: ADMIN_API,
   withCredentials: true,
   headers: { "Content-Type": "application/json" },
 });
 
-// ✅ GET ALL ROLES
 export const getAllRoles = async () => {
   try {
     const response = await axiosClient.get("/roles");
@@ -22,7 +20,6 @@ export const getAllRoles = async () => {
   }
 };
 
-// ✅ CREATE ROLE
 export const createRole = async (roleData) => {
   try {
     const response = await axiosClient.post("/roles/create", roleData);
@@ -35,7 +32,6 @@ export const createRole = async (roleData) => {
   }
 };
 
-// ✅ UPDATE ROLE
 export const updateRole = async (roleId, roleData) => {
   try {
     const response = await axiosClient.patch(
@@ -51,7 +47,6 @@ export const updateRole = async (roleId, roleData) => {
   }
 };
 
-// ✅ DELETE ROLE
 export const deleteRole = async (roleId) => {
   try {
     const response = await axiosClient.delete(`/roles/delete/${roleId}`);
@@ -64,7 +59,6 @@ export const deleteRole = async (roleId) => {
   }
 };
 
-// ✅ UPDATE ROLE PERMISSIONS
 export const updateRolePermissions = async (data) => {
   try {
     const response = await axiosClient.patch(
