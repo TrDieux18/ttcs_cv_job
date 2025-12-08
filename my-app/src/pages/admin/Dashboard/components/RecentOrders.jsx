@@ -1,7 +1,7 @@
 import { Tag } from "antd";
 
 const RecentOrders = ({ activities = [] }) => {
-  // Fallback data if no activities provided
+
   const defaultActivities = [
     {
       id: 1,

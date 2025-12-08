@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import SalesChart from "./components/SalesChart";
 import RecentOrders from "./components/RecentOrders";
-import { Card, Row, Col, Statistic, Spin, message } from "antd";
+import { Row, Col, message } from "antd";
 import {
   UserOutlined,
   FileTextOutlined,
@@ -10,6 +10,7 @@ import {
   FileSearchOutlined,
 } from "@ant-design/icons";
 import * as DashboardService from "@services/admin/DashboardService";
+import { LoadingSpinner, PageHeader, StatCard } from "@components/common";
 
 const Dashboard = () => {
   const [stats, setStats] = useState({
@@ -56,81 +57,66 @@ const Dashboard = () => {
   };
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center h-96">
-        <Spin size="large" />
-      </div>
-    );
+    return <LoadingSpinner fullScreen />;
   }
 
   return (
     <div className="p-6 bg-white min-h-screen">
       <div className="max-w-full">
-        {/* Header */}
-        <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-900">
-            Tổng quan hệ thống
-          </h1>
-          <p className="text-sm text-gray-500 mt-1">
-            Thống kê tổng quan về hoạt động của hệ thống
-          </p>
-        </div>
+        <PageHeader
+          title="Tổng quan hệ thống"
+          subtitle="Thống kê tổng quan về hoạt động của hệ thống"
+        />
 
-        {/* Stats Cards */}
         <Row gutter={[16, 16]} className="mb-6">
           <Col xs={24} sm={12} lg={8}>
-            <Card className="shadow-sm border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
-              <Statistic
-                title="Tổng người dùng"
-                value={stats.totalUsers}
-                prefix={<UserOutlined className="text-blue-600" />}
-                valueStyle={{ color: "#1890ff", fontWeight: "bold" }}
-              />
-            </Card>
+            <StatCard
+              title="Tổng người dùng"
+              value={stats.totalUsers}
+              icon={<UserOutlined />}
+              iconColor="#1890ff"
+              valueStyle={{ color: "#1890ff", fontWeight: "bold" }}
+            />
           </Col>
 
           <Col xs={24} sm={12} lg={8}>
-            <Card className="shadow-sm border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
-              <Statistic
-                title="Tổng công ty"
-                value={stats.totalCompanies}
-                prefix={<BankOutlined className="text-green-600" />}
-                valueStyle={{ color: "#52c41a", fontWeight: "bold" }}
-              />
-            </Card>
+            <StatCard
+              title="Tổng công ty"
+              value={stats.totalCompanies}
+              icon={<BankOutlined />}
+              iconColor="#52c41a"
+              valueStyle={{ color: "#52c41a", fontWeight: "bold" }}
+            />
           </Col>
 
           <Col xs={24} sm={12} lg={8}>
-            <Card className="shadow-sm border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
-              <Statistic
-                title="Tin tuyển dụng"
-                value={stats.totalJobs}
-                prefix={<FileTextOutlined className="text-orange-600" />}
-                valueStyle={{ color: "#fa8c16", fontWeight: "bold" }}
-              />
-            </Card>
+            <StatCard
+              title="Tin tuyển dụng"
+              value={stats.totalJobs}
+              icon={<FileTextOutlined />}
+              iconColor="#fa8c16"
+              valueStyle={{ color: "#fa8c16", fontWeight: "bold" }}
+            />
           </Col>
 
           <Col xs={24} sm={12} lg={8}>
-            <Card className="shadow-sm border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
-              <Statistic
-                title="Tổng CV"
-                value={stats.totalCVs}
-                prefix={<SolutionOutlined className="text-purple-600" />}
-                valueStyle={{ color: "#722ed1", fontWeight: "bold" }}
-              />
-            </Card>
+            <StatCard
+              title="Tổng CV"
+              value={stats.totalCVs}
+              icon={<SolutionOutlined />}
+              iconColor="#722ed1"
+              valueStyle={{ color: "#722ed1", fontWeight: "bold" }}
+            />
           </Col>
 
           <Col xs={24} sm={12} lg={8}>
-            <Card className="shadow-sm border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
-              <Statistic
-                title="Tổng ứng tuyển"
-                value={stats.totalApplications}
-                prefix={<FileSearchOutlined className="text-pink-600" />}
-                valueStyle={{ color: "#eb2f96", fontWeight: "bold" }}
-              />
-            </Card>
+            <StatCard
+              title="Tổng ứng tuyển"
+              value={stats.totalApplications}
+              icon={<FileSearchOutlined />}
+              iconColor="#eb2f96"
+              valueStyle={{ color: "#eb2f96", fontWeight: "bold" }}
+            />
           </Col>
         </Row>
 

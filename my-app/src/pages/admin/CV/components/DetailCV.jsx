@@ -115,7 +115,7 @@ const DetailCV = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto p-6">
+    <div className="bg-white max-w-7xl  p-6">
       {/* Header */}
       <div className="mb-6">
         <Button type="link" onClick={() => navigate(-1)} className="mb-4 px-0">

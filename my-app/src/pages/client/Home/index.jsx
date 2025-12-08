@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Select, Input, Button, Card, Tag } from "antd";
@@ -113,41 +113,7 @@ const Home = () => {
       </section>
 
       <main className="max-w-7xl mx-auto px-4 py-12">
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          <Card
-            hoverable
-            className="text-center"
-            cover={
-              <div className="flex items-center justify-center h-32 bg-gradient-to-br from-green-50 to-green-100">
-                <div className="text-6xl">💼</div>
-              </div>
-            }
-          >
-            <Card.Meta
-              title={
-                <div className="flex items-center justify-center gap-2">
-                  <span>Tìm việc thụ động</span>
-                  <Tag color="orange">HOT</Tag>
-                </div>
-              }
-              description={
-                <div>
-                  <p className="text-gray-600 mb-4">
-                    Nhận lời mời làm việc từ nhà tuyển dụng chỉ bằng cách tải CV
-                    lên
-                  </p>
-                  <Button
-                    type="primary"
-                    ghost
-                    onClick={() => navigate("/dashboard/my-cvs")}
-                  >
-                    Tải CV ngay
-                  </Button>
-                </div>
-              }
-            />
-          </Card>
-
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           <Card
             hoverable
             className="text-center"
