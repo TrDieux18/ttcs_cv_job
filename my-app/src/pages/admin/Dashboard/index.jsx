@@ -120,7 +120,7 @@ const Dashboard = () => {
           </Col>
         </Row>
 
-        {/* Chart + Recent Activity */}
+        {}
         <Row gutter={[24, 24]}>
           <Col xs={24} lg={16}>
             <SalesChart data={monthlyData} />

@@ -74,7 +74,6 @@ const Role = () => {
     ],
   });
 
-  // 🧩 Cấu hình các cột cho bảng
   const columns = [
     {
       title: "STT",
@@ -114,7 +113,7 @@ const Role = () => {
   return (
     <div className="p-6 bg-white min-h-screen">
       <div className="max-w-full">
-        {/* Header */}
+        {}
         <div className="flex justify-between items-center mb-6">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">
@@ -135,7 +134,7 @@ const Role = () => {
           </Button>
         </div>
 
-        {/* Table */}
+        {}
         <Table
           bordered
           columns={columns}

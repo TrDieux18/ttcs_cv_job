@@ -1,19 +1,43 @@
 import { useEffect, useState } from "react";
-import { Tabs, Table, Tag, Typography, Button, Card } from "antd";
+import {
+  Tabs,
+  Table,
+  Tag,
+  Typography,
+  Button,
+  Card,
+  Modal,
+  message,
+} from "antd";
 import { useNavigate } from "react-router-dom";
-import { getApplicationsByUser } from "@services/client/ApplicationService";
+import {
+  getApplicationsByUser,
+  cancelApplication,
+} from "@services/client/ApplicationService";
 import { getSavedJobsByUser } from "@services/client/SaveJobService";
 import { getFollowedCompaniesByUser } from "@services/client/FollowCompanyService";
 import { LuEarth } from "react-icons/lu";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 const { Text } = Typography;
+const { confirm } = Modal;
 
 const MyJobs = () => {
   const [activeTab, setActiveTab] = useState("applied");
   const [appliedJobs, setAppliedJobs] = useState([]);
   const [savedJobs, setSavedJobs] = useState([]);
   const [followedCompanies, setFollowedCompanies] = useState([]);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const fetchApplications = async () => {
+    try {
+      const appliedRes = await getApplicationsByUser();
+      if (appliedRes.success) setAppliedJobs(appliedRes.data);
+    } catch (err) {
+      console.error("Error fetching applications:", err);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,6 +58,33 @@ const MyJobs = () => {
 
     fetchData();
   }, []);
+
+  const handleCancelApplication = (applicationId, jobTitle) => {
+    confirm({
+      title: "Xác nhận hủy ứng tuyển",
+      icon: <ExclamationCircleOutlined />,
+      content: `Bạn có chắc chắn muốn hủy ứng tuyển vào công việc "${jobTitle}"?`,
+      okText: "Hủy ứng tuyển",
+      okType: "danger",
+      cancelText: "Đóng",
+      async onOk() {
+        setLoading(true);
+        try {
+          const result = await cancelApplication(applicationId);
+          if (result.success) {
+            message.success("Đã hủy ứng tuyển thành công");
+            await fetchApplications(); // Refresh danh sách
+          } else {
+            message.error(result.errors?.[0] || "Hủy ứng tuyển thất bại");
+          }
+        } catch (error) {
+          message.error("Có lỗi xảy ra khi hủy ứng tuyển");
+        } finally {
+          setLoading(false);
+        }
+      },
+    });
+  };
 
   const appliedColumns = [
     {
@@ -97,6 +148,29 @@ const MyJobs = () => {
             ? "Đã duyệt"
             : "Từ chối";
         return <Tag color={color}>{text}</Tag>;
+      },
+    },
+    {
+      title: "Thao tác",
+      key: "action",
+      align: "center",
+      render: (_, record) => {
+        if (record.status === "pending") {
+          return (
+            <Button
+              danger
+              size="small"
+              loading={loading}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleCancelApplication(record._id, record.job.title);
+              }}
+            >
+              Hủy ứng tuyển
+            </Button>
+          );
+        }
+        return null;
       },
     },
   ];

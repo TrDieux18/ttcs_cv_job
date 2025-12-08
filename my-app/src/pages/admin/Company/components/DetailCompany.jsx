@@ -61,7 +61,7 @@ const DetailCompany = () => {
   return (
     <div className="p-6 bg-white min-h-screen">
       <div className="max-w-full">
-        {/* Header */}
+        {}
         <div className="mb-6">
           <Button
             icon={<ArrowLeftOutlined />}
@@ -76,10 +76,10 @@ const DetailCompany = () => {
           </p>
         </div>
 
-        {/* Company Info */}
+        {}
         <Card className="shadow-sm">
           <Space direction="vertical" size="large" className="w-full">
-            {/* Logo and Basic Info */}
+            {}
             <div className="flex items-start gap-6">
               {company.logo?.url ? (
                 <Image
@@ -131,7 +131,7 @@ const DetailCompany = () => {
               </div>
             </div>
 
-            {/* Detailed Information */}
+            {}
             <Descriptions
               bordered
               column={1}

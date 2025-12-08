@@ -61,17 +61,14 @@ const DetailCV = () => {
     fetchCvDetails();
   }, [_id]);
 
-  // Helper function to parse date strings (format: "MM/YYYY" or "DD-MM-YYYY")
   const parseDate = (dateStr) => {
     if (!dateStr) return null;
     if (dateStr === "Hiện tại") return "Hiện tại";
 
-    // Check if it's ISO format
     if (dateStr.includes("T") || dateStr.includes("Z")) {
       return new Date(dateStr).toLocaleDateString("vi-VN");
     }
 
-    // Format: DD-MM-YYYY
     if (dateStr.includes("-")) {
       const [day, month, year] = dateStr.split("-");
       if (day && month && year) {
@@ -79,7 +76,6 @@ const DetailCV = () => {
       }
     }
 
-    // Format: MM/YYYY or already formatted
     return dateStr;
   };
 
@@ -116,7 +112,7 @@ const DetailCV = () => {
 
   return (
     <div className="bg-white max-w-7xl  p-6">
-      {/* Header */}
+      {}
       <div className="mb-6">
         <Button type="link" onClick={() => navigate(-1)} className="mb-4 px-0">
           ← Quay lại
@@ -147,7 +143,7 @@ const DetailCV = () => {
       </div>
 
       <Row gutter={[24, 24]}>
-        {/* Sidebar - Thông tin cá nhân */}
+        {}
         <Col xs={24} lg={8}>
           <Card className="shadow-sm border border-gray-200 rounded-lg">
             <Space direction="vertical" align="center" className="w-full mb-6">
@@ -238,7 +234,7 @@ const DetailCV = () => {
               )}
             </Descriptions>
 
-            {/* Foreign Languages */}
+            {}
             {cv.userId?.foreignLanguages &&
               cv.userId.foreignLanguages.length > 0 && (
                 <>
@@ -262,7 +258,7 @@ const DetailCV = () => {
                 </>
               )}
 
-            {/* Introduction */}
+            {}
             {cv.userId?.introduction && cv.userId.introduction.length > 0 && (
               <>
                 <Divider className="my-4" />
@@ -312,10 +308,10 @@ const DetailCV = () => {
           </Card>
         </Col>
 
-        {/* Main Content */}
+        {}
         <Col xs={24} lg={16}>
           <Space direction="vertical" size="large" className="w-full">
-            {/* Kỹ năng */}
+            {}
             <Card
               className="shadow-sm border border-gray-200 rounded-lg"
               title={
@@ -333,12 +329,10 @@ const DetailCV = () => {
                     const experience =
                       typeof skill === "object" ? skill?.experience : null;
 
-                    // Calculate level based on experience or use default
                     let level = 50;
                     if (typeof skill === "object" && skill?.level) {
                       level = skill.level;
                     } else if (experience) {
-                      // Parse experience to estimate level
                       const years = parseInt(experience);
                       if (!isNaN(years)) {
                         level = Math.min(years * 20 + 20, 100);
@@ -376,7 +370,7 @@ const DetailCV = () => {
               )}
             </Card>
 
-            {/* Kinh nghiệm làm việc */}
+            {}
             <Card
               className="shadow-sm border border-gray-200 rounded-lg"
               title={
@@ -425,7 +419,7 @@ const DetailCV = () => {
               )}
             </Card>
 
-            {/* Học vấn */}
+            {}
             <Card
               className="shadow-sm border border-gray-200 rounded-lg"
               title={
@@ -467,7 +461,7 @@ const DetailCV = () => {
               )}
             </Card>
 
-            {/* Dự án */}
+            {}
             {cv.projects && cv.projects.length > 0 && (
               <Card
                 className="shadow-sm border border-gray-200 rounded-lg"
@@ -508,7 +502,7 @@ const DetailCV = () => {
               </Card>
             )}
 
-            {/* Chứng chỉ */}
+            {}
             {cv.certificates && cv.certificates.length > 0 && (
               <Card
                 className="shadow-sm border border-gray-200 rounded-lg"
@@ -540,7 +534,7 @@ const DetailCV = () => {
               </Card>
             )}
 
-            {/* Giải thưởng */}
+            {}
             {cv.awards && cv.awards.length > 0 && (
               <Card
                 className="shadow-sm border border-gray-200 rounded-lg"

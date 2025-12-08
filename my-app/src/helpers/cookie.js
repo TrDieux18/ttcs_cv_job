@@ -1,4 +1,3 @@
-// Hàm lấy cookie
 export function getCookie(cname) {
    var name = cname + "=";
    var ca = document.cookie.split(";");
@@ -15,7 +14,6 @@ export function getCookie(cname) {
    return "";
 }
 
-//Hàm tạo cookie
 export function setCookie(cname, cvalue, exdays) {
    var d = new Date();
    d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
@@ -23,7 +21,6 @@ export function setCookie(cname, cvalue, exdays) {
    document.cookie = cname + "=" + cvalue + "; " + expries;
 }
 
-//Hàm tạo delete
 export function deleteCookie(cname) {
    document.cookie = cname + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
 }
@@ -35,10 +32,8 @@ export function deleteAllCookies() {
       const eqPos = cookie.indexOf("=");
       const name = eqPos > -1 ? cookie.substring(0, eqPos).trim() : cookie.trim();
 
-      // xóa với path gốc
       document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
 
-      // xóa thêm với path Project...
       document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/${path}`;
    }
 }

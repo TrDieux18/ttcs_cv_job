@@ -22,7 +22,6 @@ const Company = () => {
 
   const navigate = useNavigate();
 
-  // ✅ Fetch danh sách company
   const fetchCompanies = async (page = 1, limit = 10, search = "") => {
     try {
       setLoading(true);
@@ -161,7 +160,7 @@ const Company = () => {
     <div className="p-6 bg-white min-h-screen">
       {contextHolder}
       <div className="max-w-full">
-        {/* Header */}
+        {}
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-gray-900">Quản lý công ty</h1>
           <p className="text-sm text-gray-500 mt-1">
@@ -169,7 +168,7 @@ const Company = () => {
           </p>
         </div>
 
-        {/* Filters */}
+        {}
         <div className="flex gap-3 mb-6">
           <Input
             placeholder="Tìm kiếm theo tên công ty..."
@@ -191,7 +190,7 @@ const Company = () => {
           </Button>
         </div>
 
-        {/* Table */}
+        {}
         <Table
           bordered
           rowKey="_id"

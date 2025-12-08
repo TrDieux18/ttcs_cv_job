@@ -210,7 +210,7 @@ const User = () => {
     <div className="p-6 bg-white min-h-screen">
       {contextHolder}
       <div className="max-w-full">
-        {/* Header */}
+        {}
         <div className="flex justify-between items-center mb-6">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">
@@ -225,7 +225,7 @@ const User = () => {
           </Button>
         </div>
 
-        {/* Filters */}
+        {}
         <div className="flex gap-3 mb-6">
           <Input
             placeholder="Tìm kiếm theo tên, email..."
@@ -258,7 +258,7 @@ const User = () => {
           </Button>
         </div>
 
-        {/* Table */}
+        {}
         <Table
           bordered
           rowKey="_id"

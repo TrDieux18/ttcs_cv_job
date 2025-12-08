@@ -73,15 +73,12 @@ const NotificationBell = ({
     }
     setOpen(false);
 
-    // Nếu là notification báo cáo vi phạm từ admin
     if (
       notification.title?.includes("báo cáo vi phạm") &&
       notification.job?._id
     ) {
-      // Điều hướng đến trang quản lý job của company
       navigate(`/company/my-jobs/update/${notification.job._id}`);
     } else if (notification.job?._id) {
-      // Các notification thông thường về job
       navigate(`/jobs/${notification.job._id}`);
     }
   };
@@ -113,7 +110,6 @@ const NotificationBell = ({
   };
 
   const getTypeIcon = (type, title) => {
-    // Kiểm tra nếu là notification báo cáo vi phạm
     if (title?.includes("báo cáo vi phạm")) {
       return "⚠️";
     }

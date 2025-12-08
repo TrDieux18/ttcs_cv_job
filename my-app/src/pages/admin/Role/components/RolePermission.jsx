@@ -103,7 +103,7 @@ const RolePermission = () => {
   return (
     <div className="p-6 bg-white min-h-screen">
       <div className="max-w-full">
-        {/* Header */}
+        {}
         <div className="flex justify-between items-center mb-6">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">
@@ -152,7 +152,7 @@ const RolePermission = () => {
                 <tbody>
                   {permissionGroups.map((group, gi) => (
                     <React.Fragment key={gi}>
-                      {/* Spacing between groups */}
+                      {}
                       {gi > 0 && (
                         <tr>
                           <td
@@ -162,7 +162,7 @@ const RolePermission = () => {
                         </tr>
                       )}
 
-                      {/* Group header with "Select All" */}
+                      {}
                       <tr className="bg-blue-50 border-y border-blue-100">
                         <td className="px-6 py-3 font-semibold text-gray-900">
                           {group.title}
@@ -195,7 +195,7 @@ const RolePermission = () => {
                         })}
                       </tr>
 
-                      {/* Individual permissions */}
+                      {}
                       {group.permissions.map((perms, pi) => (
                         <tr
                           key={perms.name}

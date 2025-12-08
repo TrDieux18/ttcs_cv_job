@@ -10,7 +10,6 @@ import {
 } from "recharts";
 
 const SalesChart = ({ data = [] }) => {
-  // Fallback data if no data provided
   const defaultData = [
     { month: "T1", jobs: 0, applications: 0, cvs: 0 },
     { month: "T2", jobs: 0, applications: 0, cvs: 0 },

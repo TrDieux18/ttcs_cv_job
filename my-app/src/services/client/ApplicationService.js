@@ -50,3 +50,18 @@ export const getCountApplicationsByUserId = async () => {
     throw error;
   }
 };
+
+export const cancelApplication = async (applicationId) => {
+  try {
+    const response = await axiosClient.delete(`/application/${applicationId}`);
+    const result = response.data;
+    if (!result.success) {
+      throw new Error(result.message || "Hủy ứng tuyển thất bại!");
+    }
+    return new ApiResponse(result.success, result.data, null, result.message);
+  } catch (error) {
+    console.error("Error canceling application:", error);
+    const message = error.response?.data?.message || error.message;
+    return new ApiResponse(false, null, [message]);
+  }
+};

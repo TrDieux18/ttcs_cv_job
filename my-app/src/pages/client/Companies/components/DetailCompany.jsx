@@ -304,7 +304,7 @@ const DetailCompany = () => {
                     </span>
                   </div>
 
-                  {/* Keywords */}
+                  {}
                   {job.keywords?.length > 0 && (
                     <div className="flex flex-wrap gap-2">
                       {job.keywords.slice(0, 4).map((keyword, idx) => (

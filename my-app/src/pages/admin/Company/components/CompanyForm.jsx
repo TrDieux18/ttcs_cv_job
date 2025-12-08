@@ -102,7 +102,6 @@ const CompanyForm = ({ mode }) => {
   const handleSubmit = async (values) => {
     const formData = new FormData();
 
-    // Append tất cả fields từ form values
     Object.keys(values).forEach((key) => {
       if (values[key] !== undefined && values[key] !== null) {
         formData.append(key, values[key]);
@@ -144,7 +143,7 @@ const CompanyForm = ({ mode }) => {
   return (
     <div className="p-6 bg-white min-h-screen">
       <div className="max-w-full">
-        {/* Header */}
+        {}
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-gray-900">
             {isEdit ? "Chỉnh sửa công ty" : "Tạo công ty mới"}

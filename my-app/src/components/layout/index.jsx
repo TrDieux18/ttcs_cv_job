@@ -121,7 +121,7 @@ const LayoutDefault = () => {
         <div className="layout-header__logo">
           <NavLink to={"/"}>
             LOGO
-            {/* <img className="w-25" src="@assets/image/logo.png" alt="Logo" /> */}
+            {}
           </NavLink>
         </div>
         <div className="layout-header__menu">

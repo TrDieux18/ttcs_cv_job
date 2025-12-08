@@ -9,13 +9,27 @@ import {
   LuMapPin,
   LuSquareTerminal,
 } from "react-icons/lu";
-import { Button, notification, Space } from "antd";
+import { Button, notification, Space, Modal, message } from "antd";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { getRelativeTime } from "@helpers/getRelavtiveTime";
 import { parseHTMLList } from "@helpers/parseHTMLList";
 
-import { applyJob } from "@services/client/ApplicationService";
-import { addAppliedJob } from "@store/AppliedReducer";
+import {
+  applyJob,
+  getApplicationsByUser,
+  cancelApplication,
+} from "@services/client/ApplicationService";
+import {
+  createSaveJob,
+  deleteSaveJob,
+  getSavedJobsByUser,
+} from "@services/client/SaveJobService";
+import { addAppliedJob, removeAppliedJob } from "@store/AppliedReducer";
+import { addSavedJob, removeSavedJob } from "@store/SavedJobReducer";
 import { useDispatch, useSelector } from "react-redux";
+import { FaHeart } from "react-icons/fa";
+
+const { confirm } = Modal;
 
 const DetailJob = () => {
   const { id } = useParams();
@@ -26,6 +40,7 @@ const DetailJob = () => {
   const user = useSelector((state) => state.user.user);
 
   const appliedJobIds = useSelector((state) => state.appliedJobs?.appliedJobs);
+  const savedJobIds = useSelector((state) => state.savedJobs?.savedJobs);
   const [notificationApi, contextHolder] = notification.useNotification();
 
   const openNotification = () => {
@@ -94,6 +109,113 @@ const DetailJob = () => {
     }
   };
 
+  const handleCancelApplication = async (jobId, jobTitle) => {
+    if (!user) return;
+
+    try {
+      const applicationsResponse = await getApplicationsByUser();
+      if (!applicationsResponse.success) return;
+
+      const application = applicationsResponse.data.find(
+        (app) => (app.job?._id || app.job) === jobId
+      );
+
+      if (!application) {
+        message.error("Không tìm thấy đơn ứng tuyển");
+        return;
+      }
+
+      if (application.status !== "pending") {
+        message.warning("Chỉ có thể hủy đơn ứng tuyển đang chờ xử lý");
+        return;
+      }
+
+      confirm({
+        title: "Xác nhận hủy ứng tuyển",
+        icon: <ExclamationCircleOutlined />,
+        content: `Bạn có chắc chắn muốn hủy ứng tuyển vào công việc "${jobTitle}"?`,
+        okText: "Hủy ứng tuyển",
+        okType: "danger",
+        cancelText: "Đóng",
+        async onOk() {
+          try {
+            const result = await cancelApplication(application._id);
+            if (result.success) {
+              message.success("Đã hủy ứng tuyển thành công");
+              dispatch(removeAppliedJob(jobId));
+            } else {
+              message.error(result.errors?.[0] || "Hủy ứng tuyển thất bại");
+            }
+          } catch (error) {
+            message.error("Có lỗi xảy ra khi hủy ứng tuyển");
+          }
+        },
+      });
+    } catch (error) {
+      console.error("Error canceling application:", error);
+      message.error("Có lỗi xảy ra");
+    }
+  };
+
+  const handleSaveJob = async (jobId) => {
+    if (!user) {
+      openNotification();
+      return;
+    }
+
+    try {
+      const response = await createSaveJob(jobId);
+      if (!response.success) {
+        notificationApi.error({
+          message: "Lưu công việc thất bại",
+          description: "Đã có lỗi xảy ra khi lưu công việc.",
+        });
+        return;
+      }
+      dispatch(addSavedJob(jobId));
+      notificationApi.success({
+        message: "Lưu công việc thành công",
+        description: "Bạn đã lưu công việc thành công.",
+      });
+    } catch (error) {
+      console.error("Error saving job:", error);
+    }
+  };
+
+  const handleUnsaveJob = async (jobId) => {
+    if (!jobId) return;
+
+    try {
+      const savedJobsResponse = await getSavedJobsByUser();
+      if (!savedJobsResponse.success) return;
+
+      const savedJob = savedJobsResponse.data.find(
+        (item) => (item.job?._id || item.job) === jobId
+      );
+
+      if (!savedJob) {
+        message.error("Không tìm thấy công việc đã lưu");
+        return;
+      }
+
+      const response = await deleteSaveJob(savedJob._id);
+      if (!response.success) {
+        notificationApi.error({
+          message: "Bỏ lưu công việc thất bại",
+          description: "Đã có lỗi xảy ra khi bỏ lưu công việc.",
+        });
+        return;
+      }
+      dispatch(removeSavedJob(jobId));
+      notificationApi.success({
+        message: "Bỏ lưu công việc thành công",
+        description: "Bạn đã bỏ lưu công việc thành công.",
+      });
+    } catch (error) {
+      console.error("Error unsaving job:", error);
+    }
+  };
+
   return (
     <>
       <div className="overflow-x-hidden">
@@ -138,26 +260,42 @@ const DetailJob = () => {
                           </div>
                         </div>
                       </div>
-                      <button className="p-2 hover:bg-gray-100 rounded-full transition">
-                        <LuHeart
-                          size={28}
-                          className="text-red-400 hover:text-red-500"
-                        />
+                      <button
+                        className="p-2 hover:bg-gray-100 rounded-full transition"
+                        onClick={() =>
+                          savedJobIds?.includes(job._id)
+                            ? handleUnsaveJob(job._id)
+                            : handleSaveJob(job._id)
+                        }
+                      >
+                        {savedJobIds?.includes(job._id) ? (
+                          <FaHeart
+                            size={28}
+                            className="text-red-400 hover:text-red-500"
+                          />
+                        ) : (
+                          <LuHeart
+                            size={28}
+                            className="text-red-400 hover:text-red-500"
+                          />
+                        )}
                       </button>
                     </div>
 
                     {appliedJobIds?.includes(job._id) ? (
                       <Button
-                        type="primary"
+                        type="default"
+                        danger
                         size="large"
-                        disabled
                         className="w-full my-4"
                         style={{
-                          background: "#ffffff",
                           height: 48,
                         }}
+                        onClick={() =>
+                          handleCancelApplication(job._id, job.title)
+                        }
                       >
-                        Đã ứng tuyển
+                        Hủy ứng tuyển
                       </Button>
                     ) : (
                       <Button

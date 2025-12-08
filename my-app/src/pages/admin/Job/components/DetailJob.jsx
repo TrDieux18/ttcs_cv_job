@@ -111,7 +111,7 @@ const DetailJob = () => {
   return (
     <div className="p-6 bg-white min-h-screen">
       <div className="max-w-full">
-        {/* Header */}
+        {}
         <div className="mb-6">
           <Button
             icon={<ArrowLeftOutlined />}
@@ -140,10 +140,10 @@ const DetailJob = () => {
           </div>
         </div>
 
-        {/* Job Info */}
+        {}
         <Card className="shadow-sm">
           <Space direction="vertical" size="large" className="w-full">
-            {/* Job Title & Basic Info */}
+            {}
             <div>
               <h2 className="text-2xl font-bold text-gray-900 mb-3">
                 {job.title}
@@ -167,7 +167,7 @@ const DetailJob = () => {
               </Space>
             </div>
 
-            {/* Company Info */}
+            {}
             <Card type="inner" title="Thông tin công ty" className="bg-blue-50">
               <Space direction="vertical" size="small" className="w-full">
                 <div className="font-semibold text-lg text-gray-900">
@@ -193,7 +193,7 @@ const DetailJob = () => {
               </Space>
             </Card>
 
-            {/* Detailed Information */}
+            {}
             <Descriptions
               bordered
               column={1}
@@ -284,7 +284,7 @@ const DetailJob = () => {
           </Space>
         </Card>
 
-        {/* Report Modal */}
+        {}
         <Modal
           title={
             <Space>

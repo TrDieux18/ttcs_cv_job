@@ -481,7 +481,7 @@ const BlogDetail = () => {
             )}
           </div>
 
-          {/* Tags */}
+          {}
           {blog.tags && blog.tags.length > 0 && (
             <div className="bg-white rounded-xl shadow-xl p-6 border border-gray-200">
               <h3 className="text-lg font-semibold text-gray-800 mb-4 pb-3 border-b border-gray-200">

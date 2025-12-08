@@ -173,7 +173,7 @@ const BlogPage = () => {
           </motion.div>
         )}
 
-        {/* Grid Blogs */}
+        {}
         <AnimatePresence mode="wait">
           <motion.div
             key={currentPage + activeCategory}
@@ -262,7 +262,7 @@ const BlogPage = () => {
           </motion.div>
         </AnimatePresence>
 
-        {/* Pagination */}
+        {}
         {totalPages > 1 && (
           <div className="flex justify-center items-center gap-2 mt-6 flex-wrap">
             <button

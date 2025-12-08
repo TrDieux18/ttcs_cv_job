@@ -173,7 +173,7 @@ const Job = () => {
     <div className="p-6 bg-white min-h-screen">
       {contextHolder}
       <div className="max-w-full">
-        {/* Header */}
+        {}
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-gray-900">Quản lý việc làm</h1>
           <p className="text-sm text-gray-500 mt-1">
@@ -181,7 +181,7 @@ const Job = () => {
           </p>
         </div>
 
-        {/* Filters */}
+        {}
         <div className="flex gap-3 mb-6">
           <Input
             placeholder="Tìm kiếm theo tiêu đề công việc..."
@@ -203,7 +203,7 @@ const Job = () => {
           </Button>
         </div>
 
-        {/* Table */}
+        {}
         <Table
           bordered
           rowKey="_id"

@@ -2,7 +2,16 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { NavLink, useSearchParams } from "react-router-dom";
 import { getAllJobs } from "@services/client/JobsService";
-import { Select, Input, Button, Pagination, notification, Space } from "antd";
+import {
+  Select,
+  Input,
+  Button,
+  Pagination,
+  notification,
+  Space,
+  Modal,
+  message,
+} from "antd";
 import {
   LuMapPin,
   LuSearch,
@@ -12,14 +21,20 @@ import {
   LuExternalLink,
   LuClock,
 } from "react-icons/lu";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { parseHTMLList } from "@helpers/parseHTMLList";
 import { getRelativeTime } from "@helpers/getRelavtiveTime";
 import { useDispatch, useSelector } from "react-redux";
 import {
   applyJob,
   getApplicationsByUser,
+  cancelApplication,
 } from "@services/client/ApplicationService";
-import { addAppliedJob, setAppliedJobs } from "@store/AppliedReducer";
+import {
+  addAppliedJob,
+  setAppliedJobs,
+  removeAppliedJob,
+} from "@store/AppliedReducer";
 import { createSaveJob } from "@services/client/SaveJobService";
 import { getSavedJobsByUser } from "@services/client/SaveJobService";
 import { setSavedJobs } from "@store/SavedJobReducer";
@@ -27,6 +42,8 @@ import { FaHeart } from "react-icons/fa";
 import { removeSavedJob } from "@store/SavedJobReducer";
 import { addSavedJob } from "@store/SavedJobReducer";
 import { deleteSaveJob } from "@services/client/SaveJobService";
+
+const { confirm } = Modal;
 
 const optionCity = [
   {
@@ -210,6 +227,54 @@ export default function JobList() {
       });
     } catch (error) {
       console.error("Error applying for job:", error);
+    }
+  };
+
+  const handleCancelApplication = async (jobId, jobTitle) => {
+    if (!user) return;
+
+    try {
+      const applicationsResponse = await getApplicationsByUser();
+      if (!applicationsResponse.success) return;
+
+      const application = applicationsResponse.data.find(
+        (app) => (app.job?._id || app.job) === jobId
+      );
+
+      if (!application) {
+        message.error("Không tìm thấy đơn ứng tuyển");
+        return;
+      }
+
+      if (application.status !== "pending") {
+        message.warning("Chỉ có thể hủy đơn ứng tuyển đang chờ xử lý");
+        return;
+      }
+
+      confirm({
+        title: "Xác nhận hủy ứng tuyển",
+        icon: <ExclamationCircleOutlined />,
+        content: `Bạn có chắc chắn muốn hủy ứng tuyển vào công việc "${jobTitle}"?`,
+        okText: "Hủy ứng tuyển",
+        okType: "danger",
+        cancelText: "Đóng",
+        async onOk() {
+          try {
+            const result = await cancelApplication(application._id);
+            if (result.success) {
+              message.success("Đã hủy ứng tuyển thành công");
+              dispatch(removeAppliedJob(jobId));
+            } else {
+              message.error(result.errors?.[0] || "Hủy ứng tuyển thất bại");
+            }
+          } catch (error) {
+            message.error("Có lỗi xảy ra khi hủy ứng tuyển");
+          }
+        },
+      });
+    } catch (error) {
+      console.error("Error canceling application:", error);
+      message.error("Có lỗi xảy ra");
     }
   };
 
@@ -495,16 +560,21 @@ export default function JobList() {
 
                     {appliedJobIds.includes(selectedJob._id) ? (
                       <Button
-                        type="primary"
+                        type="default"
+                        danger
                         size="large"
-                        disabled
                         className="w-full my-4"
                         style={{
-                          background: "#ffffff",
                           height: 48,
                         }}
+                        onClick={() =>
+                          handleCancelApplication(
+                            selectedJob._id,
+                            selectedJob.title
+                          )
+                        }
                       >
-                        Đã ứng tuyển
+                        Hủy ứng tuyển
                       </Button>
                     ) : (
                       <Button
@@ -643,7 +713,7 @@ export default function JobList() {
                       </div>
                     )}
 
-                    {/* Additional Requirements */}
+                    {}
                     <div className="grid grid-cols-2 gap-4 p-4 bg-gray-50 rounded-lg">
                       <div>
                         <p className="text-gray-500 text-sm mb-1">Học vấn</p>

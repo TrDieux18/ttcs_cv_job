@@ -16,7 +16,6 @@ import { getRecruitmentReport } from "@services/company/ApplicantService";
 
 const { Option } = Select;
 
-// Đăng ký ChartJS (bắt buộc)
 ChartJS.register(
   ArcElement,
   Tooltip,
@@ -168,7 +167,6 @@ export default function RecruitmentReportsPage() {
     setDateFrom("");
     setDateTo("");
     setFilterJob("");
-    // Reload data without filters
     fetch();
   };
 

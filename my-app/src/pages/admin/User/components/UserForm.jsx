@@ -155,7 +155,7 @@ const UserForm = ({ mode }) => {
   return (
     <div className="p-6 bg-white min-h-screen">
       <div className="max-w-full">
-        {/* Header */}
+        {}
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-gray-900">
             {isEdit ? "Chỉnh sửa người dùng" : "Tạo người dùng mới"}

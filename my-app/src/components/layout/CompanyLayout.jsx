@@ -33,7 +33,6 @@ const CompanyLayout = () => {
     token: { colorBgContainer },
   } = theme.useToken();
 
-  // Fetch statistics on mount and when route changes
   useEffect(() => {
     fetchStats();
   }, [location.pathname]);

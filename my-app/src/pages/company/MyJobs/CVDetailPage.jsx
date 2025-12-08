@@ -27,8 +27,6 @@ export default function CVDetailPage() {
   const [updating, setUpdating] = useState(false);
 
   useEffect(() => {
-    // TODO: Fetch applicant detail by ID
-    // For now, mock data
     setTimeout(() => {
       setApplicant({
         _id: id,

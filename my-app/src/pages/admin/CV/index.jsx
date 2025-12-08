@@ -47,7 +47,7 @@ const CV = () => {
   return (
     <div className="p-6 bg-white min-h-screen">
       <div className="max-w-full">
-        {/* Header */}
+        {}
         <div className="flex justify-between items-center mb-6">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">
@@ -59,7 +59,7 @@ const CV = () => {
           </div>
         </div>
 
-        {/* CV Grid */}
+        {}
         <Row gutter={[24, 24]}>
           {cvs.map((cv) => (
             <Col key={cv._id} xs={24} sm={12} md={8} lg={6}>
