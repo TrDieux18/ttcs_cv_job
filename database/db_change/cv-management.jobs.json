@@ -9,7 +9,7 @@
   },
   "location": "Hanoi",
   "salary": "10 - 20 triệu",
-  "jobType": "Full-time",
+  "jobType": "Part-time",
   "category": "Backend Development",
   "isFeatured": true,
   "requirements": "<ul><li>Tốt nghiệp ĐH chuyên ngành CNTT hoặc tương đương.</li><li>Nắm vững Java Core, OOP.</li><li>Có kiến thức về Spring Boot, REST API là lợi thế.</li><li>Tiếng Anh đọc hiểu tài liệu.</li></ul>",
@@ -119,46 +119,6 @@
 },
 {
   "_id": {
-    "$oid": "6901a4e5d6e7f8a9b0c1d204"
-  },
-  "title": "Senior QA Automation Engineer",
-  "description": "Thiết kế, phát triển và duy trì test framework (Selenium, Cypress) cho các dự án web. Thực hiện CI/CD và đảm bảo chất lượng sản phẩm.",
-  "company": {
-    "$oid": "6901a3c1e2f3a4b5c6d7e804"
-  },
-  "location": "Ho Chi Minh City",
-  "salary": "1800 - 2500 USD",
-  "jobType": "Full-time",
-  "category": "Quality Assurance",
-  "isFeatured": false,
-  "requirements": "<ul><li>3+ năm kinh nghiệm test tự động.</li><li>Thành thạo Java/JavaScript và Selenium/Cypress.</li><li>Kinh nghiệm về API testing (Postman, RestAssured).</li><li>Có chứng chỉ ISTQB là lợi thế.</li></ul>",
-  "benefits": "<ul><li>Gói thu nhập 14-15 tháng lương.</li><li>Bảo hiểm sức khỏe cá nhân và gia đình.</li><li>Môi trường làm việc chuẩn quốc tế.</li><li>Đào tạo chuyên môn và kỹ năng mềm.</li></ul>",
-  "level": "Senior",
-  "genderRequirement": "Không yêu cầu",
-  "hiringQuantity": 3,
-  "degreeRequirement": "Đại học",
-  "experienceRequirement": "3+ năm kinh nghiệm",
-  "applicationDeadline": {
-    "$date": "2025-11-20T17:00:00.000Z"
-  },
-  "specificAddress": "Tòa nhà Etown 3, 364 Cộng Hòa, Tân Bình, TP. Hồ Chí Minh",
-  "keywords": [
-    "QA",
-    "Automation",
-    "Selenium",
-    "Cypress",
-    "Tester",
-    "HCM"
-  ],
-  "createdAt": {
-    "$date": "2025-10-25T09:00:00.000Z"
-  },
-  "updatedAt": {
-    "$date": "2025-10-25T09:00:00.000Z"
-  }
-},
-{
-  "_id": {
     "$oid": "6901a4e5d6e7f8a9b0c1d205"
   },
   "title": "Product Manager (Fintech)",
@@ -195,4 +155,44 @@
   "updatedAt": {
     "$date": "2025-10-28T15:00:00.000Z"
   }
+},
+{
+  "_id": {
+    "$oid": "69232cb07f6dc9e912f66a70"
+  },
+  "title": "Frontend Developer (ReactJS)",
+  "description": "Phát triển giao diện web sử dụng ReactJS, TailwindCSS. Tham gia tối ưu hiệu năng và UX/UI cho các sản phẩm thương mại.",
+  "company": {
+    "$oid": "6901a3c1e2f3a4b5c6d7e801"
+  },
+  "location": "Hanoi",
+  "salary": "15 - 25 triệu",
+  "jobType": "Full-time",
+  "category": "Frontend Development",
+  "isFeatured": false,
+  "requirements": "<ul><li>Kinh nghiệm với ReactJS và ES6.</li><li>Biết Redux Toolkit là lợi thế.</li><li>Nắm vững HTML5, CSS3.</li></ul>",
+  "benefits": "<ul><li>Thưởng quý và thưởng dự án.</li><li>Đóng BHXH đầy đủ.</li><li>Không OT.</li></ul>",
+  "level": "Senior",
+  "genderRequirement": "Nam",
+  "hiringQuantity": 8,
+  "degreeRequirement": "Cao đẳng trở lên",
+  "experienceRequirement": "Không yêu cầu kinh nghiệm",
+  "applicationDeadline": {
+    "$date": "2025-11-19T17:00:00.000Z"
+  },
+  "specificAddress": "Tòa nhà Technosoft, Duy Tân, Cầu Giấy, Hà Nội",
+  "keywords": [
+    "ReactJS",
+    "Frontend",
+    "JavaScript",
+    "UI",
+    "HaNoi"
+  ],
+  "createdAt": {
+    "$date": "2025-11-23T15:48:00.344Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-23T16:07:51.104Z"
+  },
+  "__v": 0
 }]

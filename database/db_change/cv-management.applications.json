@@ -1,0 +1,132 @@
+[{
+  "_id": {
+    "$oid": "69134e318d9291857066c44c"
+  },
+  "user": {
+    "$oid": "68e4da29222ffcbf35b08990"
+  },
+  "job": {
+    "$oid": "6901a4e5d6e7f8a9b0c1d205"
+  },
+  "cv": {
+    "$oid": "690103d28c3e49a31ddb4966"
+  },
+  "status": "pending",
+  "createdAt": {
+    "$date": "2025-11-11T14:54:41.773Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-11T14:54:41.773Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915f1bcf0072e67d0fd90b2"
+  },
+  "user": {
+    "$oid": "68e4da29222ffcbf35b08990"
+  },
+  "job": {
+    "$oid": "6901a4e5d6e7f8a9b0c1d201"
+  },
+  "cv": {
+    "$oid": "690103d28c3e49a31ddb4966"
+  },
+  "status": "accepted",
+  "createdAt": {
+    "$date": "2025-11-13T14:57:00.126Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-07T14:06:27.385Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915f31df0072e67d0fd90f7"
+  },
+  "user": {
+    "$oid": "68e4da29222ffcbf35b08990"
+  },
+  "job": {
+    "$oid": "6901a4e5d6e7f8a9b0c1d202"
+  },
+  "cv": {
+    "$oid": "690103d28c3e49a31ddb4966"
+  },
+  "status": "pending",
+  "createdAt": {
+    "$date": "2025-11-13T15:02:53.969Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-13T15:02:53.969Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6916cc4e360fce7dea96577a"
+  },
+  "user": {
+    "$oid": "68e4da29222ffcbf35b08990"
+  },
+  "job": {
+    "$oid": "6901a4e5d6e7f8a9b0c1d203"
+  },
+  "cv": {
+    "$oid": "690103d28c3e49a31ddb4966"
+  },
+  "status": "pending",
+  "createdAt": {
+    "$date": "2025-11-14T06:29:34.374Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-14T06:29:34.374Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69189b7d58ae12d269bbf033"
+  },
+  "user": {
+    "$oid": "69032f694d196be2dca91feb"
+  },
+  "job": {
+    "$oid": "6901a4e5d6e7f8a9b0c1d201"
+  },
+  "cv": {
+    "$oid": "68fc9731cc03ce10539ce4b4"
+  },
+  "status": "reviewed",
+  "createdAt": {
+    "$date": "2025-11-15T15:25:49.298Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-08T16:03:37.159Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69256a387ecc41c0a3a299e7"
+  },
+  "user": {
+    "$oid": "69032f694d196be2dca91feb"
+  },
+  "job": {
+    "$oid": "69232cb07f6dc9e912f66a70"
+  },
+  "cv": {
+    "$oid": "68fc9731cc03ce10539ce4b4"
+  },
+  "status": "accepted",
+  "createdAt": {
+    "$date": "2025-11-25T08:35:04.940Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-07T13:54:39.324Z"
+  },
+  "__v": 0
+}]

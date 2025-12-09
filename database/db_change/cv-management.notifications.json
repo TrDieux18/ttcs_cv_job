@@ -1,0 +1,702 @@
+[{
+  "_id": {
+    "$oid": "6925ce14fa2204355bff8d91"
+  },
+  "user": {
+    "$oid": "69032f694d196be2dca91feb"
+  },
+  "type": "application_status",
+  "title": "Cập nhật trạng thái ứng tuyển",
+  "message": "Đơn ứng tuyển của bạn đã được xem xét",
+  "application": {
+    "$oid": "69256a387ecc41c0a3a299e7"
+  },
+  "job": {
+    "$oid": "69232cb07f6dc9e912f66a70"
+  },
+  "read": true,
+  "deleted": false,
+  "deleteAt": null,
+  "createdAt": {
+    "$date": "2025-11-25T15:41:08.972Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-25T15:54:44.466Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6925d106488e357fbc2df2bc"
+  },
+  "user": {
+    "$oid": "69032f694d196be2dca91feb"
+  },
+  "type": "application_status",
+  "title": "Cập nhật trạng thái ứng tuyển",
+  "message": "Chúc mừng! Đơn ứng tuyển của bạn đã được chấp nhận",
+  "application": {
+    "$oid": "69256a387ecc41c0a3a299e7"
+  },
+  "job": {
+    "$oid": "69232cb07f6dc9e912f66a70"
+  },
+  "read": true,
+  "deleted": false,
+  "deleteAt": null,
+  "createdAt": {
+    "$date": "2025-11-25T15:53:42.091Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-25T15:54:44.466Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6925d20a488e357fbc2df338"
+  },
+  "user": {
+    "$oid": "69032f694d196be2dca91feb"
+  },
+  "type": "application_status",
+  "title": "Cập nhật trạng thái ứng tuyển",
+  "message": "Đơn ứng tuyển của bạn đã bị từ chối",
+  "application": {
+    "$oid": "69256a387ecc41c0a3a299e7"
+  },
+  "job": {
+    "$oid": "69232cb07f6dc9e912f66a70"
+  },
+  "read": true,
+  "deleted": false,
+  "deleteAt": null,
+  "createdAt": {
+    "$date": "2025-11-25T15:58:02.965Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-25T15:59:59.757Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6925d359c66c7d0dc4b114ee"
+  },
+  "user": {
+    "$oid": "69032f694d196be2dca91feb"
+  },
+  "type": "application_status",
+  "title": "Cập nhật trạng thái ứng tuyển",
+  "message": "Chúc mừng! Đơn ứng tuyển của bạn đã được chấp nhận",
+  "application": {
+    "$oid": "69256a387ecc41c0a3a299e7"
+  },
+  "job": {
+    "$oid": "69232cb07f6dc9e912f66a70"
+  },
+  "read": true,
+  "deleted": false,
+  "deleteAt": null,
+  "createdAt": {
+    "$date": "2025-11-25T16:03:37.901Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-25T16:03:41.995Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6925d485a7d76332d87ac046"
+  },
+  "user": {
+    "$oid": "69032f694d196be2dca91feb"
+  },
+  "type": "application_status",
+  "title": "Cập nhật trạng thái ứng tuyển",
+  "message": "Đơn ứng tuyển của bạn đang được xem xét",
+  "application": {
+    "$oid": "69256a387ecc41c0a3a299e7"
+  },
+  "job": {
+    "$oid": "69232cb07f6dc9e912f66a70"
+  },
+  "read": true,
+  "deleted": false,
+  "deleteAt": null,
+  "createdAt": {
+    "$date": "2025-11-25T16:08:37.795Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-25T16:10:31.822Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6925dab430e1b543136b42a9"
+  },
+  "user": {
+    "$oid": "69032f694d196be2dca91feb"
+  },
+  "type": "application_status",
+  "title": "Cập nhật trạng thái ứng tuyển",
+  "message": "Đơn ứng tuyển của bạn đã được xem xét",
+  "application": {
+    "$oid": "69189b7d58ae12d269bbf033"
+  },
+  "job": {
+    "$oid": "6901a4e5d6e7f8a9b0c1d201"
+  },
+  "read": true,
+  "deleted": false,
+  "deleteAt": null,
+  "createdAt": {
+    "$date": "2025-11-25T16:35:00.669Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-25T16:38:40.271Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6925db8df0e7bd241d662400"
+  },
+  "user": {
+    "$oid": "68e4da29222ffcbf35b08990"
+  },
+  "type": "application_status",
+  "title": "Cập nhật trạng thái ứng tuyển",
+  "message": "Đơn ứng tuyển của bạn đã được xem xét",
+  "application": {
+    "$oid": "6915f1bcf0072e67d0fd90b2"
+  },
+  "job": {
+    "$oid": "6901a4e5d6e7f8a9b0c1d201"
+  },
+  "read": false,
+  "deleted": false,
+  "deleteAt": null,
+  "createdAt": {
+    "$date": "2025-11-25T16:38:37.620Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-25T16:38:37.620Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6925db97f0e7bd241d662408"
+  },
+  "user": {
+    "$oid": "68e4da29222ffcbf35b08990"
+  },
+  "type": "application_status",
+  "title": "Cập nhật trạng thái ứng tuyển",
+  "message": "Chúc mừng! Đơn ứng tuyển của bạn đã được chấp nhận",
+  "application": {
+    "$oid": "6915f1bcf0072e67d0fd90b2"
+  },
+  "job": {
+    "$oid": "6901a4e5d6e7f8a9b0c1d201"
+  },
+  "read": false,
+  "deleted": false,
+  "deleteAt": null,
+  "createdAt": {
+    "$date": "2025-11-25T16:38:47.193Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-25T16:38:47.193Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6925dbbcf0e7bd241d66242a"
+  },
+  "user": {
+    "$oid": "69032f694d196be2dca91feb"
+  },
+  "type": "application_status",
+  "title": "Cập nhật trạng thái ứng tuyển",
+  "message": "Đơn ứng tuyển của bạn đang được xem xét",
+  "application": {
+    "$oid": "69189b7d58ae12d269bbf033"
+  },
+  "job": {
+    "$oid": "6901a4e5d6e7f8a9b0c1d201"
+  },
+  "read": true,
+  "deleted": false,
+  "deleteAt": null,
+  "createdAt": {
+    "$date": "2025-11-25T16:39:24.525Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-25T16:57:25.300Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6925dbbff0e7bd241d662430"
+  },
+  "user": {
+    "$oid": "68e4da29222ffcbf35b08990"
+  },
+  "type": "application_status",
+  "title": "Cập nhật trạng thái ứng tuyển",
+  "message": "Đơn ứng tuyển của bạn đang được xem xét",
+  "application": {
+    "$oid": "6915f1bcf0072e67d0fd90b2"
+  },
+  "job": {
+    "$oid": "6901a4e5d6e7f8a9b0c1d201"
+  },
+  "read": false,
+  "deleted": false,
+  "deleteAt": null,
+  "createdAt": {
+    "$date": "2025-11-25T16:39:27.003Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-25T16:39:27.003Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6925dbcbf0e7bd241d66243a"
+  },
+  "user": {
+    "$oid": "69032f694d196be2dca91feb"
+  },
+  "type": "application_status",
+  "title": "Cập nhật trạng thái ứng tuyển",
+  "message": "Đơn ứng tuyển của bạn đã được xem xét",
+  "application": {
+    "$oid": "69256a387ecc41c0a3a299e7"
+  },
+  "job": {
+    "$oid": "69232cb07f6dc9e912f66a70"
+  },
+  "read": true,
+  "deleted": false,
+  "deleteAt": null,
+  "createdAt": {
+    "$date": "2025-11-25T16:39:39.195Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-25T16:57:25.300Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6925dbcdf0e7bd241d662440"
+  },
+  "user": {
+    "$oid": "69032f694d196be2dca91feb"
+  },
+  "type": "application_status",
+  "title": "Cập nhật trạng thái ứng tuyển",
+  "message": "Chúc mừng! Đơn ứng tuyển của bạn đã được chấp nhận",
+  "application": {
+    "$oid": "69256a387ecc41c0a3a299e7"
+  },
+  "job": {
+    "$oid": "69232cb07f6dc9e912f66a70"
+  },
+  "read": true,
+  "deleted": false,
+  "deleteAt": null,
+  "createdAt": {
+    "$date": "2025-11-25T16:39:41.398Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-25T16:57:25.300Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6925dc38f0e7bd241d662446"
+  },
+  "user": {
+    "$oid": "69032f694d196be2dca91feb"
+  },
+  "type": "application_status",
+  "title": "Cập nhật trạng thái ứng tuyển",
+  "message": "Đơn ứng tuyển của bạn đã được xem xét",
+  "application": {
+    "$oid": "69256a387ecc41c0a3a299e7"
+  },
+  "job": {
+    "$oid": "69232cb07f6dc9e912f66a70"
+  },
+  "read": true,
+  "deleted": false,
+  "deleteAt": null,
+  "createdAt": {
+    "$date": "2025-11-25T16:41:28.687Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-25T16:57:25.300Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6925dc4f7601f62e69322a2d"
+  },
+  "user": {
+    "$oid": "69032f694d196be2dca91feb"
+  },
+  "type": "application_status",
+  "title": "Cập nhật trạng thái ứng tuyển",
+  "message": "Chúc mừng! Đơn ứng tuyển của bạn đã được chấp nhận",
+  "application": {
+    "$oid": "69256a387ecc41c0a3a299e7"
+  },
+  "job": {
+    "$oid": "69232cb07f6dc9e912f66a70"
+  },
+  "read": true,
+  "deleted": false,
+  "deleteAt": null,
+  "createdAt": {
+    "$date": "2025-11-25T16:41:51.210Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-25T16:57:25.300Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6925dcc0a2dfa19f9463b22f"
+  },
+  "user": {
+    "$oid": "69032f694d196be2dca91feb"
+  },
+  "type": "application_status",
+  "title": "Cập nhật trạng thái ứng tuyển",
+  "message": "Đơn ứng tuyển của bạn đã được xem xét",
+  "application": {
+    "$oid": "69256a387ecc41c0a3a299e7"
+  },
+  "job": {
+    "$oid": "69232cb07f6dc9e912f66a70"
+  },
+  "read": true,
+  "deleted": false,
+  "deleteAt": null,
+  "createdAt": {
+    "$date": "2025-11-25T16:43:44.839Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-25T16:57:25.300Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6925dd27a2dfa19f9463b235"
+  },
+  "user": {
+    "$oid": "69032f694d196be2dca91feb"
+  },
+  "type": "application_status",
+  "title": "Cập nhật trạng thái ứng tuyển",
+  "message": "Chúc mừng! Đơn ứng tuyển của bạn đã được chấp nhận",
+  "application": {
+    "$oid": "69256a387ecc41c0a3a299e7"
+  },
+  "job": {
+    "$oid": "69232cb07f6dc9e912f66a70"
+  },
+  "read": true,
+  "deleted": false,
+  "deleteAt": null,
+  "createdAt": {
+    "$date": "2025-11-25T16:45:27.612Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-25T16:57:25.300Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6925dde7ec652d843ff1edf2"
+  },
+  "user": {
+    "$oid": "69032f694d196be2dca91feb"
+  },
+  "type": "application_status",
+  "title": "Cập nhật trạng thái ứng tuyển",
+  "message": "Đơn ứng tuyển của bạn đã bị từ chối",
+  "application": {
+    "$oid": "69256a387ecc41c0a3a299e7"
+  },
+  "job": {
+    "$oid": "69232cb07f6dc9e912f66a70"
+  },
+  "read": true,
+  "deleted": false,
+  "deleteAt": null,
+  "createdAt": {
+    "$date": "2025-11-25T16:48:39.669Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-25T16:57:25.300Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6925de1cec652d843ff1edf8"
+  },
+  "user": {
+    "$oid": "69032f694d196be2dca91feb"
+  },
+  "type": "application_status",
+  "title": "Cập nhật trạng thái ứng tuyển",
+  "message": "Chúc mừng! Đơn ứng tuyển của bạn đã được chấp nhận",
+  "application": {
+    "$oid": "69256a387ecc41c0a3a299e7"
+  },
+  "job": {
+    "$oid": "69232cb07f6dc9e912f66a70"
+  },
+  "read": true,
+  "deleted": false,
+  "deleteAt": null,
+  "createdAt": {
+    "$date": "2025-11-25T16:49:32.142Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-25T16:57:18.278Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6925e03328a7ef9bdc8f9845"
+  },
+  "user": {
+    "$oid": "69032f694d196be2dca91feb"
+  },
+  "type": "application_status",
+  "title": "Cập nhật trạng thái ứng tuyển",
+  "message": "Chúc mừng! Đơn ứng tuyển của bạn đã được chấp nhận",
+  "application": {
+    "$oid": "69189b7d58ae12d269bbf033"
+  },
+  "job": {
+    "$oid": "6901a4e5d6e7f8a9b0c1d201"
+  },
+  "read": true,
+  "deleted": false,
+  "deleteAt": null,
+  "createdAt": {
+    "$date": "2025-11-25T16:58:27.619Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-25T16:58:50.641Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6925e06128a7ef9bdc8f9878"
+  },
+  "user": {
+    "$oid": "69032f694d196be2dca91feb"
+  },
+  "type": "application_status",
+  "title": "Cập nhật trạng thái ứng tuyển",
+  "message": "Đơn ứng tuyển của bạn đã được xem xét",
+  "application": {
+    "$oid": "69256a387ecc41c0a3a299e7"
+  },
+  "job": {
+    "$oid": "69232cb07f6dc9e912f66a70"
+  },
+  "read": true,
+  "deleted": false,
+  "deleteAt": null,
+  "createdAt": {
+    "$date": "2025-11-25T16:59:13.861Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-25T17:02:24.558Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692991f5cbef156605c7d10d"
+  },
+  "user": {
+    "$oid": "69032f694d196be2dca91feb"
+  },
+  "type": "application_status",
+  "title": "Cập nhật trạng thái ứng tuyển",
+  "message": "Chúc mừng! Đơn ứng tuyển của bạn đã được chấp nhận",
+  "application": {
+    "$oid": "69256a387ecc41c0a3a299e7"
+  },
+  "job": {
+    "$oid": "69232cb07f6dc9e912f66a70"
+  },
+  "read": true,
+  "deleted": false,
+  "deleteAt": null,
+  "createdAt": {
+    "$date": "2025-11-28T12:13:41.630Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-28T12:15:12.605Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6935871b058126f122100592"
+  },
+  "user": {
+    "$oid": "69032f694d196be2dca91feb"
+  },
+  "type": "application_status",
+  "title": "Cập nhật trạng thái ứng tuyển",
+  "message": "Đơn ứng tuyển của bạn đã được xem xét",
+  "application": {
+    "$oid": "69256a387ecc41c0a3a299e7"
+  },
+  "job": {
+    "$oid": "69232cb07f6dc9e912f66a70"
+  },
+  "read": true,
+  "deleted": false,
+  "deleteAt": null,
+  "createdAt": {
+    "$date": "2025-12-07T13:54:35.025Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-08T16:03:04.067Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6935871f058126f122100598"
+  },
+  "user": {
+    "$oid": "69032f694d196be2dca91feb"
+  },
+  "type": "application_status",
+  "title": "Cập nhật trạng thái ứng tuyển",
+  "message": "Chúc mừng! Đơn ứng tuyển của bạn đã được chấp nhận",
+  "application": {
+    "$oid": "69256a387ecc41c0a3a299e7"
+  },
+  "job": {
+    "$oid": "69232cb07f6dc9e912f66a70"
+  },
+  "read": true,
+  "deleted": false,
+  "deleteAt": null,
+  "createdAt": {
+    "$date": "2025-12-07T13:54:39.331Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-08T15:38:50.371Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "693589e3ff2d9916b78bd6bd"
+  },
+  "user": {
+    "$oid": "68e4da29222ffcbf35b08990"
+  },
+  "type": "application_status",
+  "title": "Cập nhật trạng thái ứng tuyển",
+  "message": "Chúc mừng! Đơn ứng tuyển của bạn đã được chấp nhận",
+  "application": {
+    "$oid": "6915f1bcf0072e67d0fd90b2"
+  },
+  "job": {
+    "$oid": "6901a4e5d6e7f8a9b0c1d201"
+  },
+  "read": false,
+  "deleted": false,
+  "deleteAt": null,
+  "createdAt": {
+    "$date": "2025-12-07T14:06:27.413Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-07T14:06:27.413Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6935a46522f1d959926573cc"
+  },
+  "user": {
+    "$oid": "69010689895dd630532a2ff7"
+  },
+  "type": "other",
+  "title": "⚠️ Tin tuyển dụng bị báo cáo vi phạm",
+  "message": "Tin \"Frontend Developer (ReactJS)\" của bạn đã bị báo cáo với lý do: Nội dung không phù hợp. Mô tả: Sai dữ liệu mô tả công việc",
+  "job": {
+    "$oid": "69232cb07f6dc9e912f66a70"
+  },
+  "company": {
+    "$oid": "6901a3c1e2f3a4b5c6d7e801"
+  },
+  "read": true,
+  "deleted": false,
+  "deleteAt": null,
+  "createdAt": {
+    "$date": "2025-12-07T15:59:33.679Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-07T16:00:05.220Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6936f6d98c4403233bc08553"
+  },
+  "user": {
+    "$oid": "69032f694d196be2dca91feb"
+  },
+  "type": "application_status",
+  "title": "Cập nhật trạng thái ứng tuyển",
+  "message": "Đơn ứng tuyển của bạn đã được xem xét",
+  "application": {
+    "$oid": "69189b7d58ae12d269bbf033"
+  },
+  "job": {
+    "$oid": "6901a4e5d6e7f8a9b0c1d201"
+  },
+  "read": true,
+  "deleted": false,
+  "deleteAt": null,
+  "createdAt": {
+    "$date": "2025-12-08T16:03:37.164Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-08T16:19:14.180Z"
+  },
+  "__v": 0
+}]

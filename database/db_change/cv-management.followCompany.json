@@ -1,0 +1,36 @@
+[{
+  "_id": {
+    "$oid": "6929b5fbc4a346b9ec6e0c2a"
+  },
+  "user": {
+    "$oid": "69032f694d196be2dca91feb"
+  },
+  "company": {
+    "$oid": "6901a3c1e2f3a4b5c6d7e802"
+  },
+  "createdAt": {
+    "$date": "2025-11-28T14:47:23.505Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-28T14:47:23.505Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6936f69d8c4403233bc08499"
+  },
+  "user": {
+    "$oid": "69032f694d196be2dca91feb"
+  },
+  "company": {
+    "$oid": "6901a3c1e2f3a4b5c6d7e801"
+  },
+  "createdAt": {
+    "$date": "2025-12-08T16:02:37.483Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-08T16:02:37.483Z"
+  },
+  "__v": 0
+}]
