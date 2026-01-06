@@ -120,8 +120,11 @@ const LayoutDefault = () => {
       <header className="layout-header bg-gradient-to-r from-green-700 to-teal-500 fixed top-0 left-0 right-0 z-50 shadow-md">
         <div className="layout-header__logo">
           <NavLink to={"/"}>
-            LOGO
-            {}
+            <img
+              src="/logo.png"
+              alt=""
+              className="w-10 h-10 rounded-full bg-green-300 overflow-hidden hover:scale-105 transition-transform hover:outline-1 hover:outline-emerald-300"
+            />
           </NavLink>
         </div>
         <div className="layout-header__menu">

@@ -8,6 +8,7 @@ import applicationRoute from "./application.route.js";
 import notificationRoute from "./notification.route.js";
 import savedJobRoute from "./saveJob.route.js";
 import followCompanyRoute from "./followCompany.route.js";
+import chatbotRoute from "./chatbot.route.js";
 
 const router = express.Router();
 
@@ -20,4 +21,5 @@ router.use("/application", applicationRoute);
 router.use("/notifications", notificationRoute);
 router.use("/save-job", savedJobRoute);
 router.use("/follow-company", followCompanyRoute);
+router.use("/chatbot", chatbotRoute);
 export default router;

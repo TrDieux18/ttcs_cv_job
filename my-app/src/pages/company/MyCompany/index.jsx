@@ -110,7 +110,7 @@ const MyCompany = () => {
 
                   <Button
                     type="primary"
-                    className="!mt-4 !bg-[#22c55e] hover:!bg-[#16a34a] !border-none !w-[160px] !rounded-lg"
+                    className="!mt-4  hover:!bg-[#16a34a] !border-none !w-[160px] !rounded-lg"
                     onClick={() =>
                       document.getElementById("companyLogo")?.click()
                     }
@@ -209,7 +209,7 @@ const MyCompany = () => {
                     type="primary"
                     loading={loading}
                     htmlType="submit"
-                    className="!bg-[#22c55e] hover:!bg-[#16a34a] !border-none !rounded-lg"
+                    className=" !border-none !rounded-lg"
                   >
                     Cập nhật
                   </Button>

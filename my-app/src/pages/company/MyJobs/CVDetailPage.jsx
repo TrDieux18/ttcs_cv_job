@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Card, Button, message, Tag, Spin, Select, Descriptions } from "antd";
-import { ArrowLeftOutlined, DownloadOutlined } from "@ant-design/icons";
+import { ArrowLeftOutlined, DownloadOutlined, EyeFilled } from "@ant-design/icons";
 import { updateStatusApplicant } from "@services/company/ApplicantService";
 
 const { Option } = Select;
@@ -163,7 +163,16 @@ export default function CVDetailPage() {
               </Descriptions.Item>
             </Descriptions>
 
-            <div className="mt-6">
+            <div className="mt-6 flex gap-2">
+              <Button
+                type="primary"
+                icon={<EyeFilled />}
+                href={applicant.cv.fileUrl}
+                target="_blank"
+                className="bg-blue-600 hover:bg-blue-700"
+              >
+                Xem CV
+              </Button>
               <Button
                 type="primary"
                 icon={<DownloadOutlined />}
