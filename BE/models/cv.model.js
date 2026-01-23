@@ -16,6 +16,21 @@ const cvSchema = new mongoose.Schema(
     certificates: { type: [Object], default: [] },
     awards: { type: [Object], default: [] },
     githubLink: { type: String, default: null },
+    aiScore: {
+      overallScore: { type: Number, default: 0 },
+      scores: {
+        completeness: { type: Number, default: 0 },
+        skillsQuality: { type: Number, default: 0 },
+        experienceQuality: { type: Number, default: 0 },
+        educationQuality: { type: Number, default: 0 },
+        presentation: { type: Number, default: 0 },
+      },
+      analysis: { type: String, default: "" },
+      suggestions: { type: [String], default: [] },
+      strengths: { type: [String], default: [] },
+      weaknesses: { type: [String], default: [] },
+      lastScored: { type: Date, default: null },
+    },
   },
   {
     timestamps: true,

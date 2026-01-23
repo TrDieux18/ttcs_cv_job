@@ -8,6 +8,7 @@ import HighlightProject from "./HighlightProject";
 import Certificates from "./Certificates";
 import Awards from "./Awards";
 import UploadCV from "./UploadCV";
+import CVScore from "./CVScore";
 
 import { Link } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
@@ -106,6 +107,7 @@ const Templates = () => {
       <Certificates cvData={cvData} updatedCvData={updatedCvData} />
       <Awards cvData={cvData} updatedCvData={updatedCvData} />
       <UploadCV cvData={cvData} updatedCvData={updatedCvData} />
+      <CVScore cvData={cvData} />
 
       <Link
         to={"/cv"}

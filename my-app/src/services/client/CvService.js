@@ -67,3 +67,18 @@ export const updateCv = async (cvData) => {
     return new ApiResponse(false, null, [message]);
   }
 };
+
+export const scoreCv = async (cvId) => {
+  try {
+    const response = await axiosClient.post(`/cv/score/${cvId}`);
+    const data = response.data;
+    return new ApiResponse(data.success, data.data, data.errors);
+  } catch (error) {
+    console.error("Score CV failed:", error);
+    const message =
+      error.response?.data?.message ||
+      error.message ||
+      "Chấm điểm CV thất bại!";
+    return new ApiResponse(false, null, [message]);
+  }
+};

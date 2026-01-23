@@ -4,6 +4,7 @@ import { buildCVFilter } from "../../helpers/queryFilter.js";
 import { Types } from "mongoose";
 import cloudinary from "../../configs/cloudinary.js";
 import { safeJsonParse } from "../../helpers/safeJsonParse.js";
+import ollamaService from "../../services/ollama.service.js";
 
 export const getCvById = async (req, res) => {
   try {
@@ -246,3 +247,53 @@ export const updateCv = async (req, res) => {
 };
 
 export const deleteCv = async (req, res) => {};
+
+export const scoreCv = async (req, res) => {
+  try {
+    const { cvId } = req.params;
+    const userId = res.locals.user.id;
+
+    // Tìm CV và populate thông tin user
+    const cv = await CV.findById(cvId).populate(
+      "userId",
+      "fullName email avatar phoneNumber dateOfBirth address gender jobTitle introduction foreignLanguages socialLinks"
+    );
+
+    if (!cv) {
+      return res.status(404).json({ 
+        success: false, 
+        message: "Không tìm thấy CV" 
+      });
+    }
+
+    // Kiểm tra quyền sở hữu CV
+    if (cv.userId._id.toString() !== userId) {
+      return res.status(403).json({ 
+        success: false, 
+        message: "Bạn không có quyền chấm điểm CV này" 
+      });
+    }
+
+    // Gọi AI service để chấm điểm
+    const scoreData = await ollamaService.scoreCV(cv, cv.userId);
+
+    // Cập nhật điểm vào CV
+    cv.aiScore = scoreData;
+    await cv.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Chấm điểm CV thành công",
+      data: {
+        cvId: cv._id,
+        aiScore: scoreData,
+      },
+    });
+  } catch (error) {
+    console.error("Score CV Error:", error);
+    res.status(500).json({
+      success: false,
+      message: error.message || "Lỗi khi chấm điểm CV",
+    });
+  }
+};
